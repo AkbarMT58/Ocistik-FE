@@ -1,6 +1,9 @@
 import { style } from "@mui/system";
 import { useState } from "react";
 import styled, { css } from 'styled-components'
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 
 
 export default function Home() {
@@ -16,6 +19,7 @@ background-repeat: no-repeat;
 max-width: 2000px;
 background-size:100% auto;
 height:680px ;
+margin: auto;
 `;
 
 const Word_1 =styled.div`
@@ -27,11 +31,11 @@ font-size:34px;
 const Word_2 =styled.div`
 color:white;
 margin-top:80px;
-position: absolute;
+position: relative;
 width: 156px;
 height: 42px;
 left: 900px;
-top: 520px;
+top: -30px;
 background: linear-gradient(90deg, #008BD9 25%, #56C3FF 81.35%);
 border-radius: 0px 20px;
 `;
@@ -40,11 +44,11 @@ border-radius: 0px 20px;
 const Word_3 =styled.div`
 color:white;
 margin-top:80px;
-position: absolute;
+position: relative;
 width: 156px;
 height: 42px;
 left: 900px;
-top: 780px;
+top: -65px;
 background: linear-gradient(90deg, #008BD9 25%, #56C3FF 81.35%);
 border-radius: 10px;
 `;
@@ -211,23 +215,23 @@ margin-left:460px;
                         }`}
                     >
                         <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                            <li className="text-white hover:text-indigo-200">
-                                <a href="javascript:void(0)">Home</a>
+                        <li className="text-white hover:text-indigo-200">
+                                <a href="/home">Home</a>
                             </li>
                             <li className="text-white hover:text-indigo-200">
-                                <a href="javascript:void(0)">Tentang Kami</a>
+                                <a href="/tentangkami">Tentang Kami</a>
                             </li>
                             <li className="text-white hover:text-indigo-200">
-                                <a href="javascript:void(0)">Layanan</a>
+                                <a href="/layanan">Layanan</a>
                             </li>
                             <li className="text-white hover:text-indigo-200">
-                                <a href="javascript:void(0)">Artikel</a>
+                                <a href="/artikel">Artikel</a>
                             </li>
                             <li className="text-white hover:text-indigo-200">
-                                <a href="javascript:void(0)">Kontak</a>
+                                <a href="/kontak">Kontak</a>
                             </li>
                             <li className="text-white hover:text-indigo-200">
-                                <a href="javascript:void(0)">Hitung Biaya</a>
+                                <a href="/hitungbiaya">Hitung Biaya</a>
                             </li>
                         </ul>
 
@@ -269,9 +273,10 @@ margin-left:460px;
 
 
         <Word_2><h5 style={{textAlign:"center",marginTop:'5px'}}>Hubungi Kami</h5></Word_2>
+       
 
 
-        <div className="shadow-2xl w-500 h-600 bg-green-200 rounded-lg " style={{backgroundColor: 'white',marginTop:'120px',height:'250px'}}>
+        <div className="shadow-2xl w-500 h-600 bg-green-200 rounded-lg" style={{backgroundColor: 'white',marginTop:'120px',height:'250px',padding:'0px 10px'}}>
 
         <h2  style={{color:'#0F8ED6',fontSize:'24px'}} >Cek Resi Ocistik</h2>
         <p className="mb-5">Silakan masukan kode di bawah ini</p>
@@ -295,7 +300,7 @@ margin-left:460px;
 
         </div>
 
-        <section style={{height:'100vh'}}>
+        <section style={{height:'95vh'}}>
 
         <div className="shadow-2xl w-500 bg-green-200 rounded-lg relative" style={{backgroundColor: 'white', marginTop:'120px', height:'250px', paddingTop: 42,backgroundImage:`url("/image/unsplash_nPy0X4xew60rev.png")`}}>
             <TitleBlock>
@@ -343,12 +348,9 @@ margin-left:460px;
 
         </section>
 
-        <section style={{height:'100vh'}}>
+        <section style={{height:'80vh'}}>
 
         <div className="shadow-2xl w-500 bg-green-200 rounded-lg relative" style={{backgroundColor: 'white', marginTop:'120px', height:'250px', paddingTop: 42,backgroundImage:`url("/image/Rectangle 83.png")`}}>
-
-           
-           
             <div className="mt-5 text-white text-center text-2xl">
               Hitung Biaya Import
             </div>
@@ -416,39 +418,53 @@ margin-left:460px;
             
       </section>
 
-
         <section style={{height:'90vh'}}>
 
-        <div className="shadow-2xl w-500 bg-green-200 rounded-lg relative" style={{backgroundColor: 'white', marginTop:'-80px', height:'747px', paddingTop: 42,backgroundImage:`url("/image/Rectangle 83-1.png")`}}>
+        <Carousel>
+                <div>
+                <Wording_End>
 
-        <Wording_End>
+                <h1 style={{textAlign:"center", marginTop:'8px'}}>
+                            Apa Kata Mereka Tentang Ocistok
+                </h1>
 
-        <h1 style={{textAlign:"center", marginTop:'8px'}}>
-                    Apa Kata Mereka Tentang Ocistok
-        </h1>
+                </Wording_End>
+                    <img src="/image/Rectangle 83-1.png" />
+                    <p className="legend">Legend 1</p>
+                </div>
+                <div>
+                <Wording_End>
 
-        </Wording_End>
+                <h1 style={{textAlign:"center", marginTop:'8px'}}>
+                            Apa Kata Mereka Tentang Ocistok
+                </h1>
 
+                </Wording_End>
+                    <img src="/image/Rectangle 83-1.png" />
+                    <p className="legend">Legend 2</p>
+                </div>
+                <div>
+                <Wording_End>
 
-        </div>
+                <h1 style={{textAlign:"center", marginTop:'8px'}}>
+                            Apa Kata Mereka Tentang Ocistok
+                </h1>
 
-        <div>
+                </Wording_End>
+                    <img src="/image/Rectangle 83-1.png" />
+                    <p className="legend">Legend 3</p>
+                </div>
 
-
-        </div>
-
-
-        </section>
-
-
-        <section style={{height:'90vh'}}>
-
-
-            
+           
+        </Carousel>
 
 
       
 
+
+        
+
+        
         </section>
  
     </Bg_Gambar>

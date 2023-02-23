@@ -3,8 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
-// import { Navbar, Footer, Sidebar, ThemeSettings } from './components';
-import { Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor,Repacking,Login,Layout_mode} from './pages';
+import { Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor,Repacking,Login,Layout_mode,Home,Layanan,Tentangkami,Blog} from './pages';
 
 import './App.css';
 
@@ -29,7 +28,12 @@ const App = () => {
       <BrowserRouter>  
     <Routes>
 
-    <Route path="/" element={(<Login />)} />
+    <Route path="/" element={(<Home />)} />
+    <Route path="/home" element={(<Home />)} />
+    <Route path="/tentangkami" element={<Tentangkami />} />
+    <Route path="/layanan" element={<Layanan />} />
+    <Route path="/login" element={<Login />} />
+    <Route path="/login" element={<Login />} />
     <Route path="/login" element={<Login />} />
     <Route path="/ecommerce" element={<> <Layout_mode /><Ecommerce/></>} /> 
     <Route path="/repacking" element={<> <Layout_mode /><Repacking /></>} /> 

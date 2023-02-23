@@ -19,5 +19,9 @@ export { default as Stacked } from './Charts/Stacked';
 export { default as Repacking } from '../pages/LogisticChina/Repacking';
 //export { default as SendToIDN } from '../pages/LogisticChina/SendToIdn'
 export { default as Layout_mode } from '../components/layout_design/Layout_mode';
+export { default as Home } from '../pages/Frontend/home';
+export { default as Layanan } from '../pages/Frontend/layanan';
+export { default as Blog } from '../pages/Frontend/blog';
+export { default as Tentangkami } from '../pages/Frontend/tentangkami';
 
 
