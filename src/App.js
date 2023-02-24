@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
-import { Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor,Repacking,Login,Layout_mode,Home,Layanan,Tentangkami,Blog} from './pages';
+import { Ecommerce,Repacking,Login,Layout_mode,Home,Layanan,Tentangkami,Artikel,Kontak,Hitungbiaya,Callus} from './pages';
 
 import './App.css';
 
@@ -32,9 +32,10 @@ const App = () => {
     <Route path="/home" element={(<Home />)} />
     <Route path="/tentangkami" element={<Tentangkami />} />
     <Route path="/layanan" element={<Layanan />} />
-    <Route path="/login" element={<Login />} />
-    <Route path="/login" element={<Login />} />
-    <Route path="/login" element={<Login />} />
+    <Route path="/artikel" element={<Artikel />} />
+    <Route path="/kontak" element={<Kontak />} />
+    <Route path="/hitungbiaya" element={<Hitungbiaya />} />
+    <Route path="/callus" element={<Callus />} />
     <Route path="/ecommerce" element={<> <Layout_mode /><Ecommerce/></>} /> 
     <Route path="/repacking" element={<> <Layout_mode /><Repacking /></>} /> 
     </Routes>

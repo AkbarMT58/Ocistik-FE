@@ -23,5 +23,9 @@ export { default as Home } from '../pages/Frontend/home';
 export { default as Layanan } from '../pages/Frontend/layanan';
 export { default as Blog } from '../pages/Frontend/blog';
 export { default as Tentangkami } from '../pages/Frontend/tentangkami';
+export { default as Artikel } from '../pages/Frontend/artikel';
+export { default as Kontak } from '../pages/Frontend/kontak';
+export { default as Hitungbiaya } from '../pages/Frontend/hitungbiaya';
+export { default as Callus } from '../pages/Frontend/callus';
 
 

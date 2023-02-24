@@ -6,11 +6,11 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
 
-export default function Tentangkami() {
+export default function Callus() {
     const [navbar, setNavbar] = useState(false);
 
 const Bg_Gambar = styled.div`
-background-image: url(${'/image/unsplash_FPKnAO-CF6M-1.png'});
+background-image: url(${'/image/unsplash_FPKnAO-CF6M_kontak.png'});
 background-repeat: no-repeat;
 max-width: 2000px;
 background-size:100% auto;
@@ -28,21 +28,25 @@ top: 600px;
 border: 5px solid #FFFFFF;
 margin:auto;
 
+
 `;
 
 
 
-const TitleBlock =styled.div`
-position: absolute;
-width: 300px;
-height: 42px;
-left: 50%;
+const Button_Whatsapp =styled.div`
+
+box-sizing: border-box;
+width: 200px;
+height: 60px;
+border: 1px solid #000000;
+margin-top:150px;
+border-radius:20px;
+background-color:#128c7e;
 color:white;
-top: 0;
-transform: translate(-50%, 0);
-background: linear-gradient(180deg, #0074B5 0%, #13A4F4 53.65%, #13A4F4 100%);
-border-radius: 0px 0px 50px 50px;
+font-weight:bold;
 `;
+
+
 
 
 
@@ -132,67 +136,53 @@ border-radius: 0px 0px 50px 50px;
 
 
        
-        <h1 style={{textAlign:"center",color:'white',fontSize:'3vw'}}>TENTANG KAMI</h1>
+        <h1 style={{textAlign:"center",color:'white',fontSize:'3vw'}}>CALL US</h1>
         <Border></Border>
-        <h1 style={{textAlign:"center",color:'white',fontSize:'2vw'}}>Solusi Utama dalam Pengiriman Internasional</h1>
-
+        
         
 
         <section style={{height:'0vh'}}>
-        <div className="shadow-2xl w-500 h-600 bg-green-200 rounded-lg" style={{backgroundColor: '#0F8FD7',marginTop:'250px', height:'280px', paddingTop: 42}}>
 
-            <div className="grid gap-4 mb-12 md:grid-cols-2">
 
-            <div className="mt-5 text-white text-center text-base">
-            OCIstik adalah spesialis jasa import export China-Indonesia dan seluruh dunia yang terbaik, tercepat dan termurah. Jasa kami merupakan Door to Door dan All In, dimana pengiriman dari gudang supplier dan langsung ke alamat anda dan pembayaran sudah termasuk asuransi, garansi dan pajak. Jadi tidak perlu khawatir adanya biaya tersembunyi.Anda juga tidak perlu khawatir dalam memilih supplier barang China yang terdapat di Marketplace China, karena tim spesialis importir barang China kami akan membantu Anda menemukan yang terpercaya.
-            </div>
 
-            <div className="-mt-52 ml-50">
-                 <img className="h-30 object-cover sm:w-30" src='/image/impor_ekspor-removebg-preview 2.png' />
-            </div>
 
-            </div>
- 
+         <div style={{marginTop:"400px"}}>
+          <center>
+        <div class="p-10 w-72 border-4 border-orange-200 rounded-full bg-amber-600">
+
+       
+        <img  src="/image/logo.png" style={{width:'500px'}} ></img>
+        
+        </div>
+
+        <div className="text-4xl mt-10 font-bold">
+
+             OCI Logistik
+
+
+        </div>
+
+        <div className="text-2xl">
+        <Button_Whatsapp><label style={{marginTop:'0px'}}>Continue Chat</label></Button_Whatsapp>
+        </div>
+
+       
+
+        </center>
+
         </div>
 
 
         </section>
 
         <section style={{height:'0vh'}}>
-        <div className="shadow-2xl w-500 h-600 bg-green-200 rounded-lg" style={{backgroundColor: '#5FA5FF',marginTop:'450px', height:'280px', paddingTop: 42}}>
-
-        <div className="grid gap-2 mb-12 md:grid-cols-2">
-
-            <div className="-mt-52">
-
-            <img className="h-30 object-cover sm:w-30" src='/image/customer_service-removebg-preview 2.png' />
-         
-            </div>
-
-            <div className="text-white text-left text-base mt-20 -ml-60">
-                 
-                 Kepuasan pelanggan adalah prioritas utama kami, semua kendala ataupun masalah yang anda akan alami selama impor menjadi tanggung jawab dan garansi kami. Di OCIstik, customer tidak akan dibebani sedikitpun karena semua proses akan kami selesaikan sampai tuntas
-            </div>
-
-        </div>
- 
-        </div>
-
+        
 
         </section>
 
         <section style={{height:'100vh'}}>
 
-            <center>
-
-            <div style={{marginTop:'400px'}} >
-
-            <img className="h-50 h-full object-cover sm:w-50 w-full" src='/image/unsplash_Q80LYxv_Tbs.png' />
-         
-            </div>
-
-            </center>
-
+           
 
 
 

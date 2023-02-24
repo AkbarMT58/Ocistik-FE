@@ -124,6 +124,8 @@ border-radius: 30px;
 
 `;
 
+
+
 const Box_button =styled.div`
 box-sizing: border-box;
 position: absolute;
@@ -157,6 +159,18 @@ border: 0.5px solid rgba(0, 139, 217, 0.77);
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 10px;
 margin-left:460px;
+`;
+
+const kanal_button =styled.div`
+
+position: absolute;
+width: 126px;
+height: 40px;
+left: 1131px;
+top: 38px;
+background: linear-gradient(90deg, #008BD9 25%, #56C3FF 81.35%);
+border-radius: 15px;
+
 `;
 
 
@@ -215,22 +229,22 @@ margin-left:460px;
                         }`}
                     >
                         <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                        <li className="text-white hover:text-indigo-200">
+                            <li className="text-white  hover:bg-sky-700 px-3 py-1 rounded-lg">
                                 <a href="/home">Home</a>
                             </li>
-                            <li className="text-white hover:text-indigo-200">
+                            <li className="text-white  hover:bg-sky-700 px-3 py-1 rounded-lg">
                                 <a href="/tentangkami">Tentang Kami</a>
                             </li>
-                            <li className="text-white hover:text-indigo-200">
+                            <li className="text-white  hover:bg-sky-700 px-3 py-1 rounded-lg">
                                 <a href="/layanan">Layanan</a>
                             </li>
-                            <li className="text-white hover:text-indigo-200">
+                            <li className="text-white  hover:bg-sky-700 px-3 py-1 rounded-lg">
                                 <a href="/artikel">Artikel</a>
                             </li>
-                            <li className="text-white hover:text-indigo-200">
+                            <li className="text-white  hover:bg-sky-700 px-3 py-1 rounded-lg">
                                 <a href="/kontak">Kontak</a>
                             </li>
-                            <li className="text-white hover:text-indigo-200">
+                            <li className="text-white  hover:bg-sky-700 px-3 py-1 rounded-lg">
                                 <a href="/hitungbiaya">Hitung Biaya</a>
                             </li>
                         </ul>

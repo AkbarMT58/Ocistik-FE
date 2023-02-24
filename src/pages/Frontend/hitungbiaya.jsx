@@ -7,7 +7,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
 export default function Layanan() {
-    const [navbar, setNavbar] = useState(false);
+const [navbar, setNavbar] = useState(false);
+
+
 
 const Bg_Gambar = styled.div`
 background-image: url(${'/image/unsplash_FPKnAO-CF6M-1.png'});
@@ -158,7 +160,7 @@ margin:auto;
                                 <a href="/kontak">Kontak</a>
                             </li>
                             <li className="text-white hover:bg-sky-700 px-3 py-1 rounded-lg">
-                                <a href="/hitungbiaya">Call Us</a>
+                                <a href="/callus">Call Us</a>
                             </li>
                         </ul>
 
@@ -173,72 +175,22 @@ margin:auto;
 
 
        
-        <h1 style={{textAlign:"center",color:'white',fontSize:'3vw'}}>LAYANAN</h1>
+        <h1 style={{textAlign:"center",color:'white',fontSize:'3vw'}}>HITUNG BIAYA</h1>
         <Border></Border>
 
 
-    <section class="overflow-hidden text-neutral-700 mt-60 mb-30">
-
-    <div class="container mx-auto px-5 py-2 2xl:px-32 lg:pt-12" >
-    <div class="-m-1 flex flex-wrap md:-m-2">
-
-    <div class="flex w-1/3 flex-wrap m-0">
-        <div class="w-full p-1 md:p-2" style={{backgroundColor:'#5EA5FF'}}>
-          <img
-            alt="gallery"
-            class="block h-full w-full rounded-lg"
-            src="/image/group 95.png" />
-        </div>
-        <div class="w-full p-1 md:p-2 text-center" style={{backgroundColor:'#008BD9'}}>
-        <div  style={{fontSize:'2vw',color:'white',fontWeight:'bold'}}>LCL Laut</div>
-      
-      </div>
-      </div>
-      <div class="flex w-1/3 flex-wrap">
-        <div class="w-full p-1 md:p-2" style={{backgroundColor:'white'}}>
-          <img
-            alt="gallery"
-            class="block h-full w-full rounded-lg"
-            src="/image/fixplane-removebg-preview 2.png" style={{height:'210px'}} />
-        </div>
-        <div class="w-full p-1 md:p-2 text-center" style={{backgroundColor:'white'}}>
-        <div  style={{fontSize:'2vw',color:'white',fontWeight:'bold'}}>LCL Udara</div>
-      
-      </div>
-      </div>
-      <div class="flex w-1/3 flex-wrap">
-        <div class="w-full p-1 md:p-2" style={{backgroundColor:'white'}}>
-          <img
-            alt="gallery"
-            class="block h-full w-full rounded-lg"
-            src="/image/angkut_kontainer-removebg-preview 2.png" style={{height:'210px'}} />
-        </div>
-        <div class="w-full p-1 md:p-2 text-center" style={{backgroundColor:'white'}}>
-        <div  style={{fontSize:'2vw',color:'white',fontWeight:'bold'}}>LCL Darat</div>
-      
-      </div>
-      </div>
-
-
-    
-      
-    </div>
-  </div>
-  
-    </section>
 
     <section style={{height:'300vh'}}>
 
 
-    {/* jika laut  */}
-    <div className="shadow-2xl w-500 bg-green-200 rounded-lg relative" style={{backgroundColor: 'white', marginTop:'120px',marginBottom:'400px', height:'623px', paddingTop: 42,backgroundImage:`url("/image/unsplash_2vPGGOU-wLA (3).png")`}}>
+       <div className="shadow-2xl w-500 bg-green-200 rounded-lg relative m-2" style={{backgroundColor: 'white', marginTop:'120px',marginBottom:'400px', height:'623px', paddingTop: 42,backgroundImage:`url("/image/unsplash_2vPGGOU-wLA-1.png")`}}>
             
             
             <LCL_Laut_Form>
 
                 <h5 style={{textAlign:"center", marginTop:'30px'}}>
 
-                LCL Laut (Less Container Load Via Laut)
+            Hitung Biaya
                     
                 </h5>
             </LCL_Laut_Form>
@@ -247,151 +199,6 @@ margin:auto;
             <div className="text-white mt-40 text-center text-2xl">
 
             Less Container Load via laut adalah jasa pengiriman lewat laut dimana anda bisa mengimpor dalam jumlah kecil karena barang anda akan dicampur dengan barang orang lain untuk memenuhi 1 container. Di jasa import OCI Logistic, kami dapat mengimpor barang anda TANPA MINIMAL pengiriman!
-
-
-            </div>
-           
-           
-            <div className="shadow-2xl w-500 h-600 bg-green-200 rounded-lg m-2" style={{backgroundColor: '#FFFFFF',marginTop:'200px', height:'450px', paddingTop: 42}}>
-
-            <div className="text-2xl font-bold m-2" >Hitung Biaya Import</div>
-            <div className="text-xl m-2" >Silakan Isi Informasi Di Bawah Ini</div>
-
-            <div className="grid gap-4 mb-12 md:grid-cols-2 m-4">
-
-            <div className="mb-8">
-
-            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Nama Barang</label>
-            <select  id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="No Resi" required>
-                <option>--Pilih Nama Barang--</option>
-                <option></option>
-
-
-            </select>
-
-            </div>
-            <div className="mb-4">
-            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Berat Barang</label>
-            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kode Marking" required/>
-            </div>
-            </div>
-
-            <div className="grid gap-4 mb-12 md:grid-cols-3 m-4">
-
-            <div className="mb-4">
-
-            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Panjang (Cm)</label>
-            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="No Resi" required/>
-
-            </div>
-            <div className="mb-4">
-            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Lebar (Cm)</label>
-            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kode Marking" required/>
-            </div>
-            <div className="mb-4">
-            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Tinggi (Cm)</label>
-            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kode Marking" required/>
-            </div>
-
-
-            </div>
-
-            <Hitung_Biaya_Btn>
-
-            <h5 style={{textAlign:"center",marginTop:'5px'}}>Hitung Biaya</h5>
-
-
-            </Hitung_Biaya_Btn>
-                        
-
-
-           
-        </div>
-
-        </div>
-
-
-          {/* jika udara  */}
-    <div className="shadow-2xl w-500 bg-green-200 rounded-lg relative m-2" style={{backgroundColor: 'white', marginTop:'120px',marginBottom:'400px', height:'623px', paddingTop: 42,backgroundImage:`url("/image/unsplash_FPKnAO-CF6M-1.png")`}}>
-            
-            
-            <LCL_Laut_Form>
-
-                <h5 style={{textAlign:"center", marginTop:'30px'}}>
-
-                LCL Udara (Less Container Load Via Udara)
-                    
-                </h5>
-            </LCL_Laut_Form>
-       
-
-            <div className="text-white mt-40 text-center text-2xl">
-
-            Less Container Load via laut adalah jasa pengiriman lewat laut dimana anda bisa mengimpor dalam jumlah kecil karena barang anda akan dicampur dengan barang orang lain untuk memenuhi 1 container. Di jasa import OCI Logistic, kami dapat mengimpor barang anda TANPA MINIMAL pengiriman!
-
-
-            </div>
-           
-           
-            <div className="shadow-2xl w-500 h-600 bg-green-200 rounded-lg" style={{backgroundColor: '#FFFFFF',marginTop:'200px', height:'450px', paddingTop: 42}}>
-
-            <div className="text-2xl font-bold m-2" >Hitung Biaya Import</div>
-            <div className="text-xl m-2" >Silakan Isi Informasi Di Bawah Ini</div>
-
-         
-
-            <div className="grid gap-4 mb-12 md:grid-cols-3 m-4">
-
-            <div className="mb-4">
-
-            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Panjang (Cm)</label>
-            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="No Resi" required/>
-
-            </div>
-            <div className="mb-4">
-            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Lebar (Cm)</label>
-            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kode Marking" required/>
-            </div>
-            <div className="mb-4">
-            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Tinggi (Cm)</label>
-            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kode Marking" required/>
-            </div>
-
-
-            </div>
-
-            <Hitung_Biaya_Btn>
-
-            <h5 style={{textAlign:"center",marginTop:'5px'}}>Hitung Biaya</h5>
-
-
-            </Hitung_Biaya_Btn>
-                        
-
-
-           
-        </div>
-
-        </div>
-
-
-           {/* jika darat  */}
-    <div className="shadow-2xl w-500 bg-green-200 rounded-lg relative m-2" style={{backgroundColor: 'white', marginTop:'120px',marginBottom:'400px', height:'623px', paddingTop: 42,backgroundImage:`url("/image/unsplash_FPKnAO-CF6M-1.png")`}}>
-            
-            
-            <LCL_Laut_Form>
-
-                <h5 style={{textAlign:"center", marginTop:'30px'}}>
-
-                LCL Darat (Full Container Load)
-                    
-                </h5>
-            </LCL_Laut_Form>
-       
-
-            <div className="text-white mt-40 text-center text-2xl">
-
-            Less Container Load via darat adalah jasa pengiriman lewat laut dimana anda bisa mengimpor dalam jumlah kecil karena barang anda akan dicampur dengan barang orang lain untuk memenuhi 1 container. Di jasa import OCI Logistic, kami dapat mengimpor barang anda TANPA MINIMAL pengiriman!
 
 
             </div>
@@ -401,7 +208,108 @@ margin:auto;
             <div className="text-2xl font-bold m-2" >Hitung Biaya Import</div>
             <div className="text-xl m-2" >Silakan Isi Informasi Di Bawah Ini</div>
 
+
+            <div className="grid gap-4 mb-12 md:grid-cols-3 m-4">
+
+                <div>
+
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Pilih Tipe Pengiriman</label>
+            <select type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="No Resi" required>
+             <option>--Pilih Tipe Pengiriman</option>
+             <option>Darat</option>
+             <option>Laut</option>
+             <option>Udara</option>
+              
+            </select>
+            </div>
+
+            </div>
+
+            <div className="laut" style={{display:'block'}}>
+
+            <div className="grid gap-4 mb-12 md:grid-cols-3 m-4">
+
+            <div className="mb-4">
+
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Nama Barang</label>
+            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="No Resi" required/>
+
+            </div>
+            <div className="mb-4">
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Berat Barang</label>
+            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kode Marking" required/>
+            </div>
           
+
+            </div>
+
+            <div className="grid gap-4 mb-12 md:grid-cols-3 m-4">
+
+            <div className="mb-4">
+
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Panjang (Cm)</label>
+            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="No Resi" required/>
+
+            </div>
+            <div className="mb-4">
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Lebar (Cm)</label>
+            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kode Marking" required/>
+            </div>
+            <div className="mb-4">
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Tinggi (Cm)</label>
+            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kode Marking" required/>
+            </div>
+
+
+            </div>
+
+            </div>
+
+
+            <div className="udara" style={{display:'none'}}>
+
+            <div className="grid gap-4 mb-12 md:grid-cols-3 m-4">
+
+            <div className="mb-4">
+
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Nama Barang</label>
+            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="No Resi" required/>
+
+            </div>
+            <div className="mb-4">
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Berat Barang</label>
+            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kode Marking" required/>
+            </div>
+
+
+            </div>
+
+            <div className="grid gap-4 mb-12 md:grid-cols-3 m-4">
+
+            <div className="mb-4">
+
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Panjang (Cm)</label>
+            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="No Resi" required/>
+
+            </div>
+            <div className="mb-4">
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Lebar (Cm)</label>
+            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kode Marking" required/>
+            </div>
+            <div className="mb-4">
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Tinggi (Cm)</label>
+            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kode Marking" required/>
+            </div>
+
+
+            </div>
+
+            </div>
+
+
+
+          <div className="darat" style={{display:'none'}}>
+
             <div className="grid gap-4 mb-12 md:grid-cols-3 m-4">
 
             <div className="mb-4">
@@ -437,8 +345,6 @@ margin:auto;
             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Total Invoice</label>
             <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kode Marking" required/>
             </div>
-
-
             </div>
 
             <div className="grid gap-4 mb-12 md:grid-cols-3 m-4">
@@ -457,9 +363,13 @@ margin:auto;
             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Destination City</label>
             <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kode Marking" required/>
             </div>
-
+            </div>
 
             </div>
+
+        
+
+
 
 
             <Hitung_Biaya_Darat__Btn>
@@ -478,12 +388,6 @@ margin:auto;
      
      
     </div>
-
-
-
-
-
-   
 
 
         </section>

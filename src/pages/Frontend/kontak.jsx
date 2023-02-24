@@ -6,15 +6,15 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
 
-export default function Tentangkami() {
+export default function Kontak() {
     const [navbar, setNavbar] = useState(false);
 
 const Bg_Gambar = styled.div`
-background-image: url(${'/image/unsplash_FPKnAO-CF6M-1.png'});
+background-image: url(${'/image/unsplash_FPKnAO-CF6M_kontak.png'});
 background-repeat: no-repeat;
 max-width: 2000px;
 background-size:100% auto;
-height:380px ;
+height:680px ;
 align:center;
 margin: auto;
 `;
@@ -31,6 +31,35 @@ margin:auto;
 `;
 
 
+const LCL_Laut_Form = styled.div `
+position: absolute;
+width: 736px;
+height: 107px;
+left: 50%;
+top: 0px;
+color:white;
+transform: translate(-50%, 0);
+background: #0076B8;
+border-radius: 0px 0px 30px 30px;
+margin:auto;
+font-size:32px;
+`;
+
+
+const Kirim_Pesan =styled.div`
+position:absolute;
+width: 156px;
+height: 42px;
+left:50%;
+top: 480px;
+transform: translate(-50%, 0);
+background: linear-gradient(90deg, #008BD9 25%, #56C3FF 81.35%);
+border-radius: 10px;
+color:white;
+margin:auto;
+`;
+
+
 
 const TitleBlock =styled.div`
 position: absolute;
@@ -42,6 +71,20 @@ top: 0;
 transform: translate(-50%, 0);
 background: linear-gradient(180deg, #0074B5 0%, #13A4F4 53.65%, #13A4F4 100%);
 border-radius: 0px 0px 50px 50px;
+`;
+
+const Button_more =styled.div`
+
+box-sizing: border-box;
+position: absolute;
+width: 128px;
+height: 45px;
+left:25%;
+transform: translate(-50%,0);
+border: 1px solid #000000;
+margin-top:20px;
+
+
 `;
 
 
@@ -105,7 +148,7 @@ border-radius: 0px 0px 50px 50px;
                                 <a href="/home">Home</a>
                             </li>
                             <li className="text-white hover:bg-sky-700 px-3 py-1 rounded-lg">
-                                <a href="javascript:void(0)">Tentang Kami</a>
+                                <a href="/tentangkami">Tentang Kami</a>
                             </li>
                             <li className="text-white hover:bg-sky-700 px-3 py-1 rounded-lg">
                                 <a href="/layanan">Layanan</a>
@@ -130,74 +173,125 @@ border-radius: 0px 0px 50px 50px;
             </div>
         </nav>
 
+          <section style={{height:'90vh'}}>
+            <center>
+            <div className="shadow-2xl w-800 h-600 bg-green-200 rounded-lg" style={{backgroundColor: '#FFFFFF',marginTop:'550px', height:'680px',width:'900px',paddingTop: 42}}>
 
-       
-        <h1 style={{textAlign:"center",color:'white',fontSize:'3vw'}}>TENTANG KAMI</h1>
-        <Border></Border>
-        <h1 style={{textAlign:"center",color:'white',fontSize:'2vw'}}>Solusi Utama dalam Pengiriman Internasional</h1>
+         
+          
+            <div className="grid gap-4 mb-12 md:grid-cols-2 m-4">
 
+            <div className="mb-8 mt-4">
+
+            <div className="text-2xl font-bold m-1" >Ingin Bertanya Mengenai Impor</div>
+            <div className="text-base m-2" >Konsultasi saja dengan kami sekarang melalui whatsapp,email atau datang ke kantor saja!</div>
+
+            
+            <div  className="mt-10" style={{textAlign:'left'}}>
+                JAKARTA OFFICE
+            </div>
+            <div  className="mt-10" style={{textAlign:'left'}}>
+               
+            </div>
+            <div  className="mt-10" style={{textAlign:'left'}}>
+              
+            </div>
+            <div  className="mt-10" style={{textAlign:'left'}}>
+            PT. Ocommerce Capital Indonesia
+            Email: info@ocistok.com
+               
+            </div>
+            <div  className="mt-10" style={{textAlign:'left'}}>
+            Gedung Wisma IWI Jl. Arjuna Sel. No.75, Lt. 7, RT.2/RW.12, Kb. Jeruk, Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11530
+            021-50867088
+            info@ocistok.com
+            </div>
+
+             
+
+            </div>
+            <div className="mb-4">
+
+            <div className="shadow-2xl w-800 h-600 bg-green-200 rounded-lg relative" style={{backgroundColor: '#FFFFFF',marginTop:'0px', height:'580px',width:'400px',paddingTop: 42}} >
+
+
+            <div  className="mt-10" style={{textAlign:'center',fontWeight:'bold'}}>
+                DROP US MESSAGE
+            </div>
+
+            <div className="grid gap-4 mb-2 md:grid-cols-2 m-4">
+
+                <div className="mb-4">
+
+                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Nama</label>
+                <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama" required/>
+
+
+                </div>
+
+                <div className="mb-8">
+
+                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Email</label>
+                <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email" required/>
+
+
+                    
+                </div>
+
+
+            </div>
+
+            <div className="m-4">
+
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Phone Number</label>
+            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Phone Number" required/>
+
+
+
+            </div>
+
+            <div className="m-4">
+
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Pesan</label>
+            <textarea id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Phone Number" required/>
+
+
+
+            </div>
+
+
+            <Kirim_Pesan>Kirim</Kirim_Pesan>
+
+           
+
+
+            </div>
+
+            </div>
+          
+           
+
+            </div>
         
 
-        <section style={{height:'0vh'}}>
-        <div className="shadow-2xl w-500 h-600 bg-green-200 rounded-lg" style={{backgroundColor: '#0F8FD7',marginTop:'250px', height:'280px', paddingTop: 42}}>
+           
 
-            <div className="grid gap-4 mb-12 md:grid-cols-2">
-
-            <div className="mt-5 text-white text-center text-base">
-            OCIstik adalah spesialis jasa import export China-Indonesia dan seluruh dunia yang terbaik, tercepat dan termurah. Jasa kami merupakan Door to Door dan All In, dimana pengiriman dari gudang supplier dan langsung ke alamat anda dan pembayaran sudah termasuk asuransi, garansi dan pajak. Jadi tidak perlu khawatir adanya biaya tersembunyi.Anda juga tidak perlu khawatir dalam memilih supplier barang China yang terdapat di Marketplace China, karena tim spesialis importir barang China kami akan membantu Anda menemukan yang terpercaya.
-            </div>
-
-            <div className="-mt-52 ml-50">
-                 <img className="h-30 object-cover sm:w-30" src='/image/impor_ekspor-removebg-preview 2.png' />
-            </div>
-
-            </div>
- 
-        </div>
+      
 
 
-        </section>
+           
+          </div>
+          </center>
 
-        <section style={{height:'0vh'}}>
-        <div className="shadow-2xl w-500 h-600 bg-green-200 rounded-lg" style={{backgroundColor: '#5FA5FF',marginTop:'450px', height:'280px', paddingTop: 42}}>
-
-        <div className="grid gap-2 mb-12 md:grid-cols-2">
-
-            <div className="-mt-52">
-
-            <img className="h-30 object-cover sm:w-30" src='/image/customer_service-removebg-preview 2.png' />
-         
-            </div>
-
-            <div className="text-white text-left text-base mt-20 -ml-60">
-                 
-                 Kepuasan pelanggan adalah prioritas utama kami, semua kendala ataupun masalah yang anda akan alami selama impor menjadi tanggung jawab dan garansi kami. Di OCIstik, customer tidak akan dibebani sedikitpun karena semua proses akan kami selesaikan sampai tuntas
-            </div>
-
-        </div>
- 
-        </div>
+          </section>
 
 
-        </section>
-
-        <section style={{height:'100vh'}}>
-
-            <center>
-
-            <div style={{marginTop:'400px'}} >
-
-            <img className="h-50 h-full object-cover sm:w-50 w-full" src='/image/unsplash_Q80LYxv_Tbs.png' />
-         
-            </div>
-
-            </center>
+     
+     
+    
 
 
-
-
-        </section>
-
+     
      
     </Bg_Gambar>
 
