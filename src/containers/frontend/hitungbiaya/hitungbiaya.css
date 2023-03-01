@@ -1,0 +1,162 @@
+
+.gradient__bg_hitungbiaya{
+
+    /* ff 3.6+ */
+    background:-moz-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
+
+    /* safari 5.1+,chrome 10+ */
+    background:-webkit-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
+
+    /* opera 11.10+ */
+    background:-o-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
+
+    /* ie 10+ */
+    background:-ms-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
+
+    /* global 92%+ browsers support */
+    background:radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
+
+    background-image: url("../../../assets/image/unsplash_FPKnAO-CF6M_kontak.png");
+    background-repeat: no-repeat;
+    height:780px ;
+    /* background-size:100% auto; */
+
+    max-width: 1400px;
+    margin:auto;
+
+
+
+}
+
+.hasil_hitungan{
+
+    max-width: 1400px;
+    margin:auto;
+    margin-top: -50px;
+
+
+}
+
+
+
+._hitungbiaya *:last-child {
+    margin-bottom: 0;
+   
+}
+
+.box_hitungbiaya-4 {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    position: relative;
+    width: 100%;
+    margin: 20px 0px 0px 40px;
+    max-width:1400px;
+    margin:auto;
+    position:relative;
+    height:550px; 
+}
+
+.box_hitungbiaya-content {
+    background: none repeat scroll 0 0 #FFFFFF;
+    background-color: #f3f3f3;
+    padding: 25px 55px 45px 55px;
+    position: relative;
+    z-index: 1;
+     margin-top:-150px; 
+  
+}
+.box_hitungbiaya-4:after {
+    border-radius: 0 0 50% 50% / 0 0 20px 20px;
+    bottom: 0;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+    content: "";
+    height: 20px;
+    left: 10px;
+    position: absolute;
+    right: 10px;
+}
+
+.hitung{
+
+position: absolute;
+width: 156px;
+height: 42px;
+left: 90%;
+top: 470px;
+-webkit-transform: translate(-50%,0);
+-ms-transform: translate(-50%,0);
+transform: translate(-50%,0);
+background: linear-gradient(90deg,#008BD9 25%,#56C3FF 81.35%);
+border-radius: 10px;
+color: white;
+margin: auto;
+
+
+
+}
+
+
+
+@media screen and (max-width: 500px) {
+
+    .box_hitungbiaya *:last-child {
+        margin-bottom: 0;
+       
+    }
+    
+    .box_hitungbiaya-4 {
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+        position: relative;
+        width: 100%;
+        margin: 20px;
+        max-width:1400px;
+        margin:auto;
+        position:relative;
+        height:950px; 
+        
+    }
+    
+    .box_hitungbiaya-content {
+        background: none repeat scroll 0 0 #FFFFFF;
+        background-color: #f3f3f3;
+        padding: 25px 55px 45px 55px;
+        position: relative;
+        z-index: 1;
+        margin-top:-150px;
+      
+    }
+    .box_hitungbiaya-4:after {
+        border-radius: 0 0 50% 50% / 0 0 20px 20px;
+        bottom: 0;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+        content: "";
+        height: 20px;
+        left: 10px;
+        position: absolute;
+        right: 10px;
+    }
+
+    .hitung{
+
+        position: absolute;
+        width: 156px;
+        height: 42px;
+        left: 85%;
+        top: 860px;
+        -webkit-transform: translate(-50%,0);
+        -ms-transform: translate(-50%,0);
+        transform: translate(-50%,0);
+        background: linear-gradient(90deg,#008BD9 25%,#56C3FF 81.35%);
+        border-radius: 10px;
+        color: white;
+        margin: auto;
+        
+        
+        }
+    
+
+
+
+}
+
+
+

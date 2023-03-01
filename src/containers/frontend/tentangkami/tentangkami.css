@@ -1,0 +1,159 @@
+body{
+    background: var(--color-bg);
+}
+
+.gradient__bg_tentangkami{
+
+
+     /* ff 3.6+ */
+     background:-moz-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
+
+     /* safari 5.1+,chrome 10+ */
+     background:-webkit-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
+ 
+     /* opera 11.10+ */
+     background:-o-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
+ 
+     /* ie 10+ */
+     background:-ms-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
+ 
+     /* global 92%+ browsers support */
+     background:radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
+ 
+     background-image: url("../../../assets/image/unsplash_FPKnAO-CF6M-1.png");
+     background-repeat: no-repeat;
+     height:780px ;
+ 
+     max-width: 1400px;
+     margin:auto;
+
+
+
+}
+
+
+
+
+.border_garis_tentangkami{
+
+border-style: inset;
+width: 15%;
+height: 0px;
+left: 800px;
+top: 600px;
+border: 5px solid #FFFFFF;
+margin:auto;
+color:white;
+
+
+}
+
+
+.gpt3__whatgpt3_tentangkami{
+
+    background-color: rgb(15, 143, 215); 
+    margin-top: 330px;
+     height: 280px; 
+     padding-top: 42px;
+
+
+}
+
+
+.gpt3__whatgpt3_tentangkami_griddua{
+
+    background-color: rgb(15, 143, 215); 
+    height: 250px; 
+     padding-top: 42px;
+
+
+}  
+
+.distance_text_kedua_gridsatu{
+
+
+    margin-top:-20px;
+
+
+
+}
+.distance_gambar{
+
+    margin-top:-250px;
+
+
+}
+
+.distance_gambar_kedua{
+
+    margin-top:-100px;
+
+
+}
+
+@media(max-width:500px){
+
+    .distance_gambar{
+
+        margin-top:0px;
+
+    }
+
+    .distance_gambar_kedua{
+
+        margin-top:160px;
+
+    }
+
+    .distance_text_kedua{
+
+        margin-top:600px;
+
+    }
+
+    .distance_text_kedua_griddua{
+
+
+        margin-top:-450px;
+
+
+
+    }
+
+    .gradient__bg_tentangkami{
+
+        height:650px;
+
+
+    }
+
+    .gpt3__whatgpt3-container{
+
+        margin-top:-20px;
+
+
+    }
+
+    .gpt3__whatgpt3_tentangkami {
+
+        height:370px;
+
+
+    }
+
+
+
+}
+
+
+
+
+.responsive-img{
+
+    max-width: 100%;
+    margin:auto;
+
+
+}
+
+

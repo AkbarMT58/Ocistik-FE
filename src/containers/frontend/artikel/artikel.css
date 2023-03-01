@@ -1,0 +1,161 @@
+.gradient__bg_artikel{
+
+    
+     /* ff 3.6+ */
+     background:-moz-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
+
+     /* safari 5.1+,chrome 10+ */
+     background:-webkit-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
+ 
+     /* opera 11.10+ */
+     background:-o-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
+ 
+     /* ie 10+ */
+     background:-ms-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
+ 
+     /* global 92%+ browsers support */
+     background:radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
+ 
+     background-image: url("../../../assets/image/unsplash_FPKnAO-CF6M.png");
+     background-repeat: no-repeat;
+     height:180px ;
+ 
+     max-width: 1400px;
+     margin:auto;
+
+
+}
+
+.artikel_bg{
+
+     max-width:1400px;
+     margin:auto;
+
+
+}
+
+
+div.gallery_artikel {
+     border: 1px solid #ccc;
+     /* background: linear-gradient(180deg, #62C7FF 0%, #327CA5 100%);  */
+     border-radius: 30px;
+   
+   }
+   
+   div.gallery_artikel:hover {
+     border: 1px solid #777;
+   }
+   
+   div.gallery_artikel img {
+     width: 100%;
+     height: auto;
+ 
+     
+   }
+   
+   div.desc_artikel {
+     padding: 15px;
+     text-align: center;
+     color:white;
+   }
+
+
+   .button_more{
+
+     box-sizing: border-box;
+     position: absolute;
+     width: 128px;
+     height: 30px;
+     border: 1px solid #000000;
+     margin-top:-20px;
+
+
+   }
+
+   .card-footer{
+
+     height:80px;
+
+
+   }
+
+
+.responsive-img-artikel{
+
+padding: 0 6px;
+float: left;
+width: 80%;
+height:100%;
+
+
+
+
+}
+
+.card-horizontal {
+     display: flex;
+     flex: 1 1 auto;
+   }
+
+
+.cards {
+     display: flex;
+     flex-wrap: wrap;
+     list-style: none;
+     margin: 0;
+     padding: 0;
+   }
+
+
+   .card {
+     background-color: white;
+    
+   }
+   
+
+
+
+   @media only screen and (max-width: 500px) {
+     .cards_item {
+          width: 33.3333%;
+        }
+      
+      
+      .card {
+        background-color:transparent;
+        border-radius: 0.25rem;
+        box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: column;
+        /* overflow: hidden; */
+        height:10%;
+        font-size:11px;
+      }
+      
+      .card_content {
+        padding: 1rem;
+        background: linear-gradient( white 40%, white 100%);
+        color:black;
+        font-size:11px;
+      }
+      
+      .card_title {
+        color: #ffffff;
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: capitalize;
+        margin: 0px;
+      }
+      
+      .card_text {
+        color: #ffffff;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        margin-bottom: 1.25rem;    
+        font-weight: 400;
+      }
+
+     }
+
+
