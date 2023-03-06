@@ -5,7 +5,9 @@
     background: var(--color-bg);
     border-radius:20px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    height:400px;
+   
+
+    /* height:1800px; */
 
 
 }
@@ -170,6 +172,7 @@ border-radius: 0px 0px 80px 80px;
     max-width:1400px;
     margin:auto;
     height:500px;
+    position:relative;
 
 
 }
@@ -249,6 +252,13 @@ div.gallery {
         border-radius: 0px 0px 50px 50px;
     
     }
+
+
+    div.desc {
+        padding: 15px;
+        text-align: center;
+        color:white;
+      }
 
             
     .headerjudulbanner{
@@ -387,7 +397,7 @@ div.gallery {
 
     .card_home {
         /* background-color: dodgerblue; */
-        color: white;
+        color: black;
         padding: 1rem;
         height: 3.0rem;
         font-size:3vw;
@@ -412,9 +422,50 @@ div.gallery {
     
     
     }
+
+
+    .garis_batas{
+
+        display:none;
+        }
+
+
+        .garis_batas_2{
+
+            display:none;
+
+        }
+
+
+    .garis_batas_3{
+
+        display:none;
+        }
+
+        .garis_batas_4{
+
+           display:none;
+            }
     
 
 }
+
+@media screen and (max-width: 850px) {
+    .gpt3__whatgpt3-container{
+        flex-direction: column;
+    }
+    .gpt3__whatgpt3-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 0rem;
+    }
+
+    .gpt3__whatgpt3-heading p {
+        margin-top: 1rem;
+    }
+}
+
+
 
 @media screen and (max-width: 650px) {
     .gpt3__whatgpt3-container{
@@ -445,3 +496,48 @@ div.gallery {
         min-width: 100%;
     }
 }
+
+        .garis_batas{
+
+        position: absolute;
+        width: 94px;
+        left: 180px;
+        top: 114px;
+        border: 1px inset #000000;
+        transform: rotate(90deg);
+        }
+
+
+        .garis_batas_2{
+
+            position: absolute;
+            width: 94px;
+            height: 0px;
+            left: 400px;
+            top: 114px;
+            border: 1px inset #000000;
+            transform: rotate(90deg);
+            }
+
+
+    .garis_batas_3{
+
+        position: absolute;
+        width: 94px;
+        height: 0px;
+        left: 830px;
+        top: 114px;
+        border: 1px inset #000000;
+        transform: rotate(90deg);
+        }
+
+        .garis_batas_4{
+
+            position: absolute;
+            width: 94px;
+            height: 0px;
+            left: 1050px;
+            top: 114px;
+            border: 1px inset #000000;
+            transform: rotate(90deg);
+            }

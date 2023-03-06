@@ -2,9 +2,10 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../frontend/hitungbiaya/hitungbiaya.css'
 import { useRef,useState,useMediaQuery,useEffect  } from "react";
-
 import { Navbar } from '../../../components';
 import {Footer,Header} from '../../../containers';
+import { getData_Master_Categories } from '../../../constants/api/logistik';
+import { getData_Master_Jenisbarang } from '../../../constants/api/logistik';
 
 
 function useScreenWidth() {
@@ -34,6 +35,24 @@ function useScreenWidth() {
 
 const Hitungbiaya= () => {
 
+  const [dataCategories, setDataCategories] = useState(null)
+const [dataJenisBarang, setDataJenisBarang] = useState(null)
+
+  //use state input request from form input 
+  const [inputkategori, setKategori] = useState('');
+  const [inputnamabarang, setNamabarang] = useState('');
+  const [inputberatbarang, setBeratbarang] = useState('');
+  const [inputpanjang, setPanjang] = useState('');
+  const [inputlebar, setLebar] = useState('');
+  const [inputtinggi, setTinggi] = useState('');
+  const [inputvolume, setVolume] = useState('');
+
+  
+const [TotalestimasibiayaLaut,setEstimasiBiayaLaut]=useState('');
+const [TotalestimasibiayaUdara,setEstimasiBiayaUdara]=useState('');
+const volume_total= inputvolume;
+
+
   const inputRef = useRef(null);
   const [updated, setUpdated] = useState('');
   const widthSize = useScreenWidth()
@@ -49,6 +68,132 @@ const Hitungbiaya= () => {
 }
 
 
+useEffect(() => {
+  if(!dataCategories) {
+    getDataMasterCategory()
+  }
+
+  if(!dataJenisBarang) {
+    getDataMasterJenisBarang()
+  }
+
+}, [dataCategories,dataJenisBarang])
+
+const getDataMasterCategory = async () => {
+  const res = await getData_Master_Categories();
+  if (res.status === 200) {
+    setDataCategories(res.data)
+  }
+}
+
+const getDataMasterJenisBarang = async () => {
+  const res = await getData_Master_Jenisbarang();
+  if (res.status === 200) {
+    setDataJenisBarang(res.data)
+  }
+}
+
+
+//fungsi kalkulasi biaya
+const handleGetHitungBiayaLautClick = async (e) => {
+  e.preventDefault();
+  // alert(`The category id  you are selected is: ${inputkategori}`);
+ 
+  var display_click_lcl_sea='block';
+ 
+  try {
+    let res = await fetch("http://192.168.15.16:8080/oci/calculation", {
+      method: "POST",
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+
+      },
+
+      body: JSON.stringify({
+        "volume": parseInt(volume_total),
+        "berat": parseInt(inputberatbarang),
+        "kategori": parseInt(inputkategori),
+       
+      }),
+    });
+    let resJson = await res.json();
+    if (res.status === 200) {
+    
+      console.log(resJson)
+
+      console.log(JSON.stringify(resJson.data.Laut))
+      const data_total_Laut = resJson.data.Laut
+      console.log(display_click_lcl_sea);
+
+ 
+      
+      
+
+      //laut 
+        setEstimasiBiayaLaut(data_total_Laut);
+
+      
+    } else {
+      console.log("error")
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
+const handleGetHitungBiayaUdaraClick = async (e) => {
+  e.preventDefault();
+
+
+  var display_click_lcl_udara='block';
+ 
+  try {
+    let res = await fetch("http://192.168.15.16:8080/oci/calculation", {
+      method: "POST",
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+
+      },
+
+      body: JSON.stringify({
+        "volume": parseInt(volume_total),
+        "berat": parseInt(inputberatbarang),
+        "kategori": parseInt(inputkategori),
+       
+      }),
+    });
+    let resJson = await res.json();
+    if (res.status === 200) {
+    
+      console.log(resJson)
+
+  
+      const data_total_Udara = resJson.data.Udara
+      
+      
+
+        setEstimasiBiayaUdara(data_total_Udara);
+      
+      
+      
+    } else {
+      console.log("error")
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
+const TotalbiayaLaut= (TotalestimasibiayaLaut)
+
+const TotalbiayaUdara= (TotalestimasibiayaUdara)
+
+
+
 
 const mobileWidth = 500
 
@@ -57,16 +202,22 @@ if(widthSize > mobileWidth){
   //logic for desktop
   if(updated=='Darat'){
 
+
+    var display_margin='450px';
+    var display_height_form='560px';
+    var display_status_darat='block';
     var display_select_darat='block';
-    var display_margin='140px';
-    var display_height_form='580px';
-  
-  
+    var display_status_udara='none';
+    
+    
+
   
   }else{
   
   
     var display_select_darat='none';
+
+    
   
   
   }
@@ -76,15 +227,23 @@ if(widthSize > mobileWidth){
   
     var display_select_laut='block';
   
-    var display_margin='200px';
+    var display_margin='460px';
 
     var display_height_form='580px';
+
+    var display_margin_output='260px';
+
+    var display_status_laut='none';
+
+    var display_status_udara='none';
+  
   
   
   }else{
   
   
     var display_select_laut='none';
+    var display_status_laut='none';
   
   
   }
@@ -92,14 +251,21 @@ if(widthSize > mobileWidth){
   if(updated=='Udara'){
   
     var display_select_udara='block';
-    var display_margin='260px';
-    var display_height_form='580px';
+    var display_margin='460px';
+    var display_height_form='600px';
+    var display_margin_output='0px';
+
+
+    
+    var display_status_udara='none';
+
   
   
   }else{
   
   
     var display_select_udara='none';
+ 
   
   
   }
@@ -115,48 +281,63 @@ if(widthSize <= mobileWidth){
 if(updated=='Darat'){
 
   var display_select_darat='block';
-  var display_margin='150px';
-  var display_height_form='950px';
+  var display_margin='660px';
+  var display_height_form='750px';
 
+  var display_select_darat='block';
+  var display_select_laut='none';
+  var display_select_udara='none';
 
-
-}else{
-
-
-  var display_select_darat='none';
-
+  var display_status_laut='none';
+  var display_status_udara='none';
 
 }
 
 
 if(updated=='Laut'){
 
-  var display_select_laut='block';
-  var display_margin='140px';
-  var display_height_form='680px';
+
+  var display_margin='600px';
+  var display_height_form='160px';
   var display_margin_btn='-260px';
+  display_margin_output='180px';
 
 
-}else{
+
+  var display_select_darat='none';
+  var display_select_laut='block';
+  var display_select_udara='none';
+
+  
+  var display_status_darat='none';
+  var display_status_udara='none';
 
 
-  var display_select_laut='none';
+  
+
 
 
 }
 
+
+
 if(updated=='Udara'){
 
+  
+  // var display_margin='160px';
+  // var display_height_form='580px';
+  // var display_margin_btn='-360px';
+
+  var display_margin='600px';
+  var display_height_form='160px';
+  var display_margin_btn='-260px';
+  display_margin_output='180px';
+
+
+  var display_select_darat='none';
+  var display_select_laut='none';
   var display_select_udara='block';
-  var display_margin='160px';
-  var display_height_form='580px';
-  var display_margin_btn='-360px';
-
-
-}else{
-
-
-  var display_select_udara='none';
+  var display_status_udara='none';
 
 
 }
@@ -169,10 +350,12 @@ if(updated=='Udara'){
 
 if (updated==''){
 
-  var display_select_darat='block';
+  //var display_select_darat='block';
   var display_select_laut='none';
   var display_select_udara='none';
-  var display_status='none';
+  var display_status_darat='none';
+   var display_status_udara='none';
+
 
 
 }
@@ -193,7 +376,7 @@ if (updated==''){
       </div>
       </div>
 
-      <section style={{height:'250vh'}}>
+      <section style={{height:'150vh'}}>
       <div class="box_hitungbiaya box_hitungbiaya-4" style={{height:display_height_form}} >
 			<div class="box_hitungbiaya-content" style={{marginLeft:'-40px'}}>
         <h2 style={{fontWeight:'bold'}}>HITUNG BIAYA</h2>
@@ -238,71 +421,16 @@ if (updated==''){
         
 {/* jika darat */}
 <div className='darat' style={{display:display_select_darat}}>
-
+  
   <div className='row m-2'>
-        <div className='col-md-4'>
-
-
-        <div className='form-group'>
-
-            <label>Nama Lengkap</label>
-            <input type='textbox' className='form-control'>
-
-            
-            </input>
-
-
-            </div>
-
-                    
-
-
-        </div>
-
-
-
-        <div className='col-md-4'>
-
-
-        <div className='form-group'>
-
-        <label>Email</label>
-        <input type='textbox' className='form-control'>
-
-
-        </input>
-
-
-        </div>
-
-
-
-        </div>
-
-        <div className='col-md-4'>
-
-
-          <div className='form-group'>
-
-          <label>Whatsapp</label>
-          <input type='textbox' className='form-control'>
-
-
-          </input>
-
-
-          </div>
-
-
-
-          </div>
+      
 
           <div className='col-md-4'>
 
 
               <div className='form-group'>
 
-                  <label>HS Code</label>
+                  <label className='text-black'>HS Code</label>
                   <input type='textbox' className='form-control'>
 
                   
@@ -321,7 +449,7 @@ if (updated==''){
 
               <div className='form-group'>
 
-              <label>Mata Uang</label>
+              <label className='text-black'>Mata Uang</label>
               <input type='textbox' className='form-control'>
 
 
@@ -339,7 +467,7 @@ if (updated==''){
 
                 <div className='form-group'>
 
-                <label>Total Invoice</label>
+                <label className='text-black'>Total Invoice</label>
                 <input type='textbox' className='form-control'>
 
 
@@ -351,13 +479,16 @@ if (updated==''){
 
 
                 </div>
+
+
+       
 
                 <div className='col-md-4'>
 
 
               <div className='form-group'>
 
-                  <label>Container Type</label>
+                  <label className='text-black'>Container Type</label>
                   <input type='textbox' className='form-control'>
 
                   
@@ -376,7 +507,7 @@ if (updated==''){
 
               <div className='form-group'>
 
-              <label>Origin City</label>
+              <label className='text-black'>Origin City</label>
               <input type='textbox' className='form-control'>
 
 
@@ -394,7 +525,7 @@ if (updated==''){
 
                 <div className='form-group'>
 
-                <label>Destination City</label>
+                <label className='text-black'>Destination City</label>
                 <input type='textbox' className='form-control'>
 
 
@@ -408,6 +539,10 @@ if (updated==''){
                 </div>
 
                 </div>
+
+                <button  className='hitung' style={{top:display_margin}}  type="submit" ><label className='text-white fs-5 font-weight-bold'>Hitung Biaya</label></button>
+
+            
 
                 </div>
 
@@ -416,42 +551,75 @@ if (updated==''){
 {/* jika laut */}
 <div className='laut' style={{display:display_select_laut}}>
 
+<form onSubmit={handleGetHitungBiayaLautClick}>
+
   <div className='row m-2'>
-        <div className='col-md-6'>
 
+            <div className='col-md-4'>
 
+          <div className='form-group m-1'>
+          <label htmlFor="kategoribarang" className="text-black text-left" >Kategori Barang</label>
+
+          <select value={inputkategori} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
+          <option>--Pilih Kategori Barang--</option>
+          {dataCategories?.map((category, index) => (
+            <option key={category.id} value={category.id}>{category.display_name}</option>
+          ))}
+
+          </select>
+
+          </div>
+
+          </div>
+
+    
+        <div className='col-md-4'>
         <div className='form-group'>
 
-            <label>Nama Barang</label>
-            <input type='textbox' className='form-control'>
+            <label>Jenis Barang</label>
+            <select value={inputnamabarang}   type="textbox" name="jenisbarang"  className='form-control' placeholder='Jenis Barang' onChange={(e) => setNamabarang(e.target.value)}>
+            <option>--Pilih Jenis Barang--</option>
+            {dataJenisBarang?.map((jenisbarang, index) => (
+            <option key={jenisbarang.id} value={jenisbarang.id}>{jenisbarang.display_name}</option>
+          ))}
 
-            
-            </input>
-
-
+            </select>
+          
             </div>
 
         </div>
 
 
 
-        <div className='col-md-6'>
+        <div className='col-md-4'>
 
 
         <div className='form-group'>
 
         <label>Berat Barang (Kg)</label>
-        <input type='textbox' className='form-control'>
+        
+        <input value={inputberatbarang}    type="textbox" name="berat" className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
 
 
-        </input>
+        </div>
+
 
 
         </div>
 
+        <div className='col-md-12'>
 
+        <div className='form-group m-1'>
+        <label className='text-black' htmlFor="nomorresi">Volume (m3)</label>
+
+        <input value={inputvolume} type="textbox" name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
 
         </div>
+
+        </div>
+
+
+        <div hidden>
 
         <div className='col-md-4'>
 
@@ -510,16 +678,16 @@ if (updated==''){
 
               </div>
 
+              </div>
+
+              
+            <button  className='hitung' style={{top:display_margin}}  type="submit" ><label className='text-white fs-5 font-weight-bold'>Hitung Biaya</label></button>
+
+
+
+              </form>
+
              
-
-               
-
-         
-
-          
-
-           
-
                 </div>
 
 
@@ -527,17 +695,37 @@ if (updated==''){
 {/* jika udara */}
 <div className='udara' style={{display:display_select_udara}}>
 
+<form onSubmit={handleGetHitungBiayaUdaraClick}>
+
   <div className='row m-2'>
-        <div className='col-md-4'>
 
+          <div className='col-md-3'>
 
+        <div className='form-group m-1'>
+        <label htmlFor="kategoribarang" className="text-black text-left" >Kategori Barang</label>
+
+        <select value={inputkategori} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
+        <option>--Pilih Kategori Barang--</option>
+        {dataCategories?.map((category, index) => (
+          <option key={category.id} value={category.id}>{category.display_name}</option>
+        ))}
+
+        </select>
+
+        </div>
+
+        </div>
+        <div className='col-md-3'>
         <div className='form-group'>
 
-            <label>Nama Barang</label>
-            <input type='textbox' className='form-control'>
+            <label>Jenis Barang</label>
+            <select value={inputnamabarang}   type="textbox" name="jenisbarang"  className='form-control' placeholder='Jenis Barang' onChange={(e) => setNamabarang(e.target.value)}>
+            <option>--Pilih Jenis Barang--</option>
+            {dataJenisBarang?.map((jenisbarang, index) => (
+            <option key={jenisbarang.id} value={jenisbarang.id}>{jenisbarang.display_name}</option>
+          ))}
 
-            
-            </input>
+            </select>
 
 
             </div>
@@ -549,7 +737,7 @@ if (updated==''){
 
 
 
-        <div className='col-md-4'>
+        <div className='col-md-3'>
 
 
         <div className='form-group'>
@@ -567,50 +755,45 @@ if (updated==''){
 
         </div>
 
-        <div className='col-md-4'>
+        <div className='col-md-3'>
 
 
           <div className='form-group'>
 
           <label>Berat (Kg)</label>
-          <input type='textbox' className='form-control'>
-
-
-          </input>
-
-
-          </div>
-
-
-
-          </div>
-
-          </div>
-
-
         
+          <input value={inputberatbarang}    type="textbox" name="berat" className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
+
+          </div>
+
+
+
+          </div>
+
+          
+        <div className='col-md-12'>
+
+          <div className='form-group m-1'>
+          <label className='text-black' htmlFor="nomorresi">Volume (m3)</label>
+
+          <input value={inputvolume} type="textbox" name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
+
+          </div>
+
+          </div>
+
+          </div>
+
+          <button  className='hitung' style={{top:display_margin}}  type="submit" ><label className='text-white fs-5 font-weight-bold'>Hitung Biaya</label></button>
 
             
+          </form>
 
-
-            
 
                 </div>
 
-
-
-
-
-
-                  
-
-
-                    <div className='hitung' style={{marginTop:display_margin_btn}}><div style={{marginLeft:'20px'}}>Hitung Biaya</div>
                     
-                    </div>
-
-                    
-    <div className='hasil_hitungan' style={{marginTop:display_margin,display:display_status}}>
+<div className='hasil_hitungan_laut' style={{marginTop:display_margin_output,display:display_status_laut}}>
 
     <hr  style={{border:'2px solid black',marginTop:'0px'}}/>
 
@@ -640,7 +823,8 @@ Total Tagihan
 </div>
 
 <div className='text-black fs-4'>
-Rp.4.500.000,-
+
+Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
 
 </div>
 
@@ -648,7 +832,7 @@ Rp.4.500.000,-
 
 <div className='row m-2'>
 
-<div className='col-md-3'>
+<div className='col-md-3' hidden>
 <div className='form-group'>
   <label className='text-secondary'>Tujuan Negara</label>
   <div className='text-black'>
@@ -658,11 +842,11 @@ Rp.4.500.000,-
 </div>
 
 </div>
-<div className='col-md-3'>
+<div className='col-md-3' hidden>
 <div className='form-group'>
   <label className='text-secondary'>Total Volume</label>
   <div className='text-black'>
-    1 m m3
+    1 m3
   </div>
 
 </div>
@@ -700,7 +884,7 @@ Rp.4.500.000,-
 
 <div className='row m-2'>
 
-<div className='col-md-3'>
+<div className='col-md-3' hidden>
 <div className='form-group'>
   <label className='text-secondary'>Tipe Pengiriman</label>
   <div className='text-black'>
@@ -712,9 +896,9 @@ Rp.4.500.000,-
 </div>
 <div className='col-md-3'>
 <div className='form-group'>
-  <label className='text-secondary'>Panjang</label>
+  <label className='text-secondary'></label>
   <div className='text-black'>
-    100 Cm
+  
   </div>
 
 </div>
@@ -723,9 +907,9 @@ Rp.4.500.000,-
 </div>
 <div className='col-md-3'>
 <div className='form-group'>
-  <label className='text-secondary'>Tinggi</label>
+  <label className='text-secondary'></label>
   <div className='text-black'>
-    100 Cm
+  
     
   </div>
 
@@ -733,7 +917,7 @@ Rp.4.500.000,-
 
 
 </div>
-<div className='col-md-3'>
+<div className='col-md-3' hidden>
 <div className='form-group'>
   <label className='text-secondary'></label>
 
@@ -745,7 +929,7 @@ Rp.4.500.000,-
 
 
 </div>
-<div className='col-md-3'>
+<div className='col-md-3' hidden>
 <div className='form-group'>
   <label className='text-secondary'>Kategori Barang</label>
   <div className='text-black'>
@@ -757,9 +941,9 @@ Rp.4.500.000,-
 </div>
 <div className='col-md-3'>
 <div className='form-group'>
-  <label className='text-secondary'>Lebar</label>
+  <label className='text-secondary'></label>
   <div className='text-black'>
-    100 Cm
+ 
   </div>
 
 </div>
@@ -779,6 +963,181 @@ Rp.4.500.000,-
 </div>  
 
 </div>
+
+{/* 
+hasil hitungan udara */}
+                    
+<div className='hasil_hitungan_udara' style={{marginTop:display_margin_output,display:display_status_udara}}>
+
+<hr  style={{border:'2px solid black',marginTop:'0px'}}/>
+
+<div className='box_hitungbiaya box_hitungbiaya-4' style={{borderColor:'grey',height:display_height_form}}>
+
+<div className='m-3'>
+
+<div className='text-black text-left' >
+
+Hitung Perkiraan Biaya
+
+
+</div>
+
+
+<div className='text-secondary mb-2' >
+
+Kalkulasi biaya hanya bersifat perkiraan dan dapat berubah sewaktu-waktu
+
+</div>
+
+<div className='text-secondary text-left' >
+
+Total Tagihan
+</div>
+
+<div className='text-black fs-4'>
+
+Rp.{TotalbiayaUdara.toLocaleString('ID-id')},-
+
+</div>
+
+</div>
+
+<div className='row m-2'>
+
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'>Tujuan Negara</label>
+<div className='text-black'>
+China
+</div>
+
+</div>
+
+</div>
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'>Total Volume</label>
+<div className='text-black'>
+1 m3
+</div>
+
+</div>
+
+
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
+
+</div>
+
+</div>
+
+
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+</div>
+
+
+<div className='row m-2'>
+
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'>Tipe Pengiriman</label>
+<div className='text-black'>
+Laut
+</div>
+
+</div>
+
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
+
+</div>
+
+</div>
+
+
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
+
+
+</div>
+
+</div>
+
+
+</div>
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'></label>
+
+
+<img src="/image/tools.png" className='responsive-img' />
+
+
+</div>
+
+
+</div>
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'>Kategori Barang</label>
+<div className='text-black'>
+Sepatu
+</div>
+
+</div>
+
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+</div>  
+
+</div>
+
+
+
 
 
 

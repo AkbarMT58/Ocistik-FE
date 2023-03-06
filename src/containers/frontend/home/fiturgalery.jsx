@@ -61,6 +61,7 @@ const Fitur_Galery = () => {
 
         var display_margin='400px';
         var display_height_form='920px';
+        var display_height_vh='155vh';
 
 
       }else{
@@ -84,6 +85,7 @@ const Fitur_Galery = () => {
 
     var display_margin='740px';
     var display_height_form='1550px';
+    var display_height_vh='110vh';
 
 
   }else{
@@ -91,7 +93,7 @@ const Fitur_Galery = () => {
     
   var display_margin='480px';
   var display_height_form='1400px';
-  var display_height_vh='110vh';
+  var display_height_vh='120vh';
 
 
 
@@ -219,12 +221,7 @@ var display_hidup_laut=display_aktif;
 
     <section style={{height:display_height_vh}}>
 
-
-
 <div className='fiturgalery'>
-
-
-  
 <div className='buttons_cards_layanan m-4' style={{marginTop:'100px'}}>
 
 
@@ -385,6 +382,8 @@ slide bergerak */}
 </div> 
 
 </div>
+
+
 
 </section>
 

@@ -7,8 +7,6 @@ import '../../frontend/home/home.css'
 const Galery = () => {
   return (
 
-  
-
     <div className='gpt3_home_galery_bg' >
     <div className='gpt3__galery'>
 
@@ -25,17 +23,7 @@ const Galery = () => {
 
     </div>
 
-
-  
-       
-
-
-
-    
-
-    
-   
-    
+ 
   )
 }
 

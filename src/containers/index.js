@@ -44,6 +44,16 @@ export {default as Hitungbiaya} from './frontend/hitungbiaya/hitungbiaya';
 
 
 
+//Master Artikel
+export {default as Master_Artikel} from './frontend/admin/master/master_artikel/Master_Artikel';
+
+
+//Master Artikel
+export {default as Edit_Artikel} from './frontend/admin/master/master_artikel/Edit_Artikel';
+
+
+
+
 
 
 

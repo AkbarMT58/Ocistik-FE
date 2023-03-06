@@ -16,20 +16,20 @@ const Footer = () => {
           <img src={logo} alt='logo'/>
           <p>Jakarta,Indonesia, All Rights Reserved</p>
         </div>
-        <div className='gpt3__footer-links_div'>
+        <div className='gpt3__footer-links_div' hidden>
           <h4>Links</h4>
           <p>Overons</p>
           <p>Social Media</p>
           <p>Counters</p>
           <p>Contact</p>
         </div>
-        <div className='gpt3__footer-links_div'>
+        <div className='gpt3__footer-links_div' hidden>
           <h4>Company</h4>
           <p>Terms & Conditions</p>
           <p>Privacy Policy</p>
           <p>Contact</p>
         </div>
-        <div className='gpt3__footer-links_div'>
+        <div className='gpt3__footer-links_div' hidden>
           <h4>Get in touch</h4>
           <p>Paritosh,BITS Goa</p>
           <p>9027641712</p>

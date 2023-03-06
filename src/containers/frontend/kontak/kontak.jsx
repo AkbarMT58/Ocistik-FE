@@ -2,9 +2,13 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../frontend/kontak/kontak.css'
 import { Navbar } from '../../../components';
-import {Footer,Header} from '../../../containers';
+import {Footer} from '../../../containers';
+
+import { useState } from "react";
 
 const Kontak= () => {
+
+  const [isOpen, setIsOpen] = React.useState(true);
 
     return (
    
@@ -134,16 +138,14 @@ const Kontak= () => {
     </div>
 
     </div>
+   
     </section>
 
-    
+  
+    <Footer/>
 
 
- 
-
-
-
-      <Footer/>
+      
 
     </div>
    

@@ -1,16 +1,35 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../frontend/artikel/artikel.css'
-import { Brand,CTA,Navbar } from '../../../components';
-import {Footer,Header} from '../../../containers';
+import { Navbar } from '../../../components';
+import {Footer} from '../../../containers';
 import Pagination from 'react-bootstrap/Pagination';
+import { getData_Artikel } from '../../../constants/api/logistik';
+import { useState,useEffect } from "react";
+import { data } from "autoprefixer";
 
 
+const Artikel= ({data}) => {
 
+  const [dataArtikel, setDataArtikel] = useState(null)
 
-
-const Artikel= () => {
-
+  //fungsi get data artikel
+  useEffect(() => {
+    if(!dataArtikel) {
+      getDataArtikel()
+    }
+  
+  }, [dataArtikel])
+  
+  const getDataArtikel = async () => {
+    const res = await getData_Artikel();
+    // console.log("getdata artikel", res)
+    if (res.status === 200) {
+      setDataArtikel(res.Data)
+    }
+  }
+  
+console.log("data artikel all :", dataArtikel)
     return (
 
       <div className='App'>
@@ -38,8 +57,8 @@ const Artikel= () => {
     <div className="card" >
   <img src="/image/unsplash_Q80LYxv_Tbs.png"  alt="..."/>
   <div className="card-body" >
-    <h5 className="card-title text-black">Card title</h5>
-    <p className="card-text text-black">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <h5 className="card-title text-black">Judul News</h5>
+    <p className="card-text text-black fs-6">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
      <a href="/artikel-detail" className='text-black text-center button_more'>Read More</a>
   </div>
 </div>
@@ -49,25 +68,25 @@ const Artikel= () => {
 
           <div className='col-md-7'>
 
+          {dataArtikel?.map((artikel, index) => (
           <div className='row'>
-
           <div className='col-md-6'>
-          <div class="card">
-          <div class="card-horizontal">
+          <div className="card">
+          <div className="card-horizontal">
               <div class="img-square-wrapper">
                   <img className="responsive-img-artikel" src="/image/unsplash_Q80LYxv_Tbs.png" alt="Card image cap" />
               </div>
-              <div class="card-body" style={{marginLeft:'-70px'}}>
-                  <h4 class="card-title">Card title</h4>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <div className="card-body" style={{marginLeft:'-120px'}}>
+                  <h4 className="card-title fs-6">{artikel.title}</h4>
+                  <p className="card-text fs-6"></p>
               </div>
              
           </div>
          
-          <div class="card-footer" >
+          <div className="card-footer" >
            
           <div className='text-black text-center button_more mt-4'>Read More</div>
-              <small class="text-muted">Last updated 3 mins ago</small>
+              <small className="text-muted"></small>
           </div>
         </div>
 
@@ -75,40 +94,32 @@ const Artikel= () => {
           </div>
 
           <div className='col-md-6'>
-
-          <div class="card">
-          <div class="card-horizontal">
+          <div className="card">
+          <div className="card-horizontal">
               <div class="img-square-wrapper">
                   <img className="responsive-img-artikel" src="/image/unsplash_Q80LYxv_Tbs.png" alt="Card image cap" />
               </div>
-              <div class="card-body" style={{marginLeft:'-70px'}}>
-                  <h4 class="card-title">Card title</h4>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <div className="card-body" style={{marginLeft:'-120px'}}>
+                  <h4 className="card-title fs-6">{artikel.title}</h4>
+                  <p className="card-text fs-6"></p>
               </div>
              
           </div>
-
-          
-          
-          <div class="card-footer">
+         
+          <div className="card-footer" >
+           
           <div className='text-black text-center button_more mt-4'>Read More</div>
-              <small class="text-muted">Last updated 3 mins ago</small>
+              <small className="text-muted"></small>
           </div>
         </div>
 
-       
-
-
-   
-                    
-        {/* <img className='responsive-img-artikel'  src="/image/unsplash_Q80LYxv_Tbs.png" alt=""/> */}
-
-
-
-        </div>
-
+  
+          </div>
 
           </div>
+          
+
+           ))}
 
           </div>
 
@@ -118,15 +129,15 @@ const Artikel= () => {
 
           <div className='row'>
 
-
+          {dataArtikel?.map((artikel, index) => (
             <div className='col-md-4'>
 
                                 
             <div className="card" >
             <img src="/image/unsplash_Q80LYxv_Tbs.png"  alt="..."/>
             <div className="card-body" >
-              <h5 className="card-title text-black">Card title</h5>
-              <p className="card-text text-black fs-6">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h5 className="card-title text-black">{artikel.title}</h5>
+              <p className="card-text text-black fs-6"></p>
               <div className='text-black text-center button_more'>Read More</div>
             </div>
           </div>
@@ -136,39 +147,10 @@ const Artikel= () => {
 
             </div>
 
-            <div className='col-md-4'>
-
-                                
-              <div className="card" >
-            <img src="/image/unsplash_Q80LYxv_Tbs.png"  alt="..."/>
-            <div className="card-body" >
-              <h5 className="card-title text-black">Card title</h5>
-              <p className="card-text text-black">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div className='text-black text-center button_more'>Read More</div>
-            </div>
-          </div>
-
-
-          
-
-            </div>
-            <div className='col-md-4'>
-
-                                
-              <div className="card" >
-            <img src="/image/unsplash_Q80LYxv_Tbs.png"  alt="..."/>
-            <div className="card-body" >
-              <h5 className="card-title text-black">Card title</h5>
-              <p className="card-text text-black">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div className='text-black text-center button_more'>Read More</div>
-            </div>
-          </div>
+            ))}
 
          
-
-
-            </div>
-
+           
 
           </div>
  
