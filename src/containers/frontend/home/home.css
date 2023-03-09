@@ -220,7 +220,9 @@ div.gallery {
   * {
     box-sizing: border-box;
   }
-  
+  .modal-90w{
+    width: 90%;
+  }
   .responsive {
     padding: 0 6px;
     float: left;
@@ -541,3 +543,39 @@ div.gallery {
             border: 1px inset #000000;
             transform: rotate(90deg);
             }
+.timeline-wrapper{
+    max-height: 400px;
+    padding-top: 30px;
+    overflow-y: auto;
+}
+
+ul.timeline {
+    list-style-type: none;
+    position: relative;
+}
+ul.timeline:before {
+    content: ' ';
+    background: #d4d9df;
+    display: inline-block;
+    position: absolute;
+    left: 29px;
+    width: 2px;
+    height: 100%;
+    z-index: 400;
+}
+ul.timeline > li {
+    padding: 0 0 20px 20px;
+    margin-bottom: 20px;
+    border-bottom: .5px solid #E6E6E6;
+}
+ul.timeline > li:before {
+    content: ' ';
+    background: #E6E6E6;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    left: 20px;
+    width: 20px;
+    height: 20px;
+    z-index: 400;
+}
