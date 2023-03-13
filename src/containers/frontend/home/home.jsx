@@ -34,7 +34,7 @@ function useScreenWidth() {
 const Home = () => {
 const [inputCekresi, setInputCekresi] = useState({
   nomor_resi : "",
-  kode_marking : ""
+  marking_code : ""
 })
 const [show, setShow] = useState(false);
   //fungsi set responsive
@@ -108,8 +108,8 @@ if(widthSize <= mobileWidth){
             type="textbox" 
             className='form-control' 
             placeholder='Kode Marking' 
-            value={inputCekresi.kode_marking} 
-            onChange={e => setInputCekresi({...inputCekresi, kode_marking : e.target.value})}/>
+            value={inputCekresi.marking_code} 
+            onChange={e => setInputCekresi({...inputCekresi, marking_code : e.target.value})}/>
 
           </div>
 
@@ -120,7 +120,10 @@ if(widthSize <= mobileWidth){
 
         </div>
 
-        <div className='gpt3__home_cekresi' onClick={e => setShow(true)}><p>Cek Resi</p></div>
+        <div className='gpt3__home_cekresi' onClick={e => {
+          console.log("test")
+          setShow(v => !v)
+        }}><p>Cek Resi</p></div>
         
         <ModalCekresi show={show} setShow={setShow} inputCekresi={inputCekresi}/>
         
