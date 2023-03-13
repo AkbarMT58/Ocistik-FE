@@ -4,7 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../frontend/layanan/layanan.css'
 import { Brand,CTA,Navbar } from '../../../components';
 import {Footer,Header} from '../../../containers';
+import { getData_Master_Categories } from '../../../constants/api/logistik';
+import { getData_Master_Jenisbarang } from '../../../constants/api/logistik';
+import env from "react-dotenv";
 
+
+//fungsi kalkulasi
 
 function useScreenWidth() {
 
@@ -32,6 +37,25 @@ function useScreenWidth() {
 
 const Layanan = () => {
 
+const [dataCategories, setDataCategories] = useState(null)
+const [dataJenisBarang, setDataJenisBarang] = useState(null)
+
+  //use state input request from form input 
+  const [inputkategori, setKategori] = useState('');
+  const [inputnamabarang, setNamabarang] = useState('');
+  const [inputberatbarang, setBeratbarang] = useState('');
+  const [inputpanjang, setPanjang] = useState('');
+  const [inputlebar, setLebar] = useState('');
+  const [inputtinggi, setTinggi] = useState('');
+  const [inputvolume, setVolume] = useState('');
+
+  
+const [TotalestimasibiayaLaut,setEstimasiBiayaLaut]=useState('');
+const [TotalestimasibiayaUdara,setEstimasiBiayaUdara]=useState('');
+const volume_total= inputvolume;
+
+
+
     const inputRef_laut = useRef(null);
     const inputRef_udara = useRef(null);
     const inputRef_darat = useRef(null);
@@ -50,6 +74,135 @@ const Layanan = () => {
     
     console.log("updated klik:",updated);
 
+    useEffect(() => {
+      if(!dataCategories) {
+        getDataMasterCategory()
+      }
+    
+      if(!dataJenisBarang) {
+        getDataMasterJenisBarang()
+      }
+    
+    }, [dataCategories,dataJenisBarang])
+    
+    const getDataMasterCategory = async () => {
+      const res = await getData_Master_Categories();
+      if (res.status === 200) {
+        setDataCategories(res.data)
+      }
+    }
+    
+    const getDataMasterJenisBarang = async () => {
+      const res = await getData_Master_Jenisbarang();
+      if (res.status === 200) {
+        setDataJenisBarang(res.data)
+      }
+    }
+
+//fungsi kalkulasi biaya 
+
+const handleGetHitungBiayaClick = async (e) => {
+  e.preventDefault();
+  var display_click_lcl_sea='block';
+  const url = `${env.API_GATEWAY_CALCULATION}/ocistik/create-lcl-by-sea`;
+ 
+  try {
+    let res = await fetch(url, {
+      method: "POST",
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+
+      },
+
+      body: JSON.stringify({
+        "volume": parseInt(volume_total),
+        "weight": parseInt(inputberatbarang),
+        "category": (inputkategori),
+        "is_airplane":false
+       
+      }),
+    });
+    let resJson = await res.json();
+    if (res.status === 200) {
+    
+      console.log(resJson)
+     // console.log(JSON.stringify(resJson.data.Laut)
+
+      const data_total_Laut = resJson.data
+
+      //console.log(display_click_lcl_sea);
+
+
+      //laut 
+        setEstimasiBiayaLaut(data_total_Laut);
+
+      
+    } else {
+      console.log("error")
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
+const handleGetHitungBiayaUdaraClick = async (e) => {
+  e.preventDefault();
+
+
+  var display_click_lcl_udara='block';
+
+  const url = `${env.API_GATEWAY_CALCULATION}/ocistik/create-lcl-by-sea`;
+ 
+  try {
+    let res = await fetch(url, {
+      method: "POST",
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+
+      },
+
+      body: JSON.stringify({
+        "volume": parseInt(volume_total),
+        "weight": parseInt(inputberatbarang),
+        "category": (inputkategori),
+        "is_airplane":true
+       
+      }),
+    });
+    let resJson = await res.json();
+    if (res.status === 200) {
+    
+      console.log(resJson)
+
+  
+      const data_total_Udara = resJson.data
+      
+      
+
+        setEstimasiBiayaUdara(data_total_Udara);
+      
+      
+      
+    } else {
+      console.log("error")
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
+
+
+
+
+  const TotalbiayaLaut= (TotalestimasibiayaLaut)
+  
+  const TotalbiayaUdara= (TotalestimasibiayaUdara)
+
 
     const mobileWidth = 500
 
@@ -58,14 +211,14 @@ const Layanan = () => {
 
         if(updated=='darat'){
 
-          var display_margin='400px';
-          var display_height_form='920px';
+          var display_margin='370px';
+          var display_height_form='960px';
 
 
         }else{
 
           var display_margin='320px';
-          var display_height_form='920px';
+          var display_height_form='720px';
         }
         
 
@@ -80,14 +233,14 @@ const Layanan = () => {
 
     if(updated=='darat'){
 
-      var display_margin='740px';
+      var display_margin='600px';
       var display_height_form='1550px';
 
 
     }else{
 
       
-    var display_margin='480px';
+    var display_margin='400px';
     var display_height_form='1400px';
 
 
@@ -235,7 +388,7 @@ if(updated==''){
     </div>
 
  
-<section style={{height:'280vh'}}>
+<section style={{height:'180vh'}}>
 
 <div className='fiturgalery'>
 
@@ -282,7 +435,7 @@ if(updated==''){
     <div class="desc">LCL Udara</div>
   </div>
 </div>
-<div class="responsive">
+<div class="responsive" hidden>
   <div class="gallery_artikel"  style={{background:ubahwarna_utama_darat}} onClick={onClick_darat}>
   <input
         ref={inputRef_darat}
@@ -329,14 +482,40 @@ if(updated==''){
 <div className='gpt3__whatgpt3-container m-1'>
 
 <div className="container">
+<form onSubmit={handleGetHitungBiayaClick}>
+
 <div className='row'>
 
-  <div className='col-md-8'>
+<div className='col-md-4'>
+
+<div className='form-group m-1'>
+<label htmlFor="kategoribarang" className="text-black text-left" >Kategori Barang</label>
+
+<select value={inputkategori} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
+<option>--Pilih Kategori Barang--</option>
+{dataJenisBarang?.map((category, index) => (
+  <option key={category.id} value={category.id}>{category.kategori_barang}</option>
+))}
+
+</select>
+
+</div>
+
+</div>
+
+  <div className='col-md-4' hidden>
 
   <div className='form-group m-1'>
-  <div className='text-black text-left' for="namabarang">Nama Barang</div>
+  <div className='text-black text-left' htmlFor="jenisbarang">Jenis Barang</div>
 
-  <input type="textbox" className='form-control' placeholder='Nama Barang'/>
+  <select value={inputnamabarang}   type="textbox" name="jenisbarang"  className='form-control' placeholder='Jenis Barang' onChange={(e) => setNamabarang(e.target.value)}>
+   <option>--Pilih Jenis Barang--</option>
+   {dataJenisBarang?.map((jenisbarang, index) => (
+  <option key={jenisbarang.id} value={jenisbarang.id}>{jenisbarang.display_name}</option>
+))}
+
+  </select>
+
 
 
   </div>
@@ -347,18 +526,33 @@ if(updated==''){
 
   <div className='form-group m-1'>
 
-  <div className='text-black text-left' for="kodemarking">Berat Barang</div>
+  <div className='text-black text-left' htmlFor="beratberang">Berat Barang(Kg)</div>
 
-  <input type="textbox" className='form-control' placeholder='Berat Barang'></input>
+  <input value={inputberatbarang}    type="textbox" name="berat" className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
+
 
   </div>
 
   </div>
+
+  <div className='col-md-12'>
+
+<div className='form-group m-1'>
+<label className='text-black' htmlFor="nomorresi">Volume (cm3)</label>
+
+<input value={inputvolume} type="textbox" name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
+
+</div>
+
+
+</div>
+
+  <div hidden>
   
     <div className='col-md-4'>
 
     <div className='form-group m-1'>
-    <div for="panjang" className='text-black'>Panjang (Cm)</div>
+    <div htmlFor="panjang" className='text-black'>Panjang (Cm)</div>
 
     <input type="textbox" className='form-control' placeholder='Panjang'>
 
@@ -385,7 +579,7 @@ if(updated==''){
     <div className='col-md-4'>
 
     <div className='form-group m-1'>
-    <div for="tinggi" className='text-black'>Tinggi (Cm)</div>
+    <div htmlFor="tinggi" className='text-black'>Tinggi (Cm)</div>
 
     <input type="textbox" className='form-control' placeholder='Tinggi'>
 
@@ -395,23 +589,25 @@ if(updated==''){
 
     </div>
 
-
-</div>
-
-</div>
-
-<div className='gpt3__home_hitungbiaya' style={{  top:display_margin}}><p>Hitung Biaya</p>
-
-
+    </div>
 
 
 </div>
 
 
 
+<button  className='gpt3__home_hitungbiaya' style={{top:display_margin}}  type="submit" ><label className='text-white fs-5 font-weight-bold'>Hitung Biaya</label></button>
 
+
+</form>
 </div>
 
+
+
+
+
+</div>
+{/* daerah lcl sea  */}
 <hr  style={{border:'2px solid black',marginTop:'100px'}}/>
 
 
@@ -438,13 +634,13 @@ Total Tagihan
 </div>
 
 <div className='text-black fs-4'>
-  Rp.4.500.000,-
+Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
 
 </div>
 
 <div className='row'>
 
-  <div className='col-md-3'>
+  <div className='col-md-3' hidden>
     <div className='form-group'>
       <label className='text-secondary'>Tujuan Negara</label>
       <div className='text-black'>
@@ -454,11 +650,11 @@ Total Tagihan
     </div>
 
   </div>
-  <div className='col-md-3'>
+  <div className='col-md-3' hidden>
   <div className='form-group'>
       <label className='text-secondary'>Total Volume</label>
       <div className='text-black'>
-        1 m m3
+        1 cm3
       </div>
 
     </div>
@@ -496,7 +692,7 @@ Total Tagihan
 
 <div className='row'>
 
-  <div className='col-md-3'>
+  <div className='col-md-3' hidden>
     <div className='form-group'>
       <label className='text-secondary'>Tipe Pengiriman</label>
       <div className='text-black'>
@@ -508,20 +704,8 @@ Total Tagihan
   </div>
   <div className='col-md-3'>
   <div className='form-group'>
-      <label className='text-secondary'>Panjang</label>
+      <label className='text-secondary'></label>
       <div className='text-black'>
-        100 Cm
-      </div>
-
-    </div>
-
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'>Tinggi</label>
-      <div className='text-black'>
-        100 Cm
         
       </div>
 
@@ -531,7 +715,19 @@ Total Tagihan
   </div>
   <div className='col-md-3'>
   <div className='form-group'>
-      <label className='text-secondary'>Foto Produk</label>
+      <label className='text-secondary'></label>
+      <div className='text-black'>
+    
+        
+      </div>
+
+    </div>
+
+
+  </div>
+  <div className='col-md-3' hidden>
+  <div className='form-group'>
+      <label className='text-secondary'></label>
    
 
         <img src="/image/tools.png" className='responsive-img' />
@@ -549,7 +745,7 @@ Total Tagihan
 
 <div className='row'>
 
-  <div className='col-md-3'>
+  <div className='col-md-3' hidden>
     <div className='form-group'>
       <label className='text-secondary'>Kategori Barang</label>
       <div className='text-black'>
@@ -561,9 +757,9 @@ Total Tagihan
   </div>
   <div className='col-md-3'>
   <div className='form-group'>
-      <label className='text-secondary'>Lebar</label>
+      <label className='text-secondary'></label>
       <div className='text-black'>
-        100 Cm
+     
       </div>
 
     </div>
@@ -599,7 +795,8 @@ Total Tagihan
 
 </div>
 
-</div>  
+</div> 
+
 
 </div>
 
@@ -635,14 +832,38 @@ Total Tagihan
 <div className='gpt3__whatgpt3-container m-1'>
 
 <div className="container">
+<form onSubmit={handleGetHitungBiayaUdaraClick}>
 <div className='row'>
 
-  <div className='col-md-8'>
+<div className='col-md-4'>
+
+<div className='form-group m-1'>
+<label htmlFor="kategoribarang" className="text-black text-left" >Kategori Barang</label>
+
+<select value={inputkategori} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
+<option>--Pilih Kategori Barang--</option>
+{dataJenisBarang?.map((category, index) => (
+  <option key={category.id} value={category.id}>{category.kategori_barang}</option>
+))}
+
+</select>
+
+</div>
+
+</div>
+
+  <div className='col-md-4' hidden>
 
   <div className='form-group m-1'>
-  <div className='text-black text-left' for="namabarang">Nama Barang</div>
+  <div className='text-black text-left' htmlFor="namabarang">Jenis Barang</div>
+  <select value={inputnamabarang}   type="textbox" name="jenisbarang"  className='form-control' placeholder='Jenis Barang' onChange={(e) => setNamabarang(e.target.value)}>
+   <option>--Pilih Jenis Barang--</option>
+   {dataJenisBarang?.map((jenisbarang, index) => (
+  <option key={jenisbarang.id} value={jenisbarang.id}>{jenisbarang.display_name}</option>
+))}
 
-  <input type="textbox" className='form-control' placeholder='Nama Barang'/>
+  </select>
+
 
 
   </div>
@@ -653,18 +874,34 @@ Total Tagihan
 
   <div className='form-group m-1'>
 
-  <div className='text-black text-left' for="kodemarking">Berat Barang</div>
+  <div className='text-black text-left' htmlFor="kodemarking">Berat Barang(Kg)</div>
 
-  <input type="textbox" className='form-control' placeholder='Berat Barang'></input>
+
+  <input value={inputberatbarang}    type="textbox" name="berat" className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
+
 
   </div>
 
   </div>
+
+  <div className='col-md-12'>
+
+  <div className='form-group m-1'>
+  <label className='text-black' htmlFor="nomorresi">Volume (cm3)</label>
+
+  <input value={inputvolume} type="textbox" name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
+
+  </div>
+
+
+  </div>
+
+  <div hidden>
   
     <div className='col-md-4'>
 
     <div className='form-group m-1'>
-    <div for="panjang" className='text-black'>Panjang (Cm)</div>
+    <div htmlFor="panjang" className='text-black'>Panjang (Cm)</div>
 
     <input type="textbox" className='form-control' placeholder='Panjang'>
 
@@ -691,7 +928,7 @@ Total Tagihan
     <div className='col-md-4'>
 
     <div className='form-group m-1'>
-    <div for="tinggi" className='text-black'>Tinggi (Cm)</div>
+    <div htmlFor="tinggi" className='text-black'>Tinggi (Cm)</div>
 
     <input type="textbox" className='form-control' placeholder='Tinggi'>
 
@@ -701,12 +938,20 @@ Total Tagihan
 
     </div>
 
+    </div>
+
 
 </div>
 
-</div>
+<button  className='gpt3__home_hitungbiaya' style={{top:display_margin}}  type="submit" ><label className='text-white fs-5 font-weight-bold'>Hitung Biaya</label></button>
 
-<div className='gpt3__home_hitungbiaya' style={{  top:display_margin}}><p>Hitung Biaya</p>
+
+
+</form>
+
+
+
+
 
 </div>
 
@@ -740,13 +985,14 @@ Total Tagihan
 </div>
 
 <div className='text-black fs-4'>
-  Rp.4.500.000,-
+Rp.{TotalbiayaUdara.toLocaleString('ID-id')},-
+
 
 </div>
 
 <div className='row'>
 
-  <div className='col-md-3'>
+  <div className='col-md-3' hidden>
     <div className='form-group'>
       <label className='text-secondary'>Tujuan Negara</label>
       <div className='text-black'>
@@ -756,11 +1002,11 @@ Total Tagihan
     </div>
 
   </div>
-  <div className='col-md-3'>
+  <div className='col-md-3' hidden>
   <div className='form-group'>
       <label className='text-secondary'>Total Volume</label>
       <div className='text-black'>
-        1 m m3
+        1 cm3
       </div>
 
     </div>
@@ -798,7 +1044,7 @@ Total Tagihan
 
 <div className='row'>
 
-  <div className='col-md-3'>
+  <div className='col-md-3' hidden>
     <div className='form-group'>
       <label className='text-secondary'>Tipe Pengiriman</label>
       <div className='text-black'>
@@ -810,9 +1056,9 @@ Total Tagihan
   </div>
   <div className='col-md-3'>
   <div className='form-group'>
-      <label className='text-secondary'>Panjang</label>
+      <label className='text-secondary'></label>
       <div className='text-black'>
-        100 Cm
+   
       </div>
 
     </div>
@@ -821,19 +1067,18 @@ Total Tagihan
   </div>
   <div className='col-md-3'>
   <div className='form-group'>
-      <label className='text-secondary'>Tinggi</label>
+      <label className='text-secondary'></label>
       <div className='text-black'>
-        100 Cm
-        
+    
       </div>
 
     </div>
 
 
   </div>
-  <div className='col-md-3'>
+  <div className='col-md-3' hidden>
   <div className='form-group'>
-      <label className='text-secondary'>Foto Produk</label>
+      <label className='text-secondary'></label>
    
 
         <img src="/image/tools.png" className='responsive-img' />
@@ -851,7 +1096,7 @@ Total Tagihan
 
 <div className='row'>
 
-  <div className='col-md-3'>
+  <div className='col-md-3' hidden>
     <div className='form-group'>
       <label className='text-secondary'>Kategori Barang</label>
       <div className='text-black'>
@@ -863,9 +1108,9 @@ Total Tagihan
   </div>
   <div className='col-md-3'>
   <div className='form-group'>
-      <label className='text-secondary'>Lebar</label>
+      <label className='text-secondary'></label>
       <div className='text-black'>
-        100 Cm
+       
       </div>
 
     </div>
@@ -940,10 +1185,12 @@ Total Tagihan
 <div className="container">
 <div className='row'>
 
+  <div hidden>
+
   <div className='col-md-4'>
 
   <div className='form-group m-1'>
-  <div className='text-black text-left' for="namalengkap">Nama Lengkap</div>
+  <div className='text-black text-left' htmlFor="namalengkap">Nama Lengkap</div>
 
   <input type="textbox" className='form-control' placeholder='Nama Lengkap'/>
 
@@ -956,7 +1203,7 @@ Total Tagihan
 
   <div className='form-group m-1'>
 
-  <div className='text-black text-left' for="kodemarking">Email</div>
+  <div className='text-black text-left' htmlFor="kodemarking">Email</div>
 
   <input type="textbox" className='form-control' placeholder='Email'></input>
 
@@ -967,9 +1214,11 @@ Total Tagihan
 
   <div className='form-group m-1'>
 
-  <div className='text-black text-left' for="kodemarking">Whatsapp</div>
+  <div className='text-black text-left' htmlFor="kodemarking">Whatsapp</div>
 
   <input type="textbox" className='form-control' placeholder='Whatsapp'></input>
+
+  </div>
 
   </div>
 
@@ -978,7 +1227,7 @@ Total Tagihan
     <div className='col-md-4'>
 
     <div className='form-group m-1'>
-    <div for="panjang" className='text-black'>HS Code</div>
+    <div htmlFor="panjang" className='text-black'>HS Code</div>
 
     <input type="textbox" className='form-control' placeholder='HS Code'>
 
@@ -1005,7 +1254,7 @@ Total Tagihan
     <div className='col-md-4'>
 
     <div className='form-group m-1'>
-    <div for="tinggi" className='text-black'>Total Invoice</div>
+    <div htmlFor="tinggi" className='text-black'>Total Invoice</div>
 
     <input type="textbox" className='form-control' placeholder='Total Invoice'>
 
@@ -1018,7 +1267,7 @@ Total Tagihan
     <div className='col-md-4'>
 
     <div className='form-group m-1'>
-    <div for="containertype" className='text-black'>Container Type</div>
+    <div htmlFor="containertype" className='text-black'>Container Type</div>
 
     <input type="textbox" className='form-control' placeholder='Container Type'>
 
@@ -1031,7 +1280,7 @@ Total Tagihan
     <div className='col-md-4'>
 
 <div className='form-group m-1'>
-<div for="origincity" className='text-black'>Origin City</div>
+<div htmlFor="origincity" className='text-black'>Origin City</div>
 
 <input type="textbox" className='form-control' placeholder='Origin City'>
 
@@ -1045,11 +1294,28 @@ Total Tagihan
 <div className='col-md-4'>
 
 <div className='form-group m-1'>
-<div for="destinationcity" className='text-black'>Destination City</div>
+<div htmlFor="destinationcity" className='text-black'>Destination City</div>
 
 <input type="textbox" className='form-control' placeholder='Destination City'>
 
 </input>
+
+</div>
+
+</div>
+
+<div className='col-md-4'>
+
+<div className='form-group m-1'>
+<label htmlFor="kategoribarang" className="text-black text-left" >Kategori Barang</label>
+
+<select type="textbox" className='form-control' placeholder='Kategori Barang'>
+
+  <option>--Pilih Kategori Barang--</option>
+
+
+
+</select>
 
 </div>
 
@@ -1101,7 +1367,7 @@ Total Tagihan
 
 <div className='row'>
 
-  <div className='col-md-3'>
+  <div className='col-md-3' hidden>
     <div className='form-group'>
       <label className='text-secondary'>Tujuan Negara</label>
       <div className='text-black'>
@@ -1111,11 +1377,11 @@ Total Tagihan
     </div>
 
   </div>
-  <div className='col-md-3'>
+  <div className='col-md-3' hidden>
   <div className='form-group'>
       <label className='text-secondary'>Total Volume</label>
       <div className='text-black'>
-        1 m m3
+        1 cm3
       </div>
 
     </div>
@@ -1153,7 +1419,7 @@ Total Tagihan
 
 <div className='row'>
 
-  <div className='col-md-3'>
+  <div className='col-md-3' hidden>
     <div className='form-group'>
       <label className='text-secondary'>Tipe Pengiriman</label>
       <div className='text-black'>
@@ -1165,9 +1431,9 @@ Total Tagihan
   </div>
   <div className='col-md-3'>
   <div className='form-group'>
-      <label className='text-secondary'>Panjang</label>
+      <label className='text-secondary'></label>
       <div className='text-black'>
-        100 Cm
+      
       </div>
 
     </div>
@@ -1176,9 +1442,9 @@ Total Tagihan
   </div>
   <div className='col-md-3'>
   <div className='form-group'>
-      <label className='text-secondary'>Tinggi</label>
+      <label className='text-secondary'></label>
       <div className='text-black'>
-        100 Cm
+      
         
       </div>
 
@@ -1186,9 +1452,9 @@ Total Tagihan
 
 
   </div>
-  <div className='col-md-3'>
+  <div className='col-md-3'hidden>
   <div className='form-group'>
-      <label className='text-secondary'>Foto Produk</label>
+      <label className='text-secondary'></label>
    
 
         <img src="/image/tools.png" className='responsive-img' />
@@ -1206,7 +1472,7 @@ Total Tagihan
 
 <div className='row'>
 
-  <div className='col-md-3'>
+  <div className='col-md-3' hidden>
     <div className='form-group'>
       <label className='text-secondary'>Kategori Barang</label>
       <div className='text-black'>
@@ -1218,9 +1484,9 @@ Total Tagihan
   </div>
   <div className='col-md-3'>
   <div className='form-group'>
-      <label className='text-secondary'>Lebar</label>
+      <label className='text-secondary'></label>
       <div className='text-black'>
-        100 Cm
+       
       </div>
 
     </div>

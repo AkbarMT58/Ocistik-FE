@@ -1,15 +1,124 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../frontend/artikel/artikel.css'
-import { Brand,CTA,Navbar } from '../../../components';
-import {Footer,Header} from '../../../containers';
+import { Navbar } from '../../../components';
+import {Footer} from '../../../containers';
 import Pagination from 'react-bootstrap/Pagination';
+import { getData_Artikel } from '../../../constants/api/logistik';
+import { useState,useEffect } from "react";
+import dateFormat from 'dateformat';
 
-
-
+import env from "react-dotenv";
 
 
 const Artikel= () => {
+
+  const URL = `${env.API_GATEWAY_LOKAL}/api/upload/`
+
+  console.log(URL)
+
+  const [dataArtikel, setDataArtikel] = useState(null)
+  const [dataheadlinefirstnews, setDataHeadlinefirstNews] = useState(null)
+  const [dataheadlinenews, setDataHeadlineNews] = useState(null)
+  const [datahariannews, setDataHarianNews] = useState(null)
+
+  //fungsi get data artikel
+  useEffect(() => {
+    if(!dataArtikel) {
+      getDataArtikel()
+
+    }
+
+
+  }, [dataArtikel])
+
+
+
+  const getDataArtikel = async () => {
+    const res = await getData_Artikel();
+    // console.log("getdata artikel", res)
+
+    //console.log("data:", res.Data)
+
+    
+    if (res.status === 200) {
+      setDataArtikel(res.Data)
+    }
+
+    if(res.Data){
+
+      const headline_first=[]
+      const headline_second=[]
+      const harian=[]
+    
+      for(let i=0; i < res.Data.length; i++){
+
+
+        
+        if( res.Data[i].headline_id=='1' && i==0 ){
+    
+          const title = res.Data[i].title;
+          const description=res.Data[i].description
+          const tanggal_cetak= res.Data[i].created_date.String;
+          const slug=res.Data[i].slug;
+          const picture = res.Data[i].picture;
+      
+          headline_first.push({title,description,tanggal_cetak,slug,picture})
+      
+      
+          }
+    
+    
+        if( res.Data[i].headline_id=='1' && i>0 ){
+    
+          const title = res.Data[i].title;
+          const description=res.Data[i].description
+          const tanggal_cetak= res.Data[i].created_date.String;
+          const slug=res.Data[i].slug;
+          const picture = res.Data[i].picture;
+    
+        headline_second.push({title,description,tanggal_cetak,slug,picture})
+    
+    
+        }
+        
+        
+        if( res.Data[i].headline_id=='0'){
+    
+          const title = res.Data[i].title;
+          const description=res.Data[i].description
+          const tanggal_cetak= res.Data[i].created_date.String;
+          const slug=res.Data[i].slug;
+          const picture = res.Data[i].picture;
+
+        harian.push({title,description,tanggal_cetak,slug,picture})
+    
+    
+        }
+    
+        
+    
+      }
+      
+
+      setDataHeadlinefirstNews(headline_first);
+      setDataHeadlineNews(headline_second);
+      setDataHarianNews(harian);
+    
+     
+    
+    } 
+
+  }
+
+ 
+
+  
+console.log("data artikel all :", dataArtikel)
+console.log("data harian pertama news:", dataheadlinefirstnews)
+console.log("data headline kedua news:", dataheadlinenews)
+console.log("data harian news:", datahariannews)
+
 
     return (
 
@@ -17,158 +126,135 @@ const Artikel= () => {
       <div className="gradient__bg_artikel" >
       <Navbar/>
       <div className='gpt3__header section__padding' id="home">
-      <div className='gpt3__header-content'>
-        <h1 className='gradient__text'>ARTIKEL</h1>
-        <hr className='border_garis_tentangkami'></hr>
-        <div className='gpt3__header_tentangkami'><p className='fs-2 text-white'></p></div>
-      </div>
+     
      
     </div>
     </div>
 
-    <section style={{height:'250vh'}}>
+    <section className='flex-container'>
 
       <div className='artikel_bg'>
 
+        <div className='text-black fs-3'>ARTIKEL</div>
+        <hr></hr>
+
+        <div>HEADLINE NEWS</div>
+
         <div className='row mt-4'>
+ 
 
-          <div className='col-md-5'>
+    <div className='col-md-5'>
 
-            
-    <div className="card" >
-  <img src="/image/unsplash_Q80LYxv_Tbs.png"  alt="..."/>
-  <div className="card-body" >
-    <h5 className="card-title text-black">Card title</h5>
-    <p className="card-text text-black">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-     <a href="/artikel-detail" className='text-black text-center button_more'>Read More</a>
-  </div>
-</div>
+ {dataheadlinefirstnews?.map((artikel_headline_first, index) => (
 
 
-          </div>
+<ul className="cards">
+    <li className="cards_item">
+      <div className="card">
+        <div className="card_image"><img src={URL+artikel_headline_first.picture}/></div>
+        <div className="card_content">
+          <h2 className="card_title">{artikel_headline_first.title}</h2>
+          <p className='text-secondary fs-6'>{artikel_headline_first.description}</p>
+          <p className="card_text">{ dateFormat(artikel_headline_first?.tanggal_cetak, "dd-mm-yyyy hh:mm:ss") }</p>
+          <button className="btn card_btn">Read More</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+          ))} 
+
+          </div> 
+        
 
           <div className='col-md-7'>
 
-          <div className='row'>
-
-          <div className='col-md-6'>
-          <div class="card">
-          <div class="card-horizontal">
-              <div class="img-square-wrapper">
-                  <img className="responsive-img-artikel" src="/image/unsplash_Q80LYxv_Tbs.png" alt="Card image cap" />
-              </div>
-              <div class="card-body" style={{marginLeft:'-70px'}}>
-                  <h4 class="card-title">Card title</h4>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-             
-          </div>
          
-          <div class="card-footer" >
-           
-          <div className='text-black text-center button_more mt-4'>Read More</div>
-              <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
+          <div className='row'> 
+          
+          {dataheadlinenews?.map((artikel_headline, index) => (
+          <div className='col-md-6'>
+
+<div className="container pb-4">
+  <div className="row">
+    <div className="col-lg-12">
+      <div className="horizontal-card">
+
+        <img src={URL+artikel_headline.picture} />
+        <div className="horizontal-card-body">
+          {/* <span className="card-text">Date</span> */}
+          <h4 className="card-title fs-6 fw-bold">{artikel_headline.title}</h4>
+          <span className="card-text mt-2" style={{fontSize:'11px'}}>{artikel_headline.description}</span>
         </div>
+        <div className="horizontal-card-footer">
+          <span >{ dateFormat(artikel_headline?.tanggal_cetak, "dd-mm-yyyy hh:mm:ss") }</span>
+        
+          {/* <p className='text-secondary fs-6'>{artikel_headline.description}</p> */}
+          <button className="btn_head card_btn">Read More</button>
+          {/* <a className="card-text status">#Save</a> */}
+
+        </div>
+
+
+      </div>
+    </div>
+    </div>
+    </div>
+
+      
+      
 
   
           </div>
 
-          <div className='col-md-6'>
-
-          <div class="card">
-          <div class="card-horizontal">
-              <div class="img-square-wrapper">
-                  <img className="responsive-img-artikel" src="/image/unsplash_Q80LYxv_Tbs.png" alt="Card image cap" />
-              </div>
-              <div class="card-body" style={{marginLeft:'-70px'}}>
-                  <h4 class="card-title">Card title</h4>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-             
-          </div>
-
-          
-          
-          <div class="card-footer">
-          <div className='text-black text-center button_more mt-4'>Read More</div>
-              <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
-        </div>
-
+           ))}
        
 
-
-   
-                    
-        {/* <img className='responsive-img-artikel'  src="/image/unsplash_Q80LYxv_Tbs.png" alt=""/> */}
-
-
-
-        </div>
-
-
           </div>
+          
+
 
           </div>
 
     
           </div>
 
+          <div>OCISTIK NEWS</div>
+          <hr></hr>
+
 
           <div className='row'>
 
-
+          {datahariannews?.map((artikel_harian, index) => (
             <div className='col-md-4'>
 
+<ul className="cards">
+    <li className="cards_item">
+      <div className="card">
+        <div className="card_image"><img src={URL+artikel_harian.picture} /></div>
+        <div className="card_content">
+          <h2 className="card_title">{artikel_harian.title}</h2>
+          <p className='text-secondary fs-6'>{artikel_harian.description}</p>
+          {/* <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p> */}
+          
+          <button className="btn card_btn">Read More</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+
                                 
-            <div className="card" >
-            <img src="/image/unsplash_Q80LYxv_Tbs.png"  alt="..."/>
-            <div className="card-body" >
-              <h5 className="card-title text-black">Card title</h5>
-              <p className="card-text text-black fs-6">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div className='text-black text-center button_more'>Read More</div>
-            </div>
-          </div>
+          
 
        
 
 
             </div>
 
-            <div className='col-md-4'>
-
-                                
-              <div className="card" >
-            <img src="/image/unsplash_Q80LYxv_Tbs.png"  alt="..."/>
-            <div className="card-body" >
-              <h5 className="card-title text-black">Card title</h5>
-              <p className="card-text text-black">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div className='text-black text-center button_more'>Read More</div>
-            </div>
-          </div>
-
-
-          
-
-            </div>
-            <div className='col-md-4'>
-
-                                
-              <div className="card" >
-            <img src="/image/unsplash_Q80LYxv_Tbs.png"  alt="..."/>
-            <div className="card-body" >
-              <h5 className="card-title text-black">Card title</h5>
-              <p className="card-text text-black">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div className='text-black text-center button_more'>Read More</div>
-            </div>
-          </div>
+            ))}
 
          
-
-
-            </div>
-
+           
 
           </div>
  

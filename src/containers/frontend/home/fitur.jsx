@@ -1,7 +1,12 @@
+
 import React from 'react'
-import { useRef,useState,useMediaQuery,useEffect  } from "react";
+import { useRef,useState,useMediaQuery,useEffect,props  } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../frontend/home/home.css'
+import { getData_Master_Categories } from '../../../constants/api/logistik';
+import { getData_Master_Jenisbarang } from '../../../constants/api/logistik';
+import { data } from "autoprefixer";
+import env from "react-dotenv";
 
 
 function useScreenWidth() {
@@ -29,10 +34,132 @@ function useScreenWidth() {
 }
 
 
-const Fitur = () => {
+const Fitur = ({data}) => {
+const [dataCategories, setDataCategories] = useState(null)
+const [dataJenisBarang, setDataJenisBarang] = useState(null)
 const inputRef_laut = useRef(null);
 const inputRef_udara = useRef(null);
 const inputRef_darat = useRef(null);
+
+//use state input request from form input 
+const [inputkategori, setKategori] = useState('');
+const [inputnamabarang, setNamabarang] = useState('');
+const [inputberatbarang, setBeratbarang] = useState('');
+const [inputpanjang, setPanjang] = useState('');
+const [inputlebar, setLebar] = useState('');
+const [inputtinggi, setTinggi] = useState('');
+const [inputvolume, setVolume] = useState('');
+const [TotalestimasibiayaLaut,setEstimasiBiayaLaut]=useState('');
+const [TotalestimasibiayaUdara,setEstimasiBiayaUdara]=useState('');
+const volume_total= inputvolume;
+const [dataKategoriSub, setSubKategori]=useState(null);
+
+
+
+//fungsi kalkulasi biaya 
+
+  const handleGetHitungBiayaClick = async (e) => {
+    e.preventDefault();
+    var display_click_lcl_sea='block';
+    const url = `${env.API_GATEWAY_CALCULATION}/ocistik/create-lcl-by-sea`;
+   
+    try {
+      let res = await fetch(url, {
+        method: "POST",
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+
+        },
+
+        body: JSON.stringify({
+          "volume": parseInt(volume_total),
+          "weight": parseInt(inputberatbarang),
+          "category": (inputkategori),
+          "is_airplane":false
+         
+        }),
+      });
+      let resJson = await res.json();
+      if (res.status === 200) {
+      
+        console.log(resJson)
+
+       // console.log(JSON.stringify(resJson.data.Laut))
+ 
+
+        const data_total_Laut = resJson.data
+
+       
+
+        //console.log(display_click_lcl_sea);
+
+
+        //laut 
+          setEstimasiBiayaLaut(data_total_Laut);
+
+        
+      } else {
+        console.log("error")
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+  const handleGetHitungBiayaUdaraClick = async (e) => {
+    e.preventDefault();
+  
+
+    var display_click_lcl_udara='block';
+
+    const url = `${env.API_GATEWAY_CALCULATION}/ocistik/create-lcl-by-sea`;
+   
+    try {
+      let res = await fetch(url, {
+        method: "POST",
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+
+        },
+
+        body: JSON.stringify({
+          "volume": parseInt(volume_total),
+          "weight": parseInt(inputberatbarang),
+          "category": (inputkategori),
+          "is_airplane":true
+         
+        }),
+      });
+      let resJson = await res.json();
+      if (res.status === 200) {
+      
+        console.log(resJson)
+
+    
+        const data_total_Udara = resJson.data
+        
+        
+
+          setEstimasiBiayaUdara(data_total_Udara);
+        
+        
+        
+      } else {
+        console.log("error")
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+
+const TotalbiayaLaut= TotalestimasibiayaLaut
+const TotalbiayaUdara= TotalestimasibiayaUdara
+
 const [updated, setUpdated] = useState('');
 const warna_choice_aktif ='dodgerblue';
 const warna_choice_aktif_child ='#008BD9';
@@ -41,29 +168,70 @@ const warna_choice_tidak_aktif_child ='white';
 const display_aktif ='block';
 const display__tidak_aktif ='none';
 const widthSize = useScreenWidth()
-console.log("ukuran layar live:",widthSize);
-console.log("updated klik:",updated);
 
 
 
+useEffect(() => {
+  if(!dataCategories) {
+    getDataMasterCategory()
+  }
+
+  if(!dataJenisBarang) {
+    getDataMasterJenisBarang()
+  }
+ console.log(dataJenisBarang)
+
+  
+
+}, [dataCategories,dataJenisBarang])
+
+
+
+
+//console.log("data jenis barang",dataJenisBarang);
+
+const getDataMasterCategory = async () => {
+  const res = await getData_Master_Categories();
+  if (res.status === 200) {
+    setDataCategories(res.data)
+  }
+}
+
+const getDataMasterJenisBarang = async () => {
+  const res = await getData_Master_Jenisbarang();
+  if (res.status === 200) {
+    setDataJenisBarang(res.data)
+  }
+}
+
+//fungsi set responsive
 const mobileWidth = 500
+
+var display_click_lcl_sea='';
+var display_click_lcl_udara='';
+var display_click_fcl_sea='';
+
 
 if(widthSize > mobileWidth){ 
     //logic for desktop
 
     if(updated=='lautfullcontainer'){
 
-      var display_margin='420px';
+      var display_margin='350px';
       var display_height_form='1450px';
       var displayheightbysetclick='1150px';
+      var display_click_fcl_sea='';
 
-
+     
     }
     else if(updated=='udara'){
 
-      var display_margin='290px';
-      var display_height_form='1450px';
+      var display_margin='360px';
+      var display_height_form='800px';
       var displayheightbysetclick='1000px';
+      var display_click_lcl_udara='';
+
+     
       
       }
     
@@ -71,10 +239,13 @@ if(widthSize > mobileWidth){
 
       var display_margin='350px';
       var display_height_form='1450px';
-      var displayheightbysetclick='1150px';
+      var displayheightbysetclick='900px';
 
-    }
     
+    
+    }
+
+
 
 
 
@@ -87,70 +258,61 @@ if(widthSize <= mobileWidth){
 
 if(updated=='lautfullcontainer'){
 
-  var display_margin='820px';
-  var display_height_form='2000px';
-  var displayheightbysetclick='1900px';
+  var display_margin='700px';
+  var display_height_form='740px';
+  var displayheightbysetclick='1000px';
+ 
 
 
 }else if(updated=='udara'){
 
-var display_margin='390px';
-var display_height_form='1450px';
-var displayheightbysetclick='1500px';
+var display_margin='490px';
+var display_height_form='530px';
+var displayheightbysetclick='900px';
+
 
 }else{
 
-var display_margin='530px';
-var display_height_form='1600px';
-var displayheightbysetclick='1650px';
+var display_margin='490px';
+var display_height_form='1200px';
+var displayheightbysetclick='1100px';
+
+
+}
+
+
 
 }
 
 
-
-}
+//batas fungsi responsive
 
 const onClick_darat =() => {  
     
-   
   setUpdated(inputRef_darat.current.value);
-
-  console.log("lihat data click  :",  updated)
-
-
  
 }
 
-
 const onClick_udara =() => {  
-
   setUpdated(inputRef_udara.current.value);
 
-  console.log("lihat data click  :",  updated)
-
-  
 }
-
 
 const onClick_laut =() => {  
 
-
   setUpdated(inputRef_laut.current.value);
-
-  console.log("lihat data click  :",  updated)
-
   
 }
-
 
 //kondisional fungsi ketika dipilih 
 
 if(updated=='laut'){
-
 var ubahwarna_utama_laut= warna_choice_aktif;
 var ubahwarna_child_laut=warna_choice_aktif_child
 
 var display_hidup_laut=display_aktif;
+//var display_click_lcl_sea='none';
+
 
 }else{
 
@@ -164,14 +326,12 @@ if(updated=='lautfullcontainer'){
   var ubahwarna_utama_lautfullcontainer= warna_choice_aktif;
   var ubahwarna_child_lautfullcontainer=warna_choice_aktif_child
   var display_hidup_lautfullcontainer=display_aktif;
+  //var display_click_fcl_sea='none';
 
 }else{
 
-
   var display_hidup_lautfullcontainer=display__tidak_aktif;
  
-
-
 }
 
 
@@ -181,13 +341,11 @@ if (updated=='udara'){
   var ubahwarna_utama_udara= warna_choice_aktif;
   var ubahwarna_child_udara=warna_choice_aktif_child
   var display_hidup_udara=display_aktif;
+ // var display_click_lcl_udara='none';
 
 
 }else{
-
   var display_hidup_udara=display__tidak_aktif;
-
-  
 }
 
 
@@ -199,166 +357,205 @@ var ubahwarna_utama_laut= warna_choice_aktif;
 var ubahwarna_child_laut=warna_choice_aktif_child
 var display_hidup_laut=display_aktif;
 
+// var display_click_lcl_udara='none';
+// var display_click_fcl_sea='none';
+// var display_click_lcl_sea='none';
+
 var warna_div_default='border-style:solid,border-width:2px,border-color:black,font-size:11px,color:black';
 
 }
-
 //batas kondisional
+
+
+
+
 
 
   return (
 
+<div className='gpt3_home_fitur_bg'  style={{height:displayheightbysetclick}}>
 
-    <div className='gpt3_home_fitur_bg'  style={{height:displayheightbysetclick}}>
+<div className='text-white fs-2 text-center mt-lg-5'>Hitung Biaya Import</div>
 
-        <div className='text-white fs-2 text-center mt-lg-5'>Hitung Biaya Import</div>
+<div className='gpt3__whatgpt3_formhitunghome section__margin_fitur' style={{height:display_height_form}} id='whpt3'>
 
-    
-    
-    <div className='gpt3__whatgpt3_formhitunghome section__margin_fitur' style={{height:display_height_form}} id='whpt3'>
+<div className='buttons_cards_2'>
 
-        <div className='buttons_cards'>
+<div class="card_home" style={{backgroundColor:ubahwarna_utama_laut}} onClick={onClick_laut}>
 
-        <div class="card_home" style={{backgroundColor:ubahwarna_utama_laut}} onClick={onClick_laut}>
+<input
+ref={inputRef_laut}
+type="hidden"
+id="message"
+name="message"
+value="laut"
 
-        <input
-        ref={inputRef_laut}
-        type="hidden"
-        id="message"
-        name="message"
-        value="laut"
-    
-      />
-          
-          LCL BY SEA
-          
-          
-          </div>
-        <div class="card_home" style={{backgroundColor:ubahwarna_utama_lautfullcontainer }} onClick={onClick_darat}>
+/>
+  
+  LCL BY SEA
+  
+  
+  </div>
+<div class="card_home" style={{backgroundColor:ubahwarna_utama_lautfullcontainer }} onClick={onClick_darat} hidden>
 
-        <input
-        ref={inputRef_darat}
-        type="hidden"
-        id="message"
-        name="message"
-        value="lautfullcontainer"
-    
-      />
+<input
+ref={inputRef_darat}
+type="hidden"
+id="message"
+name="message"
+value="lautfullcontainer"
 
-          FCL BY SEA </div>
-        <div class="card_home" style={{backgroundColor:ubahwarna_utama_udara }} onClick={onClick_udara}>
+/>
 
-          
-        <input
-        ref={inputRef_udara}
-        type="hidden"
-        id="message"
-        name="message"
-        value="udara"
-    
-      />
-      
-          
-          LCL BY AIR</div>
-        </div>
+  FCL BY SEA </div>
+<div className="card_home" style={{backgroundColor:ubahwarna_utama_udara }} onClick={onClick_udara}>
 
-        
-    
-      <div className='gpt3__whatgpt3-heading'>
-        <h4 className='text-black'>Hitung Biaya Import</h4>
-    
-      </div>
-      <h6 className='gradient__text'>Silakan Isi Informasi Di Bawah Ini</h6>
+  
+<input
+ref={inputRef_udara}
+type="hidden"
+id="message"
+name="message"
+value="udara"
+
+/>
+
+  
+  LCL BY AIR</div>
+</div>
+
+<div className='gpt3__whatgpt3-heading'>
+<h4 className='text-black'>Hitung Biaya Import</h4>
+
+</div>
+<h6 className='gradient__text'>Silakan Isi Informasi Di Bawah Ini</h6>
 {/* 
-      jika laut  */}
-      <div className='gpt3__whatgpt3-container m-1' style={{display:display_hidup_laut}}>
+jika laut  */}
 
-      <div className="container">
-        <div className='row'>
+<form onSubmit={handleGetHitungBiayaClick}>
+<div className='gpt3__whatgpt3-container m-1' style={{display:display_hidup_laut}}>
 
-          <div className='col-md-8'>
-
-          <div className='form-group m-1'>
-          <label for="nomorresi">Nama Barang</label>
-
-          <input type="textbox" className='form-control' placeholder='Nama Barang'>
+<div className="container">
 
 
-          </input>
+<div className='row'>
 
-          </div>
+<div className='col-md-6'>
 
-          </div>
+<div className='form-group m-1'>
+<label htmlFor="nomorresi">Kategori Barang</label>
+<select value={inputkategori} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
+<option>--Pilih Kategori Barang--</option>
+{dataJenisBarang?.map((category, index) => (
+  <option key={category.id} value={category.id}>{category.kategori_barang}</option>
+))}
 
-          <div className='col-md-4'>
+</select>
+</div>
 
-          <div className='form-group m-1'>
+</div>
 
-          <label for="kodemarking">Berat Barang</label>
+  <div className='col-md-4' hidden>
 
-          <input type="textbox" className='form-control' placeholder='Berat Barang'></input>
+  <div className='form-group m-1'>
+  <label htmlhtmlFor="namabarang">Jenis Barang</label>
 
-          </div>
+  <select value={inputnamabarang}   type="textbox" name="jenisbarang"  className='form-control' placeholder='Jenis Barang' onChange={(e) => setNamabarang(e.target.value)}>
+   <option>--Pilih Jenis Barang--</option>
+   {dataJenisBarang?.map((jenisbarang, index) => (
+  <option key={jenisbarang.id} value={jenisbarang.id}>{jenisbarang.display_name}</option>
+))}
 
-          </div>
-          
-            <div className='col-md-4'>
+  </select>
 
-            <div className='form-group m-1'>
-            <label for="nomorresi">Panjang (Cm)</label>
+  </div>
 
-            <input type="textbox" className='form-control' placeholder='Nama Barang'>
+  </div>
 
+  <div className='col-md-6'>
 
-            </input>
+  <div className='form-group m-1'>
 
-            </div>
+  <label htmlhtmlFor="kodemarking">Berat Barang</label>
 
-            </div>
+  <input value={inputberatbarang}    type="number"  pattern="[0-9]+"  name="berat"   className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
 
-            <div className='col-md-4'>
+  </div>
 
-            <div className='form-group m-1'>
-            <label for="nomorresi">Lebar (Cm)</label>
+  </div>
 
-            <input type="textbox" className='form-control' placeholder='Nama Barang'>
+  <div className='col-md-12'>
 
-            </input>
+  <div className='form-group m-1'>
+  <label htmlFor="nomorresi">Volume (m3)</label>
 
-            </div>
+  <input value={inputvolume} type="textbox" name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
 
-            </div>
-            <div className='col-md-4'>
-
-            <div className='form-group m-1'>
-            <label for="nomorresi">Tinggi (Cm)</label>
-
-            <input type="textbox" className='form-control' placeholder='Nama Barang'>
-
-
-            </input>
-
-            </div>
-
-            </div>
+  </div>
 
 
-        </div>
+  </div>
 
-        </div>
+  <div hidden>
+  
+    <div className='col-md-4'>
 
-        <div className='gpt3__home_hitungbiaya' style={{top:display_margin}} ><p>Hitung Biaya</p>
-        
-        </div>
+    <div className='form-group m-1'>
+    <label htmlhtmlFor="nomorresi">Panjang (Cm)</label>
 
-            
+    <input value={inputpanjang} type="textbox" name="panjang" className='form-control' placeholder='Panjang' onChange={(e) => setPanjang(e.target.value)}>
+
+
+    </input>
+
+    </div>
+
+    </div>
+
+    <div className='col-md-4'>
+
+    <div className='form-group m-1'>
+    <label htmlhtmlFor="nomorresi">Lebar (Cm)</label>
+
+    <input value={inputlebar} type="textbox" name="lebar" className='form-control' placeholder='Lebar' onChange={(e) => setLebar(e.target.value)}>
+
+    </input>
+
+    </div>
+
+    </div>
+    <div className='col-md-4'>
+
+    <div className='form-group m-1'>
+    <label htmlhtmlFor="nomorresi">Tinggi (Cm)</label>
+
+    <input value={inputtinggi}  type="textbox" name="tinggi" className='form-control' placeholder='Tinggi' onChange={(e) => setTinggi(e.target.value)}>
+
+
+    </input>
+
+    </div>
+
+    </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<button  className='gpt3__home_hitungbiaya' style={{top:display_margin}}  type="submit" ><label className='text-white fs-5 font-weight-bold'>Hitung Biaya</label></button>
+
+
+<div className="hasil_biaya_lcl_sea"  style={{display:display_click_lcl_sea}}>
+
 <hr  style={{border:'2px solid black',marginTop:'100px'}}/>
 
-<div className='box box-4' style={{borderColor:'grey', margin:'20px'}}>
+<div className='box box-4' style={{borderColor:'grey', margin:'10px'}}>
 
 <div className='m-3'>
 
-<div className='text-black text-left' style={{marginTop:'0px'}}>
+<div className='text-black text-left fs-3' style={{marginTop:'0px'}}>
 
 Hitung Perkiraan Biaya
 
@@ -379,165 +576,165 @@ Total Tagihan
 </div>
 
 <div className='text-black fs-4'>
-  Rp.4.500.000,-
 
-</div>
-
-</div>
-
-<div className='row m-2'>
-
-  <div className='col-md-3'>
-    <div className='form-group'>
-      <label className='text-secondary'>Tujuan Negara</label>
-      <div className='text-black'>
-        China
-      </div>
-
-    </div>
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'>Total Volume</label>
-      <div className='text-black'>
-        1 m m3
-      </div>
-
-    </div>
-
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-        
-      </div>
-
-    </div>
-
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-     
-      </div>
-
-    </div>
-
-
-  </div>
-
-
-
-
-</div>
-
-
-<div className='row m-2'>
-
-  <div className='col-md-3'>
-    <div className='form-group'>
-      <label className='text-secondary'>Tipe Pengiriman</label>
-      <div className='text-black'>
-        Laut
-      </div>
-
-    </div>
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'>Panjang</label>
-      <div className='text-black'>
-        100 Cm
-      </div>
-
-    </div>
-
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'>Tinggi</label>
-      <div className='text-black'>
-        100 Cm
-        
-      </div>
-
-    </div>
-
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-   
-
-        <img src="/image/tools.png" className='responsive-img' />
-     
-
-    </div>
-
-
-  </div>
-
-  <div className='col-md-3'>
-    <div className='form-group'>
-      <label className='text-secondary'>Kategori Barang</label>
-      <div className='text-black'>
-      Sepatu
-      </div>
-
-    </div>
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'>Lebar</label>
-      <div className='text-black'>
-        100 Cm
-      </div>
-
-    </div>
-
-
-  </div>
-
-
-
-
-</div>
-
-<div className='row m-2'>
-
+Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
   
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-      
-        
-      </div>
-
-    </div>
 
 
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-     
-      </div>
+</div>
 
-    </div>
+</div>
+
+<div className='row m-2'>
+
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'>Tujuan Negara</label>
+<div className='text-black'>
+China
+</div>
+
+</div>
+
+</div>
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'>Total Volume</label>
+<div className='text-black'>
+1 m3
+</div>
+
+</div>
 
 
-  </div>
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
+
+</div>
+
+</div>
+
+
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div className='row m-2'>
+
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'>Tipe Pengiriman</label>
+<div className='text-black'>
+Laut
+</div>
+
+</div>
+
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
+
+</div>
+
+</div>
+
+
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
+
+
+</div>
+
+</div>
+
+
+</div>
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'></label>
+
+
+<img src="/image/tools.png" className='responsive-img' />
+
+
+</div>
+
+
+</div>
+
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'>Kategori Barang</label>
+<div className='text-black'>
+Sepatu
+</div>
+
+</div>
+
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+</div>
+
+<div className='row m-2'>
+
+
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
+
+
+</div>
+
+</div>
+
+
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
+
+</div>
+
+</div>
+
+
+</div>
 
 
 
@@ -547,148 +744,177 @@ Total Tagihan
 
 
 </div>  
-     
-      
-      </div>
 
-      {/* jika laut full */}
-      <div className='gpt3__whatgpt3-container m-1' style={{display:display_hidup_lautfullcontainer}}>
+</div>
+
+
+</div>
+
+</form>
+
+{/* jika laut full */}
+<div className='gpt3__whatgpt3-container m-1' style={{display:display_hidup_lautfullcontainer}}>
 
 <div className="container">
-  <div className='row'>
+<div className='row'>
 
-    <div className='col-md-4'>
+  <div hidden>
 
-    <div className='form-group m-1'>
-    <label for="nomorresi">Nama Lengkap</label>
+<div className='col-md-4'>
 
-    <input type="textbox" className='form-control' placeholder='Nama Lengkap'>
+<div className='form-group m-1'>
+<label htmlhtmlFor="nomorresi">Nama Lengkap</label>
 
+<input type="textbox" className='form-control' placeholder='Nama Lengkap'>
 
-    </input>
 
-    </div>
+</input>
 
-    </div>
+</div>
 
-    <div className='col-md-4'>
+</div>
 
-    <div className='form-group m-1'>
+<div className='col-md-4'>
 
-    <label for="kodemarking">Email</label>
+<div className='form-group m-1'>
 
-    <input type="textbox" className='form-control' placeholder='Email'></input>
+<label htmlhtmlFor="kodemarking">Email</label>
 
-    </div>
+<input type="textbox" className='form-control' placeholder='Email'></input>
 
-    </div>
-    
-      <div className='col-md-4'>
+</div>
 
-      <div className='form-group m-1'>
-      <label for="nomorresi">Whatsapp</label>
+</div>
 
-      <input type="textbox" className='form-control' placeholder='Whatsapp'>
+<div className='col-md-4'>
 
+<div className='form-group m-1'>
+<label htmlhtmlFor="nomorresi">Whatsapp</label>
 
-      </input>
+<input type="textbox" className='form-control' placeholder='Whatsapp'>
 
-      </div>
 
-      </div>
+</input>
 
-      <div className='col-md-4'>
+</div>
 
-      <div className='form-group m-1'>
-      <label for="nomorresi">HS Code</label>
+</div>
 
-      <input type="textbox" className='form-control' placeholder='HS Code'>
+</div>
 
-      </input>
+<div className='col-md-4'>
 
-      </div>
+<div className='form-group m-1'>
+<label htmlhtmlFor="nomorresi">HS Code</label>
 
-      </div>
-      <div className='col-md-4'>
+<input type="textbox" className='form-control' placeholder='HS Code'>
 
-      <div className='form-group m-1'>
-      <label for="nomorresi">Mata Uang</label>
+</input>
 
-      <input type="textbox" className='form-control' placeholder='Mata Uang'>
+</div>
 
+</div>
+<div className='col-md-4'>
 
-      </input>
+<div className='form-group m-1'>
+<label htmlhtmlFor="nomorresi">Mata Uang</label>
 
-      </div>
+<input type="textbox" className='form-control' placeholder='Mata Uang'>
 
-      </div>
 
-      <div className='col-md-4'>
+</input>
 
-      <div className='form-group m-1'>
-      <label for="nomorresi">Total Invoice</label>
+</div>
 
-      <input type="textbox" className='form-control' placeholder='Total Invoice'>
+</div>
 
+<div className='col-md-4'>
 
-      </input>
+<div className='form-group m-1'>
+<label htmlhtmlFor="nomorresi">Total Invoice</label>
 
-      </div>
+<input type="textbox" className='form-control' placeholder='Total Invoice'>
 
-      </div>
 
-      <div className='col-md-4'>
+</input>
 
-      <div className='form-group m-1'>
-      <label for="nomorresi">Container Type</label>
+</div>
 
-      <input type="textbox" className='form-control' placeholder='Container Type'>
+</div>
 
+<div className='col-md-3'>
 
-      </input>
+<div className='form-group m-1'>
+<label htmlhtmlFor="nomorresi">Kategori Barang</label>
 
-      </div>
+<select  type="textbox" className='form-control' placeholder='Kategori Barang'>
 
-      </div>
+<option>--Pilih Kategori Barang--</option>
+<option></option>
+<option></option>
 
-      <div className='col-md-4'>
 
-      <div className='form-group m-1'>
-      <label for="nomorresi">Origin City</label>
+</select>
 
-      <input type="textbox" className='form-control' placeholder='Origin City'>
+</div>
 
+</div>
 
-      </input>
+<div className='col-md-3'>
 
-      </div>
+<div className='form-group m-1'>
+<label htmlFor="nomorresi">Container Type</label>
 
-      </div>
+<input type="textbox" className='form-control' placeholder='Container Type'>
 
-      <div className='col-md-4'>
 
-      <div className='form-group m-1'>
-      <label for="nomorresi">Destination City</label>
+</input>
 
-      <input type="textbox" className='form-control' placeholder='Destination City'>
+</div>
 
+</div>
 
-      </input>
+<div className='col-md-3'>
 
-      </div>
+<div className='form-group m-1'>
+<label htmlFor="nomorresi">Origin City</label>
 
-      </div>
+<input type="textbox" className='form-control' placeholder='Origin City'>
 
 
-  </div>
+</input>
 
-  </div>
+</div>
 
-  <div className='gpt3__home_hitungbiaya'  style={{top:display_margin}}><p>Hitung Biaya</p>
-  
-  </div>
+</div>
 
-  <hr  style={{border:'2px solid black',marginTop:'100px'}}/>
+<div className='col-md-3'>
+
+<div className='form-group m-1'>
+<label htmlFor="nomorresi">Destination City</label>
+
+<input type="textbox" className='form-control' placeholder='Destination City'>
+
+
+</input>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+<button  className='gpt3__home_hitungbiaya' style={{top:display_margin}}  type="submit" ><label className='text-white fs-5 font-weight-bold'>Hitung Biaya</label></button>
+
+
+
+
+<div className="hasil_biaya_lcl_sea"  style={{display:display_click_fcl_sea}}>
+
+<hr  style={{border:'2px solid black',marginTop:'100px'}}/>
 
 
 <div style={{borderColor:'grey',margin:'20px'}}>
@@ -716,56 +942,56 @@ Total Tagihan
 </div>
 
 <div className='text-black fs-4'>
-  Rp.4.500.000,-
+Rp.4.500.000,-
 
 </div>
 </div>
 
 <div className='row m-2'>
 
-  <div className='col-md-3'>
-    <div className='form-group'>
-      <label className='text-secondary'>Tujuan Negara</label>
-      <div className='text-black'>
-        China
-      </div>
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'>Tujuan Negara</label>
+<div className='text-black'>
+China
+</div>
 
-    </div>
+</div>
 
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'>Total Volume</label>
-      <div className='text-black'>
-        1 m m3
-      </div>
+</div>
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'>Total Volume</label>
+<div className='text-black'>
+1 m3
+</div>
 
-    </div>
-
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-        
-      </div>
-
-    </div>
+</div>
 
 
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-     
-      </div>
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
 
-    </div>
+</div>
+
+</div>
 
 
-  </div>
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
+
+</div>
+
+</div>
+
+
+</div>
 
 
 
@@ -775,51 +1001,51 @@ Total Tagihan
 
 <div className='row m-2'>
 
-  <div className='col-md-3'>
-    <div className='form-group'>
-      <label className='text-secondary'>Tipe Pengiriman</label>
-      <div className='text-black'>
-        Laut
-      </div>
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'>Tipe Pengiriman</label>
+<div className='text-black'>
+Laut
+</div>
 
-    </div>
+</div>
 
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'>Panjang</label>
-      <div className='text-black'>
-        100 Cm
-      </div>
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
 
-    </div>
+</div>
 
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'>Tinggi</label>
-      <div className='text-black'>
-        100 Cm
-        
-      </div>
-
-    </div>
+</div>
 
 
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'>Foto Produk</label>
-   
-
-        <img src="/image/tools.png" className='responsive-img' />
-     
-
-    </div>
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
 
 
-  </div>
+</div>
+
+</div>
+
+
+</div>
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'></label>
+
+
+<img src="/image/tools.png" className='responsive-img' />
+
+
+</div>
+
+
+</div>
 
 
 
@@ -828,50 +1054,50 @@ Total Tagihan
 
 <div className='row m-2'>
 
-  <div className='col-md-3'>
-    <div className='form-group'>
-      <label className='text-secondary'>Kategori Barang</label>
-      <div className='text-black'>
-      Sepatu
-      </div>
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'>Kategori Barang</label>
+<div className='text-black'>
+Sepatu
+</div>
 
-    </div>
+</div>
 
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'>Lebar</label>
-      <div className='text-black'>
-        100 Cm
-      </div>
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
 
-    </div>
+</div>
 
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-      
-        
-      </div>
-
-    </div>
+</div>
 
 
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-     
-      </div>
-
-    </div>
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
 
 
-  </div>
+</div>
+
+</div>
+
+
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
+
+</div>
+
+</div>
+
+
+</div>
 
 
 
@@ -882,74 +1108,107 @@ Total Tagihan
 
 </div> 
 
+</div>
+
 
 </div>
 {/* 
 jika udara  */}
- <div className='gpt3__whatgpt3-container m-1' style={{display:display_hidup_udara}}>
+<div className='gpt3__whatgpt3-container m-1' style={{display:display_hidup_udara}}>
 
 <div className="container">
-  <div className='row'>
 
-    <div className='col-md-4'>
+<form onSubmit={handleGetHitungBiayaUdaraClick}>
+<div className='row'>
 
-    <div className='form-group m-1'>
-    <label for="nomorresi">Nama Barang</label>
+<div className='col-md-6'>
 
-    <input type="textbox" className='form-control' placeholder='Nama Barang'>
+<div className='form-group m-1'>
+<label htmlFor="nomorresi">Kategori Barang</label>
 
+<select value={inputkategori} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
+<option>--Pilih Kategori Barang--</option>
+{dataJenisBarang?.map((category, index) => (
+  <option key={category.id} value={category.id}>{category.kategori_barang}</option>
+))}
 
-    </input>
+</select>
 
-    </div>
+</div>
 
-    </div>
+</div>
 
-    <div className='col-md-4'>
+<div className='col-md-3' hidden>
 
-    <div className='form-group m-1'>
+<div className='form-group m-1'>
+<label htmlFor="nomorresi">Jenis Barang</label>
 
-    <label for="kodemarking">Harga Barang</label>
+<select value={inputnamabarang}   type="textbox" name="jenisbarang"  className='form-control' placeholder='Jenis Barang' onChange={(e) => setNamabarang(e.target.value)}>
+   <option>--Pilih Jenis Barang--</option>
+   {dataJenisBarang?.map((jenisbarang, index) => (
+  <option key={jenisbarang.id} value={jenisbarang.id}>{jenisbarang.display_name}</option>
+))}
 
-    <input type="textbox" className='form-control' placeholder='Berat Barang'></input>
+  </select>
 
-    </div>
+</div>
 
-    </div>
-    
-      <div className='col-md-4'>
-
-      <div className='form-group m-1'>
-      <label for="nomorresi">Berat</label>
-
-      <input type="textbox" className='form-control' placeholder='Nama Barang'>
-
-
-      </input>
-
-      </div>
-
-      </div>
-
-   
-     
-
-  </div>
-
-  </div>
-
-  <div className='gpt3__home_hitungbiaya'  style={{top:display_margin}}><p>Hitung Biaya</p>
-  
-  </div>
+</div>
 
 
-    
+
+<div className='col-md-6'>
+
+<div className='form-group m-1'>
+<label htmlFor="nomorresi">Berat</label>
+
+
+
+<input value={inputberatbarang}    type="number" pattern="[0-9]+"   name="berat" className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
+
+
+
+</div>
+
+</div>
+
+<div className='col-md-12'>
+
+<div className='form-group m-1'>
+<label htmlhtmlFor="nomorresi">Volume (cm3)</label>
+
+<input value={inputvolume} type="textbox" name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
+
+</div>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+<button  className='gpt3__home_hitungbiaya' style={{top:display_margin}}  type="submit" ><label className='text-white fs-5 font-weight-bold'>Hitung Biaya</label></button>
+
+
+
+</form>
+
+</div>
+
+
+
+<div className="hasil_biaya_lcl_udara"  style={{display:display_click_lcl_udara}}>
+
 <hr  style={{border:'2px solid black',marginTop:'100px'}}/>
 
 
 <div style={{ borderColor:'grey',margin:'20px'}}>
 
-  <div className='m-3'>
+<div className='m-3'>
 
 <div className='text-black text-left' style={{marginTop:'0px'}}>
 
@@ -972,7 +1231,7 @@ Total Tagihan
 </div>
 
 <div className='text-black fs-4'>
-  Rp.4.500.000,-
+Rp.{TotalbiayaUdara.toLocaleString('ID-id')},-
 
 </div>
 
@@ -980,49 +1239,49 @@ Total Tagihan
 
 <div className='row m-2'>
 
-  <div className='col-md-3'>
-    <div className='form-group'>
-      <label className='text-secondary'>Tujuan Negara</label>
-      <div className='text-black'>
-        China
-      </div>
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'>Tujuan Negara</label>
+<div className='text-black'>
+China
+</div>
 
-    </div>
+</div>
 
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'>Total Volume</label>
-      <div className='text-black'>
-        1 m m3
-      </div>
+</div>
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'>Total Volume</label>
+<div className='text-black'>
+1 m3
+</div>
 
-    </div>
-
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-        
-      </div>
-
-    </div>
+</div>
 
 
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-     
-      </div>
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
 
-    </div>
+</div>
+
+</div>
 
 
-  </div>
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
+
+</div>
+
+</div>
+
+
+</div>
 
 
 
@@ -1032,51 +1291,51 @@ Total Tagihan
 
 <div className='row m-2'>
 
-  <div className='col-md-3'>
-    <div className='form-group'>
-      <label className='text-secondary'>Tipe Pengiriman</label>
-      <div className='text-black'>
-        Laut
-      </div>
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'>Tipe Pengiriman</label>
+<div className='text-black'>
+Laut
+</div>
 
-    </div>
+</div>
 
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'>Panjang</label>
-      <div className='text-black'>
-        100 Cm
-      </div>
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
 
-    </div>
+</div>
 
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'>Tinggi</label>
-      <div className='text-black'>
-        100 Cm
-        
-      </div>
-
-    </div>
+</div>
 
 
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'>Foto Produk</label>
-   
-
-        <img src="/image/tools.png" className='responsive-img' />
-     
-
-    </div>
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
 
 
-  </div>
+</div>
+
+</div>
+
+
+</div>
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'></label>
+
+
+<img src="/image/tools.png" className='responsive-img' />
+
+
+</div>
+
+
+</div>
 
 
 
@@ -1085,72 +1344,77 @@ Total Tagihan
 
 <div className='row m-2'>
 
-  <div className='col-md-3'>
-    <div className='form-group'>
-      <label className='text-secondary'>Kategori Barang</label>
-      <div className='text-black'>
-      Sepatu
-      </div>
+<div className='col-md-3' hidden>
+<div className='form-group'>
+<label className='text-secondary'>Kategori Barang</label>
+<div className='text-black'>
+Sepatu
+</div>
 
-    </div>
+</div>
 
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'>Lebar</label>
-      <div className='text-black'>
-        100 Cm
-      </div>
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
 
-    </div>
+</div>
 
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-      
-        
-      </div>
-
-    </div>
+</div>
 
 
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-     
-      </div>
-
-    </div>
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
 
 
-  </div>
+</div>
+
+</div>
+
+
+</div>
+<div className='col-md-3'>
+<div className='form-group'>
+<label className='text-secondary'></label>
+<div className='text-black'>
+
+</div>
+
+</div>
+
+
+</div>
 
 
 
 
 </div>
-
 
 
 </div>  
 
 </div>
 
+</div>
+
 
 </div>
 
 
-    </div>
 
-   
-   
-    
+</div>
+
+
+
+ 
+     
   )
-}
+
+    }
+
 
 export default Fitur

@@ -37,8 +37,11 @@ body{
      margin: 0 auto;
      display: grid;
      gap: 0.5rem;
-     grid-template-columns: repeat(3, minmax(50px, 1fr));
+     grid-template-columns: repeat(2, minmax(50px, 1fr));
      margin-left:0%;
+     position:relative;
+     left:7%;
+     transform: translate(0%, 0%);
      }
    
      .card_layanan {
@@ -158,6 +161,18 @@ color:white;
 
 
     }
+
+    .buttons_cards_layanan {
+        max-width: 1400px;
+         margin: 0 auto;
+         display: grid;
+         gap: 0.5rem;
+         grid-template-columns: repeat(2, minmax(50px, 1fr));
+         margin-left:0%;
+         position:relative;
+         left:0%;
+         transform: translate(0%, 0%);
+         }
 
 
 
