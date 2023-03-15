@@ -7,6 +7,7 @@ import {Footer,Header} from '../../../containers';
 import { getData_Master_Categories } from '../../../constants/api/logistik';
 import { getData_Master_Jenisbarang } from '../../../constants/api/logistik';
 import env from "react-dotenv";
+import swal from 'sweetalert';
 
 
 //fungsi kalkulasi
@@ -48,6 +49,10 @@ const [dataJenisBarang, setDataJenisBarang] = useState(null)
   const [inputlebar, setLebar] = useState('');
   const [inputtinggi, setTinggi] = useState('');
   const [inputvolume, setVolume] = useState('');
+  const kategori_select = useRef('');
+  const kategori_select_air = useRef('');
+  const [deskripsi_kategori, setDeskripsiKategori]=useState(null)
+  const [deskripsi_kategori_Air, setDeskripsiKategori_Air]=useState(null)
 
   
 const [TotalestimasibiayaLaut,setEstimasiBiayaLaut]=useState('');
@@ -84,6 +89,55 @@ const volume_total= inputvolume;
       }
     
     }, [dataCategories,dataJenisBarang])
+
+
+    
+const input_kategori = kategori_select.current.value
+const input_kategori_air=kategori_select_air.current.value
+
+     
+//console.log("data jenis barang:",dataJenisBarang)
+
+  const deskripsibypilih=[]
+  const deskripsibypilih_air=[]
+
+  for(let j=0;j< dataJenisBarang?.length ; j++){
+
+
+    //console.log("input kategori :",input_kategori)
+
+    //console.log("data kategori all:",dataJenisBarang)
+  
+     
+       if(dataJenisBarang[j].id ==input_kategori ){
+ 
+       
+ 
+         deskripsibypilih.push(dataJenisBarang[j].detail_barang)
+
+        // console.log("input kategori :",dataJenisBarang[j])
+ 
+
+       }
+
+       if(dataJenisBarang[j].id ==input_kategori_air ){
+ 
+      
+        deskripsibypilih_air.push(dataJenisBarang[j].detail_barang)
+
+       // console.log("input kategori :",dataJenisBarang[j])
+
+
+      }
+
+
+   }
+
+   const deskripsi_barang=deskripsibypilih
+   const deskripsi_barang_air=deskripsibypilih_air
+
+
+  
     
     const getDataMasterCategory = async () => {
       const res = await getData_Master_Categories();
@@ -105,6 +159,31 @@ const handleGetHitungBiayaClick = async (e) => {
   e.preventDefault();
   var display_click_lcl_sea='block';
   const url = `${env.API_GATEWAY_CALCULATION}/ocistik/create-lcl-by-sea`;
+
+      
+  if(inputberatbarang=='' && inputkategori =='' && volume_total==''){
+
+    swal({
+      title: "Form Input Tidak Diisi atau Tidak Lengkap?",
+      text: "Pastikan untuk mengisi form dengan lengkap",
+      icon: "warning",
+      dangerMode: true,
+    })
+    ;
+
+
+  }else if(inputberatbarang=='' || inputkategori =='' || volume_total==''){
+
+    swal({
+      title: "Form Input Tidak Diisi atau Tidak Lengkap?",
+      text: "Pastikan untuk mengisi form dengan lengkap",
+      icon: "warning",
+      dangerMode: true,
+    })
+    ;
+
+
+  }else{
  
   try {
     let res = await fetch(url, {
@@ -144,6 +223,8 @@ const handleGetHitungBiayaClick = async (e) => {
   } catch (err) {
     console.log(err);
   }
+
+}
 };
 
 
@@ -154,6 +235,30 @@ const handleGetHitungBiayaUdaraClick = async (e) => {
   var display_click_lcl_udara='block';
 
   const url = `${env.API_GATEWAY_CALCULATION}/ocistik/create-lcl-by-sea`;
+
+  if(inputberatbarang=='' && inputkategori =='' && volume_total==''){
+
+    swal({
+      title: "Form Input Tidak Diisi atau Tidak Lengkap?",
+      text: "Pastikan untuk mengisi form dengan lengkap",
+      icon: "warning",
+      dangerMode: true,
+    })
+    ;
+
+
+  }else if(inputberatbarang=='' || inputkategori =='' || volume_total==''){
+
+    swal({
+      title: "Form Input Tidak Diisi atau Tidak Lengkap?",
+      text: "Pastikan untuk mengisi form dengan lengkap",
+      icon: "warning",
+      dangerMode: true,
+    })
+    ;
+
+
+  }else{
  
   try {
     let res = await fetch(url, {
@@ -192,6 +297,7 @@ const handleGetHitungBiayaUdaraClick = async (e) => {
   } catch (err) {
     console.log(err);
   }
+}
 };
 
 
@@ -215,11 +321,48 @@ const handleGetHitungBiayaUdaraClick = async (e) => {
           var display_height_form='960px';
 
 
-        }else{
-
-          var display_margin='320px';
-          var display_height_form='720px';
         }
+
+        
+        if(updated=='udara'){
+
+          // var display_margin='430px';
+          // var display_height_form='960px';
+
+          var display_margin='360px';
+          var display_height_form='720px';
+          var sectionmobile='180vh'
+
+
+        }
+        
+        else{
+
+          var display_margin='340px';
+          var display_height_form='720px';
+          var sectionmobile='180vh'
+        }
+
+        //jika select kategori
+
+        if(input_kategori>"0"){
+
+          var display_margin='440px';
+          var display_height_form='720px';
+          var sectionmobile='180vh'
+
+
+        }
+
+        if(input_kategori=='0'){
+
+          var display_margin='380px';
+          var display_height_form='720px';
+          var sectionmobile='180vh'
+
+
+        }
+
         
 
 
@@ -240,8 +383,9 @@ const handleGetHitungBiayaUdaraClick = async (e) => {
     }else{
 
       
-    var display_margin='400px';
-    var display_height_form='1400px';
+    var display_margin='360px';
+    var display_height_form='700px';
+    var sectionmobile='150vh';
 
 
 
@@ -372,6 +516,14 @@ if(updated==''){
 
 //batas kondisional
 
+function allowNumbersOnly(e) {
+  var code = (e.which) ? e.which : e.keyCode;
+  if (code > 31 && (code < 48 || code > 57)) {
+      e.preventDefault();
+  }
+}
+
+
   return (
 
     <div className='App'>
@@ -388,7 +540,7 @@ if(updated==''){
     </div>
 
  
-<section style={{height:'180vh'}}>
+<section style={{height:sectionmobile}}>
 
 <div className='fiturgalery'>
 
@@ -486,13 +638,13 @@ if(updated==''){
 
 <div className='row'>
 
-<div className='col-md-4'>
+<div className='col-md-6'>
 
 <div className='form-group m-1'>
 <label htmlFor="kategoribarang" className="text-black text-left" >Kategori Barang</label>
 
-<select value={inputkategori} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
-<option>--Pilih Kategori Barang--</option>
+<select value={inputkategori} ref={kategori_select} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
+<option value="0">--Pilih Kategori Barang--</option>
 {dataJenisBarang?.map((category, index) => (
   <option key={category.id} value={category.id}>{category.kategori_barang}</option>
 ))}
@@ -500,6 +652,15 @@ if(updated==''){
 </select>
 
 </div>
+
+
+<div className='card mt-3 mb-2'>
+
+  <div className="text-black fs-6 fw-bold" >Detail barang:{deskripsi_barang}</div>
+  
+  
+</div>
+
 
 </div>
 
@@ -522,13 +683,13 @@ if(updated==''){
 
   </div>
 
-  <div className='col-md-4'>
+  <div className='col-md-6'>
 
   <div className='form-group m-1'>
 
-  <div className='text-black text-left' htmlFor="beratberang">Berat Barang(Kg)</div>
+  <div className='text-black text-left' htmlFor="beratberang">Berat Barang(gram)</div>
 
-  <input value={inputberatbarang}    type="textbox" name="berat" className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
+  <input value={inputberatbarang}    type="number" name="berat" onKeyPress={allowNumbersOnly}  className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
 
 
   </div>
@@ -538,9 +699,9 @@ if(updated==''){
   <div className='col-md-12'>
 
 <div className='form-group m-1'>
-<label className='text-black' htmlFor="nomorresi">Volume (cm3)</label>
+<label className='text-black' htmlFor="nomorresi">Volume (cm³)</label>
 
-<input value={inputvolume} type="textbox" name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
+<input value={inputvolume} type="number" onKeyPress={allowNumbersOnly}  name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
 
 </div>
 
@@ -661,28 +822,8 @@ Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
 
 
   </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-        
-      </div>
 
-    </div>
-
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-     
-      </div>
-
-    </div>
-
-
-  </div>
+ 
 
 
 
@@ -835,13 +976,13 @@ Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
 <form onSubmit={handleGetHitungBiayaUdaraClick}>
 <div className='row'>
 
-<div className='col-md-4'>
+<div className='col-md-6'>
 
 <div className='form-group m-1'>
 <label htmlFor="kategoribarang" className="text-black text-left" >Kategori Barang</label>
 
-<select value={inputkategori} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
-<option>--Pilih Kategori Barang--</option>
+<select value={inputkategori} ref={kategori_select_air} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
+<option value="0">--Pilih Kategori Barang--</option>
 {dataJenisBarang?.map((category, index) => (
   <option key={category.id} value={category.id}>{category.kategori_barang}</option>
 ))}
@@ -849,6 +990,14 @@ Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
 </select>
 
 </div>
+
+<div className='card mt-3 mb-2'>
+
+  <div className="text-black fs-6 fw-bold" >Detail barang:{deskripsi_barang_air}</div>
+  
+  
+</div>
+
 
 </div>
 
@@ -870,14 +1019,14 @@ Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
 
   </div>
 
-  <div className='col-md-4'>
+  <div className='col-md-6'>
 
   <div className='form-group m-1'>
 
-  <div className='text-black text-left' htmlFor="kodemarking">Berat Barang(Kg)</div>
+  <div className='text-black text-left' htmlFor="kodemarking">Berat Barang(gram)</div>
 
 
-  <input value={inputberatbarang}    type="textbox" name="berat" className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
+  <input value={inputberatbarang}   type="number" onKeyPress={allowNumbersOnly} name="berat"  className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
 
 
   </div>
@@ -887,9 +1036,9 @@ Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
   <div className='col-md-12'>
 
   <div className='form-group m-1'>
-  <label className='text-black' htmlFor="nomorresi">Volume (cm3)</label>
+  <label className='text-black' htmlFor="nomorresi">Volume (cm³)</label>
 
-  <input value={inputvolume} type="textbox" name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
+  <input value={inputvolume} type="number" onKeyPress={allowNumbersOnly} name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
 
   </div>
 

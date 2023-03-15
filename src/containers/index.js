@@ -43,6 +43,11 @@ export {default as Callus} from './frontend/callus/callus';
 export {default as Hitungbiaya} from './frontend/hitungbiaya/hitungbiaya';
 
 
+//Artikel More
+export {default as ArtikelMore} from './frontend/artikel/artikel_more';
+
+
+
 
 
 

@@ -3,24 +3,33 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../frontend/artikel/artikel.css'
 import { Navbar } from '../../../components';
 import {Footer} from '../../../containers';
-import Pagination from 'react-bootstrap/Pagination';
-import { getData_Artikel } from '../../../constants/api/logistik';
-import { useState,useEffect } from "react";
-import dateFormat from 'dateformat';
 
+import { getData_Artikel } from '../../../constants/api/logistik';
+import { useState,useRef,useEffect } from "react";
+import dateFormat from 'dateformat';
 import env from "react-dotenv";
+import Pagination from '../../../components/general/Pagination';
+import axios from 'axios';
+
 
 
 const Artikel= () => {
 
   const URL = `${env.API_GATEWAY_LOKAL}/api/upload/`
 
-  console.log(URL)
+  //console.log(URL)
 
   const [dataArtikel, setDataArtikel] = useState(null)
   const [dataheadlinefirstnews, setDataHeadlinefirstNews] = useState(null)
   const [dataheadlinenews, setDataHeadlineNews] = useState(null)
+  const [dataheadlinethirdnews, setDataHeadlineThirdNews] = useState(null)
   const [datahariannews, setDataHarianNews] = useState(null)
+  const [currentPage, setCurrentPage] = useState(1);// No of Records to be displayed on each page   
+  const [recordsPerPage] = useState(6);
+  const inputsearch = useRef('');
+
+  
+
 
   //fungsi get data artikel
   useEffect(() => {
@@ -35,61 +44,85 @@ const Artikel= () => {
 
 
   const getDataArtikel = async () => {
-    const res = await getData_Artikel();
-    // console.log("getdata artikel", res)
 
-    //console.log("data:", res.Data)
+    const text_pencarian=inputsearch.current.value;
 
-    
+
+    var formdata_request = new FormData()
+
+    formdata_request.append('search',text_pencarian)
+
+    const res = await getData_Artikel(formdata_request);
+
+       const data_all= res.data.Data
+
     if (res.status === 200) {
-      setDataArtikel(res.Data)
+
+  
+      setDataArtikel(data_all)
     }
 
-    if(res.Data){
+    //console.log("lihat data:",data_all)
+
+    if(data_all){
 
       const headline_first=[]
       const headline_second=[]
+      const headline_third=[]
       const harian=[]
     
-      for(let i=0; i < res.Data.length; i++){
+      for(let i=0; i < data_all.length; i++){
 
-
-        
-        if( res.Data[i].headline_id=='1' && i==0 ){
+        if( data_all[i].headline_id=='1' && i==0 ){
     
-          const title = res.Data[i].title;
-          const description=res.Data[i].description
-          const tanggal_cetak= res.Data[i].created_date.String;
-          const slug=res.Data[i].slug;
-          const picture = res.Data[i].picture;
-      
+          const title = data_all[i].title;
+          const description=data_all[i].description
+          const tanggal_cetak= data_all[i].created_date.String;
+          const slug=data_all[i].slug;
+          const picture = data_all[i].picture;
+  
           headline_first.push({title,description,tanggal_cetak,slug,picture})
       
       
           }
     
     
-        if( res.Data[i].headline_id=='1' && i>0 ){
+        if( data_all[i].headline_id=='1' && (i>0 && i<=2 )){
     
-          const title = res.Data[i].title;
-          const description=res.Data[i].description
-          const tanggal_cetak= res.Data[i].created_date.String;
-          const slug=res.Data[i].slug;
-          const picture = res.Data[i].picture;
+          const title = data_all[i].title;
+          const description=data_all[i].description
+          const tanggal_cetak= data_all[i].created_date.String;
+          const slug=data_all[i].slug;
+          const picture =data_all[i].picture;
     
         headline_second.push({title,description,tanggal_cetak,slug,picture})
     
     
         }
-        
-        
-        if( res.Data[i].headline_id=='0'){
+
+        if( data_all[i].headline_id=='1' && (i>2 && i<=6 )){
     
-          const title = res.Data[i].title;
-          const description=res.Data[i].description
-          const tanggal_cetak= res.Data[i].created_date.String;
-          const slug=res.Data[i].slug;
-          const picture = res.Data[i].picture;
+          const title = data_all[i].title;
+          const description=data_all[i].description
+          const tanggal_cetak= data_all[i].created_date.String;
+          const slug=data_all[i].slug;
+          const picture =data_all[i].picture;
+    
+        headline_third.push({title,description,tanggal_cetak,slug,picture})
+    
+    
+        }
+        
+        
+        
+        
+        if(data_all[i].headline_id=='0'){
+    
+          const title =data_all[i].title;
+          const description=data_all[i].description
+          const tanggal_cetak=data_all[i].created_date.String;
+          const slug=data_all[i].slug;
+          const picture =data_all[i].picture;
 
         harian.push({title,description,tanggal_cetak,slug,picture})
     
@@ -103,6 +136,7 @@ const Artikel= () => {
 
       setDataHeadlinefirstNews(headline_first);
       setDataHeadlineNews(headline_second);
+      setDataHeadlineThirdNews(headline_third);
       setDataHarianNews(harian);
     
      
@@ -111,13 +145,18 @@ const Artikel= () => {
 
   }
 
- 
 
-  
-console.log("data artikel all :", dataArtikel)
-console.log("data harian pertama news:", dataheadlinefirstnews)
-console.log("data headline kedua news:", dataheadlinenews)
-console.log("data harian news:", datahariannews)
+
+const arr = datahariannews || [];
+const totaldata=  Number(arr.length);
+const nPages = Math.ceil(totaldata / recordsPerPage)
+const indexOfLastRecord = currentPage * recordsPerPage;
+const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+const currentRecords = arr.slice(indexOfFirstRecord, indexOfLastRecord)
+
+//console.log(nPages)
+
+
 
 
     return (
@@ -135,15 +174,44 @@ console.log("data harian news:", datahariannews)
 
       <div className='artikel_bg'>
 
-        <div className='text-black fs-3'>ARTIKEL</div>
+         <div className='row'>
+
+          <div className='col-md-8'>
+
+        <div className='text-black fs-3 m-2'>ARTIKEL</div>
+
+        </div>
+
+        <div className='col-md-4'>
+
+        <div className='col-md-12 mt-4'>
+
+         
+          <div className='col-md-8'>
+
+          <input ref={inputsearch} onChange={getDataArtikel}  type="text" className='form-control' placeholder="search news"/>
+         
+
+          </div>
+
+         
+      
+
+        </div>
+       
+        </div>
+
+        </div>
         <hr></hr>
 
-        <div>HEADLINE NEWS</div>
+        <div className='m-2 fw-bold'>HEADLINE NEWS</div>
+
+
 
         <div className='row mt-4'>
  
 
-    <div className='col-md-5'>
+    <div className='col-md-4'>
 
  {dataheadlinefirstnews?.map((artikel_headline_first, index) => (
 
@@ -155,8 +223,9 @@ console.log("data harian news:", datahariannews)
         <div className="card_content">
           <h2 className="card_title">{artikel_headline_first.title}</h2>
           <p className='text-secondary fs-6'>{artikel_headline_first.description}</p>
-          <p className="card_text">{ dateFormat(artikel_headline_first?.tanggal_cetak, "dd-mm-yyyy hh:mm:ss") }</p>
-          <button className="btn card_btn">Read More</button>
+          <p className="card_text"><i class="fa fa-clock-o" aria-hidden="true"></i>
+          { dateFormat(artikel_headline_first?.tanggal_cetak, "dd-mm-yyyy hh:mm:ss") }</p>
+          <a className="btn card_btn" href={'artikel-detail/'+ artikel_headline_first.slug}  >Read More</a>
         </div>
       </div>
     </li>
@@ -167,47 +236,111 @@ console.log("data harian news:", datahariannews)
           </div> 
         
 
-          <div className='col-md-7'>
+          <div className='col-md-8'>
 
          
           <div className='row'> 
+
+          {/* grid 2 */}
           
-          {dataheadlinenews?.map((artikel_headline, index) => (
+        
           <div className='col-md-6'>
 
-<div className="container pb-4">
-  <div className="row">
-    <div className="col-lg-12">
-      <div className="horizontal-card">
+            <div className="container pb-4">
+            {dataheadlinenews?.map((artikel_headline, index) => (
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className="horizontal-card">
 
-        <img src={URL+artikel_headline.picture} />
-        <div className="horizontal-card-body">
-          {/* <span className="card-text">Date</span> */}
-          <h4 className="card-title fs-6 fw-bold">{artikel_headline.title}</h4>
-          <span className="card-text mt-2" style={{fontSize:'11px'}}>{artikel_headline.description}</span>
-        </div>
-        <div className="horizontal-card-footer">
-          <span >{ dateFormat(artikel_headline?.tanggal_cetak, "dd-mm-yyyy hh:mm:ss") }</span>
-        
-          {/* <p className='text-secondary fs-6'>{artikel_headline.description}</p> */}
-          <button className="btn_head card_btn">Read More</button>
-          {/* <a className="card-text status">#Save</a> */}
-
-        </div>
+                    <img src={URL+artikel_headline.picture} />
+                    <div className="horizontal-card-body">
+                      {/* <span className="card-text">Date</span> */}
+                      <h4 className="card-title fs-6 fw-bold">{artikel_headline.title}</h4>
+                      <span className="card-text mt-2 mb-4" style={{fontSize:'11px'}}>{artikel_headline.description}</span>
+                    </div>
+                    <div className="horizontal-card-footer">
+                     
+            
+                      <span style={{fontSize:'12px',marginLeft:'90px'}} ><i class="fa-light fa-clock"></i>
 
 
-      </div>
-    </div>
-    </div>
-    </div>
+                      { dateFormat(artikel_headline?.tanggal_cetak, "dd-mm-yyyy hh:mm:ss") }</span>
+                    
+                      
+                      <a className="btn_head card_btn text-center" href={'artikel-detail/'+ artikel_headline.slug}> Read More</a>
+                    
 
-      
-      
+                    </div>
 
-  
+
+                  </div>
+                </div> 
+                
+               
+
+                </div>
+                
+                ))}
+                </div>
+
           </div>
 
-           ))}
+          {/* grid 3 */}
+          <div className='col-md-6'>
+
+            <div className="container pb-4">
+            {dataheadlinethirdnews?.map((artikel_headline, index) => (
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className="horizontal-card">
+
+                    <img className="img-grid-3" src={URL+artikel_headline.picture} />
+                    <div className="horizontal-card-body">
+                      {/* <span className="card-text">Date</span> */}
+                      <h4 className="card-title fs-6 fw-bold">{artikel_headline.title}</h4>
+                      <span className="card-text mt-2 mb-4" style={{fontSize:'11px'}}>{artikel_headline.description}</span>
+                    </div>
+                    <div className="horizontal-card-footer">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+
+                      <span style={{fontSize:'12px',marginLeft:'90px'}} ><i class="fa-light fa-clock"></i>
+
+{ dateFormat(artikel_headline?.tanggal_cetak, "dd-mm-yyyy hh:mm:ss") }</span>
+                    
+                      
+                      <a className="btn_head card_btn text-center" href={'artikel-detail/'+ artikel_headline.slug}> Read More</a>
+                    
+
+                    </div>
+
+
+                  </div>
+                </div> 
+                
+               
+
+                </div>
+                
+                ))}
+                </div>
+
+          </div>
+
+
+          
+
+          
+
+
+           {/* grid ke 3  */}
+        
+
+           {/* batas grid 3 */}
+
+                                        
+                         <center>
+                        <a className="btn_head card_btn text-center" href='/artikel-more'> Load More</a>
+                        </center>
        
 
           </div>
@@ -219,13 +352,15 @@ console.log("data harian news:", datahariannews)
     
           </div>
 
-          <div>OCISTIK NEWS</div>
+       
+
+          <div className='m-2 fw-bold'>GOMILE NEWS</div>
           <hr></hr>
 
-
+<div className='container-fluid'>
           <div className='row'>
 
-          {datahariannews?.map((artikel_harian, index) => (
+          {currentRecords?.map((artikel_harian, index) => (
             <div className='col-md-4'>
 
 <ul className="cards">
@@ -237,18 +372,13 @@ console.log("data harian news:", datahariannews)
           <p className='text-secondary fs-6'>{artikel_harian.description}</p>
           {/* <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p> */}
           
-          <button className="btn card_btn">Read More</button>
+          <a className="btn card_btn" href={'artikel-detail/'+ artikel_harian.slug}>Read More</a>
         </div>
       </div>
     </li>
   </ul>
 
-                                
-          
-
-       
-
-
+                              
             </div>
 
             ))}
@@ -257,30 +387,19 @@ console.log("data harian news:", datahariannews)
            
 
           </div>
+
+          </div>
  
           <div className='mt-4'>
 
          
 
 
-      <Pagination>
-      <Pagination.First />
-      <Pagination.Prev />
-      <Pagination.Item>{1}</Pagination.Item>
-      <Pagination.Ellipsis />
-
-      <Pagination.Item>{10}</Pagination.Item>
-      <Pagination.Item>{11}</Pagination.Item>
-      <Pagination.Item active>{12}</Pagination.Item>
-      <Pagination.Item>{13}</Pagination.Item>
-      <Pagination.Item disabled>{14}</Pagination.Item>
-
-      <Pagination.Ellipsis />
-      <Pagination.Item>{20}</Pagination.Item>
-      <Pagination.Next />
-      <Pagination.Last />
-    </Pagination>
-
+          <Pagination
+                nPages={nPages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+            />
 
     </div>
 

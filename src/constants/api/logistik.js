@@ -13,18 +13,26 @@ export async function getData_Master_Categories() {
     });
   }
 
-  export async function getData_Artikel() {
-    const url = `${env.API_GATEWAY_LOKAL}/api/getArtikel`;
-    return callAPI({
-      url,
-      method: 'GET',
-      headers:{
-        'Access-Control-Allow-Origin':'*',
-        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        'Access-Control-Allow-Header':"Cache-Control, Content-Type,Xid"
-      },
-      token: true,
-    });
+  export async function getData_Artikel(formrequest) {
+    const paramrequest=formrequest
+    const url = `${env.API_GATEWAY_LOKAL}/api/getSearchArtikel`;
+  
+  
+
+  const response =await axios({
+      method: "post",
+      url: url,
+      data: paramrequest,
+      headers: { "Content-Type": "multipart/form-data" },
+  })
+
+  const axiosResponse = response;
+   
+  return axiosResponse;
+
+
+
+
   }
 
   export async function getData_Artikel_All() {
@@ -60,29 +68,7 @@ export async function getData_Master_Categories() {
 
   }
 
-  
-  // export async function getData_Artikel_By_Slug(slug_) {
 
-  //   let slug_string=(slug_)
-   
-  //   //const url_ = `${env.API_GATEWAY_LOKAL}/api/getArtikelbyslug/${slug_string}`;
-
-  //   const url = `http://localhost:9000/api/getArtikelbyslug/${slug_string}`;
-
-  //   return callAPI({
-  //     url,
-  //     method: 'GET',
-  //     headers:{
-  //       'Access-Control-Allow-Origin':'*',
-  //       'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-  //       'Access-Control-Allow-Header':"Cache-Control, Content-Type,Xid"
-  //     },
-  //     token: true,
-  //   });
-
-
-
-  // }
 
 
   
@@ -107,7 +93,7 @@ export async function getData_Master_Categories() {
   export async function getData_Master_Jenisbarang() {
     const url = `${env.API_GATEWAY}/oms/cms/category-oci-logistics`;
 
-    const response = await axios.post(url, {
+    const response = await axios.get(url, {
       headers:{
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -121,5 +107,8 @@ export async function getData_Master_Categories() {
   return axiosResponse;
 
   }
+
+
+
 
 

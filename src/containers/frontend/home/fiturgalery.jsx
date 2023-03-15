@@ -85,7 +85,7 @@ const Fitur_Galery = () => {
 
     var display_margin='740px';
     var display_height_form='1550px';
-    var display_height_vh='110vh';
+    var display_height_vh='90vh';
 
 
   }else{
@@ -93,7 +93,7 @@ const Fitur_Galery = () => {
     
   var display_margin='480px';
   var display_height_form='1400px';
-  var display_height_vh='120vh';
+  var display_height_vh='110vh';
 
 
 

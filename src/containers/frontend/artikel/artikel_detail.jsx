@@ -8,6 +8,10 @@ import {useLocation} from 'react-router-dom';
 import { useState,useEffect } from "react";
 import { getData_Artikel_By_Slug } from '../../../constants/api/logistik';
 import { getData_Artikel_All } from '../../../constants/api/logistik';
+import dateFormat from 'dateformat';
+import Parser from 'html-react-parser';
+import env from "react-dotenv";
+
 
 
 
@@ -15,6 +19,7 @@ import { getData_Artikel_All } from '../../../constants/api/logistik';
 const Artikel_Detail= () => {
 //const URL = `${env.API_GATEWAY_LOKAL}/api/upload/`
 const URL = 'http://localhost:9000/api/upload/'
+
 
 const location = useLocation();
 const slug_id= location.pathname.split('/').slice(2);
@@ -106,7 +111,7 @@ const fetchOrderDataArtikel = async () => {
     </div>
 
 
-    <section className="flex-container">
+    <section className="flex-container" >
 
       <div className='artikel_bg'>
 
@@ -116,11 +121,11 @@ const fetchOrderDataArtikel = async () => {
 
           {dataArtikelbySlug?.map((artikel, index) => (
 
-    <div className="card" >
+    <div className="card m-4" >
       <img className="responsive-img-artikel-detail"  src={URL +'/'+ artikel.picture}  alt="..."/>
       <div className="card-body" >
         <h1 className="card-title text-black">{artikel.title}</h1>
-        <p className="card-text text-black">{artikel.description}</p>
+        <p className="card-text text-black">{Parser(artikel.konten)}</p>
       
       </div>
     </div>
@@ -152,25 +157,23 @@ const fetchOrderDataArtikel = async () => {
         <div className='row'>
           {datahariannews?.map((artikelharian, index) => (
           <div className='col-md-4'>
-         
-          <div class="card">
-          <div class="card-horizontal">
-              <div class="img-square-wrapper">
-                  <img className="responsive-img-artikel" src={URL+artikelharian.picture} alt="Card image cap" />
-              </div>
-              <div class="card-body" style={{marginLeft:'-70px'}}>
-                  <h4 class="card-title">{artikelharian.title}</h4>
-                  <p class="card-text"></p>
-              </div>
-             
-          </div>
-         
-          <div class="card-footer" >
-           
-          <div className='text-black text-right button_more mt-4'>Read More</div>
-              <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
+
+            
+<ul className="cards">
+    <li className="cards_item">
+      <div className="card">
+        <div className="card_image"><img src={URL+artikelharian.picture}/></div>
+        <div className="card_content">
+          <h2 className="card_title">{artikelharian.title}</h2>
+          <p className='text-secondary fs-6'>{artikelharian.description}</p>
+          <p className="card_text">{ dateFormat(artikelharian?.tanggal_cetak, "dd-mm-yyyy hh:mm:ss") }</p>
+          <a className="btn card_btn" href={'/artikel-detail/'+ artikelharian.slug}  >Read More</a>
         </div>
+      </div>
+    </li>
+  </ul>
+         
+      
            
           </div>
  ))}  
