@@ -29,6 +29,7 @@ function ModalCekresi({show, setShow, inputCekresi}) {
           text: "cannot find your data",
           icon: "error",
         })
+        handleClose()
       }
     } catch (error) {
       console.log({error})
@@ -37,6 +38,7 @@ function ModalCekresi({show, setShow, inputCekresi}) {
         text: "cannot find your data",
         icon: "error",
       })
+      handleClose()
       
     }
   }
@@ -46,7 +48,10 @@ function ModalCekresi({show, setShow, inputCekresi}) {
     }
   }, [show])
   
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false)
+    setCekResiData(null)
+  };
 
   const listStatusFiltered = useMemo(() => cekResiData?.list_status.filter(v => v.proses), [cekResiData])
   const tanggalTerima = useMemo(() => {
