@@ -11,6 +11,41 @@
 
 
 }
+.timeline-wrapper{
+    /* max-height: 400px; */
+    padding-top: 30px;
+    overflow-y: auto;
+}
+
+ul.timeline {
+    list-style-type: none;
+    position: relative;
+}
+ul.timeline > li {
+    padding: 0 0 20px 20px;
+    border-left: 1px solid #E6E6E6;
+}
+ul.timeline > li.active {
+    border-left: 1px solid #E6E6E6;
+}
+ul.timeline > li.last {
+    border-left: none;
+}
+ul.timeline > li:before {
+    content: ' ';
+    background: #E6E6E6;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    left: 22px;
+    width: 20px;
+    height: 20px;
+    z-index: 400;
+}
+
+ul.timeline > li.active:before {
+    background: #E6E6E6;
+}
 
 .headerjudulbanner{
 
