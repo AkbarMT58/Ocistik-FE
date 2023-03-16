@@ -51,7 +51,7 @@ function ModalCekresi({show, setShow, inputCekresi}) {
       
     }
   }
-
+  console.log({show})
   useEffect(() => {
     if(show){
       _fetchResi()
@@ -63,7 +63,7 @@ function ModalCekresi({show, setShow, inputCekresi}) {
   const listStatusFiltered = useMemo(() => cekResiData?.list_status.filter(v => v.proses), [cekResiData])
   const tanggalTerima = useMemo(() => {
     if(cekResiData) {
-      return cekResiData.list_status.find(item => item.status === "closed" && item.proses).tanggal
+      return cekResiData.list_status.find(item => item.status === "closed" && item.proses)?.tanggal
     }
     return ""
   }, [cekResiData])
@@ -73,6 +73,7 @@ function ModalCekresi({show, setShow, inputCekresi}) {
   }
   const eta = inDays(new Date(), new Date(cekResiData.header.eta))
 
+  console.log({tanggalTerima})
   return (
     <Modal show={show} onHide={handleClose}
         size="xl">
@@ -111,7 +112,7 @@ function ModalCekresi({show, setShow, inputCekresi}) {
             <div className='px-3 py-2 ' style={{width: "20%"}}>
               <div className='mb-2'>
                 <img src="/image/Vector(4).png" alt="" className='me-2'/>Tanggal Terima</div>
-              <div className='h6'>{tanggalTerima !== "" ? format(new Date(tanggalTerima),'D MMM YYYY h:m') : "-" }</div>
+              <div className='h6'>{tanggalTerima && tanggalTerima !== "" ? format(new Date(tanggalTerima),'D MMM YYYY h:m') : "-" }</div>
             </div>
           </div>
           <div className='py-2 px-3 border-bottom'>
