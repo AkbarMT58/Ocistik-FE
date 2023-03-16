@@ -16,6 +16,8 @@ function useScreenWidth() {
   const getWidth = () => isWindow ? window.innerWidth : windowWidth;
 
   const resize = () => setWindowWidth(getWidth());
+
+  
   
   useEffect(() => {
       if (isWindow) {
@@ -32,14 +34,13 @@ function useScreenWidth() {
 }
 
 const Home = () => {
-
-  const [inputCekresi, setInputCekresi] = useState({
-    nomor_resi : "",
-    marking_code : ""
-  })
-  const [show, setShow] = useState(false);
   //fungsi set responsive
 const widthSize = useScreenWidth()
+const [inputCekresi, setInputCekresi] = useState({
+  nomor_resi : "",
+  marking_code : ""
+})
+const [show, setShow] = useState(false);
 
 const mobileWidth = 700
 
