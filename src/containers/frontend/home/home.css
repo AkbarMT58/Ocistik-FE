@@ -220,9 +220,7 @@ div.gallery {
   * {
     box-sizing: border-box;
   }
-  .modal-90w{
-    width: 90%;
-  }
+  
   .responsive {
     padding: 0 6px;
     float: left;
@@ -307,8 +305,18 @@ div.gallery {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(3, minmax(50px, 1fr));
-  margin-left:0px;
+  margin-left:170px;
   }
+
+
+  .buttons_cards_2 {
+    max-width: 1400px;
+     margin: 0 auto;
+     display: grid;
+     gap: 1rem;
+     grid-template-columns: repeat(3, minmax(50px, 1fr));
+     margin-left:0px;
+     }
 
   .card_home {
     /* background-color: dodgerblue; */
@@ -405,6 +413,16 @@ div.gallery {
         font-size:3vw;
     
       }
+
+      .buttons_cards {
+        max-width: 1400px;
+         margin: 0 auto;
+         display: grid;
+         gap: 1rem;
+         grid-template-columns: repeat(3, minmax(50px, 1fr));
+         margin-left:0px;
+         }
+       
 
       .gpt3__home_cekresi{
 
@@ -543,38 +561,3 @@ div.gallery {
             border: 1px inset #000000;
             transform: rotate(90deg);
             }
-.timeline-wrapper{
-    /* max-height: 400px; */
-    padding-top: 30px;
-    overflow-y: auto;
-}
-
-ul.timeline {
-    list-style-type: none;
-    position: relative;
-}
-ul.timeline > li {
-    padding: 0 0 20px 20px;
-    border-left: 1px solid #E6E6E6;
-}
-ul.timeline > li.active {
-    border-left: 1px solid #E6E6E6;
-}
-ul.timeline > li.last {
-    border-left: none;
-}
-ul.timeline > li:before {
-    content: ' ';
-    background: #E6E6E6;
-    display: inline-block;
-    position: absolute;
-    border-radius: 50%;
-    left: 22px;
-    width: 20px;
-    height: 20px;
-    z-index: 400;
-}
-
-ul.timeline > li.active:before {
-    background: #E6E6E6;
-}

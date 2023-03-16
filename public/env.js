@@ -1,6 +1,7 @@
 window.env = {
   "ALLUSERSPROFILE": "C:\\ProgramData",
-  "API_GATEWAY": "http://192.168.15.16:8080",
+  "API_GATEWAY": "http://192.168.15.24:8080",
+  "API_GATEWAY_CALCULATION": "http://192.168.15.24:8787",
   "API_GATEWAY_LOKAL": "http://localhost:9000",
   "APPDATA": "C:\\Users\\back end\\AppData\\Roaming",
   "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\LOCAL\\crashpad_18352_AUMSPPTQBBVSJNFH",
@@ -70,6 +71,7 @@ window.env = {
   "PROMPT": "$P$G",
   "PSModulePath": "C:\\Users\\back end\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules",
   "PUBLIC": "C:\\Users\\Public",
+  "REACT_APP_API_GATEWAY": "http://192.168.15.24:8080",
   "SESSIONNAME": "Console",
   "SystemDrive": "C:",
   "SystemRoot": "C:\\Windows",

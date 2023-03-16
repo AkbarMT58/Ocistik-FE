@@ -1,6 +1,6 @@
 import React from 'react'
 import gpt3Logo from '../../assets/logo.svg';
-import logo from '../../assets/image/logo.png'
+import logo from '../../assets/image/gomile-removebg-preview.png'
 
 import './footer.css'
 const Footer = () => {
@@ -37,7 +37,7 @@ const Footer = () => {
         </div>
       </div>
       <div className='gpt3__footer-copyright'>
-        <p>© 2023 Ocistik. All rights reserved.</p>
+        <p>© 2023 G0MILE. All rights reserved.</p>
       </div>
     </div>
 

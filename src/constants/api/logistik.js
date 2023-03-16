@@ -13,8 +13,30 @@ export async function getData_Master_Categories() {
     });
   }
 
-  export async function getData_Artikel() {
-    const url = `${env.API_GATEWAY_LOKAL}/api/getArtikel`;
+  export async function getData_Artikel(formrequest) {
+    const paramrequest=formrequest
+    const url = `${env.API_GATEWAY_LOKAL}/api/getSearchArtikel`;
+  
+  
+
+  const response =await axios({
+      method: "post",
+      url: url,
+      data: paramrequest,
+      headers: { "Content-Type": "multipart/form-data" },
+  })
+
+  const axiosResponse = response;
+   
+  return axiosResponse;
+
+
+
+
+  }
+
+  export async function getData_Artikel_All() {
+    const url = `http://localhost:9000/api/getArtikel`;
     return callAPI({
       url,
       method: 'GET',
@@ -27,15 +49,12 @@ export async function getData_Master_Categories() {
     });
   }
 
-  
   export async function getData_Artikel_By_Slug(slug_) {
 
-    let slug_string=(slug_)
-   
-    //const url_ = `${env.API_GATEWAY_LOKAL}/api/getArtikelbyslug/${slug_string}`;
+    //const url = `${env.API_GATEWAY_LOKAL}/api/getArtikelbyslug/${slug_}`;
 
-    const url = `http://localhost:9000/api/getArtikelbyslug/${slug_string}`;
-
+    const url ="http://localhost:9000/api/getArtikelbySlug/"+slug_ ;
+ 
     return callAPI({
       url,
       method: 'GET',
@@ -44,12 +63,12 @@ export async function getData_Master_Categories() {
         'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
         'Access-Control-Allow-Header':"Cache-Control, Content-Type,Xid"
       },
-      token: true,
+      token:false,
     });
 
-
-
   }
+
+
 
 
   
@@ -72,13 +91,15 @@ export async function getData_Master_Categories() {
 
 
   export async function getData_Master_Jenisbarang() {
-    const url = `${env.API_GATEWAY}/oms/cms/categories/indo-china`;
+    const url = `${env.API_GATEWAY}/oms/cms/category-oci-logistics`;
 
     const response = await axios.get(url, {
-      headers: {
-          xCode :'ocijaya',
-          xRole:'admin' ,
-          xUser:'friska'
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        'Access-Control-Allow-Header':"Cache-Control, Content-Type,Xid"
       },
   });
   const axiosResponse = response.data;
@@ -86,3 +107,8 @@ export async function getData_Master_Categories() {
   return axiosResponse;
 
   }
+
+
+
+
+

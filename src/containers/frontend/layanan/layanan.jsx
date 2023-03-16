@@ -6,6 +6,8 @@ import { Brand,CTA,Navbar } from '../../../components';
 import {Footer,Header} from '../../../containers';
 import { getData_Master_Categories } from '../../../constants/api/logistik';
 import { getData_Master_Jenisbarang } from '../../../constants/api/logistik';
+import env from "react-dotenv";
+import swal from 'sweetalert';
 
 
 //fungsi kalkulasi
@@ -47,6 +49,10 @@ const [dataJenisBarang, setDataJenisBarang] = useState(null)
   const [inputlebar, setLebar] = useState('');
   const [inputtinggi, setTinggi] = useState('');
   const [inputvolume, setVolume] = useState('');
+  const kategori_select = useRef('');
+  const kategori_select_air = useRef('');
+  const [deskripsi_kategori, setDeskripsiKategori]=useState(null)
+  const [deskripsi_kategori_Air, setDeskripsiKategori_Air]=useState(null)
 
   
 const [TotalestimasibiayaLaut,setEstimasiBiayaLaut]=useState('');
@@ -83,6 +89,55 @@ const volume_total= inputvolume;
       }
     
     }, [dataCategories,dataJenisBarang])
+
+
+    
+const input_kategori = kategori_select.current.value
+const input_kategori_air=kategori_select_air.current.value
+
+     
+//console.log("data jenis barang:",dataJenisBarang)
+
+  const deskripsibypilih=[]
+  const deskripsibypilih_air=[]
+
+  for(let j=0;j< dataJenisBarang?.length ; j++){
+
+
+    //console.log("input kategori :",input_kategori)
+
+    //console.log("data kategori all:",dataJenisBarang)
+  
+     
+       if(dataJenisBarang[j].id ==input_kategori ){
+ 
+       
+ 
+         deskripsibypilih.push(dataJenisBarang[j].detail_barang)
+
+        // console.log("input kategori :",dataJenisBarang[j])
+ 
+
+       }
+
+       if(dataJenisBarang[j].id ==input_kategori_air ){
+ 
+      
+        deskripsibypilih_air.push(dataJenisBarang[j].detail_barang)
+
+       // console.log("input kategori :",dataJenisBarang[j])
+
+
+      }
+
+
+   }
+
+   const deskripsi_barang=deskripsibypilih
+   const deskripsi_barang_air=deskripsibypilih_air
+
+
+  
     
     const getDataMasterCategory = async () => {
       const res = await getData_Master_Categories();
@@ -98,98 +153,156 @@ const volume_total= inputvolume;
       }
     }
 
-    //fungsi kalkulasi biaya
-  const handleGetHitungBiayaClick = async (e) => {
-    e.preventDefault();
-    // alert(`The category id  you are selected is: ${inputkategori}`);
-   
-    var display_click_lcl_sea='block';
-   
-    try {
-      let res = await fetch("http://192.168.15.16:8080/oci/calculation", {
-        method: "POST",
-        headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+//fungsi kalkulasi biaya 
 
-        },
+const handleGetHitungBiayaClick = async (e) => {
+  e.preventDefault();
+  var display_click_lcl_sea='block';
+  const url = `${env.API_GATEWAY_CALCULATION}/ocistik/create-lcl-by-sea`;
 
-        body: JSON.stringify({
-          "volume": parseInt(volume_total),
-          "berat": parseInt(inputberatbarang),
-          "kategori": parseInt(inputkategori),
-         
-        }),
-      });
-      let resJson = await res.json();
-      if (res.status === 200) {
       
-        console.log(resJson)
+  if(inputberatbarang=='' && inputkategori =='' && volume_total==''){
 
-        console.log(JSON.stringify(resJson.data.Laut))
-        const data_total_Laut = resJson.data.Laut
-        console.log(display_click_lcl_sea);
-
-   
-        
-        
-
-        //laut 
-          setEstimasiBiayaLaut(data_total_Laut);
-
-        
-      } else {
-        console.log("error")
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    swal({
+      title: "Form Input Tidak Diisi atau Tidak Lengkap?",
+      text: "Pastikan untuk mengisi form dengan lengkap",
+      icon: "warning",
+      dangerMode: true,
+    })
+    ;
 
 
-  const handleGetHitungBiayaUdaraClick = async (e) => {
-    e.preventDefault();
-  
+  }else if(inputberatbarang=='' || inputkategori =='' || volume_total==''){
 
-    var display_click_lcl_udara='block';
-   
-    try {
-      let res = await fetch("http://192.168.15.16:8080/oci/calculation", {
-        method: "POST",
-        headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+    swal({
+      title: "Form Input Tidak Diisi atau Tidak Lengkap?",
+      text: "Pastikan untuk mengisi form dengan lengkap",
+      icon: "warning",
+      dangerMode: true,
+    })
+    ;
 
-        },
 
-        body: JSON.stringify({
-          "volume": parseInt(volume_total),
-          "berat": parseInt(inputberatbarang),
-          "kategori": parseInt(inputkategori),
-         
-        }),
-      });
-      let resJson = await res.json();
-      if (res.status === 200) {
-      
-        console.log(resJson)
+  }else{
+ 
+  try {
+    let res = await fetch(url, {
+      method: "POST",
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
 
+      },
+
+      body: JSON.stringify({
+        "volume": parseInt(volume_total),
+        "weight": parseInt(inputberatbarang),
+        "category": (inputkategori),
+        "is_airplane":false
+       
+      }),
+    });
+    let resJson = await res.json();
+    if (res.status === 200) {
     
-        const data_total_Udara = resJson.data.Udara
-        
-        
+      console.log(resJson)
+     // console.log(JSON.stringify(resJson.data.Laut)
 
-          setEstimasiBiayaUdara(data_total_Udara);
-        
-        
-        
-      } else {
-        console.log("error")
-      }
-    } catch (err) {
-      console.log(err);
+      const data_total_Laut = resJson.data
+
+      //console.log(display_click_lcl_sea);
+
+
+      //laut 
+        setEstimasiBiayaLaut(data_total_Laut);
+
+      
+    } else {
+      console.log("error")
     }
-  };
+  } catch (err) {
+    console.log(err);
+  }
+
+}
+};
+
+
+const handleGetHitungBiayaUdaraClick = async (e) => {
+  e.preventDefault();
+
+
+  var display_click_lcl_udara='block';
+
+  const url = `${env.API_GATEWAY_CALCULATION}/ocistik/create-lcl-by-sea`;
+
+  if(inputberatbarang=='' && inputkategori =='' && volume_total==''){
+
+    swal({
+      title: "Form Input Tidak Diisi atau Tidak Lengkap?",
+      text: "Pastikan untuk mengisi form dengan lengkap",
+      icon: "warning",
+      dangerMode: true,
+    })
+    ;
+
+
+  }else if(inputberatbarang=='' || inputkategori =='' || volume_total==''){
+
+    swal({
+      title: "Form Input Tidak Diisi atau Tidak Lengkap?",
+      text: "Pastikan untuk mengisi form dengan lengkap",
+      icon: "warning",
+      dangerMode: true,
+    })
+    ;
+
+
+  }else{
+ 
+  try {
+    let res = await fetch(url, {
+      method: "POST",
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+
+      },
+
+      body: JSON.stringify({
+        "volume": parseInt(volume_total),
+        "weight": parseInt(inputberatbarang),
+        "category": (inputkategori),
+        "is_airplane":true
+       
+      }),
+    });
+    let resJson = await res.json();
+    if (res.status === 200) {
+    
+      console.log(resJson)
+
+  
+      const data_total_Udara = resJson.data
+      
+      
+
+        setEstimasiBiayaUdara(data_total_Udara);
+      
+      
+      
+    } else {
+      console.log("error")
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+};
+
+
+
+
 
 
   const TotalbiayaLaut= (TotalestimasibiayaLaut)
@@ -208,11 +321,48 @@ const volume_total= inputvolume;
           var display_height_form='960px';
 
 
-        }else{
-
-          var display_margin='320px';
-          var display_height_form='920px';
         }
+
+        
+        if(updated=='udara'){
+
+          // var display_margin='430px';
+          // var display_height_form='960px';
+
+          var display_margin='360px';
+          var display_height_form='720px';
+          var sectionmobile='180vh'
+
+
+        }
+        
+        else{
+
+          var display_margin='340px';
+          var display_height_form='720px';
+          var sectionmobile='180vh'
+        }
+
+        //jika select kategori
+
+        if(input_kategori>"0"){
+
+          var display_margin='440px';
+          var display_height_form='720px';
+          var sectionmobile='180vh'
+
+
+        }
+
+        if(input_kategori=='0'){
+
+          var display_margin='380px';
+          var display_height_form='720px';
+          var sectionmobile='180vh'
+
+
+        }
+
         
 
 
@@ -233,8 +383,9 @@ const volume_total= inputvolume;
     }else{
 
       
-    var display_margin='400px';
-    var display_height_form='1400px';
+    var display_margin='360px';
+    var display_height_form='700px';
+    var sectionmobile='150vh';
 
 
 
@@ -365,6 +516,14 @@ if(updated==''){
 
 //batas kondisional
 
+function allowNumbersOnly(e) {
+  var code = (e.which) ? e.which : e.keyCode;
+  if (code > 31 && (code < 48 || code > 57)) {
+      e.preventDefault();
+  }
+}
+
+
   return (
 
     <div className='App'>
@@ -381,7 +540,7 @@ if(updated==''){
     </div>
 
  
-<section style={{height:'280vh'}}>
+<section style={{height:sectionmobile}}>
 
 <div className='fiturgalery'>
 
@@ -428,7 +587,7 @@ if(updated==''){
     <div class="desc">LCL Udara</div>
   </div>
 </div>
-<div class="responsive">
+<div class="responsive" hidden>
   <div class="gallery_artikel"  style={{background:ubahwarna_utama_darat}} onClick={onClick_darat}>
   <input
         ref={inputRef_darat}
@@ -479,24 +638,33 @@ if(updated==''){
 
 <div className='row'>
 
-<div className='col-md-4'>
+<div className='col-md-6'>
 
 <div className='form-group m-1'>
 <label htmlFor="kategoribarang" className="text-black text-left" >Kategori Barang</label>
 
-<select value={inputkategori} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
-<option>--Pilih Kategori Barang--</option>
-{dataCategories?.map((category, index) => (
-  <option key={category.id} value={category.id}>{category.display_name}</option>
+<select value={inputkategori} ref={kategori_select} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
+<option value="0">--Pilih Kategori Barang--</option>
+{dataJenisBarang?.map((category, index) => (
+  <option key={category.id} value={category.id}>{category.kategori_barang}</option>
 ))}
 
 </select>
 
 </div>
 
+
+<div className='card mt-3 mb-2'>
+
+  <div className="text-black fs-6 fw-bold" >Detail barang:{deskripsi_barang}</div>
+  
+  
 </div>
 
-  <div className='col-md-4'>
+
+</div>
+
+  <div className='col-md-4' hidden>
 
   <div className='form-group m-1'>
   <div className='text-black text-left' htmlFor="jenisbarang">Jenis Barang</div>
@@ -515,13 +683,13 @@ if(updated==''){
 
   </div>
 
-  <div className='col-md-4'>
+  <div className='col-md-6'>
 
   <div className='form-group m-1'>
 
-  <div className='text-black text-left' htmlFor="beratberang">Berat Barang(Kg)</div>
+  <div className='text-black text-left' htmlFor="beratberang">Berat Barang(gram)</div>
 
-  <input value={inputberatbarang}    type="textbox" name="berat" className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
+  <input value={inputberatbarang}    type="number" name="berat" onKeyPress={allowNumbersOnly}  className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
 
 
   </div>
@@ -531,9 +699,9 @@ if(updated==''){
   <div className='col-md-12'>
 
 <div className='form-group m-1'>
-<label className='text-black' htmlFor="nomorresi">Volume (cm3)</label>
+<label className='text-black' htmlFor="nomorresi">Volume (cm³)</label>
 
-<input value={inputvolume} type="textbox" name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
+<input value={inputvolume} type="number" onKeyPress={allowNumbersOnly}  name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
 
 </div>
 
@@ -654,28 +822,8 @@ Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
 
 
   </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-        
-      </div>
 
-    </div>
-
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-     
-      </div>
-
-    </div>
-
-
-  </div>
+ 
 
 
 
@@ -828,24 +976,32 @@ Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
 <form onSubmit={handleGetHitungBiayaUdaraClick}>
 <div className='row'>
 
-<div className='col-md-4'>
+<div className='col-md-6'>
 
 <div className='form-group m-1'>
 <label htmlFor="kategoribarang" className="text-black text-left" >Kategori Barang</label>
 
-<select value={inputkategori} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
-<option>--Pilih Kategori Barang--</option>
-{dataCategories?.map((category, index) => (
-  <option key={category.id} value={category.id}>{category.display_name}</option>
+<select value={inputkategori} ref={kategori_select_air} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
+<option value="0">--Pilih Kategori Barang--</option>
+{dataJenisBarang?.map((category, index) => (
+  <option key={category.id} value={category.id}>{category.kategori_barang}</option>
 ))}
 
 </select>
 
 </div>
 
+<div className='card mt-3 mb-2'>
+
+  <div className="text-black fs-6 fw-bold" >Detail barang:{deskripsi_barang_air}</div>
+  
+  
 </div>
 
-  <div className='col-md-4'>
+
+</div>
+
+  <div className='col-md-4' hidden>
 
   <div className='form-group m-1'>
   <div className='text-black text-left' htmlFor="namabarang">Jenis Barang</div>
@@ -863,14 +1019,14 @@ Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
 
   </div>
 
-  <div className='col-md-4'>
+  <div className='col-md-6'>
 
   <div className='form-group m-1'>
 
-  <div className='text-black text-left' htmlFor="kodemarking">Berat Barang(Kg)</div>
+  <div className='text-black text-left' htmlFor="kodemarking">Berat Barang(gram)</div>
 
 
-  <input value={inputberatbarang}    type="textbox" name="berat" className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
+  <input value={inputberatbarang}   type="number" onKeyPress={allowNumbersOnly} name="berat"  className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
 
 
   </div>
@@ -880,9 +1036,9 @@ Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
   <div className='col-md-12'>
 
   <div className='form-group m-1'>
-  <label className='text-black' htmlFor="nomorresi">Volume (cm3)</label>
+  <label className='text-black' htmlFor="nomorresi">Volume (cm³)</label>
 
-  <input value={inputvolume} type="textbox" name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
+  <input value={inputvolume} type="number" onKeyPress={allowNumbersOnly} name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
 
   </div>
 

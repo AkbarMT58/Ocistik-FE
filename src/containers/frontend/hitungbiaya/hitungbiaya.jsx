@@ -6,6 +6,9 @@ import { Navbar } from '../../../components';
 import {Footer,Header} from '../../../containers';
 import { getData_Master_Categories } from '../../../constants/api/logistik';
 import { getData_Master_Jenisbarang } from '../../../constants/api/logistik';
+import env from "react-dotenv";
+import swal from 'sweetalert';
+import { Modal, Button } from 'react-bootstrap'
 
 
 function useScreenWidth() {
@@ -35,7 +38,7 @@ function useScreenWidth() {
 
 const Hitungbiaya= () => {
 
-  const [dataCategories, setDataCategories] = useState(null)
+const [dataCategories, setDataCategories] = useState(null)
 const [dataJenisBarang, setDataJenisBarang] = useState(null)
 
   //use state input request from form input 
@@ -46,11 +49,18 @@ const [dataJenisBarang, setDataJenisBarang] = useState(null)
   const [inputlebar, setLebar] = useState('');
   const [inputtinggi, setTinggi] = useState('');
   const [inputvolume, setVolume] = useState('');
+  const kategori_select = useRef('');
+  const kategori_select_air = useRef('');
+  const [deskripsi_kategori, setDeskripsiKategori]=useState(null)
+  const [deskripsi_kategori_Air, setDeskripsiKategori_Air]=useState(null)
 
   
 const [TotalestimasibiayaLaut,setEstimasiBiayaLaut]=useState('');
 const [TotalestimasibiayaUdara,setEstimasiBiayaUdara]=useState('');
 const volume_total= inputvolume;
+
+
+const [show, setShow] = useState(false);
 
 
   const inputRef = useRef(null);
@@ -59,10 +69,10 @@ const volume_total= inputvolume;
 
 
   const onOptionChangeHandler = (event) => {
-    console.log("User Selected Value - ", event.target.value)
+  console.log("User Selected Value - ", event.target.value)
 
     
-     setUpdated(event.target.value);
+  setUpdated(event.target.value);
 
     
 }
@@ -79,6 +89,53 @@ useEffect(() => {
 
 }, [dataCategories,dataJenisBarang])
 
+
+const input_kategori = kategori_select.current.value
+const input_kategori_air=kategori_select_air.current.value
+
+     
+//console.log("data jenis barang:",dataJenisBarang)
+
+  const deskripsibypilih=[]
+  const deskripsibypilih_air=[]
+
+  for(let j=0;j< dataJenisBarang?.length ; j++){
+
+
+    //console.log("input kategori :",input_kategori)
+
+    //console.log("data kategori all:",dataJenisBarang)
+  
+     
+       if(dataJenisBarang[j].id ==input_kategori ){
+ 
+       
+ 
+         deskripsibypilih.push(dataJenisBarang[j].detail_barang)
+
+         console.log("input kategori Laut:",dataJenisBarang[j])
+ 
+
+       }
+
+       if(dataJenisBarang[j].id ==input_kategori_air ){
+ 
+      
+        deskripsibypilih_air.push(dataJenisBarang[j].detail_barang)
+
+       // console.log("input kategori :",dataJenisBarang[j])
+
+
+      }
+
+
+   }
+
+   const deskripsi_barang_laut=deskripsibypilih
+   const deskripsi_barang_air=deskripsibypilih_air
+
+
+
 const getDataMasterCategory = async () => {
   const res = await getData_Master_Categories();
   if (res.status === 200) {
@@ -94,15 +151,44 @@ const getDataMasterJenisBarang = async () => {
 }
 
 
-//fungsi kalkulasi biaya
-const handleGetHitungBiayaLautClick = async (e) => {
+//fungsi kalkulasi biaya 
+
+const handleGetHitungBiayaClick = async (e) => {
   e.preventDefault();
-  // alert(`The category id  you are selected is: ${inputkategori}`);
- 
   var display_click_lcl_sea='block';
+  const url = `${env.API_GATEWAY_CALCULATION}/ocistik/create-lcl-by-sea`;
+
+  setShow(false)
+
+  
+  if(inputberatbarang=='' && inputkategori =='' && volume_total==''){
+
+    swal({
+      title: "Form Input Tidak Diisi atau Tidak Lengkap?",
+      text: "Pastikan untuk mengisi form dengan lengkap",
+      icon: "warning",
+      dangerMode: true,
+    })
+    ;
+
+
+  }else if(inputberatbarang=='' || inputkategori =='' || volume_total==''){
+
+    swal({
+      title: "Form Input Tidak Diisi atau Tidak Lengkap?",
+      text: "Pastikan untuk mengisi form dengan lengkap",
+      icon: "warning",
+      dangerMode: true,
+    })
+    ;
+
+
+  }else{
+
+
  
   try {
-    let res = await fetch("http://192.168.15.16:8080/oci/calculation", {
+    let res = await fetch(url, {
       method: "POST",
       headers: {
       'Accept': 'application/json',
@@ -112,8 +198,9 @@ const handleGetHitungBiayaLautClick = async (e) => {
 
       body: JSON.stringify({
         "volume": parseInt(volume_total),
-        "berat": parseInt(inputberatbarang),
-        "kategori": parseInt(inputkategori),
+        "weight": parseInt(inputberatbarang),
+        "category": (inputkategori),
+        "is_airplane":false
        
       }),
     });
@@ -121,17 +208,17 @@ const handleGetHitungBiayaLautClick = async (e) => {
     if (res.status === 200) {
     
       console.log(resJson)
+     // console.log(JSON.stringify(resJson.data.Laut)
 
-      console.log(JSON.stringify(resJson.data.Laut))
-      const data_total_Laut = resJson.data.Laut
-      console.log(display_click_lcl_sea);
+      const data_total_Laut = resJson.data
 
- 
-      
-      
+      //console.log(display_click_lcl_sea);
+
 
       //laut 
         setEstimasiBiayaLaut(data_total_Laut);
+
+        setShow(true)
 
       
     } else {
@@ -140,17 +227,45 @@ const handleGetHitungBiayaLautClick = async (e) => {
   } catch (err) {
     console.log(err);
   }
+}
 };
-
 
 const handleGetHitungBiayaUdaraClick = async (e) => {
   e.preventDefault();
 
+  setShow(false)
 
   var display_click_lcl_udara='block';
+
+  const url = `${env.API_GATEWAY_CALCULATION}/ocistik/create-lcl-by-sea`;
+
+
+  if(inputberatbarang=='' && inputkategori =='' && volume_total==''){
+
+    swal({
+      title: "Form Input Tidak Diisi atau Tidak Lengkap?",
+      text: "Pastikan untuk mengisi form dengan lengkap",
+      icon: "warning",
+      dangerMode: true,
+    })
+    ;
+
+
+  }else if(inputberatbarang=='' || inputkategori =='' || volume_total==''){
+
+    swal({
+      title: "Form Input Tidak Diisi atau Tidak Lengkap?",
+      text: "Pastikan untuk mengisi form dengan lengkap",
+      icon: "warning",
+      dangerMode: true,
+    })
+    ;
+
+
+  }else{
  
   try {
-    let res = await fetch("http://192.168.15.16:8080/oci/calculation", {
+    let res = await fetch(url, {
       method: "POST",
       headers: {
       'Accept': 'application/json',
@@ -160,8 +275,9 @@ const handleGetHitungBiayaUdaraClick = async (e) => {
 
       body: JSON.stringify({
         "volume": parseInt(volume_total),
-        "berat": parseInt(inputberatbarang),
-        "kategori": parseInt(inputkategori),
+        "weight": parseInt(inputberatbarang),
+        "category": (inputkategori),
+        "is_airplane":true
        
       }),
     });
@@ -171,11 +287,13 @@ const handleGetHitungBiayaUdaraClick = async (e) => {
       console.log(resJson)
 
   
-      const data_total_Udara = resJson.data.Udara
+      const data_total_Udara = resJson.data
       
       
 
         setEstimasiBiayaUdara(data_total_Udara);
+
+        setShow(true)
       
       
       
@@ -185,7 +303,10 @@ const handleGetHitungBiayaUdaraClick = async (e) => {
   } catch (err) {
     console.log(err);
   }
+
+}
 };
+
 
 
 const TotalbiayaLaut= (TotalestimasibiayaLaut)
@@ -193,49 +314,20 @@ const TotalbiayaLaut= (TotalestimasibiayaLaut)
 const TotalbiayaUdara= (TotalestimasibiayaUdara)
 
 
-
-
 const mobileWidth = 500
 
 
 if(widthSize > mobileWidth){ 
   //logic for desktop
-  if(updated=='Darat'){
 
-
-    var display_margin='450px';
-    var display_height_form='560px';
-    var display_status_darat='block';
-    var display_select_darat='block';
-    var display_status_udara='none';
-    
-    
-
-  
-  }else{
-  
-  
-    var display_select_darat='none';
-
-    
-  
-  
-  }
   
   
   if(updated=='Laut'){
   
     var display_select_laut='block';
-  
     var display_margin='460px';
-
-    var display_height_form='580px';
-
-    var display_margin_output='260px';
-
-    var display_status_laut='none';
-
-    var display_status_udara='none';
+    var display_status='block';
+  
   
   
   
@@ -252,12 +344,12 @@ if(widthSize > mobileWidth){
   
     var display_select_udara='block';
     var display_margin='460px';
-    var display_height_form='600px';
+    var display_height_form='0px';
     var display_margin_output='0px';
 
 
     
-    var display_status_udara='none';
+    var display_status='block';
 
   
   
@@ -278,39 +370,23 @@ if(widthSize <= mobileWidth){
     
 // jika itu adalah pengiriman full container laut mobile version
 
-if(updated=='Darat'){
 
-  var display_select_darat='block';
-  var display_margin='660px';
-  var display_height_form='750px';
-
-  var display_select_darat='block';
-  var display_select_laut='none';
-  var display_select_udara='none';
-
-  var display_status_laut='none';
-  var display_status_udara='none';
-
-}
 
 
 if(updated=='Laut'){
 
-
-  var display_margin='600px';
-  var display_height_form='160px';
+  var display_margin='400px';
+  // var display_height_form='160px';
   var display_margin_btn='-260px';
-  display_margin_output='180px';
+  // display_margin_output='180px';
 
 
 
-  var display_select_darat='none';
+
   var display_select_laut='block';
   var display_select_udara='none';
 
-  
-  var display_status_darat='none';
-  var display_status_udara='none';
+  var display_status='none';
 
 
   
@@ -324,14 +400,10 @@ if(updated=='Laut'){
 if(updated=='Udara'){
 
   
-  // var display_margin='160px';
-  // var display_height_form='580px';
-  // var display_margin_btn='-360px';
 
   var display_margin='600px';
-  var display_height_form='160px';
   var display_margin_btn='-260px';
-  display_margin_output='180px';
+ 
 
 
   var display_select_darat='none';
@@ -350,18 +422,35 @@ if(updated=='Udara'){
 
 if (updated==''){
 
-  //var display_select_darat='block';
-  var display_select_laut='none';
+  
+  var display_select_laut='block';
   var display_select_udara='none';
   var display_status_darat='none';
    var display_status_udara='none';
+   var display_status_laut='block';
 
 
 
 }
 
+function allowNumbersOnly(e) {
+  var code = (e.which) ? e.which : e.keyCode;
+  if (code > 31 && (code < 48 || code > 57)) {
+      e.preventDefault();
+  }
+}
+
+
+
+
+const handleClose = () => setShow(false);
+const handleShow = () => setShow(true);
+  
+
+
 
     return (
+
 
         <div className='App'>
         <div className="gradient__bg_kontak" >
@@ -376,229 +465,97 @@ if (updated==''){
       </div>
       </div>
 
-      <section style={{height:'150vh'}}>
-      <div class="box_hitungbiaya box_hitungbiaya-4" style={{height:display_height_form}} >
-			<div class="box_hitungbiaya-content" style={{marginLeft:'-40px'}}>
-        <h2 style={{fontWeight:'bold'}}>HITUNG BIAYA</h2>
-				<p>Silakan pilih tipe pengiriman dan isi form setelahnya</p>
-			</div>
 
-      <div className='row m-2'>
+      <section className='flex-container'>
 
-      <div className='form-group'>
+        <div className='container' style={{marginTop:'-200px'}}>
 
-<label>Tipe Pengiriman</label>
-
-<select className='form-control' ref={inputRef} onChange={onOptionChangeHandler} >
-
-  <option value="">
-    --Pilih Tipe Pengiriman
-  </option>
-
-  <option value='Darat' >
-    Darat
-  </option>
-
-  <option value='Laut'  >
-    Laut
-  </option>
-
-
-  <option value='Udara'  >
-    Udara
-  </option>
-
-
-
-
-</select>
-
-
-</div>
-
-</div>
-
+        <div class="card m-4 -mt-4" >
         
-{/* jika darat */}
-<div className='darat' style={{display:display_select_darat}}>
-  
-  <div className='row m-2'>
-      
+        <div class="card-body">
+          <p class="card-text">
 
-          <div className='col-md-4'>
+          <h2 style={{fontWeight:'bold'}}>HITUNG BIAYA</h2>
+				<p>Silakan pilih tipe pengiriman dan isi form setelahnya</p>
 
 
-              <div className='form-group'>
+          </p>
 
-                  <label className='text-black'>HS Code</label>
-                  <input type='textbox' className='form-control'>
+                      <div className='row m-2'>
 
-                  
-                  </input>
+                      <div className='form-group'>
 
+                <label>Tipe Pengiriman</label>
 
-                  </div>
+                <select className='form-control' ref={inputRef} onChange={onOptionChangeHandler} >
 
-                          
+                  <option value="">
+                    --Pilih Tipe Pengiriman
+                  </option>
 
+                  <option value='Darat' hidden >
+                    Darat
+                  </option>
 
-              </div>
-
-              <div className='col-md-4'>
-
-
-              <div className='form-group'>
-
-              <label className='text-black'>Mata Uang</label>
-              <input type='textbox' className='form-control'>
+                  <option value='Laut'  >
+                    Laut
+                  </option>
 
 
-              </input>
+                  <option value='Udara'  >
+                    Udara
+                  </option>
 
-
-              </div>
-
-
-
-              </div>
-
-              <div className='col-md-4'>
-
-
-                <div className='form-group'>
-
-                <label className='text-black'>Total Invoice</label>
-                <input type='textbox' className='form-control'>
-
-
-                </input>
+                </select>
 
 
                 </div>
-
-
-
                 </div>
+{/* 
+apabila laut  */}
+                <div className='laut' style={{display:display_select_laut}}>
 
 
-       
+            <form onSubmit={handleGetHitungBiayaClick}>
 
-                <div className='col-md-4'>
+              <div className='row m-2'>
 
-
-              <div className='form-group'>
-
-                  <label className='text-black'>Container Type</label>
-                  <input type='textbox' className='form-control'>
-
-                  
-                  </input>
-
-
-                  </div>
-
-                          
-
-
-              </div>
-
-              <div className='col-md-4'>
-
-
-              <div className='form-group'>
-
-              <label className='text-black'>Origin City</label>
-              <input type='textbox' className='form-control'>
-
-
-              </input>
-
-
-              </div>
-
-
-
-              </div>
-
-              <div className='col-md-4'>
-
-
-                <div className='form-group'>
-
-                <label className='text-black'>Destination City</label>
-                <input type='textbox' className='form-control'>
-
-
-                </input>
-
-
-                </div>
-
-
-
-                </div>
-
-                </div>
-
-                <button  className='hitung' style={{top:display_margin}}  type="submit" ><label className='text-white fs-5 font-weight-bold'>Hitung Biaya</label></button>
-
-            
-
-                </div>
-
-
-                       
-{/* jika laut */}
-<div className='laut' style={{display:display_select_laut}}>
-
-<form onSubmit={handleGetHitungBiayaLautClick}>
-
-  <div className='row m-2'>
-
-            <div className='col-md-4'>
+            <div className='col-md-6'>
 
           <div className='form-group m-1'>
           <label htmlFor="kategoribarang" className="text-black text-left" >Kategori Barang</label>
 
-          <select value={inputkategori} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
+          <select value={inputkategori} ref={kategori_select} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
           <option>--Pilih Kategori Barang--</option>
-          {dataCategories?.map((category, index) => (
-            <option key={category.id} value={category.id}>{category.display_name}</option>
+          {dataJenisBarang?.map((category, index) => (
+            <option key={category.id} value={category.id}>{category.kategori_barang}</option>
           ))}
 
           </select>
 
           </div>
 
+          <div className='card mt-3 mb-2'>
+
+          <div className="text-black fs-6 fw-bold" >Detail barang:{deskripsi_barang_laut}</div>
+          
+          
+        </div>
+
           </div>
 
     
-        <div className='col-md-4'>
-        <div className='form-group'>
-
-            <label>Jenis Barang</label>
-            <select value={inputnamabarang}   type="textbox" name="jenisbarang"  className='form-control' placeholder='Jenis Barang' onChange={(e) => setNamabarang(e.target.value)}>
-            <option>--Pilih Jenis Barang--</option>
-            {dataJenisBarang?.map((jenisbarang, index) => (
-            <option key={jenisbarang.id} value={jenisbarang.id}>{jenisbarang.display_name}</option>
-          ))}
-
-            </select>
-          
-            </div>
-
-        </div>
+     
 
 
-
-        <div className='col-md-4'>
+        <div className='col-md-6'>
 
 
         <div className='form-group'>
 
-        <label>Berat Barang (Kg)</label>
+        <label>Berat Barang (gram)</label>
         
-        <input value={inputberatbarang}    type="textbox" name="berat" className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
+        <input value={inputberatbarang}    type="number"  pattern="[0-9]+" onKeyPress={allowNumbersOnly} name="berat" className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
 
 
         </div>
@@ -610,552 +567,188 @@ if (updated==''){
         <div className='col-md-12'>
 
         <div className='form-group m-1'>
-        <label className='text-black' htmlFor="nomorresi">Volume (m3)</label>
+        <label className='text-black' htmlFor="nomorresi">Volume (cm³)</label>
 
-        <input value={inputvolume} type="textbox" name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
-
-        </div>
+        <input value={inputvolume} type="number" name="volume" onKeyPress={allowNumbersOnly} className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
 
         </div>
 
+        </div>
 
-        <div hidden>
-
-        <div className='col-md-4'>
-
-
-          <div className='form-group'>
-
-          <label>Panjang (Cm)</label>
-          <input type='textbox' className='form-control'>
+    
+            <button className='hitung_biaya mt-4'  type="submit" onClick={handleShow}><label className='text-white fs-5 font-weight-bold'>Hitung Biaya</label></button>
 
 
-          </input>
+        
 
+        </div>
 
-          </div>
-
-
-
-          </div>
-
-          <div className='col-md-4'>
-
-
-              <div className='form-group'>
-
-                  <label>Lebar (Cm)</label>
-                  <input type='textbox' className='form-control'>
-
-                  
-                  </input>
-
-
-                  </div>
-
-                          
-
-
-              </div>
-
-              <div className='col-md-4'>
-
-
-              <div className='form-group'>
-
-              <label>Tinggi (Cm)</label>
-              <input type='textbox' className='form-control'>
-
-
-              </input>
-
-
-              </div>
-
-
-
-              </div>
-
-              </div>
-
-              </div>
-
-              
-            <button  className='hitung' style={{top:display_margin}}  type="submit" ><label className='text-white fs-5 font-weight-bold'>Hitung Biaya</label></button>
-
-
+          
 
               </form>
 
-             
-                </div>
+              </div>
 
-
-                       
-{/* jika udara */}
 <div className='udara' style={{display:display_select_udara}}>
+
 
 <form onSubmit={handleGetHitungBiayaUdaraClick}>
 
   <div className='row m-2'>
 
-          <div className='col-md-3'>
+<div className='col-md-6'>
 
-        <div className='form-group m-1'>
-        <label htmlFor="kategoribarang" className="text-black text-left" >Kategori Barang</label>
+<div className='form-group m-1'>
+<label htmlFor="kategoribarang" className="text-black text-left" >Kategori Barang</label>
 
-        <select value={inputkategori} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
-        <option>--Pilih Kategori Barang--</option>
-        {dataCategories?.map((category, index) => (
-          <option key={category.id} value={category.id}>{category.display_name}</option>
-        ))}
+<select value={inputkategori} ref={kategori_select_air} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
+<option value="0">--Pilih Kategori Barang--</option>
+{dataJenisBarang?.map((category, index) => (
+<option key={category.id} value={category.id}>{category.kategori_barang}</option>
+))}
 
-        </select>
+</select>
 
-        </div>
+</div>
 
-        </div>
-        <div className='col-md-3'>
-        <div className='form-group'>
+<div className='card mt-3 mb-2'>
 
-            <label>Jenis Barang</label>
-            <select value={inputnamabarang}   type="textbox" name="jenisbarang"  className='form-control' placeholder='Jenis Barang' onChange={(e) => setNamabarang(e.target.value)}>
-            <option>--Pilih Jenis Barang--</option>
-            {dataJenisBarang?.map((jenisbarang, index) => (
-            <option key={jenisbarang.id} value={jenisbarang.id}>{jenisbarang.display_name}</option>
-          ))}
+  <div className="text-black fs-6 fw-bold" >Detail barang:{deskripsi_barang_air}</div>
+  
+  
+</div>
 
-            </select>
-
-
-            </div>
-
-                    
-
-
-        </div>
+</div>
 
 
 
-        <div className='col-md-3'>
 
 
-        <div className='form-group'>
-
-        <label>Harga Barang</label>
-        <input type='textbox' className='form-control'>
+<div className='col-md-6'>
 
 
-        </input>
+<div className='form-group'>
+
+<label>Berat Barang (gram)</label>
+
+<input value={inputberatbarang}    type="number"  pattern="[0-9]+" onKeyPress={allowNumbersOnly} name="berat" className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
 
 
-        </div>
-
-
-
-        </div>
-
-        <div className='col-md-3'>
-
-
-          <div className='form-group'>
-
-          <label>Berat (Kg)</label>
-        
-          <input value={inputberatbarang}    type="textbox" name="berat" className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
-
-          </div>
+</div>
 
 
 
-          </div>
+</div>
+
+<div className='col-md-12'>
+
+<div className='form-group m-1'>
+<label className='text-black' htmlFor="nomorresi">Volume (cm³)</label>
+
+<input value={inputvolume} type="number" name="volume" onKeyPress={allowNumbersOnly} className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
+
+</div>
+
+</div>
+
+<button className='hitung_biaya mt-4'  type="submit"  onClick={handleShow}><label className='text-white fs-5 font-weight-bold'>Hitung Biaya</label></button>
+
+
+
+
+</div>
+
+
+
+  </form>
+
+  </div>
+
+
+
+
+
+
+
+<Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Hitung Perkiraan Biaya</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="fs-3 fw-bold" >
 
           
-        <div className='col-md-12'>
+       
 
-          <div className='form-group m-1'>
-          <label className='text-black' htmlFor="nomorresi">Volume (m3)</label>
+ 
+        {(updated =='Laut' ? (
 
-          <input value={inputvolume} type="textbox" name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
+"Rp "+ TotalbiayaLaut.toLocaleString('ID-id')+",-"
 
-          </div>
+    ) : 
+    
+"Rp "+TotalbiayaUdara.toLocaleString('ID-id')+",-"
+    )}
 
-          </div>
-
-          </div>
-
-          <button  className='hitung' style={{top:display_margin}}  type="submit" ><label className='text-white fs-5 font-weight-bold'>Hitung Biaya</label></button>
-
+         
+        </Modal.Body>
+        <Modal.Footer>
+        Kalkulasi biaya hanya bersifat perkiraan dan dapat berubah sewaktu-waktu
+          <Button variant="primary" onClick={handleClose}>
+            Close
+          </Button>
             
-          </form>
-
-
-                </div>
-
-                    
-<div className='hasil_hitungan_laut' style={{marginTop:display_margin_output,display:display_status_laut}}>
-
-    <hr  style={{border:'2px solid black',marginTop:'0px'}}/>
-
-
-
-<div className='box_hitungbiaya box_hitungbiaya-4' style={{borderColor:'grey',height:display_height_form}}>
-
-<div className='m-3'>
-
-<div className='text-black text-left' >
-
-Hitung Perkiraan Biaya
-
-
-</div>
-
-
-<div className='text-secondary mb-2' >
-
-Kalkulasi biaya hanya bersifat perkiraan dan dapat berubah sewaktu-waktu
-
-</div>
-
-<div className='text-secondary text-left' >
-
-Total Tagihan
-</div>
-
-<div className='text-black fs-4'>
-
-Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
-
-</div>
-
-</div>
-
-<div className='row m-2'>
-
-<div className='col-md-3' hidden>
-<div className='form-group'>
-  <label className='text-secondary'>Tujuan Negara</label>
-  <div className='text-black'>
-    China
-  </div>
-
-</div>
-
-</div>
-<div className='col-md-3' hidden>
-<div className='form-group'>
-  <label className='text-secondary'>Total Volume</label>
-  <div className='text-black'>
-    1 m3
-  </div>
-
-</div>
-
-
-</div>
-<div className='col-md-3'>
-<div className='form-group'>
-  <label className='text-secondary'></label>
-  <div className='text-black'>
-    
-  </div>
-
-</div>
-
-
-</div>
-<div className='col-md-3'>
-<div className='form-group'>
-  <label className='text-secondary'></label>
-  <div className='text-black'>
- 
-  </div>
-
-</div>
-
-
-</div>
+        </Modal.Footer>
+      </Modal>
 
 
 
 
-</div>
-
-
-<div className='row m-2'>
-
-<div className='col-md-3' hidden>
-<div className='form-group'>
-  <label className='text-secondary'>Tipe Pengiriman</label>
-  <div className='text-black'>
-    Laut
-  </div>
-
-</div>
-
-</div>
-<div className='col-md-3'>
-<div className='form-group'>
-  <label className='text-secondary'></label>
-  <div className='text-black'>
   
-  </div>
 
-</div>
+              
 
 
-</div>
-<div className='col-md-3'>
-<div className='form-group'>
-  <label className='text-secondary'></label>
-  <div className='text-black'>
+        </div>
+      </div>
+
+      </div>
+
+
+
+
+    
   
-    
-  </div>
+     
 
-</div>
 
 
-</div>
-<div className='col-md-3' hidden>
-<div className='form-group'>
-  <label className='text-secondary'></label>
+  
 
 
-    <img src="/image/tools.png" className='responsive-img' />
- 
 
-</div>
 
 
-</div>
-<div className='col-md-3' hidden>
-<div className='form-group'>
-  <label className='text-secondary'>Kategori Barang</label>
-  <div className='text-black'>
-  Sepatu
-  </div>
 
-</div>
 
-</div>
-<div className='col-md-3'>
-<div className='form-group'>
-  <label className='text-secondary'></label>
-  <div className='text-black'>
- 
-  </div>
 
-</div>
+      </section>
 
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-</div>  
-
-</div>
-
-{/* 
-hasil hitungan udara */}
-                    
-<div className='hasil_hitungan_udara' style={{marginTop:display_margin_output,display:display_status_udara}}>
-
-<hr  style={{border:'2px solid black',marginTop:'0px'}}/>
-
-<div className='box_hitungbiaya box_hitungbiaya-4' style={{borderColor:'grey',height:display_height_form}}>
-
-<div className='m-3'>
-
-<div className='text-black text-left' >
-
-Hitung Perkiraan Biaya
-
-
-</div>
-
-
-<div className='text-secondary mb-2' >
-
-Kalkulasi biaya hanya bersifat perkiraan dan dapat berubah sewaktu-waktu
-
-</div>
-
-<div className='text-secondary text-left' >
-
-Total Tagihan
-</div>
-
-<div className='text-black fs-4'>
-
-Rp.{TotalbiayaUdara.toLocaleString('ID-id')},-
-
-</div>
-
-</div>
-
-<div className='row m-2'>
-
-<div className='col-md-3' hidden>
-<div className='form-group'>
-<label className='text-secondary'>Tujuan Negara</label>
-<div className='text-black'>
-China
-</div>
-
-</div>
-
-</div>
-<div className='col-md-3' hidden>
-<div className='form-group'>
-<label className='text-secondary'>Total Volume</label>
-<div className='text-black'>
-1 m3
-</div>
-
-</div>
-
-
-</div>
-<div className='col-md-3'>
-<div className='form-group'>
-<label className='text-secondary'></label>
-<div className='text-black'>
-
-</div>
-
-</div>
-
-
-</div>
-<div className='col-md-3'>
-<div className='form-group'>
-<label className='text-secondary'></label>
-<div className='text-black'>
-
-</div>
-
-</div>
-
-
-</div>
-
-
-
-
-</div>
-
-
-<div className='row m-2'>
-
-<div className='col-md-3' hidden>
-<div className='form-group'>
-<label className='text-secondary'>Tipe Pengiriman</label>
-<div className='text-black'>
-Laut
-</div>
-
-</div>
-
-</div>
-<div className='col-md-3'>
-<div className='form-group'>
-<label className='text-secondary'></label>
-<div className='text-black'>
-
-</div>
-
-</div>
-
-
-</div>
-<div className='col-md-3'>
-<div className='form-group'>
-<label className='text-secondary'></label>
-<div className='text-black'>
-
-
-</div>
-
-</div>
-
-
-</div>
-<div className='col-md-3' hidden>
-<div className='form-group'>
-<label className='text-secondary'></label>
-
-
-<img src="/image/tools.png" className='responsive-img' />
-
-
-</div>
-
-
-</div>
-<div className='col-md-3' hidden>
-<div className='form-group'>
-<label className='text-secondary'>Kategori Barang</label>
-<div className='text-black'>
-Sepatu
-</div>
-
-</div>
-
-</div>
-<div className='col-md-3'>
-<div className='form-group'>
-<label className='text-secondary'></label>
-<div className='text-black'>
-
-</div>
-
-</div>
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-</div>  
-
-</div>
-
-
-
-
-
-
-		</div>
-
-
-
-
-    </section>
 
     
 
 
-      <Footer/>
+      
+<Footer/>
 
 
       </div>
   
+
 
     )
    

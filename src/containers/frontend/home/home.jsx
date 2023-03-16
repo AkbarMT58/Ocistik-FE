@@ -5,7 +5,6 @@ import { Navbar } from '../../../components';
 import {Footer,Header,Fitur, FiturGalery,Sliderbanner,Galery,Tentangkami} from '../../../containers';
 import { getData_Master_Categories } from '../../../constants/api/logistik';
 import { useState,useEffect  } from "react";
-import ModalCekresi from './ModalCekresi';
 
 function useScreenWidth() {
 
@@ -32,11 +31,7 @@ function useScreenWidth() {
 }
 
 const Home = () => {
-const [inputCekresi, setInputCekresi] = useState({
-  nomor_resi : "",
-  marking_code : ""
-})
-const [show, setShow] = useState(false);
+
   //fungsi set responsive
 const widthSize = useScreenWidth()
 
@@ -87,12 +82,7 @@ if(widthSize <= mobileWidth){
           <div className='form-group m-1'>
           <label htmlFor="nomorresi">Nomor Resi</label>
 
-          <input 
-            type="textbox" 
-            className='form-control' 
-            placeholder='Nomor Resi'
-            value={inputCekresi.nomor_resi} 
-            onChange={e => setInputCekresi({...inputCekresi, nomor_resi : e.target.value})}/>
+          <input type="textbox" className='form-control' placeholder='Nomor Resi'></input>
 
           </div>
 
@@ -104,12 +94,7 @@ if(widthSize <= mobileWidth){
 
           <label htmlFor="kodemarking">Kode Marking</label>
 
-          <input 
-            type="textbox" 
-            className='form-control' 
-            placeholder='Kode Marking' 
-            value={inputCekresi.marking_code} 
-            onChange={e => setInputCekresi({...inputCekresi, marking_code : e.target.value})}/>
+          <input type="textbox" className='form-control' placeholder='Kode Marking'></input>
 
           </div>
 
@@ -120,13 +105,10 @@ if(widthSize <= mobileWidth){
 
         </div>
 
-        <div className='gpt3__home_cekresi' onClick={e => {
-          console.log("test")
-          setShow(v => !v)
-        }}><p>Cek Resi</p></div>
+        <div className='gpt3__home_cekresi'><p>Cek Resi</p></div>
         
-        <ModalCekresi show={show} setShow={setShow} inputCekresi={inputCekresi}/>
-        
+      
+      
       
       </div>
 

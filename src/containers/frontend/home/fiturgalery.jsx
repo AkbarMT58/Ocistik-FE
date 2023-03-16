@@ -85,7 +85,7 @@ const Fitur_Galery = () => {
 
     var display_margin='740px';
     var display_height_form='1550px';
-    var display_height_vh='110vh';
+    var display_height_vh='90vh';
 
 
   }else{
@@ -93,7 +93,7 @@ const Fitur_Galery = () => {
     
   var display_margin='480px';
   var display_height_form='1400px';
-  var display_height_vh='120vh';
+  var display_height_vh='110vh';
 
 
 
@@ -263,7 +263,7 @@ var display_hidup_laut=display_aktif;
     <div class="desc">LCL Udara</div>
   </div>
 </div>
-<div class="responsive">
+<div class="responsive" hidden>
   <div class="gallery_artikel"  style={{background:ubahwarna_utama_darat}} onClick={onClick_darat}>
   <input
         ref={inputRef_darat}

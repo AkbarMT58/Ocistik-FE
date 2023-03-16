@@ -5,11 +5,67 @@ import { Navbar } from '../../../components';
 import {Footer} from '../../../containers';
 
 import { useState } from "react";
+import swal from 'sweetalert';
+import axios from 'axios';
+import env from "react-dotenv";
 
 const Kontak= () => {
 
   const [isOpen, setIsOpen] = React.useState(true);
 
+  const [inputnama, setNama] = useState('');
+  const [inputphonenumber, setPhoneNumber] = useState('');
+  const [inputpesan, setPesan] = useState('');
+  const [inputemail, setEmail] = useState('');
+
+
+  
+  const handleInsertDataKontak = async (e) => {
+    e.preventDefault();
+
+var formdatarequest = new FormData();
+
+
+formdatarequest.append('nama',inputnama);
+formdatarequest.append('phone_number',inputphonenumber);
+formdatarequest.append('email',inputemail);
+formdatarequest.append('pesan',inputpesan);  
+
+
+  try {
+        const URL = `${env.API_GATEWAY_LOKAL}/api/insertKontak`;
+
+        const response= await axios.post(
+            URL,  formdatarequest,
+            {
+              headers:{
+                "Content-Type": "multipart/form-data",
+            
+             },
+             
+             
+            }
+          )
+
+            swal({
+                title: "Are you sure?",
+                text: "Are you sure that you want to send this message?",
+                icon: "warning",
+                dangerMode: true,
+              })
+              .then(willDelete => {
+                if (willDelete) {
+                  swal("Success!", "Your Data Has Been Updated!", "success");
+                }
+                window.location.href="/kontak"
+              });
+
+  } catch (err) {
+    console.log(err);
+  }
+
+}
+ 
     return (
    
       <div className='App'>
@@ -76,6 +132,8 @@ const Kontak= () => {
           <div className='text-black fs-4 mb-4'>Drop Up Message</div>
         </center>
 
+        <form onSubmit={handleInsertDataKontak} >
+
         <div className='row'>
 
           <div className='col-md-6'>
@@ -84,7 +142,7 @@ const Kontak= () => {
 
               <label>Nama</label>
 
-              <input type='textbox' className='form-control'/>
+              <input value={inputnama} type='textbox' className='form-control' onChange={(e) => setNama(e.target.value)} required/>
               
             </div>
 
@@ -94,7 +152,7 @@ const Kontak= () => {
           <div className='form-group'>
 
           <label>Email</label>
-          <input type='textbox' className='form-control'/>
+          <input value={inputemail} type='email' className='form-control' onChange={(e) => setEmail(e.target.value)} required />
               
           </div>
 
@@ -104,7 +162,7 @@ const Kontak= () => {
 
             <label>Phone Number</label>
 
-          <input type='textbox' className='form-control'></input>
+          <input value={inputphonenumber}  type="number"  pattern="[0-9]+"  className='form-control' onChange={(e) => setPhoneNumber(e.target.value)} required ></input>
 
 
           </div>
@@ -113,7 +171,7 @@ const Kontak= () => {
 
           <label>Pesan</label>
 
-          <textarea  className='form-control'></textarea>
+          <textarea  value={inputpesan} className='form-control' maxlength="300" onChange={(e) => setPesan(e.target.value)}></textarea>
 
 
           </div>
@@ -122,8 +180,16 @@ const Kontak= () => {
 
         </div>
 
-        <div className='submit_kontak'><div style={{marginLeft:'40px',marginTop:'2opx'}}>Submit</div></div>
+        
+<button  className='submit_kontak'><label style={{marginLeft:'40px',marginTop:'2opx'}}>Submit</label></button>
 
+
+{/* 
+ <div className='submit_kontak'><div style={{marginLeft:'40px',marginTop:'2opx'}}>Submit</div></div> */}
+
+        </form>
+
+       
       
 
      

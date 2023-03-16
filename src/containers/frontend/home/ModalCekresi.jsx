@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import swal from 'sweetalert';
 import { format } from 'fecha';
+import { getCekResi } from '../../../constants/api/report';
 
 function inDays(d1, d2) {
   var t2 = d2.getTime();
@@ -15,23 +16,11 @@ function inDays(d1, d2) {
 function ModalCekresi({show, setShow, inputCekresi}) {
   const [cekResiData, setCekResiData] = useState(null)
   const _fetchResi = async () => {
-    console.log({inputCekresi})
     try {
-      let res = await fetch("http://localhost:8080/oci/logistics/cek-resi", {
-        method: "POST",
-        headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin':'*',
-        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        'Access-Control-Allow-Header':"Cache-Control, Content-Type,Xid"
-        }, 
-        body: JSON.stringify({
-          "no_resi": inputCekresi.nomor_resi,
-          "marking_code": inputCekresi.marking_code,
-        }),
-      });
-      const resJson = await res.json();
+      let resJson = await getCekResi(JSON.stringify({
+        "no_resi": inputCekresi.nomor_resi,
+        "marking_code": inputCekresi.marking_code,
+      }));
       if(resJson.status === 200) {
         setCekResiData(resJson.data)
       } else {
@@ -51,7 +40,6 @@ function ModalCekresi({show, setShow, inputCekresi}) {
       
     }
   }
-  console.log({show})
   useEffect(() => {
     if(show){
       _fetchResi()
@@ -73,7 +61,6 @@ function ModalCekresi({show, setShow, inputCekresi}) {
   }
   const eta = inDays(new Date(), new Date(cekResiData.header.eta))
 
-  console.log({tanggalTerima})
   return (
     <Modal show={show} onHide={handleClose}
         size="xl">
@@ -84,34 +71,34 @@ function ModalCekresi({show, setShow, inputCekresi}) {
           <div className='d-flex border-bottom'>
             <div className='px-3 py-2 border-end' style={{width: "20%"}}>
               <div className='mb-2'>
-                <img src="/image/Group.png" alt="" className='me-2'/>
+                <img src="/image/Group.png" alt="" className='me-2' style={{width : 20}}/>
                 Shipment Service</div>
               <div className='h6'>OCE</div>
             </div>
             <div className='px-3 py-2 border-end' style={{width: "20%"}}>
               <div className='mb-2'>
-                <img src="/image/Vector(1).png" alt="" className='me-2'/>
+                <img src="/image/Vector(1).png" alt="" className='me-2' style={{width : 20}}/>
                 From
               </div>
               <div className='h6'>Jakarta</div>
             </div>
             <div className='px-3 py-2 border-end' style={{width: "20%"}}>
               <div className='mb-2'>
-                <img src="/image/Vector(2).png" alt="" className='me-2'/>
+                <img src="/image/Vector(2).png" alt="" className='me-2' style={{width : 20}}/>
                 To
               </div>
               <div className='h6'>{cekResiData.header.kecamatan}, {cekResiData.header.kota}</div>
             </div>
             <div className='px-3 py-2 border-end' style={{width: "20%"}}>
               <div className='mb-2'>
-                <img src="/image/Vector(3).png" alt="" className='me-2'/>
+                <img src="/image/Vector(3).png" alt="" className='me-2' style={{width : 20}}/>
                 Estimate Date
               </div>
               <div className='h6'>{eta > 0 ? eta + (eta == 1 ? " Day" : "Days") : "-"}</div>
             </div>
             <div className='px-3 py-2 ' style={{width: "20%"}}>
               <div className='mb-2'>
-                <img src="/image/Vector(4).png" alt="" className='me-2'/>Tanggal Terima</div>
+                <img src="/image/Vector(4).png" alt="" className='me-2' style={{width : 20}}/>Tanggal Terima</div>
               <div className='h6'>{tanggalTerima && tanggalTerima !== "" ? format(new Date(tanggalTerima),'D MMM YYYY h:m') : "-" }</div>
             </div>
           </div>
@@ -120,7 +107,7 @@ function ModalCekresi({show, setShow, inputCekresi}) {
           </div>
           <div className='d-flex border-bottom' style={{maxHeight: 400}}>
             <div className='timeline-wrapper pe-3'>
-              <ul className='timeline'>
+              <ul className='timeline' style={{overflowY: "auto"}}>
                 {
                   listStatusFiltered.map((item, i) => {
                     return (
@@ -135,7 +122,7 @@ function ModalCekresi({show, setShow, inputCekresi}) {
             </div>
             <div className='d-flex flex-column align-items-center border-start justify-content-center w-25 ps-3'>
               <div>
-                <img src="/image/Vector(6).png" alt="" className='me-2' />
+                <img src="/image/Vector(6).png" alt="" className='me-2' style={{width : 30}}/>
                 <span>Reciever Name</span>
               </div>
               <h3 className='my-2 text-center'>

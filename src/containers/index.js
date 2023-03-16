@@ -43,13 +43,9 @@ export {default as Callus} from './frontend/callus/callus';
 export {default as Hitungbiaya} from './frontend/hitungbiaya/hitungbiaya';
 
 
+//Artikel More
+export {default as ArtikelMore} from './frontend/artikel/artikel_more';
 
-//Master Artikel
-export {default as Master_Artikel} from './frontend/admin/master/master_artikel/Master_Artikel';
-
-
-//Master Artikel
-export {default as Edit_Artikel} from './frontend/admin/master/master_artikel/Edit_Artikel';
 
 
 
