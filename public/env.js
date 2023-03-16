@@ -2,7 +2,7 @@ window.env = {
   "ALLUSERSPROFILE": "C:\\ProgramData",
   "API_GATEWAY": "http://192.168.15.24:8080",
   "API_GATEWAY_CALCULATION": "http://192.168.15.24:8787",
-  "API_GATEWAY_LOKAL": "http://localhost:9000",
+  "API_GATEWAY_LOKAL": "http://192.168.15.14:9000",
   "APPDATA": "C:\\Users\\AKBAR\\AppData\\Roaming",
   "ChocolateyInstall": "C:\\ProgramData\\chocolatey",
   "ChocolateyLastPathUpdate": "133195076116219703",

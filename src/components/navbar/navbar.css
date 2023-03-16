@@ -39,6 +39,8 @@
     text-transform: capitalize;
     margin: 0 1rem;
     cursor: pointer;
+    /* color:white;*/
+    font-weight: bold;
 }
 .gpt3__navbar-sign button,
 .gpt3__navbar-menu_container button{
@@ -92,6 +94,7 @@ p a:hover {
     background: linear-gradient(90deg, #008BD9 40%, #56C3FF 100%);
     border-radius: 15px;
     padding:10px 10px;
+   
   
   }
 
