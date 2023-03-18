@@ -44,7 +44,7 @@
       margin: 20px 0px 0px 40px;
       max-width:1400px;
       margin:auto;
-      height:250px;
+      height:400px;
   }
   
   .box_kontak-content {
@@ -53,7 +53,7 @@
       padding: 25px 55px 45px 55px;
       position: relative;
       z-index: 1;
-      margin-top:-150px;
+      margin-top:-180px;
     
   }
   .box_kontak-4:after {
@@ -77,6 +77,25 @@
 
 
   @media screen and (max-width: 500px) {
+/* 
+    .submit_kontak{
+
+        position: absolute;
+        width: 156px;
+        height: 42px;
+        left: 65%;
+        top: 400px;
+        -webkit-transform: translate(-50%,0);
+        -ms-transform: translate(-50%,0);
+        transform: translate(-50%,0);
+        background: linear-gradient(90deg,#008BD9 25%,#56C3FF 81.35%);
+        border-radius: 10px;
+        color: white;
+        margin: auto;
+        
+
+
+       } */
 
     .box *:last-child {
         margin-bottom: 0;
@@ -112,6 +131,19 @@
         right: 10px;
     }
 
+    .box_kontak-4 {
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+        position: relative;
+        width: 100%;
+        margin: 20px 0px 0px 40px;
+        max-width:1400px;
+        margin:auto;
+        height:450px;
+    }
+
+ 
+    
+
 
 
    
@@ -123,8 +155,8 @@
         position: absolute;
         width: 156px;
         height: 42px;
-        left: 90%;
-        top: 470px;
+        left: 80%;
+        top: 350px;
         -webkit-transform: translate(-50%,0);
         -ms-transform: translate(-50%,0);
         transform: translate(-50%,0);
@@ -133,8 +165,6 @@
         color: white;
         margin: auto;
         
-        
-
 
 
        }

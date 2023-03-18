@@ -115,7 +115,22 @@ formdatarequest.append('pesan',inputpesan);
             Gedung Wisma IWI Jl. Arjuna Sel. No.75, Lt. 7, RT.2/RW.12, Kb. Jeruk, Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11530
             021-50867088
             info@ocistok.com
+
+            
+          
             </div>
+
+            <div className='whatsappinfo' >
+
+            <a target="_blank" href="https://api.whatsapp.com/send?phone=+6285710824508&text=Selamat Datang Di GoMile.Ada yang perlu ditanyakan.Kami akan selalu membantu.">
+
+            <img  src="/image/chat.png" className="responsive" style={{width:'200px'}} />
+
+            </a>
+
+
+            </div>
+
 
 			</div>
 		</div>
@@ -181,11 +196,9 @@ formdatarequest.append('pesan',inputpesan);
         </div>
 
         
-<button  className='submit_kontak'><label style={{marginLeft:'40px',marginTop:'2opx'}}>Submit</label></button>
+<button  className='submit_kontak fw-bold'><label style={{marginLeft:'40px',marginTop:'-20px'}}>Submit</label></button>
 
 
-{/* 
- <div className='submit_kontak'><div style={{marginLeft:'40px',marginTop:'2opx'}}>Submit</div></div> */}
 
         </form>
 

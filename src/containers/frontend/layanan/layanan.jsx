@@ -330,7 +330,7 @@ const handleGetHitungBiayaUdaraClick = async (e) => {
           // var display_height_form='960px';
 
           var display_margin='360px';
-          var display_height_form='720px';
+          var display_height_form='750px';
           var sectionmobile='180vh'
 
 
@@ -339,7 +339,7 @@ const handleGetHitungBiayaUdaraClick = async (e) => {
         else{
 
           var display_margin='340px';
-          var display_height_form='720px';
+          var display_height_form='750px';
           var sectionmobile='180vh'
         }
 
@@ -348,7 +348,7 @@ const handleGetHitungBiayaUdaraClick = async (e) => {
         if(input_kategori>"0"){
 
           var display_margin='440px';
-          var display_height_form='720px';
+          var display_height_form='750px';
           var sectionmobile='180vh'
 
 
@@ -374,21 +374,53 @@ const handleGetHitungBiayaUdaraClick = async (e) => {
         
     // jika itu adalah pengiriman darat mobile version
 
-    if(updated=='darat'){
+    if(updated=='laut'){
 
-      var display_margin='600px';
-      var display_height_form='1550px';
+      var display_margin='460px';
+      var display_height_form='730px';
+      var sectionmobile='150vh';
+  
 
 
     }else{
 
       
-    var display_margin='360px';
+    var display_margin='380px';
     var display_height_form='700px';
     var sectionmobile='150vh';
 
 
 
+    }
+
+
+    if(input_kategori>"0"){
+
+      var display_margin='480px';
+      var display_height_form='580px';
+    
+    
+    
+    }
+
+    if(input_kategori=='6402d86f190408cf0424f502'){
+
+      var display_margin='400px';
+      var display_height_form='580px';
+    
+
+
+
+
+    }
+    
+    if(input_kategori=='0'){
+    
+      var display_margin='390px';
+      var display_height_form='440px';
+    
+    
+    
     }
 
 
@@ -613,7 +645,7 @@ function allowNumbersOnly(e) {
 
     <div className='gpt3__galery' onClick={onClick_laut}>
 
-    <div style={{textAlign:"center", marginTop:'8px'}}>
+    <div className='fs-3 fw-bold' style={{textAlign:"center", marginTop:'8px'}}>
     LCL Laut (Less Container Load Via Laut)
     </div>
        <div className='text-white text-center mb-2' style={{marginTop:'90px'}}>Less Container Load via laut adalah jasa pengiriman lewat laut dimana anda bisa mengimpor dalam jumlah kecil karena barang anda akan dicampur dengan barang orang lain untuk memenuhi 1 container. Di jasa import OCI Logistic, kami dapat mengimpor barang anda TANPA MINIMAL pengiriman!
@@ -687,7 +719,7 @@ function allowNumbersOnly(e) {
 
   <div className='form-group m-1'>
 
-  <div className='text-black text-left' htmlFor="beratberang">Berat Barang(gram)</div>
+  <div className='text-black text-left' htmlFor="beratberang">Berat Barang(Kg)</div>
 
   <input value={inputberatbarang}    type="number" name="berat" onKeyPress={allowNumbersOnly}  className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
 
@@ -699,7 +731,7 @@ function allowNumbersOnly(e) {
   <div className='col-md-12'>
 
 <div className='form-group m-1'>
-<label className='text-black' htmlFor="nomorresi">Volume (cm³)</label>
+<label className='text-black' htmlFor="nomorresi">Volume (CBM)</label>
 
 <input value={inputvolume} type="number" onKeyPress={allowNumbersOnly}  name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
 
@@ -769,12 +801,12 @@ function allowNumbersOnly(e) {
 
 </div>
 {/* daerah lcl sea  */}
-<hr  style={{border:'2px solid black',marginTop:'100px'}}/>
+<hr  style={{border:'2px solid black',marginTop:'120px'}}/>
 
 
-<div style={{borderStyle:'solid', borderColor:''}}>
+<div >
 
-<div className='text-black text-left' style={{marginTop:'0px'}}>
+<div className='text-black text-left flex-container' >
 
 Hitung Perkiraan Biaya
 
@@ -799,142 +831,11 @@ Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
 
 </div>
 
-<div className='row'>
-
-  <div className='col-md-3' hidden>
-    <div className='form-group'>
-      <label className='text-secondary'>Tujuan Negara</label>
-      <div className='text-black'>
-        China
-      </div>
-
-    </div>
-
-  </div>
-  <div className='col-md-3' hidden>
-  <div className='form-group'>
-      <label className='text-secondary'>Total Volume</label>
-      <div className='text-black'>
-        1 cm3
-      </div>
-
-    </div>
-
-
-  </div>
-
- 
 
 
 
 
-</div>
 
-
-<div className='row'>
-
-  <div className='col-md-3' hidden>
-    <div className='form-group'>
-      <label className='text-secondary'>Tipe Pengiriman</label>
-      <div className='text-black'>
-        Laut
-      </div>
-
-    </div>
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-        
-      </div>
-
-    </div>
-
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-    
-        
-      </div>
-
-    </div>
-
-
-  </div>
-  <div className='col-md-3' hidden>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-   
-
-        <img src="/image/tools.png" className='responsive-img' />
-     
-
-    </div>
-
-
-  </div>
-
-
-
-
-</div>
-
-<div className='row'>
-
-  <div className='col-md-3' hidden>
-    <div className='form-group'>
-      <label className='text-secondary'>Kategori Barang</label>
-      <div className='text-black'>
-      Sepatu
-      </div>
-
-    </div>
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-     
-      </div>
-
-    </div>
-
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-      
-        
-      </div>
-
-    </div>
-
-
-  </div>
-  <div className='col-md-3'>
-  <div className='form-group'>
-      <label className='text-secondary'></label>
-      <div className='text-black'>
-     
-      </div>
-
-    </div>
-
-
-  </div>
-
-
-
-
-</div>
 
 </div> 
 
@@ -955,7 +856,7 @@ Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
 
     <div className='gpt3__galery'>
 
-    <div style={{textAlign:"center", marginTop:'8px'}}>
+    <div className='fs-3 fw-bold' style={{textAlign:"center", marginTop:'8px'}}>
     LCL Udara (Less Container Load Via Udara)
     </div>
        <div className='text-white text-center mb-2' style={{marginTop:'90px'}}>Less Container Load via laut adalah jasa pengiriman lewat laut dimana anda bisa mengimpor dalam jumlah kecil karena barang anda akan dicampur dengan barang orang lain untuk memenuhi 1 container. Di jasa import OCI Logistic, kami dapat mengimpor barang anda TANPA MINIMAL pengiriman!
@@ -1023,7 +924,7 @@ Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
 
   <div className='form-group m-1'>
 
-  <div className='text-black text-left' htmlFor="kodemarking">Berat Barang(gram)</div>
+  <div className='text-black text-left' htmlFor="kodemarking">Berat Barang(Kg)</div>
 
 
   <input value={inputberatbarang}   type="number" onKeyPress={allowNumbersOnly} name="berat"  className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
@@ -1036,7 +937,7 @@ Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
   <div className='col-md-12'>
 
   <div className='form-group m-1'>
-  <label className='text-black' htmlFor="nomorresi">Volume (cm³)</label>
+  <label className='text-black' htmlFor="nomorresi">Volume (CBM)</label>
 
   <input value={inputvolume} type="number" onKeyPress={allowNumbersOnly} name="volume" className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
 
@@ -1108,12 +1009,12 @@ Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
 
 </div>
 
-<hr  style={{border:'2px solid black',marginTop:'100px'}}/>
+<hr  style={{border:'2px solid black',marginTop:'120px'}}/>
 
 
-<div style={{borderStyle:'solid', borderColor:''}}>
+<div >
 
-<div className='text-black text-left' style={{marginTop:'0px'}}>
+<div className='text-black text-left flex-container' >
 
 Hitung Perkiraan Biaya
 

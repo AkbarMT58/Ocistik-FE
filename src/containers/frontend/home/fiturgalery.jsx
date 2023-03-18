@@ -68,7 +68,7 @@ const Fitur_Galery = () => {
 
         var display_margin='320px';
         var display_height_form='920px';
-        var display_height_vh='155vh';
+        var display_height_vh='160vh';
       }
       
 
@@ -113,7 +113,7 @@ const onClick_darat =() => {
  
   setUpdated(inputRef_darat.current.value);
 
-  console.log("lihat data click  :",  updated)
+  //console.log("lihat data click  :",  updated)
 
 
  
@@ -292,7 +292,7 @@ slide bergerak */}
 <div className='gpt3_home_galery_bg' style={{display:display_hidup_laut}} >
     <div className='gpt3__galery'>
 
-    <div style={{textAlign:"center", marginTop:'8px'}}>
+    <div className="fs-3" style={{textAlign:"center", marginTop:'8px'}}>
     LCL Laut (Less Container Load Via Laut)
     </div>
        <div className='text-white  text-center mt-lg-5' style={{marginTop:'50px'}}>Less Container Load via laut adalah jasa pengiriman lewat laut dimana anda bisa mengimpor dalam jumlah kecil karena barang anda akan dicampur dengan barang orang lain untuk memenuhi 1 container. Di jasa import VAR Express, kami dapat mengimpor barang anda TANPA MINIMAL pengiriman!
@@ -310,7 +310,7 @@ slide bergerak */}
 <div className='gpt3_home_galery_bg' style={{display:display_hidup_udara}} >
     <div className='gpt3__galery'>
 
-    <div style={{textAlign:"center", marginTop:'8px'}}>
+    <div  className="fs-3" style={{textAlign:"center", marginTop:'8px'}}>
     LCL Udara (Less Container Load Via Udara)
     </div>
        <div className='text-white  text-center mt-lg-5' style={{marginTop:'50px'}}>Less Container Load via laut adalah jasa pengiriman lewat laut dimana anda bisa mengimpor dalam jumlah kecil karena barang anda akan dicampur dengan barang orang lain untuk memenuhi 1 container. Di jasa import VAR Express, kami dapat mengimpor barang anda TANPA MINIMAL pengiriman!
@@ -346,7 +346,7 @@ slide bergerak */}
 
 <div class="responsive">
   <div class="gallery">
-    <a target="_blank" href="img_mountains.jpg">
+    <a>
       <img src="/image/CEPAT-removebg-preview (1) 2.png" alt="Mountains" width="600" height="400" />
     </a>
     <div class="desc">Pengiriman Cepat</div>
@@ -355,7 +355,7 @@ slide bergerak */}
 
 <div class="responsive">
   <div class="gallery">
-    <a target="_blank" href="img_mountains.jpg">
+    <a >
       <img src="/image/CEPAT-removebg-preview (1) 3.png" alt="Mountains" width="600" height="400" />
     </a>
     <div class="desc">Easy Tracking</div>
@@ -363,7 +363,7 @@ slide bergerak */}
 </div>
 <div class="responsive">
   <div class="gallery">
-    <a target="_blank" href="img_mountains.jpg">
+    <a >
       <img src="/image/CEPAT-removebg-preview (1) 4.png" alt="Mountains" width="600" height="400" />
     </a>
     <div class="desc">Kemudahan Pembayaran</div>
@@ -372,7 +372,7 @@ slide bergerak */}
 
 <div class="responsive">
   <div class="gallery">
-    <a target="_blank" href="img_mountains.jpg">
+    <a >
       <img src="/image/CEPAT-removebg-preview (1) 1.png" alt="Mountains" width="600" height="400" />
     </a>
     <div class="desc">Harga Ekonomis</div>

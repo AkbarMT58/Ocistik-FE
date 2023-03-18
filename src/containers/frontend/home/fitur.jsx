@@ -337,7 +337,7 @@ if(widthSize > mobileWidth){
     else if(updated=='udara'){
 
       var display_margin='430px';
-      var display_height_form='800px';
+      var display_height_form='780px';
       var displayheightbysetclick='1000px';
       var display_click_lcl_udara='';
 
@@ -347,8 +347,8 @@ if(widthSize > mobileWidth){
     
     else{
 
-      var display_margin='430px';
-      var display_height_form='1450px';
+      var display_margin='420px';
+      var display_height_form='780px';
       var displayheightbysetclick='900px';
 
     
@@ -391,6 +391,26 @@ var displayheightbysetclick='1100px';
 
 
 }
+
+
+if(input_kategori>"0"){
+
+  var display_margin='500px';
+  var display_height_form='580px';
+
+
+
+}
+
+if(input_kategori=='0'){
+
+  var display_margin='450px';
+  var display_height_form='540px';
+
+
+
+}
+
 
 
 
@@ -504,7 +524,7 @@ function allowNumbersOnly(e) {
 
 <div className='gpt3_home_fitur_bg'  style={{height:displayheightbysetclick}}>
 
-<div className='text-white fs-2 text-center mt-lg-5'>Hitung Biaya Import</div>
+<div className='text-white fs-2 text-center mt-lg-5 mb-5 fw-bold'>Hitung Biaya Import</div>
 
 <div className='gpt3__whatgpt3_formhitunghome section__margin_fitur' style={{height:display_height_form}} id='whpt3'>
 
@@ -574,7 +594,7 @@ jika laut  */}
 <div className='form-group m-1'>
 <label htmlFor="nomorresi">Kategori Barang</label>
 <select value={inputkategori} ref={kategori_select}   type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
-<option>--Pilih Kategori Barang--</option>
+<option value="0">--Pilih Kategori Barang--</option>
 {dataJenisBarang?.map((category, index) => (
   
   <option key={category.id} value={category.id}>{category.kategori_barang}</option>
@@ -617,7 +637,7 @@ jika laut  */}
 
   <div className='form-group m-1'>
 
-  <label htmlhtmlFor="kodemarking">Berat Barang(Gram)</label>
+  <label htmlhtmlFor="kodemarking">Berat Barang(Kg)</label>
 
   <input value={inputberatbarang}    type="number"  pattern="[0-9]+"  name="berat" onKeyPress={allowNumbersOnly}   className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
 
@@ -628,7 +648,7 @@ jika laut  */}
   <div className='col-md-12'>
 
   <div className='form-group m-1'>
-  <label htmlFor="nomorresi">Volume (cm³)</label>
+  <label htmlFor="nomorresi">Volume (CBM)</label>
 
   <input value={inputvolume} type="number" name="volume" onKeyPress={allowNumbersOnly} className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
 
@@ -1268,7 +1288,7 @@ jika udara  */}
 <label htmlFor="nomorresi">Kategori Barang</label>
 
 <select value={inputkategori} ref={kategori_select_air} type="textbox" name="inputkategori"  className='form-control' placeholder='Kategori Barang'  onChange={(e) => setKategori(e.target.value)}>
-<option>--Pilih Kategori Barang--</option>
+<option value="0">--Pilih Kategori Barang--</option>
 {dataJenisBarang?.map((category, index) => (
   <option key={category.id} value={category.id}>{category.kategori_barang}</option>
 ))}
@@ -1309,7 +1329,7 @@ jika udara  */}
 <div className='col-md-6'>
 
 <div className='form-group m-1'>
-<label htmlFor="nomorresi">Berat Barang (gram)</label>
+<label htmlFor="nomorresi">Berat Barang (Kg)</label>
 
 
 
@@ -1324,7 +1344,7 @@ jika udara  */}
 <div className='col-md-12'>
 
 <div className='form-group m-1'>
-<label htmlhtmlFor="nomorresi">Volume (cm³)</label>
+<label htmlhtmlFor="nomorresi">Volume (CBM)</label>
 
 <input value={inputvolume} type="number" name="volume" onKeyPress={allowNumbersOnly}  className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
 

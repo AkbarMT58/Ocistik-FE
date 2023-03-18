@@ -64,11 +64,11 @@ const Sliderbanner = () => {
 
     <Carousel>
             <div>
-            <div className='headerjudulbanner'>
+            <div className='headerjudulbanner fw-bold fs-3 text-center'>
 
-            <h1 style={{textAlign:"center", marginTop:'8px'}}>
+           
                         Apa Kata Mereka Tentang Ocistok
-            </h1>
+            
 
             </div>
 
@@ -76,22 +76,22 @@ const Sliderbanner = () => {
                 <p className="legend">Legend 1</p>
             </div>
             <div>
-            <div className='headerjudulbanner'>
+            <div className='headerjudulbanner fw-bold fs-3 text-center'>
 
-            <h1 style={{textAlign:"center", marginTop:'8px'}}>
+          
                         Apa Kata Mereka Tentang Ocistok
-            </h1>
+            
 
             </div>
                 <img src="/image/Rectangle 83-1.png" />
                 <p className="legend">Legend 2</p>
             </div>
             <div>
-            <div className='headerjudulbanner'>
+            <div className='headerjudulbanner fw-bold fs-3 text-center'>
 
-            <h1 style={{textAlign:"center", marginTop:'8px'}}>
+           
                         Apa Kata Mereka Tentang Ocistok
-            </h1>
+            
 
             </div>
                 <img src="/image/Rectangle 83-1.png" />

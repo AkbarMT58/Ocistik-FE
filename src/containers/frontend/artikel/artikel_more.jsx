@@ -15,7 +15,7 @@ import { getData_Artikel } from '../../../constants/api/logistik';
 
 const Artikel_More= () => {
 //const URL = `${env.API_GATEWAY_LOKAL}/api/upload/`
-const URL = 'http://localhost:9000/api/upload/'
+const URL = 'http://192.168.15.14:9000/api/upload/'
 
 const location = useLocation();
 const slug_id= location.pathname.split('/').slice(2);

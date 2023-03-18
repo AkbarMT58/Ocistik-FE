@@ -553,7 +553,7 @@ apabila laut  */}
 
         <div className='form-group'>
 
-        <label>Berat Barang (gram)</label>
+        <label>Berat Barang (Kg)</label>
         
         <input value={inputberatbarang}    type="number"  pattern="[0-9]+" onKeyPress={allowNumbersOnly} name="berat" className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
 
@@ -567,7 +567,7 @@ apabila laut  */}
         <div className='col-md-12'>
 
         <div className='form-group m-1'>
-        <label className='text-black' htmlFor="nomorresi">Volume (cm³)</label>
+        <label className='text-black' htmlFor="nomorresi">Volume (CBM)</label>
 
         <input value={inputvolume} type="number" name="volume" onKeyPress={allowNumbersOnly} className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
 
@@ -629,7 +629,7 @@ apabila laut  */}
 
 <div className='form-group'>
 
-<label>Berat Barang (gram)</label>
+<label>Berat Barang (Kg)</label>
 
 <input value={inputberatbarang}    type="number"  pattern="[0-9]+" onKeyPress={allowNumbersOnly} name="berat" className='form-control' placeholder='Berat Barang' onChange={(e) => setBeratbarang(e.target.value)}></input>
 
@@ -643,7 +643,7 @@ apabila laut  */}
 <div className='col-md-12'>
 
 <div className='form-group m-1'>
-<label className='text-black' htmlFor="nomorresi">Volume (cm³)</label>
+<label className='text-black' htmlFor="nomorresi">Volume (CBM)</label>
 
 <input value={inputvolume} type="number" name="volume" onKeyPress={allowNumbersOnly} className='form-control' placeholder='Volume' onChange={(e) => setVolume(e.target.value)}/>
 

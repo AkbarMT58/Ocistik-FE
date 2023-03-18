@@ -18,7 +18,7 @@ import env from "react-dotenv";
 
 const Artikel_Detail= () => {
 //const URL = `${env.API_GATEWAY_LOKAL}/api/upload/`
-const URL = 'http://localhost:9000/api/upload/'
+const URL = 'http://192.168.15.14:9000/api/upload/'
 
 
 const location = useLocation();
@@ -61,27 +61,30 @@ setDataArtikelBySlug(data_.Data)
 
 const fetchOrderDataArtikel = async () => {
   const res = await getData_Artikel_All();
-  // console.log("get data artikel", res)
- // console.log("data res:", res)
+   console.log("get data artikel:", res)
+ //console.log("data res:", res)
 
- 
-    setDataArtikel(res.Data)
+   const data_all= res.Data
+
+    setDataArtikel(data_all)
+
+  
   
 
-  if(res.Data){
+  if(data_all){
 
     const harian=[]
   
-    for(let i=0; i < res.Data.length; i++){
+    for(let i=0; i < data_all.length; i++){
 
 
       
-      if( res.Data[i].headline_id=='1' && i>0 ){
+      if( data_all[i].headline_id=='1' && i>0 ){
 
-        const title = res.Data[i].title;
-        const tanggal_cetak= res.Data[i].created_date.String;
-        const slug=res.Data[i].slug;
-        const picture = res.Data[i].picture;
+        const title = data_all[i].title;
+        const tanggal_cetak= data_all[i].created_date.String;
+        const slug=data_all[i].slug;
+        const picture = data_all[i].picture;
         harian.push({title,tanggal_cetak,slug,picture})
     
 
@@ -96,7 +99,7 @@ const fetchOrderDataArtikel = async () => {
 
 }
 
- console.log("data:", datahariannews)
+ //console.log("data harian news:", datahariannews)
 
 
     return (
