@@ -32,7 +32,7 @@ a{
     background-repeat: no-repeat;
     height:600px ;
 
-    max-width: 1400px;
+    max-width: 1200px;
     margin:auto;
    
 
@@ -53,7 +53,7 @@ a{
 .section__margin{
     margin: 4rem 6rem;
     margin-top:-100px;
-    max-width:1400px;
+    max-width:1200px;
     margin:auto;
 }
 
@@ -68,7 +68,7 @@ a{
 
   margin: 2rem 2rem;
   margin-top:100px;
-  max-width:1400px;
+  max-width:1200px;
   margin:auto;
   margin-bottom: 300px;
 
@@ -79,7 +79,7 @@ a{
 .section__margin_galery{
   margin: 2rem 2rem;
   margin-top:100px;
-  max-width:1400px;
+  max-width:1200px;
   margin:auto;
 }
 .scale-up-center {

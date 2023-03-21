@@ -126,7 +126,7 @@ if(widthSize <= mobileWidth){
         <button className='gpt3__home_cekresi' onClick={e => {
           console.log("test")
           setShow(v => !v)
-        }}><p>Cek Resi</p></button>
+        }}><p style={{marginTop:'-5x'}}>Cek Resi</p></button>
         
         <ModalCekresi show={show} setShow={setShow} inputCekresi={inputCekresi}/>
         

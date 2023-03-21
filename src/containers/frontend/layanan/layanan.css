@@ -24,7 +24,7 @@ body{
      background-repeat: no-repeat;
      height:580px ;
  
-     max-width: 1400px;
+     max-width: 1200px;
      margin:auto;
 
 
@@ -163,7 +163,7 @@ color:white;
     }
 
     .buttons_cards_layanan {
-        max-width: 1400px;
+        max-width: 1200px;
          margin: 0 auto;
          display: grid;
          gap: 0.5rem;

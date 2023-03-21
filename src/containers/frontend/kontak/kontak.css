@@ -22,7 +22,7 @@
       height:780px ;
       /* background-size:100% auto; */
   
-      max-width: 1400px;
+      max-width: 1200px;
       margin:auto;
  
 
@@ -107,7 +107,7 @@
         position: relative;
         width: 100%;
         margin: 20px 0px 0px 40px;
-        max-width:1400px;
+        max-width:1200px;
         margin:auto;
     }
     
@@ -136,7 +136,7 @@
         position: relative;
         width: 100%;
         margin: 20px 0px 0px 40px;
-        max-width:1400px;
+        max-width:1200px;
         margin:auto;
         height:450px;
     }
