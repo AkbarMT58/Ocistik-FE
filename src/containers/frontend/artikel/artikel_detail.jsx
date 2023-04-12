@@ -17,8 +17,10 @@ import env from "react-dotenv";
 
 
 const Artikel_Detail= () => {
-//const URL = `${env.API_GATEWAY_LOKAL}/api/upload/`
-const URL = 'http://192.168.15.14:9000/api/upload/'
+
+// const URL = `${env.API_GATEWAY_LOKAL}/api/upload/`
+
+const URL = 'http://192.168.15.20:9000/api/upload/'
 
 
 const location = useLocation();

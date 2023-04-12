@@ -44,6 +44,7 @@ a{
     background-clip: text;
     -webkit-background-clop: text;
     -webkit-text-fill-color: none;
+    margin-top:-10px;
     
 }
 .section__padding{
@@ -62,6 +63,15 @@ a{
   margin-top:100px;
   max-width:1000px;
   margin:auto;
+}
+
+.section__margin_login{
+
+  max-width:600px;
+  margin:auto;
+  margin-top:-700px;
+
+
 }
 
 .section__margin_tentangkami{

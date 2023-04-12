@@ -38,7 +38,7 @@ export async function getData_Master_Categories() {
   export async function getData_Artikel_All() {
     // const url = `${env.API_GATEWAY_LOKAL}/api/getArtikel`;
 
-    const url ="http://192.168.15.14:9000/api/getArtikel" ;
+    const url ="http://192.168.15.20:9000/api/getArtikel" ;
     return callAPI({
       url,
       method: 'GET',
@@ -55,7 +55,7 @@ export async function getData_Master_Categories() {
 
     //const url = `${env.API_GATEWAY_LOKAL}/api/getArtikelbyslug/${slug_}`;
 
-    const url ="http://192.168.15.14:9000/api/getArtikelbySlug/"+slug_ ;
+    const url ="http://192.168.15.20:9000/api/getArtikelbySlug/"+slug_ ;
  
     return callAPI({
       url,

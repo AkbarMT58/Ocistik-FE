@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {RiMenu3Line,RiCloseLine} from 'react-icons/ri';
-import logo from '../../assets/image/gomile-removebg-preview.png'
+import logo from '../../assets/image/LOMILES.png'
 import './navbar.css';
 
 const Menu =() => (
@@ -11,6 +11,7 @@ const Menu =() => (
   <p><a href="/artikel">Artikel</a></p>
   <p><a href="/kontak">Kontak</a></p>
   <p><a href="/hitungbiaya">Hitung Biaya</a></p>
+  <p><a href="/login">Login</a></p>
   </>
 )
 const Navbar = () => {

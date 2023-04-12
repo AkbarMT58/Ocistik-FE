@@ -74,7 +74,7 @@ if(widthSize <= mobileWidth){
     <div className='gpt3__whatgpt3 section__margin' id='whpt3' style={{height:display_height_form}}>
     
       <div className='gpt3__whatgpt3-heading'>
-        <h4 className='gradient__text'>Cek Resi Ocistik</h4>
+        <h4 className='gradient__text'>Cek Resi Lowmiles</h4>
        
 
       </div>
@@ -126,7 +126,7 @@ if(widthSize <= mobileWidth){
         <button className='gpt3__home_cekresi' onClick={e => {
           console.log("test")
           setShow(v => !v)
-        }}><p style={{marginTop:'-5x'}}>Cek Resi</p></button>
+        }}><div className='-mt-2'>Cek Resi</div></button>
         
         <ModalCekresi show={show} setShow={setShow} inputCekresi={inputCekresi}/>
         

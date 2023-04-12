@@ -59,9 +59,10 @@ margin:auto;
     flex-direction: column;
 }
 .gpt3__footer-links_logo img{
-    width: 154px;
-    height: 55px;
+    width: 100px;
+    height: 40px;
     margin-bottom: 1rem;
+    margin-top:-50px;
 }
 .gpt3__footer-links_logo p {
     font-size: 12px;
@@ -121,3 +122,18 @@ margin:auto;
         line-height: 38px;
     }
 }
+
+.textsize{
+
+    font-size:13px;
+
+
+}
+
+.fontkonsumen{
+
+    font-size:12px;
+
+
+}
+

@@ -73,7 +73,11 @@ const Sliderbanner = () => {
             </div>
 
                 <img src="/image/Rectangle 83-1.png" />
-                <p className="legend">Legend 1</p>
+                <div className='legend -mt-4'>
+                  <iframe  src="https://www.youtube.com/embed/tgbNymZ7vqY" width="" height="" ></iframe>
+
+                </div>
+              
             </div>
             <div>
             <div className='headerjudulbanner fw-bold fs-3 text-center'>
@@ -84,7 +88,12 @@ const Sliderbanner = () => {
 
             </div>
                 <img src="/image/Rectangle 83-1.png" />
-                <p className="legend">Legend 2</p>
+             
+                <div className="legend">
+
+                <iframe  src="https://www.youtube.com/embed/tgbNymZ7vqY" width="" height="" ></iframe>
+
+                </div>
             </div>
             <div>
             <div className='headerjudulbanner fw-bold fs-3 text-center'>
@@ -95,7 +104,11 @@ const Sliderbanner = () => {
 
             </div>
                 <img src="/image/Rectangle 83-1.png" />
-                <p className="legend">Legend 3</p>
+                <div className="legend">
+
+                <iframe  src="https://www.youtube.com/embed/tgbNymZ7vqY" width="" height="" ></iframe>
+
+                </div>
             </div>
 
        

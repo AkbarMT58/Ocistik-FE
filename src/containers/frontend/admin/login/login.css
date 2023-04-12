@@ -1,0 +1,58 @@
+
+.gradient__bg_login{
+
+    
+
+     background-image: url("../../../../assets/image/login_bg.png");
+     background-repeat: no-repeat;
+     height:800px ;
+ 
+     max-width: 1200px;
+     margin:auto;
+
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+     background-size: cover;
+
+
+
+
+}
+
+
+#wrapper {
+    width: 100%;
+}
+#top, #bottom {
+    height: 100px;
+    background-color: #ccc;    
+}
+
+#left {
+    background-color: red;
+}
+
+#right {
+    background-color: green;
+}
+
+#content {
+    width: 100%;
+    display: table;
+}
+
+#left, #right {
+    width: 50%;
+    display: table-cell;
+}
+
+.login_masuk{
+
+width: 150px;
+height: 49px;
+left: 900px;
+top: 580px;
+background: #008BD9;
+border-radius: 30px;
+}

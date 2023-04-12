@@ -354,7 +354,7 @@ const currentRecords = arr.slice(indexOfFirstRecord, indexOfLastRecord)
 
        
 
-          <div className='m-2 fw-bold'>GOMILE NEWS</div>
+          <div className='m-2 fw-bold'>LOMILES NEWS</div>
           <hr></hr>
 
 <div className='container-fluid'>

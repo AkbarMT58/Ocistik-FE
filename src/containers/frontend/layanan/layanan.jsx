@@ -331,7 +331,7 @@ const handleGetHitungBiayaUdaraClick = async (e) => {
 
           var display_margin='360px';
           var display_height_form='750px';
-          var sectionmobile='180vh'
+          var sectionmobile='220vh'
 
 
         }
@@ -340,7 +340,7 @@ const handleGetHitungBiayaUdaraClick = async (e) => {
 
           var display_margin='340px';
           var display_height_form='750px';
-          var sectionmobile='180vh'
+          var sectionmobile='220vh'
         }
 
         //jika select kategori
@@ -354,14 +354,6 @@ const handleGetHitungBiayaUdaraClick = async (e) => {
 
         }
 
-        if(input_kategori=='0'){
-
-          var display_margin='380px';
-          var display_height_form='720px';
-          var sectionmobile='180vh'
-
-
-        }
 
         
 
@@ -471,13 +463,10 @@ if(updated=='laut'){
 
   var ubahwarna_utama_laut= warna_choice_aktif;
   var ubahwarna_child_laut=warna_choice_aktif_child
-
   var display_hidup_laut=display_aktif;
+  var ubahwarna_font_laut="white";
+  var ubahwarna_font_udara="#0F8ED6";
 
-  // var display_margin='320px';
-  // var display_height_form='420px';
-
-  //console.log(ubahwarna_utama_laut);
 
 
 }else{
@@ -512,13 +501,9 @@ if (updated=='udara'){
 
     var ubahwarna_utama_udara= warna_choice_aktif;
     var ubahwarna_child_udara=warna_choice_aktif_child
-
-
-    
-    // var display_margin='320px';
-    // var display_height_form='420px';
-
     var display_hidup_udara=display_aktif;
+    var ubahwarna_font_udara="white";
+    var ubahwarna_font_laut="#0F8ED6";
 
 
 }else{
@@ -535,9 +520,8 @@ if(updated==''){
 
   var ubahwarna_utama_laut= warna_choice_aktif;
   var ubahwarna_child_laut=warna_choice_aktif_child
-
-
   var display_hidup_laut=display_aktif;
+  var ubahwarna_font_udara="#0F8ED6";
   // var display_margin='320px';
   // var display_height_form='420px';
 
@@ -595,9 +579,9 @@ function allowNumbersOnly(e) {
       />
   
     <a target="_blank" >
-      <img src="/image/group 95.png" alt="laut" width="600" height="400" />
+      <img src="/image/kapal.png" alt="laut" width="228" height="119" style={{marginTop:'50px'}} />
     </a>
-    <div class="desc">LCL LAUT</div>
+    <div class="desc" style={{color:ubahwarna_font_laut,fontWeight:"bold"}}>PENGIRIMAN LAUT</div>
   </div>
 </div>
 
@@ -612,11 +596,11 @@ function allowNumbersOnly(e) {
     
       />
     <a target="_blank">
-      <img src="/image/fixplane-removebg-preview 2.png" alt="udara" width="600" height="400" />
+      <img src="/image/pesawat.png" alt="udara"  width="228" height="119"  />
     </a>
  
    
-    <div class="desc">LCL Udara</div>
+    <div class="desc" style={{color:ubahwarna_font_udara,fontWeight:"bold"}}>PENGIRIMAN UDARA</div>
   </div>
 </div>
 <div class="responsive" hidden>

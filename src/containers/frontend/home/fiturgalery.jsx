@@ -149,11 +149,9 @@ var ubahwarna_utama_laut= warna_choice_aktif;
 var ubahwarna_child_laut=warna_choice_aktif_child
 
 var display_hidup_laut=display_aktif;
+var ubahwarna_font_laut="white";
+var ubahwarna_font_udara="#0F8ED6";
 
-// var display_margin='320px';
-// var display_height_form='420px';
-
-//console.log(ubahwarna_utama_laut);
 
 
 }else{
@@ -168,8 +166,6 @@ if(updated=='darat'){
   var ubahwarna_utama_darat= warna_choice_aktif;
   var ubahwarna_child_darat=warna_choice_aktif_child
 
-// var display_margin='400px';
-// var display_height_form='520px';
 
   var display_hidup_darat=display_aktif;
 
@@ -188,6 +184,8 @@ if (updated=='udara'){
 
   var ubahwarna_utama_udara= warna_choice_aktif;
   var ubahwarna_child_udara=warna_choice_aktif_child
+  var ubahwarna_font_udara="white";
+  var ubahwarna_font_laut="#0F8ED6";
 
 
   
@@ -210,8 +208,8 @@ if (updated=='udara'){
 if(updated==''){
 
 var ubahwarna_utama_laut= warna_choice_aktif;
-var ubahwarna_child_laut=warna_choice_aktif_child
-
+var ubahwarna_child_laut=warna_choice_aktif_child;
+var ubahwarna_font_udara="#0F8ED6";
 
 var display_hidup_laut=display_aktif;
 
@@ -239,9 +237,9 @@ var display_hidup_laut=display_aktif;
       />
   
     <a target="_blank" >
-      <img src="/image/group 95.png" alt="laut" width="600" height="400" />
+      <img src="/image/kapal.png" alt="laut" width="228" height="119" style={{marginTop:'50px'}}  />
     </a>
-    <div class="desc">LCL LAUT</div>
+    <div class="desc font-bold mt-4" style={{color:ubahwarna_font_laut}}>PENGIRIMAN LAUT</div>
   </div>
 </div>
 
@@ -256,11 +254,11 @@ var display_hidup_laut=display_aktif;
     
       />
     <a target="_blank">
-      <img src="/image/fixplane-removebg-preview 2.png" alt="udara" width="600" height="400" />
+      <img src="/image/pesawat.png" alt="udara" width="228" height="119" />
     </a>
  
    
-    <div class="desc">LCL Udara</div>
+    <div class="desc font-bold" style={{color:ubahwarna_font_udara,fontWeight:"bold"}} >PENGIRIMAN UDARA</div>
   </div>
 </div>
 <div class="responsive" hidden>
@@ -274,7 +272,7 @@ var display_hidup_laut=display_aktif;
     
       />
     <a target="_blank">
-      <img src="/image/angkut_kontainer-removebg-preview 2.png" alt="darat" width="600" height="400" />
+      <img src="/image/angkut_kontainer-removebg-preview 2.png" alt="darat" width="228" height="119" />
     </a>
    
     <div class="desc">LCL Darat</div>
@@ -340,9 +338,14 @@ slide bergerak */}
     </div>
 
 
-  
+<center>
+
+<div className='mt-4 mb-4' style={{color:'#3A88B4',fontSize:'20px', fontWeight:'bold'}}>Mengapa Memilih kami</div>
+
+</center>
 
 <div className='buttons_cards' style={{marginTop:'20px'}}>
+
 
 <div class="responsive">
   <div class="gallery">
@@ -356,7 +359,7 @@ slide bergerak */}
 <div class="responsive">
   <div class="gallery">
     <a >
-      <img src="/image/CEPAT-removebg-preview (1) 3.png" alt="Mountains" width="600" height="400" />
+      <img src="/image/kemudahanpelacakan.png" alt="Mountains" width="600" height="400" />
     </a>
     <div class="desc">Easy Tracking</div>
   </div>
@@ -364,7 +367,7 @@ slide bergerak */}
 <div class="responsive">
   <div class="gallery">
     <a >
-      <img src="/image/CEPAT-removebg-preview (1) 4.png" alt="Mountains" width="600" height="400" />
+      <img src="/image/kemudahanpembayaran.png" alt="Mountains" width="600" height="400" />
     </a>
     <div class="desc">Kemudahan Pembayaran</div>
   </div>
@@ -373,7 +376,7 @@ slide bergerak */}
 <div class="responsive">
   <div class="gallery">
     <a >
-      <img src="/image/CEPAT-removebg-preview (1) 1.png" alt="Mountains" width="600" height="400" />
+      <img src="/image/hargaekonomis.png" alt="Mountains" width="600" height="400" />
     </a>
     <div class="desc">Harga Ekonomis</div>
   </div>

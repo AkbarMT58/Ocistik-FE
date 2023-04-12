@@ -14,37 +14,21 @@ export {default as Sliderbanner} from './frontend/home/sliderbanner'
 
 //tentang kami
 export {default as Tentangkami} from './frontend/tentangkami/tentangkami';
-
-
 //layanan
 export {default as Layanan} from './frontend/layanan/layanan';
-
-
-
-
 //Artikel
 export {default as Artikel} from './frontend/artikel/artikel';
 export {default as Artikel_Detail} from './frontend/artikel/artikel_detail';
-
-
-
-
 //Kontak
 export {default as Kontak} from './frontend/kontak/kontak';
-
-
-
 //Call Us
 export {default as Callus} from './frontend/callus/callus';
-
-
-
 //Hitung Biaya
 export {default as Hitungbiaya} from './frontend/hitungbiaya/hitungbiaya';
-
-
 //Artikel More
 export {default as ArtikelMore} from './frontend/artikel/artikel_more';
+export {default as Login} from './frontend/admin/login/login';
+
 
 
 

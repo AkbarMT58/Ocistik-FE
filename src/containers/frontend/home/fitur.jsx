@@ -221,7 +221,8 @@ const TotalbiayaLaut= TotalestimasibiayaLaut
 const TotalbiayaUdara= TotalestimasibiayaUdara
 
 const [updated, setUpdated] = useState('');
-const warna_choice_aktif ='dodgerblue';
+const warna_choice_aktif ='linear-gradient(90deg, #008BD9 25%, #56C3FF 81.35%)';
+const warna_font="white";
 const warna_choice_aktif_child ='#008BD9';
 const warna_choice_tidak_aktif ='white';
 const warna_choice_tidak_aktif_child ='white';
@@ -440,10 +441,14 @@ const onClick_laut =() => {
 
 if(updated=='laut'){
 var ubahwarna_utama_laut= warna_choice_aktif;
-var ubahwarna_child_laut=warna_choice_aktif_child
+
 
 var display_hidup_laut=display_aktif;
-//var display_click_lcl_sea='none';
+//var ubahwarna_font=warna_font;
+
+var ubahwarna_font_laut="white";
+
+
 
 
 }else{
@@ -474,6 +479,8 @@ if (updated=='udara'){
   var ubahwarna_child_udara=warna_choice_aktif_child
   var display_hidup_udara=display_aktif;
  // var display_click_lcl_udara='none';
+ var ubahwarna_font=warna_font;
+ var ubahwarna_font_udara=warna_font;
 
 
 }else{
@@ -488,6 +495,8 @@ if(updated==''){
 var ubahwarna_utama_laut= warna_choice_aktif;
 var ubahwarna_child_laut=warna_choice_aktif_child
 var display_hidup_laut=display_aktif;
+var ubahwarna_font="#0F8ED6";
+var ubahwarna_font_laut="white";
 
 // var display_click_lcl_udara='none';
 // var display_click_fcl_sea='none';
@@ -508,18 +517,6 @@ function allowNumbersOnly(e) {
 
     
 
-
-
-
-
- 
-   
-
-
-
-
-
-
   return (
 
 <div className='gpt3_home_fitur_bg'  style={{height:displayheightbysetclick}}>
@@ -530,7 +527,7 @@ function allowNumbersOnly(e) {
 
 <div className='buttons_cards_2'>
 
-<div class="card_home" style={{backgroundColor:ubahwarna_utama_laut}} onClick={onClick_laut}>
+<div class="card_home" style={{background:ubahwarna_utama_laut,color:ubahwarna_font_laut}} onClick={onClick_laut}>
 
 <input
 ref={inputRef_laut}
@@ -541,11 +538,11 @@ value="laut"
 
 />
   
-  LCL BY SEA
+  VIA LAUT
   
   
   </div>
-<div class="card_home" style={{backgroundColor:ubahwarna_utama_lautfullcontainer }} onClick={onClick_darat} hidden>
+<div class="card_home" style={{ubahwarna_utama_lautfullcontainer }} onClick={onClick_darat} hidden>
 
 <input
 ref={inputRef_darat}
@@ -556,8 +553,8 @@ value="lautfullcontainer"
 
 />
 
-  FCL BY SEA </div>
-<div className="card_home" style={{backgroundColor:ubahwarna_utama_udara }} onClick={onClick_udara}>
+  VIA UDARA </div>
+<div className="card_home" style={{background:ubahwarna_utama_udara,color:ubahwarna_font_udara }} onClick={onClick_udara}>
 
   
 <input
