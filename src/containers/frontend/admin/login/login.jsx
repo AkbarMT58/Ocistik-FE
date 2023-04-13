@@ -55,21 +55,20 @@ if(widthSize <= mobileWidth){
   return (
 
     <div className='App'>
-    <div className="gradient__bg_login" >
-    
-    
-    </div>
+    <div className="gradient__bg_login" style={{marginTop:''}} >
 
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
 
-
-    <div className='gpt3__whatgpt3 section__margin_login' id='whpt3' style={{height:display_height_form,backgroundColor:''}} >
-
-        <div className='row' >
-
-            <div className='col-md-8' style={{backgroundColor:'transparent'}} >
-
-                <center>
-                     <div>
+    <div class="container">
+        <div class="body d-md-flex align-items-center justify-content-between">
+            <div class="box-1 mt-md-0 mt-5">
+                {/* <img src="https://images.pexels.com/photos/2033997/pexels-photo-2033997.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                    class="" alt=""/> */}
+                      <center>
+                     <div className='mt-4' >
 
                         <img src='/image/Logistik.png' style={{width:'100px',height:'20px'}}/>
 
@@ -79,52 +78,66 @@ if(widthSize <= mobileWidth){
 
                 </center>
 
-               
-
             </div>
-
-            <div className='col-md-4 mb-4' style={{marginTop:'100px'}}>
-                <center>
-
-                <div className='mb-4'>Login Customer</div>
-                </center>
+            <div class=" box-2 d-flex flex-column h-100">
+                <div class="mt-5">
 
                 
 
-                <div className='form-group mb-4'>
+<center>
 
-                    <input type="text" className='form-control' placeholder='Kode Marking'></input>
-                   
+<div className='mb-4 text-black'>Login Customer</div>
+</center>
 
+
+
+<div className='form-group mb-4'>
+
+    <input type="text" className='form-control' placeholder='Kode Marking'></input>
+   
+
+</div>
+<div className='form-group mb-4'>
+
+<input type="text" className='form-control' placeholder='Password'></input>
+
+
+</div>
+
+<div className='form-group mb-4'>
+
+    <div style={{fontSize:'10px'}}>Tetap Login</div>
+
+</div>
+
+<center>
+<button type="button" className="login_masuk" style={{color:'white'}}>Login</button>
+</center>
+
+
+
+
+             
                 </div>
-                <div className='form-group mb-4'>
-
-                <input type="text" className='form-control' placeholder='Password'></input>
-
-
+                <div class="mt-auto">
+                <div className='text-black' ><a href="/home">Back To home</a></div>
                 </div>
-
-                <div className='form-group mb-4'>
-
-                    <div style={{fontSize:'10px'}}>Tetap Login</div>
-
-                </div>
-
-               
-                <button type="button" className="login_masuk" style={{color:'white'}}>Login</button>
-
-               
-
-
-              
-
-             </div>
-
-
-
+            </div>
+            <span class="fas fa-times"></span>
         </div>
+    </div>
+
+      
+
     
-   </div>
+    
+    </div>
+
+
+
+
+
+
 
 
     

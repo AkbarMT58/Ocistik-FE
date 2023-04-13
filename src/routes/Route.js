@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Brand,CTA,Navbar } from '../components';
-import {Footer,Features,Header,Possibility,Home,Tentangkami,Layanan,Artikel,Callus,Kontak,Hitungbiaya, Artikel_Detail,Master_Artikel,Edit_Artikel,ArtikelMore,Login} from '../containers';
+import {Home,Tentangkami,Layanan,Artikel,Callus,Kontak,Hitungbiaya, Artikel_Detail,ArtikelMore,Login,Dashboard} from '../containers';
 import '../routes/App.css';
 
 
@@ -22,6 +22,9 @@ const App = () => {
     <Route path="/hitungbiaya" element={<Hitungbiaya />} />
     <Route path="/callus" element={<Callus />} /> 
     <Route path="/login" element={<Login />} /> 
+    <Route path="/admin/dashboard" element={<Dashboard />} /> 
+
+
 
    
 

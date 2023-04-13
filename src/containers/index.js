@@ -29,6 +29,15 @@ export {default as Hitungbiaya} from './frontend/hitungbiaya/hitungbiaya';
 export {default as ArtikelMore} from './frontend/artikel/artikel_more';
 export {default as Login} from './frontend/admin/login/login';
 
+ export {default as Dashboard} from './frontend/admin/dashboard/dashboard';
+// export {default as UserProfile} from './frontend/admin/dashboard/UserProfile';
+// export {default as TableList} from './frontend/admin/dashboard/TableList';
+// export {default as Typography} from './frontend/admin/dashboard/Typography';
+// export {default as Icons} from './frontend/admin/dashboard/Icons';
+// export {default as Maps} from './frontend/admin/dashboard/Maps';
+// export {default as Notifications} from './frontend/admin/dashboard/Notifications';
+// export {default as Upgrade} from './frontend/admin/dashboard/Upgrade';
+// export {default as Adminjs} from '../components/dashboard/layouts/Admin';
 
 
 
