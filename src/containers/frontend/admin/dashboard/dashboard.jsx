@@ -91,11 +91,12 @@ const Dashboard = () => {
         <div className="container">
        
 <div className='bg_layerdashboard bg-aqua'>
-    <div className='bg_dashboard '>
+
+    <div className='bg_dashboard bq-aqua'>
 
             <Navbar_Dashboard/>
             
-         </div>
+    </div>
 
 
 </div>
