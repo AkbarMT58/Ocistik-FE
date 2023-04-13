@@ -337,7 +337,7 @@ if(widthSize > mobileWidth){
     }
     else if(updated=='udara'){
 
-      var display_margin='430px';
+      var display_margin='400px';
       var display_height_form='780px';
       var displayheightbysetclick='1000px';
       var display_click_lcl_udara='';
@@ -348,7 +348,7 @@ if(widthSize > mobileWidth){
     
     else{
 
-      var display_margin='420px';
+      var display_margin='400px';
       var display_height_form='780px';
       var displayheightbysetclick='900px';
 
@@ -370,7 +370,7 @@ if(widthSize <= mobileWidth){
 
 if(updated=='udara'){
 
-var display_margin='500px';
+var display_margin='400px';
 var display_height_form='680px';
 var displayheightbysetclick='900px';
 
@@ -386,7 +386,7 @@ else if(updated=='laut'){
   
 }else{
 
-var display_margin='450px';
+var display_margin='400px';
 var display_height_form='1200px';
 var displayheightbysetclick='1100px';
 
@@ -405,7 +405,7 @@ if(input_kategori>"0"){
 
 if(input_kategori=='0'){
 
-  var display_margin='450px';
+  var display_margin='400px';
   var display_height_form='540px';
 
 
@@ -567,7 +567,7 @@ value="udara"
 />
 
   
-  LCL BY AIR</div>
+  VIA UDARA</div>
 </div>
 
 <div className='gpt3__whatgpt3-heading'>

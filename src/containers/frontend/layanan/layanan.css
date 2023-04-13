@@ -22,7 +22,7 @@ body{
  
      background-image: url("../../../assets/image/unsplash_FPKnAO-CF6M-1.png");
      background-repeat: no-repeat;
-     height:580px ;
+     height:300px ;
  
      max-width: 1200px;
      margin:auto;
@@ -84,8 +84,8 @@ color:white;
 .gpt3__whatgpt3_tentangkami_griddua{
 
     background-color: rgb(15, 143, 215); 
-    height: 250px; 
-     padding-top: 42px;
+    height: 350px; 
+    padding-top: 42px;
 
 
 }  
@@ -100,7 +100,7 @@ color:white;
 }
 .distance_gambar{
 
-    margin-top:-250px;
+    margin-top:-100px;
 
 
 }
@@ -184,7 +184,7 @@ color:white;
 
 .responsive-img{
 
-    max-width: 100%;
+    max-width: 80%;
     margin:auto;
 
 

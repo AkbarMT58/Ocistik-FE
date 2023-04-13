@@ -82,7 +82,7 @@ formdatarequest.append('pesan',inputpesan);
     </div>
 
 
-    <section style={{height:'90vh'}}>
+    <section style={{height:'40vh'}}>
 
       <div className='kontak_bg'>
 
@@ -108,13 +108,13 @@ formdatarequest.append('pesan',inputpesan);
             </div>
             <div  className="mt-10" style={{textAlign:'left'}}>
             PT. Ocommerce Capital Indonesia
-            Email: info@ocistok.com
+            Email: info@lomiles.com
                
             </div>
             <div  className="mt-10" style={{textAlign:'left'}}>
             Gedung Wisma IWI Jl. Arjuna Sel. No.75, Lt. 7, RT.2/RW.12, Kb. Jeruk, Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11530
             021-50867088
-            info@ocistok.com
+            info@lomiles.com
 
             
           

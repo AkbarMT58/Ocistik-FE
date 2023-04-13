@@ -290,11 +290,11 @@ slide bergerak */}
 <div className='gpt3_home_galery_bg' style={{display:display_hidup_laut}} >
     <div className='gpt3__galery'>
 
-    <div className="fs-3 galery-title" style={{textAlign:"center", marginTop:'8px'}}>
+    <div className="fs-4 galery-title" style={{textAlign:"center", marginTop:'8px'}}>
     LCL Laut (Less Container Load Via Laut)
     </div>
-       <div className='text-white  text-center mt-lg-5' style={{marginTop:'50px'}}>Less Container Load via laut adalah jasa pengiriman lewat laut dimana anda bisa mengimpor dalam jumlah kecil karena barang anda akan dicampur dengan barang orang lain untuk memenuhi 1 container. Di jasa import VAR Express, kami dapat mengimpor barang anda TANPA MINIMAL pengiriman!
-        
+       <div className='text-white  text-center mt-lg-5' style={{marginTop:'50px'}}>
+       Pengiriman via laut adalah jasa pengiriman lewat laut dimana anda bisa mengimpor dalam jumlah kecil karena barang anda akan dicampur dengan barang orang lain untuk memenuhi 1 container. Dijasa import Lomiles, anda dapat mengimpor barang anda TANPA MINIMAL pengiriman!
         </div>
     </div>
 
@@ -308,11 +308,11 @@ slide bergerak */}
 <div className='gpt3_home_galery_bg' style={{display:display_hidup_udara}} >
     <div className='gpt3__galery'>
 
-    <div  className="fs-3 galery-title" style={{textAlign:"center", marginTop:'8px'}}>
+    <div  className="fs-4 galery-title" style={{textAlign:"center", marginTop:'8px'}}>
     LCL Udara (Less Container Load Via Udara)
     </div>
-       <div className='text-white  text-center mt-lg-5' style={{marginTop:'50px'}}>Less Container Load via laut adalah jasa pengiriman lewat laut dimana anda bisa mengimpor dalam jumlah kecil karena barang anda akan dicampur dengan barang orang lain untuk memenuhi 1 container. Di jasa import VAR Express, kami dapat mengimpor barang anda TANPA MINIMAL pengiriman!
-        
+       <div className='text-white  text-center mt-lg-5' style={{marginTop:'50px'}}>
+       Pengiriman via udara adalah jasa pengiriman lewat laut dimana anda bisa mengimpor dalam jumlah kecil karena barang anda akan dicampur dengan barang orang lain untuk memenuhi 1 container. Dijasa import Lomiles, anda dapat mengimpor barang anda TANPA MINIMAL pengiriman!
         </div>
     </div>
 
