@@ -64,6 +64,7 @@ const Dashboard = () => {
               ) : (
                 <FiArrowLeftCircle/>
               )}
+              
             </div>
           </SidebarHeader>
           <SidebarContent>
