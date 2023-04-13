@@ -65,16 +65,15 @@ if(widthSize <= mobileWidth){
     <div class="container">
         <div class="body d-md-flex align-items-center justify-content-between">
             <div class="box-1 mt-md-0 mt-5">
-                {/* <img src="https://images.pexels.com/photos/2033997/pexels-photo-2033997.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                    class="" alt=""/> */}
+               
                       <center>
                      <div className='mt-4' >
 
-                        <img src='/image/Logistik.png' style={{width:'100px',height:'20px'}}/>
+                        <img src='/image/LOMILES_PUTIH.png' style={{width:'339px',height:'84px'}}/>
 
 
                      </div>
-                     <div className='mt-4'>Selamat datang di halaman Customer New Logistik</div>
+                     <div className='mt-4'>Selamat datang di halaman Customer</div>
 
                 </center>
 
@@ -92,14 +91,14 @@ if(widthSize <= mobileWidth){
 
 
 <div className='form-group mb-4'>
-
-    <input type="text" className='form-control' placeholder='Kode Marking'></input>
+  
+    <input type="text" className='form-control' placeholder='Alamat Email'></input>
    
 
 </div>
 <div className='form-group mb-4'>
 
-<input type="text" className='form-control' placeholder='Password'></input>
+<input type="password" className='form-control' placeholder='Password'></input>
 
 
 </div>
@@ -111,7 +110,7 @@ if(widthSize <= mobileWidth){
 </div>
 
 <center>
-<button type="button" className="login_masuk" style={{color:'white'}}>Login</button>
+<button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/dashboard">Login</a></button>
 </center>
 
 

@@ -24,6 +24,7 @@
     flex-direction: row;
     margin-left:80px;
     width:800px;
+    margin-top:-40px;
 }
 .gpt3__navbar-sign{
     display: flex;

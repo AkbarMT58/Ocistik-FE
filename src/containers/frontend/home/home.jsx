@@ -74,7 +74,7 @@ if(widthSize <= mobileWidth){
     <div className='gpt3__whatgpt3 section__margin' id='whpt3' style={{height:display_height_form}}>
     
       <div className='gpt3__whatgpt3-heading'>
-        <h4 className='gradient__text'>Cek Resi Lowmiles</h4>
+        <h4 className='gradient__text'>Cek Resi Lomiles</h4>
        
 
       </div>

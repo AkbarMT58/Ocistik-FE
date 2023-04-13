@@ -547,7 +547,7 @@ function allowNumbersOnly(e) {
       <Navbar/>
       <div className='gpt3__header section__padding' id="home">
       <div className='gpt3__header-content'>
-        <h1 className='gradient__text'>LAYANAN</h1>
+        <h1 className='gradient__text' style={{marginTop:'-100px'}}>LAYANAN</h1>
         <hr className='border_garis_tentangkami'></hr>
         <div className='gpt3__header_tentangkami'><p className='fs-2 text-white'></p></div>
       </div>

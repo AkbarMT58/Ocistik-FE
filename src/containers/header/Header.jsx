@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div className='gpt3__header section__padding' id="home">
       <div className='gpt3__header-content'>
-        <h1 className='gradient__text'>Termurah Dan Tercepat</h1>
+        <h1 className='gradient__text' style={{marginTop:'200px'}}>Termurah Dan Tercepat</h1>
         <div className='gpt3__header_hubungi_kami'><p>Hubungi Kami</p></div>
        
       

@@ -22,6 +22,7 @@ import {
   SidebarHeader,
   SidebarFooter,
   SidebarContent,
+  
 } from "react-pro-sidebar";
 
 //import icons from react icons
@@ -29,10 +30,8 @@ import { FaList, FaRegHeart } from "react-icons/fa";
 import { FiHome, FiLogOut, FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import { RiPencilLine } from "react-icons/ri";
 import { BiCog } from "react-icons/bi";
-
-
-//import sidebar css from react-pro-sidebar module and our custom css 
 import "react-pro-sidebar/dist/css/styles.css";
+
 
 
 
@@ -55,7 +54,7 @@ const Dashboard = () => {
           <SidebarHeader>
           <div className="logotext">
               {/* small and big change using menucollapse state */}
-              <p>{menuCollapse ? "Logo" : "Lowmiles"}</p>
+              <p>{menuCollapse ? <img src="/image/lomiles_admin.png" /> : <img src="/image/lomiles_admin.png" />}</p>
             </div>
             <div className="closemenu" onClick={menuIconClick}>
                 {/* changing menu collapse icon on click */}
@@ -64,26 +63,32 @@ const Dashboard = () => {
               ) : (
                 <FiArrowLeftCircle/>
               )}
-              
+
             </div>
           </SidebarHeader>
           <SidebarContent>
             <Menu iconShape="square">
               <MenuItem active={true} icon={<FiHome />}>
-                Home
+                Beranda
               </MenuItem>
-              <MenuItem icon={<FaList />}>Category</MenuItem>
-              <MenuItem icon={<FaRegHeart />}>Favourite</MenuItem>
-              <MenuItem icon={<RiPencilLine />}>Author</MenuItem>
-              <MenuItem icon={<BiCog />}>Settings</MenuItem>
+              <MenuItem icon={<FaList />}>Pesanan Saya</MenuItem>
+              <MenuItem icon={<FaRegHeart />}>Pesanan Saya</MenuItem>
+              <MenuItem icon={<RiPencilLine />}>Buat Pesanan</MenuItem>
+              <MenuItem icon={<BiCog />}>Invoices</MenuItem>
+              <MenuItem icon={<BiCog />}>Pembayaran</MenuItem>
+              <MenuItem icon={<BiCog />}>Poin</MenuItem>
             </Menu>
           </SidebarContent>
           <SidebarFooter>
             <Menu iconShape="square">
-              <MenuItem icon={<FiLogOut />}>Logout</MenuItem>
+              <MenuItem icon={<BiCog />}>Referral</MenuItem>
+              <MenuItem icon={<BiCog />}>Pusat Bantuan</MenuItem>
+              <MenuItem icon={<BiCog />}>Pengaturan</MenuItem>
+              <MenuItem icon={<FiLogOut />}><a href="/login"></a>Logout</MenuItem>
             </Menu>
           </SidebarFooter>
         </ProSidebar>
+      
       </div>
     </>
   );
