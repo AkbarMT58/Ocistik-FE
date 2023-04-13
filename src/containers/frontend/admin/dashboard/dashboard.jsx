@@ -3,8 +3,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../frontend/admin/dashboard/dashboard.css'
 import Navbar_Dashboard  from './navbar';
-
-
+import Pesanan  from './pesanan/pesanan';
 import { getData_Artikel } from '../../../../constants/api/logistik';
 import { useState,useRef,useEffect } from "react";
 import dateFormat from 'dateformat';
@@ -72,7 +71,6 @@ const Dashboard = () => {
                 Beranda
               </MenuItem>
               <MenuItem icon={<FaList />}>Pesanan Saya</MenuItem>
-              <MenuItem icon={<FaRegHeart />}>Pesanan Saya</MenuItem>
               <MenuItem icon={<RiPencilLine />}>Buat Pesanan</MenuItem>
               <MenuItem icon={<BiCog />}>Invoices</MenuItem>
               <MenuItem icon={<BiCog />}>Pembayaran</MenuItem>
@@ -95,6 +93,8 @@ const Dashboard = () => {
     <div className='bg_dashboard bq-aqua'>
 
             <Navbar_Dashboard/>
+
+            <Pesanan/>
             
     </div>
 
