@@ -81,13 +81,15 @@
 
 .bg_dashboard{
 
-  background-image: url("../../../../assets/image/unsplash_FPKnAO-CF6M-1.png");
+  background-image: url("../../../../assets/image/petikemasvertikal.png");
   background-repeat: no-repeat;
   height:400px ;
-  width: 1400px;
- 
+  max-width: 1200px;
 
-
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 
 }
 
@@ -95,8 +97,46 @@
 
   height:400px ;
   width: 1400px;
-  
+  background-color:aqua;
   background-color: rgba(0, 139, 217, 0.28);
 
 
+
 }
+
+
+.body_pesanan {
+  
+  width: 720px;
+  height: 440px;
+  margin: 0px auto;
+  border: 1px solid #dddd;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: white;
+  color:white;
+ 
+}
+
+
+.body_ketentuan {
+  
+  width: 900px;
+  height: 440px;
+  margin: 0px auto;
+  border: 1px solid #dddd;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: white;
+  color:white;
+ 
+}
+
+.box-ketentuan {
+  width: 100%;
+ 
+  ;
+}
+

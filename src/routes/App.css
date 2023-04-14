@@ -13,27 +13,18 @@ a{
 }
 .gradient__bg{
 
-    /* ff 3.6+ */
-    background:-moz-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
-
-    /* safari 5.1+,chrome 10+ */
-    background:-webkit-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
-
-    /* opera 11.10+ */
-    background:-o-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
-
-    /* ie 10+ */
-    background:-ms-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
-
-    /* global 92%+ browsers support */
-    background:radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, white 100%);
 
     background-image: url("../../src/assets/image/unsplash_FPKnAO-CF6M.png");
     background-repeat: no-repeat;
     height:600px ;
 
-    max-width: 1200px;
+    max-width: 1400px;
     margin:auto;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
    
 
     
@@ -55,6 +46,7 @@ a{
     margin: 4rem 6rem;
     margin-top:-100px;
     max-width:1200px;
+    margin-bottom:50px;
     margin:auto;
 }
 
