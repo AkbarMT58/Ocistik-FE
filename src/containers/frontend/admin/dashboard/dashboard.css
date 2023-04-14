@@ -77,6 +77,35 @@
   background-color: rgba(0, 139, 217, 0.74);
 }
 
+.box_1_header{
+background: linear-gradient(180deg, #46BCFE 0%, #0386CE 120%);
+box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+border-radius: 20px 20px 0px 0px;
+width: 500px;
+margin-left:0px;
+height:60px;
+
+}
+
+.box_dashboard{
+
+  left: 0%;
+  right: -2.39%;
+  top: 5.88%;
+  bottom: -5.88%;
+  
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+
+   
+  width: 500px;
+  height: 200px;
+
+
+
+}
+
 
 
 .bg_dashboard{
@@ -84,7 +113,7 @@
   background-image: url("../../../../assets/image/petikemasvertikal.png");
   background-repeat: no-repeat;
   height:400px ;
-  max-width: 1200px;
+  max-width: 1400px;
 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -134,9 +163,40 @@
  
 }
 
+
+.body_dashboard {
+  
+  width: 500px;
+  height: 200px;
+  margin: 0px auto;
+  border: 1px solid #dddd;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: white;
+  color:white;
+ 
+}
+
+
 .box-ketentuan {
   width: 100%;
+  height:100%;
  
   ;
+}
+
+.box-dashboard {
+  width: 50%;
+  height:50%;
+ 
+  ;
+}
+
+p {
+  color: black;
+  text-indent: 0px;
+  font-size:10px;
+  text-justify:center;
 }
 
