@@ -3,15 +3,8 @@ window.env = {
   "API_GATEWAY": "http://192.168.15.24:8080",
   "API_GATEWAY_CALCULATION": "http://192.168.15.24:8787",
   "API_GATEWAY_LOKAL": "http://192.168.15.20:9000",
-<<<<<<< HEAD
-  "APPDATA": "C:\\Users\\AKBAR\\AppData\\Roaming",
-  "ChocolateyInstall": "C:\\ProgramData\\chocolatey",
-  "ChocolateyLastPathUpdate": "133195076116219703",
-  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\LOCAL\\crashpad_7148_BMXCBQVDLYSFZGEJ",
-=======
   "APPDATA": "C:\\Users\\Back End\\AppData\\Roaming",
-  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\LOCAL\\crashpad_8684_BKYXWLXWELLWFBUU",
->>>>>>> 103349c5adbbba5236d811652644216404be3a95
+  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\LOCAL\\crashpad_544_XXZOWEYSZOCETNEH",
   "CLIENT_KEY": "Mid-client-S_UQJqsP0cWaWzIU",
   "COLOR": "1",
   "COLORTERM": "truecolor",
@@ -25,6 +18,8 @@ window.env = {
   "EDITOR": "notepad.exe",
   "ENV_NODE": "DEVELOPMENT",
   "EXPIRED_TOKEN_DAY": "1",
+  "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
+  "FPS_BROWSER_USER_PROFILE_STRING": "Default",
   "GIT_ASKPASS": "c:\\Users\\Back End\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh",
   "GOPATH": "C:\\Users\\Back End\\go",
   "HOME": "C:\\Users\\Back End",
