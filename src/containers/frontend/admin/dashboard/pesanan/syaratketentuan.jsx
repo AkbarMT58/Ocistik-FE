@@ -66,12 +66,12 @@ const SyaratKetentuan = () => {
             </div>
           </SidebarHeader>
           <SidebarContent>
-            <Menu iconShape="square">
+          <Menu iconShape="square">
               <MenuItem active={true} icon={<FiHome />}>
-                Beranda
+              <a className='text-black' href="/admin/dashboard">Beranda</a>
               </MenuItem>
-              <MenuItem icon={<FaList />}><a className='text-black' href="/admin/dashboard">Pesanan Saya</a></MenuItem>
-              <MenuItem icon={<RiPencilLine />}><a  className='text-black' href="/admin/dashboard">Buat Pesanan</a></MenuItem>
+              <MenuItem icon={<FaList />}><a className='text-black' href="/admin/pesanan">Pesanan Saya</a></MenuItem>
+              <MenuItem icon={<RiPencilLine />}><a className='text-black' href="/admin/buatpesanan">Buat Pesanan</a></MenuItem>
               <MenuItem icon={<BiCog />}>Invoices</MenuItem>
               <MenuItem icon={<BiCog />}>Pembayaran</MenuItem>
               <MenuItem icon={<BiCog />}>Poin</MenuItem>
@@ -109,16 +109,37 @@ const SyaratKetentuan = () => {
                                            
                                             <div className='' >
                                              <center>
-                                            <div className='text-black' style={{marginLeft:"-150px"}}>Syarat & Ketentuan</div>
+                                            <div className='text-black mb-4' style={{marginTop:'0px',fontWeight:'bold'}} >Syarat & Ketentuan</div>
                                             </center>
-                                            <div className='-ml-100'>
-                                              <div className='text-black'>A. KETENTUAN PENGIRIMAN</div>
-                                              <div>Telah disepakatinya ketentuan Pengiriman sebagaimana tercantum dalam Syarat dan Ketentuan ini, syarat dan ketentuan pengiriman yang diberikan oleh Ocommerce Capital Express</div>
-                                              <div>Untuk pengiriman via udara, Ocommerce Capital Express memberlakukan syarat minimum sebesar 1 Kg/ pengiriman, dan nilai berat atas Barang ditentukan menggunakan perhitungan pengukuran dari Ocommerce Capital Express. Dalam hal perhitungan berat Barang, maka akan mengikuti ketentuan pembulatan nilai sebagai berikut:</div>
-                                              Untuk pengiriman via laut, Ocommerce Capital Express memberlakukan syarat minimum sebesar 0,1 Cbm/ pengiriman dengan ketentuan apabila Barang tidak mencapai 0,1 Cbm/ pengiriman maka akan dibulatkan ke atas menjadi 0,1 Cbm.
+                                            <div className='text-black fs-6' >
+                                              <div style={{marginLeft:'-650px'}} >A. KETENTUAN PENGIRIMAN</div>
+                                            
+                                              <p style={{fontSize:'15px'}} >1.Telah disepakatinya ketentuan Pengiriman sebagaimana tercantum dalam Syarat dan Ketentuan ini, syarat dan
+                                              <p style={{fontSize:'15px',marginLeft:'-300px'}} >ketentuan pengiriman yang diberikan oleh Ocommerce Capital Express</p>
+                                              </p>
 
-                                              B. KETENTUAN BARANG
-                                                  Adapun barang-barang yang dapat dikirimkan menggunakan Jasa Lomiles
+                                              <p style={{fontSize:'15px',marginLeft:'-65px',marginTop:'-50px'}} >2.Untuk pengiriman via udara, Ocommerce Capital Express memberlakukan syarat minimum sebesar 1 Kg</p>
+                                              <p style={{fontSize:'15px',marginLeft:'-750px',marginTop:'-30px'}}>Pengiriman</p>
+                                              
+                                        
+                                              <p style={{fontSize:'15px',marginTop:'-30px'}} >3.Telah disepakatinya ketentuan Pengiriman sebagaimana tercantum dalam Syarat dan Ketentuan ini, syarat dan
+                                              <p style={{fontSize:'15px',marginLeft:'-300px'}} >ketentuan pengiriman yang diberikan oleh Ocommerce Capital Express</p>
+                                              </p>
+
+                                              <center>
+                                              <button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/syaratketentuan">Setuju</a></button>
+                                              <button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/syaratketentuan">Tidak Setuju</a></button>
+                                              </center>
+
+                                     
+                                            
+                                             
+                                              
+
+
+                                            
+                                              
+                                         
                                             </div>
                                            </div>
                                        
