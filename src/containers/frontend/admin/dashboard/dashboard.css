@@ -164,6 +164,81 @@ height:60px;
 }
 
 
+.body_informasibarang {
+  
+  width: 900px;
+  height: 540px;
+  margin: 0px auto;
+  border: 1px solid #dddd;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: white;
+  color:white;
+ 
+}
+
+
+.body_kirimindo {
+  
+  width: 900px;
+  height: 350px;
+  margin: 0px auto;
+  border: 1px solid #dddd;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: white;
+  color:white;
+ 
+}
+
+.box-kirimindo{
+
+  
+  width: 900px;
+  height: 350px;
+  margin: 0px auto;
+  border: 1px solid #dddd;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: white;
+  color:white;
+ 
+
+
+
+
+}
+
+.lanjut_tombol{
+
+ width: 461px;
+height: 46px;
+left: 601px;
+top: 869px;
+
+background: #008BD9;
+border-radius: 5px;
+
+
+}
+
+.boxkirimindonesia{
+ box-sizing: border-box;
+
+
+width: 422px;
+height: 63px;
+left: 381px;
+top: 612px;
+
+border: 1.20572px solid #ACACAC;
+border-radius: 6.02858px;
+}
+
+
 .body_dashboard {
   
   width: 500px;
