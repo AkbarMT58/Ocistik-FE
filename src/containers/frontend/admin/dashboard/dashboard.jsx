@@ -70,8 +70,8 @@ const Dashboard = () => {
               <MenuItem active={true} icon={<FiHome />}>
                 Beranda
               </MenuItem>
-              <MenuItem icon={<FaList />}>Pesanan Saya</MenuItem>
-              <MenuItem icon={<RiPencilLine />}>Buat Pesanan</MenuItem>
+              <MenuItem icon={<FaList />}><a className='text-black' href="/admin/dashboard">Pesanan Saya</a></MenuItem>
+              <MenuItem icon={<RiPencilLine />}><a className='text-black' href="/admin/dashboard">Buat Pesanan</a></MenuItem>
               <MenuItem icon={<BiCog />}>Invoices</MenuItem>
               <MenuItem icon={<BiCog />}>Pembayaran</MenuItem>
               <MenuItem icon={<BiCog />}>Poin</MenuItem>

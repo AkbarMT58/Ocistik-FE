@@ -9,7 +9,18 @@ const Pesanan =()=>{
     return (
 
         <>
-                            <div class="container" style={{marginTop:'100px'}}>
+                            <center>
+
+                                    <div className='text-white fs-3' style={{fontWeight:'bold',marginTop:'120px'}}>
+
+                                        Buat Pesanan
+
+                                    </div>
+
+
+                            </center>
+                            
+                            <div class="container" style={{marginTop:'50px'}}>
                                 <div class="body_pesanan d-md-flex align-items-center justify-content-between">
                                     <div class="box-1 mt-md-0 mt-5">
                                     
@@ -85,15 +96,28 @@ const Pesanan =()=>{
                             </div>
 
                         </div>
-                        <center>
-                        <button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/dashboard">Lanjut</a></button>
+                       
+                                        </div>
+
+                                        <center>
+                        <button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/syaratketentuan">Lanjut</a></button>
                         </center>
 
-                                        </div>
                                       
                                     </div>
-                                    <span class="fas fa-times"></span>
+
+                                
+
+                                    
+                             
+                             
+
                                 </div>
+
+
+
+                      
+                                
                             </div>
 
         </>
