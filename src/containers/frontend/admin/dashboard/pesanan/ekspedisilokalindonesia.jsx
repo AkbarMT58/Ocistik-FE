@@ -3,14 +3,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../../frontend/admin/dashboard/dashboard.css'
 import Navbar_Dashboard  from '../navbar';
-
-
 import { useState,useRef,useEffect } from "react";
-import dateFormat from 'dateformat';
-import env from "react-dotenv";
-import Pagination from '../../../../../components/general/Pagination';
-import axios from 'axios';
-
 
 //import react pro sidebar components
 import {
@@ -29,11 +22,14 @@ import { FiHome, FiLogOut, FiArrowLeftCircle, FiArrowRightCircle } from "react-i
 import { RiPencilLine } from "react-icons/ri";
 import { BiCheckbox, BiCog } from "react-icons/bi";
 import "react-pro-sidebar/dist/css/styles.css";
-import { CheckBox } from '@ui-kitten/components';
+
 
 
 const EkspedisiLokalIndonesia = () => {
-  
+  const [tipeekspedisi, setEkpedisi] = React.useState("jne");
+
+
+
     //create initial menuCollapse state using useState hook
     const [menuCollapse, setMenuCollapse] = useState(false)
 
@@ -106,33 +102,63 @@ const EkspedisiLokalIndonesia = () => {
                                            
                                             <div className='' >
                                              <center>
-                                            <div className='text-black mb-4 fs-5' style={{marginTop:'20px',fontWeight:'bold'}} >Pengiriman Ke Indonesia</div>
+                                            <div className='text-black fs-5' style={{marginTop:'20px',fontWeight:'bold'}} >Ekspedisi Lokal Indonesia</div>
                                             </center>
                                             <div className='text-black fs-6' >
-                                             <div className='row mb-4' style={{marginTop:'100px'}} >
+                                             <div className='row' style={{marginTop:'20px'}} >
 
-                                                <div className='col-md-6'>
+                                                <div className='col-md-12'>
 
-                                                 <div className='boxkirimindonesia'>
+                                                 <div className='boxkirimindonesia mb-4'>
 
-                                                  <img src="/image/icons/kapal.png"  className='setlaut'/>
+                                                  <img src="/image/icons/jne.png"  className='setlaut'/>
                                                   <label className='text-black labelkirimlaut'>JNE</label>
+                                                
+
+                                                  <input style={{marginLeft:'200px'}}
+                                                    type="checkbox"
+                                                    checked={tipeekspedisi === "jne"}
+                                                    onChange={() => setEkpedisi("jne")}
+                                                  />
                                                  
                                               
 
                                                  </div>
-                                                                                                    <div className='col-md-6'>
+                                                <div className='col-md-12'>
 
-                                                    <div className='boxkirimindonesia'>
+                                                    <div className='boxkirimindonesia mb-4'>
 
-                                                    <img src="/image/icons/kapal.png"  className='setlaut'/>
+                                                    <img src="/image/icons/sicepat.png"  className='setlaut'/>
                                                     <label className='text-black labelkirimlaut'>Si Cepat</label>
-
+                                                    <input style={{marginLeft:'160px'}}
+                                                    type="checkbox"
+                                                    checked={tipeekspedisi === "sicepat"}
+                                                    onChange={() => setEkpedisi("sicepat")}
+                                                  />
 
 
                                                     </div>
 
                                         
+
+                                                </div>
+                                                <div className='col-md-12'>
+
+                                                <div className='boxkirimindonesia mb-4'>
+
+                                                <img src="/image/icons/jnt.png"  className='setlaut'/>
+                                                <label className='text-black labelkirimlaut'>J&T</label>
+                                                <input style={{marginLeft:'200px'}}
+                                                    type="checkbox"
+                                                    checked={tipeekspedisi === "jnt"}
+                                                    onChange={() => setEkpedisi("jnt")}
+                                                  />
+
+
+
+                                                </div>
+
+
 
                                                 </div>
 
@@ -142,12 +168,11 @@ const EkspedisiLokalIndonesia = () => {
 
                                              </div>
 
-                                             <br>
-                                             </br>
+                                          
 
                                              <center >
                                                 
-                                                <button  type="button" className="lanjut_tombol" style={{color:'white',marginTop:'-250px'}}><a href="/admin/syaratketentuan">Lanjut</a></button>
+                                                <button  type="button" className="lanjut_tombol" style={{color:'white',marginTop:'-250px'}}><a href="/admin/rangkumanpesanan">Lanjut</a></button>
                                                
                                             </center>
 

@@ -29,7 +29,7 @@ import { FiHome, FiLogOut, FiArrowLeftCircle, FiArrowRightCircle } from "react-i
 import { RiPencilLine } from "react-icons/ri";
 import { BiCheckbox, BiCog } from "react-icons/bi";
 import "react-pro-sidebar/dist/css/styles.css";
-import { CheckBox } from '@ui-kitten/components';
+
 
 
 const PengirimanKeIndonesia = () => {
@@ -42,6 +42,9 @@ const PengirimanKeIndonesia = () => {
     //condition checking to change state from true to false and vice versa
     menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
   };
+
+  const [tipekirim, setTipeKirim] = React.useState("laut");
+
 
   return (
     <>
@@ -115,14 +118,19 @@ const PengirimanKeIndonesia = () => {
 
                                                  <div className='boxkirimindonesia'>
 
-                                                  <img src="/image/icons/kapal.png"  className='setlaut'/>
+                                                  <img src="/image/icons/kapal.png"  className='setlautkirim'/>
                                                   <label className='text-black labelkirimlaut'>Pengiriman Laut</label>
                                                  
-                                              
 
+                                                  <input  style={{marginLeft:'200px'}}
+                                                          type="checkbox"
+                                                          checked={tipekirim === "laut"}
+                                                          onChange={() => setTipeKirim("laut")}
+                                                        />
+
+                                                  
+      
                                                  </div>
-
-                                        
 
                                                 </div>
 
@@ -133,6 +141,13 @@ const PengirimanKeIndonesia = () => {
 
                                                 <img src="/image/icons/pesawat.png"  className='setudara'/>
                                                 <label className='text-black labelkirimudara'>Pengiriman Udara</label>
+                                               
+
+                                                 <input style={{marginLeft:'180px'}}
+                                                    type="checkbox"
+                                                    checked={tipekirim === "udara"}
+                                                    onChange={() => setTipeKirim("udara")}
+                                                  />
 
                                                 </div>
 
@@ -145,7 +160,7 @@ const PengirimanKeIndonesia = () => {
 
                                              <center >
                                                 
-                                                <button  type="button" className="lanjut_tombol" style={{color:'white',marginTop:'-250px'}}><a href="/admin/syaratketentuan">Lanjut</a></button>
+                                                <button  type="button" className="lanjut_tombol" style={{color:'white',marginTop:'0px'}}><a href="/admin/ekspedisilokalindonesia">Lanjut</a></button>
                                                
                                             </center>
 

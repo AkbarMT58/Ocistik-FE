@@ -126,8 +126,8 @@ const SyaratKetentuan = () => {
                                               </p>
 
                                               <center>
-                                              <button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/syaratketentuan">Setuju</a></button>
-                                              <button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/syaratketentuan">Tidak Setuju</a></button>
+                                              <button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/informasibarang">Setuju</a></button>
+                                              <button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/buatpesanan">Tidak Setuju</a></button>
                                               </center>
 
                                             </div>

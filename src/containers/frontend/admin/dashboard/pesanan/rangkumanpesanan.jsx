@@ -10,6 +10,7 @@ import dateFormat from 'dateformat';
 import env from "react-dotenv";
 import Pagination from '../../../../../components/general/Pagination';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 
 //import react pro sidebar components
@@ -29,7 +30,7 @@ import { FiHome, FiLogOut, FiArrowLeftCircle, FiArrowRightCircle } from "react-i
 import { RiPencilLine } from "react-icons/ri";
 import { BiCheckbox, BiCog } from "react-icons/bi";
 import "react-pro-sidebar/dist/css/styles.css";
-import { CheckBox } from '@ui-kitten/components';
+
 
 
 const RangkumanPesanan = () => {
@@ -42,6 +43,25 @@ const RangkumanPesanan = () => {
     //condition checking to change state from true to false and vice versa
     menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
   };
+
+  const simpanrangkumanpesanan=()=>{
+
+    swal({
+      title: "Selesai",
+      text: "Pesananmu Berhasil Dibuat",
+      icon: "success",
+      successMode: true,
+    })
+    .then(willDelete => {
+      if (willDelete) {
+        swal("Success!", "Pesananmu Berhasil Dibuat", "success");
+      }
+      window.location.href="/admin/buatpesanan"
+    });
+
+
+
+  }
 
   return (
     <>
@@ -100,43 +120,108 @@ const RangkumanPesanan = () => {
             </div>
 
             <div class="container" style={{marginTop:'10px'}}>
-                                <div class="body_kirimindo d-md-flex align-items-center justify-content-between">
-                                    <div class="box-kirimindo mt-md-0 mt-5">
+                                <div class="body_rangkuman d-md-flex align-items-center justify-content-between">
+                                    <div class="box-rangkuman mt-md-0 mt-5">
                                     
                                            
                                             <div className='' >
                                              <center>
-                                            <div className='text-black mb-4 fs-5' style={{marginTop:'20px',fontWeight:'bold'}} >Pengiriman Ke Indonesia</div>
+                                            <div className='text-black mb-4 fs-5' style={{marginTop:'20px',fontWeight:'bold'}} >Rangkuman Pesanan</div>
                                             </center>
                                             <div className='text-black fs-6' >
-                                             <div className='row mb-4' style={{marginTop:'100px'}} >
+                                             <div className='row mb-4' style={{marginTop:'0px'}} >
 
-                                                <div className='col-md-6'>
 
-                                                 <div className='boxkirimindonesia'>
+                                              <center>
+                                              <div class="card" style={{width:'400px'}}>
+                                              <div class="card-body">
+                                                <div className='row'>
 
-                                                  <img src="/image/icons/kapal.png"  className='setlaut'/>
-                                                  <label className='text-black labelkirimlaut'>Pengiriman Laut</label>
+                                                  <div className='col-md-8'>
+                                                    <label className='text-black' style={{fontSize:'12px',fontWeight:'bold',marginLeft:'-120px'}}>Nama Penerima</label>
+                                                    <br></br>
+                                                    <label className='text-black' style={{fontSize:'10px',marginLeft:'-140px'}}>Ita Yuliana Pane
+                                                    </label>
+                                                    <br></br>
+
+                                                    <label className='text-black' style={{fontSize:'10px',marginLeft:'-20px'}}>+6281290002631</label>
+                                                     <label className='text-black' style={{fontSize:'10px',marginLeft:'8px'}}> JL. H. Maula Ujung No.6 </label>
+                                                     <label className='text-black' style={{fontSize:'10px',marginLeft:'0px'}}>RT.008 RW.012 Palmerah, Jakarta Barat 11480</label>
+
+                                                  </div>
+                                                  <div className='col-md-4' style={{marginTop:'20px'}}>
+
+                                                    <a  type="submit" className='text-blue' style={{fontSize:'12px',color:'blue'}}>Ubah</a>
+
+                                                  </div>
+
+
+                                                </div>
+
+                                                <div className='row'>
+
+                                                <div className='col-md-8'>
+                                                  <label className='text-black' style={{fontSize:'12px',fontWeight:'bold',marginLeft:'-150px'}}>Pengiriman</label>
+                                                  <br></br>
+                                                  <label className='text-black' style={{fontSize:'10px',marginLeft:'-140px'}}>Pengiriman Laut
+                                                  </label>
                                                  
+                                                </div>
+                                                <div className='col-md-4' style={{marginTop:'20px'}}>
+
+                                                  <a  type="submit" className='text-blue' style={{fontSize:'12px',color:'blue'}}>Ubah</a>
+
+                                                </div>
+
+
+                                                </div>
+
+                                                <div className='row'>
+
+                                                <div className='col-md-8'>
+                                                  <label className='text-black' style={{fontSize:'12px',fontWeight:'bold',marginLeft:'-130px'}}>Ekspedisi Lokal</label>
+                                                  <br></br>
+                                                  <label className='text-black' style={{fontSize:'10px',marginLeft:'-200px'}}>JNE
+                                                  </label>
+                                                 
+                                                </div>
+                                                <div className='col-md-4' style={{marginTop:'20px'}}>
+
+                                                  <a  type="submit" className='text-blue' style={{fontSize:'12px',color:'blue'}}>Ubah</a>
+
+                                                </div>
+                                                
+
+
+                                                </div>
+
+                                                <div className='row'>
+
+                                                  <div className='col-md-8'>
+                                                    <label className='text-black' style={{fontSize:'12px',fontWeight:'bold',marginLeft:'-90px'}}>Estimasi Ongkos Kirim</label>
+                                                    <br></br>
+                                                    <label className='text-black' style={{fontSize:'10px',marginLeft:'-150px'}}>Rp. 320.490,-
+                                                    </label>
+                                                  
+                                                  </div>
+                                                  <div className='col-md-4' style={{marginTop:'20px'}}>
+
+                                                    <a  type="submit" className='text-blue' style={{fontSize:'12px',color:'blue'}}>Ubah</a>
+
+                                                  </div>
+
+
+
+                                                  </div>
+                                                
+                                              </div>
+                                               </div>
+                                               </center>
+
                                               
 
-                                                 </div>
-
-                                        
-
-                                                </div>
-
                                                 
-                                                <div className='col-md-6' >
-
-                                                <div className='boxkirimindonesia'>
-
-                                                <img src="/image/icons/pesawat.png"  className='setudara'/>
-                                                <label className='text-black labelkirimudara'>Pengiriman Udara</label>
-
-                                                </div>
-
-                                                </div>
+                                              
 
                                              </div>
 
@@ -145,7 +230,7 @@ const RangkumanPesanan = () => {
 
                                              <center >
                                                 
-                                                <button  type="button" className="lanjut_tombol" style={{color:'white',marginTop:'-250px'}}><a href="/admin/syaratketentuan">Lanjut</a></button>
+                                                <button onClick={simpanrangkumanpesanan} type="button" className="lanjut_tombol" style={{color:'white',marginTop:'-350px'}}><a>Lanjut</a></button>
                                                
                                             </center>
 

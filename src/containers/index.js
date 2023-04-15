@@ -36,6 +36,8 @@ export {default as BuatPesanan} from './frontend/admin/dashboard/pesanan/BuatPes
  export {default as Syaratketentuan} from './frontend/admin/dashboard/pesanan/syaratketentuan';
  export {default as Informasibarang} from './frontend/admin/dashboard/pesanan/informasibarang';
  export {default as PengirimanKeIndonesia} from './frontend/admin/dashboard/pesanan/pengirimankeindonesia';
+ export {default as EkspedisiLokalIndonesia} from './frontend/admin/dashboard/pesanan/ekspedisilokalindonesia';
+ export {default as RangkumanPesanan} from './frontend/admin/dashboard/pesanan/rangkumanpesanan';
 
 // export {default as UserProfile} from './frontend/admin/dashboard/UserProfile';
 // export {default as TableList} from './frontend/admin/dashboard/TableList';

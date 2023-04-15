@@ -120,7 +120,7 @@ const PengirimanBarang = () => {
                                                 
                                                 <div className='col-md-8 mb-4' style={{marginLeft:'-50px'}}>
 
-                                                    <input type="text" className='form-control w-100' />
+                                                    <select type="text" className='form-control w-100' />
 
                                                 
 
@@ -136,7 +136,7 @@ const PengirimanBarang = () => {
 
                                                     <div className='col-md-8 mb-4' style={{marginLeft:'-50px'}}>
 
-                                                    <input type="text" className='form-control w-100' />
+                                                    <input type="text" className='form-control w-100' placeholder='m3' />
 
 
 
@@ -152,7 +152,7 @@ const PengirimanBarang = () => {
 
                                                     <div className='col-md-8 mb-4' style={{marginLeft:'-50px'}}>
 
-                                                    <input type="text" className='form-control w-100' />
+                                                    <input type="text" className='form-control w-100' placeholder='Kg' />
 
 
 
@@ -168,7 +168,7 @@ const PengirimanBarang = () => {
 
                                                     <div className='col-md-8 mb-4' style={{marginLeft:'-50px'}}>
 
-                                                    <input type="text" className='form-control w-100' />
+                                                    <input type="file" className='form-control w-100' />
 
 
 
@@ -192,7 +192,7 @@ const PengirimanBarang = () => {
 
                                                     <center>
                                                 
-                                                <button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/syaratketentuan">Lanjut</a></button>
+                                                <button  type="button" className="submit_informasibarang" style={{color:'white'}}><a href="/admin/pengirimankeindonesia">Lanjut</a></button>
                                                
                                                 </center>
 
@@ -202,20 +202,7 @@ const PengirimanBarang = () => {
                                              </div>
 
                                              <div className='text-black'></div>
-                                            
-                                           
-
-
-                                             
-                                     
-                                            
-                                             
-                                              
-
-
-                                            
-                                              
-                                         
+             
                                             </div>
                                            </div>
                                        
