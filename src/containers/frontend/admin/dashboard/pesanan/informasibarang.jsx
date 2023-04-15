@@ -31,10 +31,7 @@ import { BiCog } from "react-icons/bi";
 import "react-pro-sidebar/dist/css/styles.css";
 
 
-
-
-
-const SyaratKetentuan = () => {
+const PengirimanBarang = () => {
   
     //create initial menuCollapse state using useState hook
     const [menuCollapse, setMenuCollapse] = useState(false)
@@ -101,35 +98,124 @@ const SyaratKetentuan = () => {
 
             </div>
 
-            <div class="container" style={{marginTop:'50px'}}>
-                                <div class="body_ketentuan d-md-flex align-items-center justify-content-between">
+            <div class="container" style={{marginTop:'10px'}}>
+                                <div class="body_informasibarang d-md-flex align-items-center justify-content-between">
                                     <div class="box-ketentuan mt-md-0 mt-5">
                                     
                                            
                                             <div className='' >
                                              <center>
-                                            <div className='text-black mb-4 mt-4' style={{marginTop:'0px',fontWeight:'bold'}} >Syarat & Ketentuan</div>
+                                            <div className='text-black mb-4' style={{marginTop:'20px',fontWeight:'bold'}} >Informasi Barang</div>
                                             </center>
                                             <div className='text-black fs-6' >
-                                              <div style={{marginLeft:'-650px'}} >A. KETENTUAN PENGIRIMAN</div>
+                                             <div className='row mb-4 px-4 py-4' style={{marginTop:'-20px'}} >
+
+                                                <div className='col-md-4 mb-4'>
+
+                                                    <label className='text-black'>Kategori Barang</label>
+
+
+                                                </div>
+
+                                                
+                                                <div className='col-md-8 mb-4' style={{marginLeft:'-50px'}}>
+
+                                                    <input type="text" className='form-control w-100' />
+
+                                                
+
+                                                </div>
+
+                                                <div className='col-md-4 mb-4'>
+
+                                                    <label className='text-black'>Total Volume</label>
+
+
+                                                    </div>
+
+
+                                                    <div className='col-md-8 mb-4' style={{marginLeft:'-50px'}}>
+
+                                                    <input type="text" className='form-control w-100' />
+
+
+
+                                                    </div>
+
+                                                    <div className='col-md-4 mb-4'>
+
+                                                    <label className='text-black'>Total Berat</label>
+
+
+                                                    </div>
+
+
+                                                    <div className='col-md-8 mb-4' style={{marginLeft:'-50px'}}>
+
+                                                    <input type="text" className='form-control w-100' />
+
+
+
+                                                    </div>
+
+                                                    <div className='col-md-4 mb-4'>
+
+                                                    <label className='text-black'>Packing List</label>
+
+
+                                                    </div>
+
+
+                                                    <div className='col-md-8 mb-4' style={{marginLeft:'-50px'}}>
+
+                                                    <input type="text" className='form-control w-100' />
+
+
+
+                                                    </div>
+                                                    <div className='col-md-4 mb-4'>
+
+                                                    <label className='text-black'>Tracking Number</label>
+
+
+                                                    </div>
+
+
+                                                    <div className='col-md-8 mb-4' style={{marginLeft:'-50px'}}>
+
+                                                    <input type="text" className='form-control w-100' />
+
+
+
+                                                    </div>
+
+
+                                                    <center>
+                                                
+                                                <button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/syaratketentuan">Lanjut</a></button>
+                                               
+                                                </center>
+
+
+                                      
+
+                                             </div>
+
+                                             <div className='text-black'></div>
                                             
-                                              <p style={{fontSize:'15px'}} >1.Telah disepakatinya ketentuan Pengiriman sebagaimana tercantum dalam Syarat dan Ketentuan ini, syarat dan
-                                              <p style={{fontSize:'15px',marginLeft:'-300px'}} >ketentuan pengiriman yang diberikan oleh Ocommerce Capital Express</p>
-                                              </p>
+                                           
 
-                                              <p style={{fontSize:'15px',marginLeft:'-65px',marginTop:'-50px'}} >2.Untuk pengiriman via udara, Ocommerce Capital Express memberlakukan syarat minimum sebesar 1 Kg</p>
-                                              <p style={{fontSize:'15px',marginLeft:'-750px',marginTop:'-30px'}}>Pengiriman</p>
+
+                                             
+                                     
+                                            
+                                             
                                               
-                                        
-                                              <p style={{fontSize:'15px',marginTop:'-30px'}} >3.Telah disepakatinya ketentuan Pengiriman sebagaimana tercantum dalam Syarat dan Ketentuan ini, syarat dan
-                                              <p style={{fontSize:'15px',marginLeft:'-300px'}} >ketentuan pengiriman yang diberikan oleh Ocommerce Capital Express</p>
-                                              </p>
 
-                                              <center>
-                                              <button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/syaratketentuan">Setuju</a></button>
-                                              <button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/syaratketentuan">Tidak Setuju</a></button>
-                                              </center>
 
+                                            
+                                              
+                                         
                                             </div>
                                            </div>
                                        
@@ -171,4 +257,4 @@ const SyaratKetentuan = () => {
   );
 };
 
-export default SyaratKetentuan;
+export default PengirimanBarang;

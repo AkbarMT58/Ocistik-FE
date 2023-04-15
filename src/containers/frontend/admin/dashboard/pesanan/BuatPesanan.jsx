@@ -73,15 +73,14 @@ const BuatPesanan = () => {
               <MenuItem icon={<BiCog />}>Pembayaran</MenuItem>
               <MenuItem icon={<BiCog />}>Poin</MenuItem>
             </Menu>
-          </SidebarContent>
-          <SidebarFooter>
             <Menu iconShape="square">
               <MenuItem icon={<BiCog />}>Referral</MenuItem>
               <MenuItem icon={<BiCog />}>Pusat Bantuan</MenuItem>
               <MenuItem icon={<BiCog />}>Pengaturan</MenuItem>
               <MenuItem icon={<FiLogOut />}><a href="/login"></a>Logout</MenuItem>
             </Menu>
-          </SidebarFooter>
+          </SidebarContent>
+         
         </ProSidebar>
         <div className="container">
        
