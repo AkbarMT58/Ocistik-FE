@@ -67,23 +67,27 @@ const PengirimanKeIndonesia = () => {
             </div>
           </SidebarHeader>
           <SidebarContent>
-          <Menu iconShape="square">
-              <MenuItem active={true} icon={<FiHome />}>
-              <a className='text-black' href="/admin/dashboard">Beranda</a>
-              </MenuItem>
-              <MenuItem icon={<FaList />}><a className='text-black' href="/admin/pesanan">Pesanan Saya</a></MenuItem>
-              <MenuItem icon={<RiPencilLine />}><a className='text-black' href="/admin/buatpesanan">Buat Pesanan</a></MenuItem>
-              <MenuItem icon={<BiCog />}>Invoices</MenuItem>
-              <MenuItem icon={<BiCog />}>Pembayaran</MenuItem>
-              <MenuItem icon={<BiCog />}>Poin</MenuItem>
-            </Menu>
             <Menu iconShape="square">
-              <MenuItem icon={<BiCog />}>Referral</MenuItem>
-              <MenuItem icon={<BiCog />}>Pusat Bantuan</MenuItem>
-              <MenuItem icon={<BiCog />}>Pengaturan</MenuItem>
-              <MenuItem icon={<FiLogOut />}><a href="/login"></a>Logout</MenuItem>
+              <MenuItem active={true} >
+                <img src='/image/icons/beranda.png' style={{width:'40px', height:'40px'}} />
+              <a className='text-white' href="/admin/dashboard">  Beranda</a>
+              </MenuItem>
+              <MenuItem >  <img src='/image/icons/pesanansaya.png' style={{width:'40px', height:'40px'}} /><a className='text-black' href="/admin/pesanan">Pesanan Saya</a></MenuItem>
+              <MenuItem ><img src='/image/icons/logistic.png' style={{width:'40px', height:'40px'}} /><a className='text-black' href="/admin/buatpesanan">Buat Pesanan</a></MenuItem>
+              <MenuItem><img src='/image/icons/invoices.png' style={{width:'40px', height:'40px'}} /> Invoices</MenuItem>
+              <MenuItem ><img src='/image/icons/pembayaran.png' style={{width:'40px', height:'40px'}} /> Pembayaran</MenuItem>
+              <MenuItem ><img src='/image/icons/uang.png' style={{width:'40px', height:'40px'}} /> Poin</MenuItem>
+              
+            <Menu iconShape="square">
+              <MenuItem ><img src='/image/icons/money.png' style={{width:'40px', height:'40px'}} />  Referral</MenuItem>
+              <MenuItem ><img src='/image/icons/bantuan.png' style={{width:'40px', height:'40px'}} /> Pusat Bantuan</MenuItem>
+              <MenuItem ><img src='/image/icons/pengaturan.png' style={{width:'40px', height:'40px'}} /> Pengaturan</MenuItem>
+              {/* <MenuItem ><a href="/login"></a>Logout</MenuItem> */}
+            </Menu>
+      
             </Menu>
           </SidebarContent>
+       
          
         </ProSidebar>
         <div className="container">
