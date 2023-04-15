@@ -27,8 +27,9 @@ import {
 import { FaList, FaRegHeart } from "react-icons/fa";
 import { FiHome, FiLogOut, FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import { RiPencilLine } from "react-icons/ri";
-import { BiCog } from "react-icons/bi";
+import { BiCheckbox, BiCog } from "react-icons/bi";
 import "react-pro-sidebar/dist/css/styles.css";
+import { CheckBox } from '@ui-kitten/components';
 
 
 const PengirimanKeIndonesia = () => {
@@ -114,6 +115,11 @@ const PengirimanKeIndonesia = () => {
 
                                                  <div className='boxkirimindonesia'>
 
+                                                  <img src="/image/icons/kapal.png"  className='setlaut'/>
+                                                  <label className='text-black labelkirimlaut'>Pengiriman Laut</label>
+                                                 
+                                              
+
                                                  </div>
 
                                         
@@ -124,6 +130,9 @@ const PengirimanKeIndonesia = () => {
                                                 <div className='col-md-6' >
 
                                                 <div className='boxkirimindonesia'>
+
+                                                <img src="/image/icons/pesawat.png"  className='setudara'/>
+                                                <label className='text-black labelkirimudara'>Pengiriman Udara</label>
 
                                                 </div>
 

@@ -214,14 +214,47 @@ height:60px;
 
 .lanjut_tombol{
 
- width: 461px;
-height: 46px;
+width: 461px;
+height: 60px;
 left: 601px;
 top: 869px;
 
 background: #008BD9;
 border-radius: 5px;
 
+
+}
+
+.setlaut{
+
+  width:45px;
+  height:45px;
+  float:left;
+  margin:5px;
+
+
+}
+.labelkirimlaut{
+
+  margin-top:20px;
+  margin-left:-150px;
+
+}
+
+.setudara{
+
+  width:45px;
+  height:45px;
+  float:left;
+  margin:5px;
+
+
+}
+
+.labelkirimudara{
+
+  margin-top:20px;
+  margin-left:-150px;
 
 }
 
