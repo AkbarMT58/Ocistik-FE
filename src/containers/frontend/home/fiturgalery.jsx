@@ -68,7 +68,7 @@ const Fitur_Galery = () => {
 
         var display_margin='320px';
         var display_height_form='920px';
-        var display_height_vh='160vh';
+        var display_height_vh='30vh';
       }
       
 
@@ -93,7 +93,7 @@ const Fitur_Galery = () => {
     
   var display_margin='480px';
   var display_height_form='1400px';
-  var display_height_vh='110vh';
+  var display_height_vh='150vh';
 
 
 
@@ -146,6 +146,8 @@ const onClick_laut =() => {
 if(updated=='laut'){
 
 var ubahwarna_utama_laut= warna_choice_aktif;
+var ubahwarna_utama_udara= 'white';
+
 var ubahwarna_child_laut=warna_choice_aktif_child
 
 var display_hidup_laut=display_aktif;
@@ -183,6 +185,7 @@ if(updated=='darat'){
 if (updated=='udara'){
 
   var ubahwarna_utama_udara= warna_choice_aktif;
+  var ubahwarna_utama_laut= 'white';
   var ubahwarna_child_udara=warna_choice_aktif_child
   var ubahwarna_font_udara="white";
   var ubahwarna_font_laut="#0F8ED6";
@@ -208,6 +211,7 @@ if (updated=='udara'){
 if(updated==''){
 
 var ubahwarna_utama_laut= warna_choice_aktif;
+var ubahwarna_utama_udara= 'white';
 var ubahwarna_child_laut=warna_choice_aktif_child;
 var ubahwarna_font_udara="#0F8ED6";
 
@@ -217,16 +221,16 @@ var display_hidup_laut=display_aktif;
 
   return (
 
-    <section style={{height:display_height_vh}}>
+  <section className="flex-container"  >
 
 <div className='fiturgalery'>
-<div className='buttons_cards_layanan m-4' style={{marginTop:'100px'}}>
+<div className='buttons_cards_home m-4' style={{marginTop:'100px'}}>
 
 
 <div class="responsive">
 
 
-  <div class="gallery_artikel"  style={{background:ubahwarna_utama_laut}} onClick={onClick_laut}>
+  <div class="gallery_home"  style={{background:ubahwarna_utama_laut}} onClick={onClick_laut}>
   <input
         ref={inputRef_laut}
         type="hidden"
@@ -244,7 +248,7 @@ var display_hidup_laut=display_aktif;
 </div>
 
 <div class="responsive">
-  <div class="gallery_artikel"  style={{background:ubahwarna_utama_udara}} onClick={onClick_udara} >
+  <div class="gallery_home"  style={{background:ubahwarna_utama_udara}} onClick={onClick_udara} >
   <input
         ref={inputRef_udara}
         type="hidden"
@@ -291,7 +295,7 @@ slide bergerak */}
     <div className='gpt3__galery'>
 
     <div className="fs-4 galery-title" style={{textAlign:"center", marginTop:'8px'}}>
-    LCL Laut (Less Container Load Via Laut)
+   PENGIRIMAN LAUT
     </div>
        <div className='text-white  text-center mt-lg-5' style={{marginTop:'50px'}}>
        Pengiriman via laut adalah jasa pengiriman lewat laut dimana anda bisa mengimpor dalam jumlah kecil karena barang anda akan dicampur dengan barang orang lain untuk memenuhi 1 container. Dijasa import Lomiles, anda dapat mengimpor barang anda TANPA MINIMAL pengiriman!
@@ -309,7 +313,7 @@ slide bergerak */}
     <div className='gpt3__galery'>
 
     <div  className="fs-4 galery-title" style={{textAlign:"center", marginTop:'8px'}}>
-    LCL Udara (Less Container Load Via Udara)
+PENGIRIMAN UDARA
     </div>
        <div className='text-white  text-center mt-lg-5' style={{marginTop:'50px'}}>
        Pengiriman via udara adalah jasa pengiriman lewat laut dimana anda bisa mengimpor dalam jumlah kecil karena barang anda akan dicampur dengan barang orang lain untuk memenuhi 1 container. Dijasa import Lomiles, anda dapat mengimpor barang anda TANPA MINIMAL pengiriman!

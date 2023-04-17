@@ -350,7 +350,7 @@ if(widthSize > mobileWidth){
 
       var display_margin='400px';
       var display_height_form='780px';
-      var displayheightbysetclick='900px';
+      var displayheightbysetclick='1000px';
 
     
     
@@ -388,7 +388,7 @@ else if(updated=='laut'){
 
 var display_margin='400px';
 var display_height_form='1200px';
-var displayheightbysetclick='1100px';
+var displayheightbysetclick='0px';
 
 
 }
@@ -498,9 +498,7 @@ var display_hidup_laut=display_aktif;
 var ubahwarna_font="#0F8ED6";
 var ubahwarna_font_laut="white";
 
-// var display_click_lcl_udara='none';
-// var display_click_fcl_sea='none';
-// var display_click_lcl_sea='none';
+
 
 var warna_div_default='border-style:solid,border-width:2px,border-color:black,font-size:11px,color:black';
 
@@ -519,7 +517,9 @@ function allowNumbersOnly(e) {
 
   return (
 
-<div className='gpt3_home_fitur_bg'  style={{height:displayheightbysetclick}}>
+    <section className='flex-container' style={{height:displayheightbysetclick}}>
+
+<div className='gpt3_home_fitur_bg '  >
 
 <div className='text-white fs-2 text-center mt-lg-5 mb-5 fw-bold'>Hitung Biaya Import</div>
 
@@ -1573,6 +1573,8 @@ Sepatu
 
 
 </div>
+
+</section>
 
 
 

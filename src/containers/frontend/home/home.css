@@ -202,12 +202,77 @@ border-radius: 0px 0px 80px 80px;
 
 }
 
+
+
+.buttons_cards_home {
+    max-width: 1400px;
+     margin: 0 auto;
+     display: inline-block;
+     grid-template-columns: repeat(2, minmax(50px, 1fr));
+     margin-left:0%;
+     position:relative;
+     left:20%;
+     transform: translate(0%, 0%);
+
+     }
+   
+     .card_home {
+       background-color: dodgerblue;
+       color: white;
+       padding: 1rem;
+       height: 3rem;
+     }
+
+     
+div.gallery_home {
+    border: 1px solid #ccc;
+    background: linear-gradient(180deg, #62C7FF 0%, #327CA5 100%);
+    border-radius: 30px;
+    height: 250px;
+    margin-left: 80px;
+  }
+
+
+  
+  div.gallery_home:hover {
+    border: 1px solid #777;
+  
+  }
+  
+  div.gallery_home img {
+    width: 100%;
+    height: auto;
+
+    
+  }
+  
+  div.gallery_layanan {
+    padding: 15px;
+    text-align: center;
+    color:white;
+    margin-left:80px;
+  }
+
+  .desc-2{
+   color:#0076B8;
+
+  }
+   
+
+
 .fiturgalery{
 
     max-width:1200px;
     margin:auto;
-    height:500px;
+    height:1000px;
     position:relative;
+
+
+}
+
+.gpt3__header_hubungi_kami p{
+
+    margin-top:-5px;
 
 
 }
@@ -402,6 +467,7 @@ div.gallery {
     max-width:1200px;
     margin:auto;
     position:relative;
+    margin-top:50px;
 
 }
 

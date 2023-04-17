@@ -22,7 +22,7 @@ body{
  
      background-image: url("../../../assets/image/unsplash_FPKnAO-CF6M-1.png");
      background-repeat: no-repeat;
-     height:300px ;
+     height:600px ;
  
      max-width: 1200px;
      margin:auto;
@@ -31,17 +31,35 @@ body{
 
 }
 
+.setgambartombol{
+    margin-top:50px;
+   
+}
+
+
+.fiturgalery_layanan{
+
+    max-width:1200px;
+    margin:auto;
+    height:1100px;
+    position:relative;
+
+
+}
+
+
+
 
 .buttons_cards_layanan {
     max-width: 1400px;
      margin: 0 auto;
-     display: grid;
-     gap: 0.5rem;
+     display: inline-block;
      grid-template-columns: repeat(2, minmax(50px, 1fr));
      margin-left:0%;
      position:relative;
-     left:11%;
+     left:15%;
      transform: translate(0%, 0%);
+
      }
    
      .card_layanan {
@@ -69,13 +87,49 @@ color:white;
 
 }
 
+div.gallery_layanan {
+    border: 1px solid #ccc;
+    background: linear-gradient(180deg, #62C7FF 0%, #327CA5 100%);
+    border-radius: 30px;
+    height: 200px;
+  }
+
+
+  
+  div.gallery_layanan:hover {
+    border: 1px solid #777;
+  
+  }
+  
+  div.gallery_layanan img {
+    width: 70%;
+    height: auto;
+
+    
+  }
+  
+  div.gallery_layanan {
+    padding: 15px;
+    text-align: center;
+    color:white;
+    margin-left:80px;
+  }
+
+  .desc-2{
+   color:#0076B8;
+
+  }
+
+
 
 .gpt3__whatgpt3_tentangkami{
 
-    background-color: rgb(15, 143, 215); 
+   
     margin-top: 330px;
      height: 280px; 
      padding-top: 42px;
+     background: linear-gradient(91.11deg, #0F8FD7 27.64%, #58B5E9 59.26%);
+     border-radius: 0px;
 
 
 }
@@ -83,9 +137,12 @@ color:white;
 
 .gpt3__whatgpt3_tentangkami_griddua{
 
-    background-color: rgb(15, 143, 215); 
+   
     height: 350px; 
     padding-top: 42px;
+
+    background: linear-gradient(92.73deg, #B9CCE4 35.92%, #7698C2 49.07%, #0076B8 67.27%);
+    border-radius: 0px;
 
 
 }  

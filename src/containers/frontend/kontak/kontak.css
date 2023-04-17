@@ -22,9 +22,20 @@
       height:520px ;
       /* background-size:100% auto; */
   
-      max-width: 1200px;
+      max-width: 1400px;
       margin:auto;
  
+
+
+}
+
+
+.fiturgalery_kontakkami{
+
+    max-width:1200px;
+    margin:auto;
+    height:600px;
+    position:relative;
 
 
 }
@@ -53,7 +64,7 @@
       padding: 25px 55px 45px 55px;
       position: relative;
       z-index: 1;
-      margin-top:-180px;
+      margin-top:50px;
     
   }
   .box_kontak-4:after {
@@ -69,7 +80,7 @@
 
   .kontak_bg{
 
-    max-width:1400px;
+    max-width:1200px;
     margin:auto;
 
 

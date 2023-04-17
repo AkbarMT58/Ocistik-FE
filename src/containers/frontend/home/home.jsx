@@ -2,7 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../frontend/home/home.css'
 import { Navbar } from '../../../components';
-import {Footer,Header,Fitur, FiturGalery,Sliderbanner,Galery,Tentangkami} from '../../../containers';
+import {Footer,Header,Fitur, FiturGalery,Sliderbanner,Galery,Tentangkami, Hitungbiayaimport} from '../../../containers';
 import { getData_Master_Categories } from '../../../constants/api/logistik';
 import { useState,useEffect  } from "react";
 import ModalCekresi from './ModalCekresi';
@@ -333,13 +333,9 @@ if(widthSize <= mobileWidth){
 
 
     </div>
-
-
-    
-
-        <Galery/>
+        {/* <Galery/> */}
         <FiturGalery/>
-        <Fitur/>
+        <Hitungbiayaimport/>
         <Sliderbanner/>
 
     <Footer/>

@@ -462,6 +462,7 @@ const onClick_laut =() => {
 if(updated=='laut'){
 
   var ubahwarna_utama_laut= warna_choice_aktif;
+  var ubahwarna_utama_udara='white';
   var ubahwarna_child_laut=warna_choice_aktif_child
   var display_hidup_laut=display_aktif;
   var ubahwarna_font_laut="white";
@@ -500,6 +501,7 @@ if(updated=='darat'){
 if (updated=='udara'){
 
     var ubahwarna_utama_udara= warna_choice_aktif;
+    var ubahwarna_utama_laut= 'white';
     var ubahwarna_child_udara=warna_choice_aktif_child
     var display_hidup_udara=display_aktif;
     var ubahwarna_font_udara="white";
@@ -519,11 +521,10 @@ if (updated=='udara'){
 if(updated==''){
 
   var ubahwarna_utama_laut= warna_choice_aktif;
+  var ubahwarna_utama_udara='white';
   var ubahwarna_child_laut=warna_choice_aktif_child
   var display_hidup_laut=display_aktif;
   var ubahwarna_font_udara="#0F8ED6";
-  // var display_margin='320px';
-  // var display_height_form='420px';
 
 
 }
@@ -548,27 +549,22 @@ function allowNumbersOnly(e) {
       <div className='gpt3__header section__padding' id="home">
       <div className='gpt3__header-content'>
         <h1 className='gradient__text' style={{marginTop:'-100px'}}>LAYANAN</h1>
-        <hr className='border_garis_tentangkami'></hr>
-        <div className='gpt3__header_tentangkami'><p className='fs-2 text-white'></p></div>
-      </div>
+       
+     </div>
+
+      {/* tombol pilihan  */}
+
+
+
+      
      
     </div>
-    </div>
 
- 
-<section style={{height:sectionmobile}}>
-
-<div className='fiturgalery'>
-
-
-
-<div className='buttons_cards_layanan m-4' style={{marginTop:'100px'}}>
-
+    <div  className='setgambartombol'>
+<div className='buttons_cards_layanan m-4' >
 
 <div class="responsive">
-
-
-  <div class="gallery_artikel"  style={{background:ubahwarna_utama_laut}} onClick={onClick_laut}>
+  <div class="gallery_layanan"  style={{background:ubahwarna_utama_laut}} onClick={onClick_laut}>
   <input
         ref={inputRef_laut}
         type="hidden"
@@ -579,14 +575,14 @@ function allowNumbersOnly(e) {
       />
   
     <a target="_blank" >
-      <img src="/image/kapal.png" alt="laut" width="228" height="119" style={{marginTop:'50px'}} />
+      <img src="/image/kapal.png" alt="laut" width="175" height="84" style={{marginTop:'40px'}} />
     </a>
     <div class="desc" style={{color:ubahwarna_font_laut,fontWeight:"bold"}}>PENGIRIMAN LAUT</div>
   </div>
 </div>
 
 <div class="responsive">
-  <div class="gallery_artikel"  style={{background:ubahwarna_utama_udara}} onClick={onClick_udara} >
+  <div class="gallery_layanan"  style={{background:ubahwarna_utama_udara}} onClick={onClick_udara} >
   <input
         ref={inputRef_udara}
         type="hidden"
@@ -596,7 +592,7 @@ function allowNumbersOnly(e) {
     
       />
     <a target="_blank">
-      <img src="/image/pesawat.png" alt="udara"  width="228" height="119"  />
+      <img src="/image/pesawat.png" alt="udara"  width="175" height="84"  />
     </a>
  
    
@@ -624,15 +620,26 @@ function allowNumbersOnly(e) {
 
 </div> 
 
+</div>
+
+    </div>
+
+ 
+<section className='flex-container' >
+
+<div className='fiturgalery_layanan'>
+
+
+
 {/* jika laut  */}
 <div className='gpt3_home_galery_bg' style={{display:display_hidup_laut}} >
 
     <div className='gpt3__galery' onClick={onClick_laut}>
 
     <div className='fs-3 fw-bold' style={{textAlign:"center", marginTop:'8px'}}>
-    LCL Laut (Less Container Load Via Laut)
+    PENGIRIMAN LAUT
     </div>
-       <div className='text-white text-center mb-2' style={{marginTop:'90px'}}>Less Container Load via laut adalah jasa pengiriman lewat laut dimana anda bisa mengimpor dalam jumlah kecil karena barang anda akan dicampur dengan barang orang lain untuk memenuhi 1 container. Di jasa import OCI Logistic, kami dapat mengimpor barang anda TANPA MINIMAL pengiriman!
+       <div className='text-white text-center mb-4' style={{marginTop:'70px'}}>Pengiriman barang melalui jalur laut yang dilakukan dengan pengiriman yang lebih kecil di dalam satu kontainer bersama pengiriman lainnya. Keuntungan dari pengiriman laut adalah biaya pengiriman barang akan jauh lebih murah dengan minimum pengiriman 0,1 cbm.
         
       </div>
 
@@ -816,11 +823,6 @@ Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
 </div>
 
 
-
-
-
-
-
 </div> 
 
 
@@ -833,17 +835,16 @@ Rp.{TotalbiayaLaut.toLocaleString('ID-id')},-
 
 
     </div>
-{/* 
-    jika udara  */}
+{/* jika udara  */}
     
 <div className='gpt3_home_galery_bg' style={{display:display_hidup_udara}} >
 
     <div className='gpt3__galery'>
 
     <div className='fs-3 fw-bold' style={{textAlign:"center", marginTop:'8px'}}>
-    LCL Udara (Less Container Load Via Udara)
+    PENGIRIMAN UDARA
     </div>
-       <div className='text-white text-center mb-2' style={{marginTop:'90px'}}>Less Container Load via laut adalah jasa pengiriman lewat laut dimana anda bisa mengimpor dalam jumlah kecil karena barang anda akan dicampur dengan barang orang lain untuk memenuhi 1 container. Di jasa import OCI Logistic, kami dapat mengimpor barang anda TANPA MINIMAL pengiriman!
+       <div className='text-white text-center mb-2' style={{marginTop:'70px'}}>Pengiriman barang melalui jalur udara atau pesawat dengan minimal pengiriman 1 kg. Kelebihan dari pengiriman ini adalah estimasi waktu pengiriman barang lebih cepat dan sangat cocok bagi anda yang membutuhkan kecepatan durasi pengiriman.
         
       </div>
 

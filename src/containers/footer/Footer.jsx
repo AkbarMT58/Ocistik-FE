@@ -1,6 +1,6 @@
 import React from 'react'
 import gpt3Logo from '../../assets/logo.svg';
-import logo from '../../assets/image/Lomiles_.png'
+import logo from '../../assets/image/LOMILES_PUTIH.png'
 
 import './footer.css'
 const Footer = () => {

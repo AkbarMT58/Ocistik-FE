@@ -41,7 +41,7 @@ const Sliderbanner = () => {
   if(widthSize > mobileWidth){ 
     //logic for desktop
 
-    var display_tampilan='95vh';
+    var display_tampilan='30vh';
 
 
   }
@@ -58,7 +58,7 @@ const Sliderbanner = () => {
 
   return (
 
-    <section style={{height:display_tampilan}}>
+    <section className="flex-container" >
 
         <div className='footer_screen'>
 
@@ -67,14 +67,14 @@ const Sliderbanner = () => {
             <div className='headerjudulbanner fw-bold fs-3 text-center'>
 
            
-                        Apa Kata Mereka Tentang Ocistok
+                        Apa Kata Mereka Tentang Lomiles
             
 
             </div>
 
                 <img src="/image/Rectangle 83-1.png" />
                 <div className='legend -mt-4'>
-                  <iframe  src="https://www.youtube.com/embed/tgbNymZ7vqY" width="" height="" ></iframe>
+                  <iframe  src="https://www.youtube.com/embed/Odlmpg3XxFw" width="" height="" ></iframe>
 
                 </div>
               
@@ -91,7 +91,7 @@ const Sliderbanner = () => {
              
                 <div className="legend">
 
-                <iframe  src="https://www.youtube.com/embed/tgbNymZ7vqY" width="" height="" ></iframe>
+                <iframe  src="https://www.youtube.com/embed/Odlmpg3XxFw" width="" height="" ></iframe>
 
                 </div>
             </div>
@@ -106,7 +106,7 @@ const Sliderbanner = () => {
                 <img src="/image/Rectangle 83-1.png" />
                 <div className="legend">
 
-                <iframe  src="https://www.youtube.com/embed/tgbNymZ7vqY" width="" height="" ></iframe>
+                <iframe  src="https://www.youtube.com/embed/Odlmpg3XxFw" width="" height="" ></iframe>
 
                 </div>
             </div>

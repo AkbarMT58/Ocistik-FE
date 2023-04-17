@@ -457,7 +457,7 @@ const handleShow = () => setShow(true);
         <Navbar/>
         <div className='gpt3__header section__padding' id="home">
         <div className='gpt3__header-content' >
-          <h1 className='gradient__text'>HITUNG BIAYA</h1>
+          <h1 className='gradient__text'>HITUNG ESTIMASI BIAYA KIRIM</h1>
           <hr className='border_garis_tentangkami'></hr>
           <div className='gpt3__header_tentangkami'><p className='fs-2 text-white'></p></div>
         </div>
@@ -475,8 +475,8 @@ const handleShow = () => setShow(true);
         <div class="card-body">
           <p class="card-text">
 
-          <h2 style={{fontWeight:'bold'}}>HITUNG BIAYA</h2>
-				<p>Silakan pilih tipe pengiriman dan isi form setelahnya</p>
+          <h2 style={{fontWeight:'bold'}}>HITUNG ESTIMASI BIAYA KIRIM</h2>
+				<p style={{fontSize:'20px'}}>Silakan pilih tipe pengiriman dan isi form setelahnya</p>
 
 
           </p>

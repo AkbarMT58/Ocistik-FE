@@ -124,7 +124,17 @@ const PengirimanBarang = () => {
                                                 
                                                 <div className='col-md-8 mb-4' style={{marginLeft:'-50px'}}>
 
-                                                    <select type="text" className='form-control w-100' />
+                                                    <select type="text" className='form-control w-100' 
+                                                  
+                                                    
+                                                    >
+
+                                                      <option>Tas</option>
+                                                      <option>Sepatu</option>
+                                                      
+
+                                                      </select>
+
 
                                                 
 

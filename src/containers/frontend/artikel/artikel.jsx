@@ -303,7 +303,7 @@ const currentRecords = arr.slice(indexOfFirstRecord, indexOfLastRecord)
                     <div className="horizontal-card-footer">
                     <i class="fa fa-clock-o" aria-hidden="true"></i>
 
-                      <span style={{fontSize:'12px',marginLeft:'90px'}} ><i class="fa-light fa-clock"></i>
+                      <span style={{fontSize:'12px',marginLeft:'20px'}} ><i class="fa-light fa-clock"></i>
 
 { dateFormat(artikel_headline?.tanggal_cetak, "dd-mm-yyyy hh:mm:ss") }</span>
                     

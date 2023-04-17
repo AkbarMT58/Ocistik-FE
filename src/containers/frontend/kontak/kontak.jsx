@@ -82,7 +82,7 @@ formdatarequest.append('pesan',inputpesan);
     </div>
 
 
-    <section style={{height:'40vh'}}>
+    <section className='flex-container' >
 
       <div className='kontak_bg'>
 
@@ -144,7 +144,8 @@ formdatarequest.append('pesan',inputpesan);
 
         <center>
 
-          <div className='text-black fs-4 mb-4'>Drop Up Message</div>
+          <div className='text-black fs-4 mb-4' style={{marginTop:'20px'}}>Tinggalkan Pesan</div>
+         
         </center>
 
         <form onSubmit={handleInsertDataKontak} >

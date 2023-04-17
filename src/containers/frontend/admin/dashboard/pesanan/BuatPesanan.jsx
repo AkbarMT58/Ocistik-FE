@@ -105,38 +105,38 @@ const BuatPesanan = () => {
                                             <div className='text-black' style={{marginLeft:"-150px"}}>Informasi Penerima</div>
                                             <div className='form-group m-2'>
                                            
-                                            <input type="text" className='form-control' placeholder='Nama Lengkap'/>
+                                            <input type="text" className='form-control icon_1' placeholder='Nama Lengkap'/>
                                             
 
                                             </div>
                                             <div className='form-group m-2'>
                                           
-                                            <input type="text" className='form-control'  placeholder='No HP'/>
+                                            <input type="text" className='form-control icon_2'  placeholder='No HP'/>
 
                                             </div>
                                             <div className='form-group m-2'>
                                           
-                                          <input type="text" className='form-control'  placeholder='Alamat Lengkap'/>
+                                          <input type="text" className='form-control icon_3'  placeholder='Alamat Lengkap'/>
 
                                           </div>
                                           <div className='form-group m-2'>
                                           
-                                          <input type="text" className='form-control'  placeholder='Pilih Provinsi'/>
+                                          <input type="text" className='form-control icon_4'  placeholder='Pilih Provinsi'/>
 
                                           </div>
                                           <div className='form-group m-2'>
                                           
-                                          <input type="text" className='form-control'   placeholder='Pilih Kota'/>
+                                          <input type="text" className='form-control icon_5'   placeholder='Pilih Kota'/>
 
                                           </div>
                                           <div className='form-group m-2'>
                                           
-                                          <input type="text" className='form-control'  placeholder='Pilih Kecamatan'/>
+                                          <input type="text" className='form-control icon_6'  placeholder='Pilih Kecamatan'/>
 
                                           </div>
                                           <div className='form-group m-2'>
                                           
-                                          <input type="text" className='form-control'  placeholder='Kode Pos'/>
+                                          <input type="text" className='form-control icon_7'  placeholder='Kode Pos'/>
 
                                           </div>
 

@@ -13,8 +13,7 @@ const Tentangkami = () => {
       <div className='gpt3__header section__padding' id="home">
       <div className='gpt3__header-content'>
         <h1 className='gradient__text'>TENTANG KAMI</h1>
-        <hr className='border_garis_tentangkami'></hr>
-        <div className='gpt3__header_tentangkami'><p className='fs-2 text-white'>Solusi Utama dalam Pengiriman Internasional</p></div>
+        <div className='gpt3__header_tentangkami'><p className='fs-2 text-white' style={{marginTop:'-10px'}}>Logistic channel China - Indonesia</p></div>
       </div>
      
     </div>
@@ -32,11 +31,11 @@ const Tentangkami = () => {
 
         <div className='col-md-6'>
 
-        <div className='distance_text_kedua_gridsatu text-white fs-6'>
+        <div className='distance_text_kedua_gridsatu text-white fs-6 ml-4 px-4'>
         
        {/* isi paragraph text */}
 
-       Lomiles adalah spesialis jasa import China-Indonesia yang terbaik, tercepat dan termurah. Jasa kami merupakan Door to Door dan All In, dimana pengiriman dari gudang supplier dan langsung ke alamat anda dan pembayaran sudah termasuk asuransi, garansi dan pajak. Jadi tidak perlu khawatir adanya biaya tersembunyi.Anda juga tidak perlu khawatir dalam memilih supplier barang China yang terdapat di Marketplace China, karena tim spesialis importir barang China kami akan membantu Anda menemukan yang terpercaya.
+       Lomiles adalah logistic channel China-Indonesia yang beroperasi di bawah naungan PT Ocommerce Capital Indonesia. Kami telah berpengalaman di bidang impor dan logistic. Lomiles memiliki gudang pribadi di China dan Indonesia, sehingga membuat biaya pengiriman yang kami tawarkan lebih terjangkau dan proses pengiriman lebih cepat dan aman. Selain itu Lomiles memiliki sistem yang terintegrasi sehingga membuat proses tracking lebih mudah. 
         </div>
 
         </div>

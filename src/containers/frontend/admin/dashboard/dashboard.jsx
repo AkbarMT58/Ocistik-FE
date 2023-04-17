@@ -81,7 +81,7 @@ const Dashboard = ()=>{
               <MenuItem ><img src='/image/icons/money.png' style={{width:'40px', height:'40px'}} />  Referral</MenuItem>
               <MenuItem ><img src='/image/icons/bantuan.png' style={{width:'40px', height:'40px'}} /> Pusat Bantuan</MenuItem>
               <MenuItem ><img src='/image/icons/pengaturan.png' style={{width:'40px', height:'40px'}} /> Pengaturan</MenuItem>
-              {/* <MenuItem ><a href="/login"></a>Logout</MenuItem> */}
+              <MenuItem ><img src='/image/icons/pengaturan.png' style={{width:'40px', height:'40px'}} /><a href="/login"></a>Logout</MenuItem> 
             </Menu>
       
             </Menu>
@@ -92,7 +92,7 @@ const Dashboard = ()=>{
        
 <div className='bg_layerdashboard bg-aqua'>
 
-    <div className='bg_dashboard bq-aqua'>
+    <div className='bg_dashboard'>
 
             <Navbar_Dashboard/>
 
@@ -155,13 +155,13 @@ const Dashboard = ()=>{
           
           <div className='row mt-4 py-4 -px-2'>
 
-            <div className='col-md-6'>
+            <div className='col-md-5'>
 
               <img   src="/image/icons/tools.png" style={{height:'88px',width:'84px',marginTop:'-30px',marginLeft:'20px'}}/>
 
 
             </div>
-            <div className='col-md-6'>
+            <div className='col-md-3'>
 
               <label className='text-black' style={{marginLeft:'-120px',marginTop:'-100px'}}>Belum Dibayar</label>
               <br></br>
@@ -169,6 +169,22 @@ const Dashboard = ()=>{
 
 
             </div>
+            <div className='col-md-2' style={{marginLeft:'-5px'}}>
+
+              <label className='text-black' style={{marginLeft:'-120px',marginTop:'-100px',fontSize:'11px'}}>DALAM PERJALANAN</label>
+              <br></br>
+              <label className='text-black' style={{marginLeft:'-120px',marginTop:'0px'}}>3</label>
+
+
+            </div>
+            <div className='col-md-2' style={{marginLeft:'5px'}}>
+
+          <label className='text-black' style={{marginLeft:'-100px',marginTop:'-100px',fontSize:'11px'}}>DALAM PERJALANAN</label>
+          <br></br>
+          <label className='text-black' style={{marginLeft:'-100px',marginTop:'0px'}}>3</label>
+
+
+          </div>
 
 
           </div>
@@ -206,6 +222,7 @@ const Dashboard = ()=>{
 
 
             </div>
+            
 
 
           </div>
