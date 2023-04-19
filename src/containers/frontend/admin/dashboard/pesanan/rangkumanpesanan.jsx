@@ -3,8 +3,6 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../../frontend/admin/dashboard/dashboard.css'
 import Navbar_Dashboard  from '../navbar';
-
-
 import { useState,useRef,useEffect } from "react";
 import dateFormat from 'dateformat';
 import env from "react-dotenv";
@@ -24,12 +22,9 @@ import {
   
 } from "react-pro-sidebar";
 
-//import icons from react icons
-import { FaList, FaRegHeart } from "react-icons/fa";
-import { FiHome, FiLogOut, FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
-import { RiPencilLine } from "react-icons/ri";
-import { BiCheckbox, BiCog } from "react-icons/bi";
+
 import "react-pro-sidebar/dist/css/styles.css";
+import Sidebar from '../../layout/sidebar';
 
 
 
@@ -67,46 +62,8 @@ const RangkumanPesanan = () => {
     <>
       <div id="header" style={{ display: 'flex' }}>
         
-        <ProSidebar collapsed={menuCollapse}>
-          <SidebarHeader>
-          <div className="logotext">
-             
-              <p>{menuCollapse ? <img src="/image/lomiles_admin.png" /> : <img src="/image/lomiles_admin.png" />}</p>
-            </div>
-            <div className="closemenu" onClick={menuIconClick}>
-                
-              {menuCollapse ? (
-                <FiArrowRightCircle/>
-              ) : (
-                <FiArrowLeftCircle/>
-              )}
-
-            </div>
-          </SidebarHeader>
-          <SidebarContent>
-            <Menu iconShape="square">
-              <MenuItem active={true} >
-                <img src='/image/icons/beranda.png' style={{width:'40px', height:'40px'}} />
-              <a className='text-white' href="/admin/dashboard">  Beranda</a>
-              </MenuItem>
-              <MenuItem >  <img src='/image/icons/pesanansaya.png' style={{width:'40px', height:'40px'}} /><a className='text-black' href="/admin/pesanan">Pesanan Saya</a></MenuItem>
-              <MenuItem ><img src='/image/icons/logistic.png' style={{width:'40px', height:'40px'}} /><a className='text-black' href="/admin/buatpesanan">Buat Pesanan</a></MenuItem>
-              <MenuItem><img src='/image/icons/invoices.png' style={{width:'40px', height:'40px'}} /> Invoices</MenuItem>
-              <MenuItem ><img src='/image/icons/pembayaran.png' style={{width:'40px', height:'40px'}} /> Pembayaran</MenuItem>
-              <MenuItem ><img src='/image/icons/uang.png' style={{width:'40px', height:'40px'}} /> Poin</MenuItem>
-              
-            <Menu iconShape="square">
-              <MenuItem ><img src='/image/icons/money.png' style={{width:'40px', height:'40px'}} />  Referral</MenuItem>
-              <MenuItem ><img src='/image/icons/bantuan.png' style={{width:'40px', height:'40px'}} /> Pusat Bantuan</MenuItem>
-              <MenuItem ><img src='/image/icons/pengaturan.png' style={{width:'40px', height:'40px'}} /> Pengaturan</MenuItem>
-              {/* <MenuItem ><a href="/login"></a>Logout</MenuItem> */}
-            </Menu>
-      
-            </Menu>
-          </SidebarContent>
-       
-         
-        </ProSidebar>
+      <Sidebar/>
+        
         <div className="container">
        
 <div className='bg_layerdashboard bg-aqua'>

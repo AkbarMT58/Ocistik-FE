@@ -22,9 +22,6 @@ function useScreenWidth() {
 
   const resize = () => setWindowWidth(getWidth());
 
-  
-
-
   return windowWidth;
 }
 
@@ -113,10 +110,6 @@ if(widthSize <= mobileWidth){
 <button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/dashboard">Login</a></button>
 </center>
 
-
-
-
-             
                 </div>
                 <div class="mt-auto">
                 <div className='text-black' ><a href="/home">Back To home</a></div>

@@ -33,21 +33,13 @@ export {default as Login} from './frontend/admin/login/login';
 
 export {default as Dashboard} from './frontend/admin/dashboard/dashboard';
 export {default as BuatPesanan} from './frontend/admin/dashboard/pesanan/BuatPesanan';
- export {default as Pesanan} from './frontend/admin/dashboard/pesanan/pesanan';
- export {default as Syaratketentuan} from './frontend/admin/dashboard/pesanan/syaratketentuan';
- export {default as Informasibarang} from './frontend/admin/dashboard/pesanan/informasibarang';
- export {default as PengirimanKeIndonesia} from './frontend/admin/dashboard/pesanan/pengirimankeindonesia';
- export {default as EkspedisiLokalIndonesia} from './frontend/admin/dashboard/pesanan/ekspedisilokalindonesia';
- export {default as RangkumanPesanan} from './frontend/admin/dashboard/pesanan/rangkumanpesanan';
-
-// export {default as UserProfile} from './frontend/admin/dashboard/UserProfile';
-// export {default as TableList} from './frontend/admin/dashboard/TableList';
-// export {default as Typography} from './frontend/admin/dashboard/Typography';
-// export {default as Icons} from './frontend/admin/dashboard/Icons';
-// export {default as Maps} from './frontend/admin/dashboard/Maps';
-// export {default as Notifications} from './frontend/admin/dashboard/Notifications';
-// export {default as Upgrade} from './frontend/admin/dashboard/Upgrade';
-// export {default as Adminjs} from '../components/dashboard/layouts/Admin';
+export {default as Pesanan} from './frontend/admin/dashboard/pesanan/pesanan';
+export {default as Syaratketentuan} from './frontend/admin/dashboard/pesanan/syaratketentuan';
+export {default as Informasibarang} from './frontend/admin/dashboard/pesanan/informasibarang';
+export {default as PengirimanKeIndonesia} from './frontend/admin/dashboard/pesanan/pengirimankeindonesia';
+export {default as EkspedisiLokalIndonesia} from './frontend/admin/dashboard/pesanan/ekspedisilokalindonesia';
+export {default as RangkumanPesanan} from './frontend/admin/dashboard/pesanan/rangkumanpesanan';
+export {default as Pembayaran} from './frontend/admin/pembayaran/pembayaran';
 
 
 

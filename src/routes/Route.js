@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Brand,CTA,Navbar } from '../components';
-import {Home,Tentangkami,Layanan,Artikel,Callus,Kontak,Hitungbiaya, Artikel_Detail,ArtikelMore,Login,Dashboard,Pesanan,BuatPesanan,Syaratketentuan,Informasibarang,PengirimanKeIndonesia,EkspedisiLokalIndonesia,RangkumanPesanan} from '../containers';
+import {Home,Tentangkami,Layanan,Artikel,Callus,Kontak,Hitungbiaya, Artikel_Detail,ArtikelMore,Login,Dashboard,Pesanan,BuatPesanan,Syaratketentuan,Informasibarang,PengirimanKeIndonesia,EkspedisiLokalIndonesia,RangkumanPesanan,Pembayaran} from '../containers';
 import '../routes/App.css';
 
 
@@ -30,6 +30,7 @@ const App = () => {
     <Route path="/admin/pengirimankeindonesia" element={<PengirimanKeIndonesia/>} /> 
     <Route path="/admin/ekspedisilokalindonesia" element={<EkspedisiLokalIndonesia/>} /> 
     <Route path="/admin/rangkumanpesanan" element={<RangkumanPesanan/>} /> 
+    <Route path="/admin/pembayaran" element={<Pembayaran/>} /> 
 
 
 

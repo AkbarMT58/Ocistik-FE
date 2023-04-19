@@ -4,7 +4,7 @@ window.env = {
   "API_GATEWAY_CALCULATION": "http://192.168.15.24:8787",
   "API_GATEWAY_LOKAL": "http://192.168.15.20:9000",
   "APPDATA": "C:\\Users\\Back End\\AppData\\Roaming",
-  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\LOCAL\\crashpad_908_TPELNRJVXWQICBDK",
+  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\LOCAL\\crashpad_6092_GHBVTUSXVMXBSHJY",
   "CLIENT_KEY": "Mid-client-S_UQJqsP0cWaWzIU",
   "COLOR": "1",
   "COLORTERM": "truecolor",
