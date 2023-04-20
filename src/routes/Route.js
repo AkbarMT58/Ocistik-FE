@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Brand,CTA,Navbar } from '../components';
-import {Home,Tentangkami,Layanan,Artikel,Callus,Kontak,Hitungbiaya, Artikel_Detail,ArtikelMore,Login,Dashboard,Pesanan,BuatPesanan,Syaratketentuan,Informasibarang,PengirimanKeIndonesia,EkspedisiLokalIndonesia,RangkumanPesanan,Pembayaran} from '../containers';
+import {Home,Tentangkami,Layanan,Artikel,Callus,Kontak,Hitungbiaya, Artikel_Detail,ArtikelMore,Login,Dashboard,Pesanan,BuatPesanan,Syaratketentuan,Informasibarang,PengirimanKeIndonesia,EkspedisiLokalIndonesia,RangkumanPesanan,Pembayaran,Waitingpembayaran,Statuspembayaran} from '../containers';
 import '../routes/App.css';
 
 
@@ -31,6 +31,8 @@ const App = () => {
     <Route path="/admin/ekspedisilokalindonesia" element={<EkspedisiLokalIndonesia/>} /> 
     <Route path="/admin/rangkumanpesanan" element={<RangkumanPesanan/>} /> 
     <Route path="/admin/pembayaran" element={<Pembayaran/>} /> 
+    <Route path="/admin/pembayaran/waitingpembayaran" element={<Waitingpembayaran/>} /> 
+    <Route path="/admin/pembayaran/statuspembayaran" element={<Statuspembayaran/>} /> 
 
 
 

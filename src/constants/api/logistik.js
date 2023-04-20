@@ -90,6 +90,62 @@ export async function getData_Master_Categories() {
   
   }
 
+    
+  export async function getData_Provinsi() {
+    const url = `https://api.rajaongkir.com/starter/province`;
+    return callAPI({
+      url,
+      method: 'GET',
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        'Access-Control-Allow-Header':"Cache-Control, Content-Type,Xid",
+        'Key':'2cde5c2e002d7033f11527ba0ae23de1',
+      },
+      token: false,
+     
+    });
+
+
+  
+  }
+
+  export async function getData_Kota_ByProvinsiID(formrequest) {
+    const url = `${env.API_GATEWAY_LOKAL}/getkotabyprovinsiid`;
+    return callAPI({
+      url,
+      method: 'POST',
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      formrequest,
+      token: false,
+    });
+
+
+  
+  }
+  export async function getData_Kecamatan_ByKotaID(formrequest) {
+    const url = `${env.API_GATEWAY_LOKAL}/getkecamatanbykotaid`;
+    return callAPI({
+      url,
+      method: 'POST',
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      formrequest,
+      token: false,
+    });
+
+
+  
+  }
+
+
 
 
   export async function getData_Master_Jenisbarang() {

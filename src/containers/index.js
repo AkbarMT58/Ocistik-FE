@@ -40,6 +40,8 @@ export {default as PengirimanKeIndonesia} from './frontend/admin/dashboard/pesan
 export {default as EkspedisiLokalIndonesia} from './frontend/admin/dashboard/pesanan/ekspedisilokalindonesia';
 export {default as RangkumanPesanan} from './frontend/admin/dashboard/pesanan/rangkumanpesanan';
 export {default as Pembayaran} from './frontend/admin/pembayaran/pembayaran';
+export {default as Waitingpembayaran} from './frontend/admin/pembayaran/waitingpembayaran';
+export {default as Statuspembayaran} from './frontend/admin/pembayaran/statuspembayaran';
 
 
 
