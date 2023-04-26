@@ -203,6 +203,26 @@ export async function getData_Master_Categories() {
 
   }
 
+  
+  export async function getData_DetailPesanan(id_so) {
+    const url = "http://localhost:9000/api/getdetailpesanan/"+id_so;
+
+    const response = await axios.get(url, {
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        // 'Access-Control-Allow-Origin':'*',
+        // 'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        // 'Access-Control-Allow-Header':"Cache-Control, Content-Type,Xid"
+      },
+  });
+  const axiosResponse = response.data;
+ 
+  return axiosResponse;
+
+  }
+
+
 
 
   

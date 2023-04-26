@@ -13,6 +13,7 @@ import Sidebar from '../../layout/sidebar';
 import {Timeline, TimelineEvent} from 'react-event-timeline'
 import 'material-icons/iconfont/material-icons.css';
 import { getData_PesananSaya } from '../../../../../constants/api/logistik';
+import { getData_DetailPesanan } from '../../../../../constants/api/logistik';
 
 
 const PesananSaya = () => {
@@ -22,6 +23,7 @@ const PesananSaya = () => {
   const inputRef_LiveTracking= useRef(null);
   const [updated, setUpdated] = useState('');
   const [datapesanansaya, setDataPesananSaya] = useState(null)
+  const [datadetailpesanan, setDataDetailPesanan] = useState(null)
   
     //create initial menuCollapse state using useState hook
     const [menuCollapse, setMenuCollapse] = useState(false)
@@ -47,7 +49,8 @@ const PesananSaya = () => {
 
     setUpdated(inputRef_DetailProduk.current.value);
 
-    
+    getDataDetailPesanan(nomorpesanan);
+
     
     console.log("lihat data click no pesanan :",  nomorpesanan)
 
@@ -130,6 +133,7 @@ if(updated==''){
       getDataPesananSaya()
 
     }
+   
 
   }, [Pagination])
 
@@ -141,7 +145,16 @@ if(updated==''){
     }
   }
 
-  //console.log(datapesanansaya)
+  
+  const getDataDetailPesanan = async (id_so) => {
+
+    const res = await getData_DetailPesanan(id_so);
+    if (res.status === 200) {
+      setDataDetailPesanan(res.Data)
+    }
+  }
+
+  console.log("detail pesanan:",datadetailpesanan)
 
 
   return (
@@ -456,20 +469,29 @@ if(updated==''){
 {/* 
 daerah detail produk */}
 <div style={{display:tabledetailproduk}}>
+
   <div className='text-black alert alert-success m-4' style={{fontWeight:'bold'}}>{label_text}</div>
+  {datadetailpesanan?.map((details,index) => (  
           <div className='row m-4'>
 
           <div className='col-md-4'>
-            <div classNmae="text-black"  style={{fontWeight:'bold',marginBottom:'20px'}}>Tipe Pengiriman <label style={{marginLeft:'110px'}} >:</label>  </div>
-            <div classNmae="text-black"  style={{fontWeight:'bold',marginBottom:'20px'}}>Ekspedisi Lokal <label style={{marginLeft:'120px'}}>:</label> </div>
-            <div classNmae="text-black"  style={{fontWeight:'bold',marginBottom:'100px'}}>Alamat Pengiriman <label style={{marginLeft:'81px'}}>:</label> </div>
-            <div classNmae="text-black"  style={{fontWeight:'bold',marginBottom:'20px'}}>Total Harga <label style={{marginLeft:'145px'}}>:</label> </div>
+            <div classNmae="text-black"  style={{fontWeight:'bold',marginBottom:'20px'}}>Tipe Pengiriman <label style={{marginLeft:'110px',fontWeight:'normal'}} >:   
+            
+            
+             {(details.tipe_pengiriman ===0 ? ("Udara") :  "Laut")}
+
+
+</label>  </div>
+            <div classNmae="text-black"  style={{fontWeight:'bold',marginBottom:'20px'}}>Ekspedisi Lokal <label style={{marginLeft:'120px',fontWeight:'normal'}}>: {details.ekspedisi_lokal}</label></div>
+            <div classNmae="text-black"  style={{fontWeight:'bold',marginBottom:'100px'}}>Alamat Pengiriman <label style={{marginLeft:'81px',fontWeight:'normal'}}>: {details.namajalan}</label> </div>
+            <div classNmae="text-black"  style={{fontWeight:'bold',marginBottom:'20px'}}>Total Harga <label style={{marginLeft:'145px',fontWeight:'normal'}}>:{details.estimasi_biaya_kirim}</label> </div>
           </div>
           <div className='col-md-8'>
           </div>
 
 
           </div>
+))}
 </div>
 
 {/* 
