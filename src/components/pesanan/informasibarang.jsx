@@ -1,15 +1,18 @@
 
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../../../frontend/admin/dashboard/dashboard.css'
-import Navbar_Dashboard  from '../navbar';
-
+import '../../containers/frontend/admin/dashboard/dashboard.css'
+import Navbar_Dashboard  from '../../containers/frontend/admin/layout/navbar';
 
 import { useState,useRef,useEffect } from "react";
 import dateFormat from 'dateformat';
 import env from "react-dotenv";
-import Pagination from '../../../../../components/general/Pagination';
+import Pagination from '../../components/general/Pagination';
 import axios from 'axios';
+import Sidebar from '../../containers/frontend/admin/layout/sidebar';
+import swal from 'sweetalert';
+import { getData_Master_Jenisbarang_Informasi } from '../../constants/api/logistik';
+
 
 
 //import react pro sidebar components
@@ -23,10 +26,35 @@ import {
   
 } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
-import Sidebar from '../../layout/sidebar';
+
+import { RecoilRoot } from "recoil";
+import { useRecoilState } from "recoil";
+import {
+  PesananFormInputsState,
+  pesananFormStepState,
+  } from "../../atoms/pesananForm";
+import { useRecoilValue } from "recoil";
+
+
+
+
 
 
 const PengirimanBarang = () => {
+  
+
+  const [form, setForm] = useRecoilState(PesananFormInputsState);
+  const [formStep, setFormStep] = useRecoilState(pesananFormStepState);
+  const [image, setImage] =useState('')
+  const [createObjectURL, setCreateObjectURL] = useState(null);
+  const [dataJenisBarang, setDataJenisBarang] = useState(null)
+  
+
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    setFormStep("pengirimanindonesia");
+  };
+
   
     //create initial menuCollapse state using useState hook
     const [menuCollapse, setMenuCollapse] = useState(false)
@@ -36,6 +64,104 @@ const PengirimanBarang = () => {
     //condition checking to change state from true to false and vice versa
     menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
   };
+
+  
+useEffect(() => {
+
+
+  if(!dataJenisBarang) {
+    getDataMasterJenisBarang()
+  }
+ console.log(dataJenisBarang)
+
+  
+
+}, [dataJenisBarang])
+
+  const getDataMasterJenisBarang = async () => {
+    const res = await getData_Master_Jenisbarang_Informasi();
+    if (res.status === 200) {
+      setDataJenisBarang(res.data)
+    }
+  }
+
+
+  
+const uploadToClient =async (event) => {
+  if (event.target.files && event.target.files[0]) {
+    const i = event.target.files[0];
+
+
+  
+  try {
+    const URL = "http://localhost:9000/api/uploadexcel";
+
+
+    var formdatarequest = new FormData();
+
+    formdatarequest.append('dokumen',i);
+  
+
+    const response= await axios.post(
+        URL,  
+        
+        formdatarequest,
+        {
+          headers:{
+            "Content-Type": "multipart/form-data",
+        
+         },
+         
+         
+        }
+      )
+           console.log(response.data.Data)
+
+      setForm({
+      ...form,
+      packinglistfile:response.data.Data[0].link_file,
+  })
+
+
+
+      
+      
+
+
+
+        swal({
+            title: "Upload The Excell File ?",
+            text: "Do You Want To Upload The Excell Document?",
+            icon: "warning",
+            dangerMode: true,
+          })
+          .then(willDelete => {
+            if (willDelete) {
+              swal("Success!", "Your Data Hads Been Uploaded!", "success");
+            }
+            // window.location.href="/admin/formpesanan"
+          });
+
+} catch (err) {
+console.log(err);
+}
+ 
+  
+
+     console.log("lihat gambar upload:",i);
+    setCreateObjectURL(URL.createObjectURL(i));
+
+    
+
+  
+
+  }
+
+ 
+
+
+};
+
 
   return (
     <>
@@ -61,6 +187,7 @@ const PengirimanBarang = () => {
             </div>
 
             <div class="container" style={{marginTop:'10px'}}>
+            <form onSubmit={handleSubmit}>
                                 <div class="body_informasibarang d-md-flex align-items-center justify-content-between">
                                     <div class="box-ketentuan mt-md-0 mt-5">
                                     
@@ -82,14 +209,21 @@ const PengirimanBarang = () => {
                                                 
                                                 <div className='col-md-8 mb-4' style={{marginLeft:'-50px'}}>
 
-                                                    <select type="text" className='form-control w-100' 
+                                                    <select onChange={(e) =>
+  setForm({
+      ...form,
+      kategori_id: e.target.value,
+  })
+  }
+  value={form.kategori_id}
+ type="text" className='form-control w-100' 
                                                   
                                                     
                                                     >
-
-                                                      <option>Tas</option>
-                                                      <option>Sepatu</option>
-                                                      
+                                                      <option value="">--Pilih kategori Barang--</option>
+                                                      {dataJenisBarang?.map((category, index) => (
+                                                    <option key={category.id} value={category.id}>{category.kategori_barang}</option>
+                                                  ))}
 
                                                       </select>
 
@@ -108,7 +242,14 @@ const PengirimanBarang = () => {
 
                                                     <div className='col-md-8 mb-4' style={{marginLeft:'-50px'}}>
 
-                                                    <input type="text" className='form-control w-100' placeholder='m3' />
+                                                    <input onChange={(e) =>
+  setForm({
+      ...form,
+      volume: e.target.value,
+  })
+  }
+  value={form.volume}
+ type="text" className='form-control w-100' placeholder='m3' />
 
 
 
@@ -124,7 +265,14 @@ const PengirimanBarang = () => {
 
                                                     <div className='col-md-8 mb-4' style={{marginLeft:'-50px'}}>
 
-                                                    <input type="text" className='form-control w-100' placeholder='Kg' />
+                                                    <input onChange={(e) =>
+  setForm({
+      ...form,
+      totalberat: e.target.value,
+  })
+  }
+  value={form.totalberat}
+ type="text" className='form-control w-100' placeholder='Kg' />
 
 
 
@@ -140,7 +288,7 @@ const PengirimanBarang = () => {
 
                                                     <div className='col-md-8 mb-4' style={{marginLeft:'-50px'}}>
 
-                                                    <input type="file" className='form-control w-100' />
+                                                    <input onChange={uploadToClient} type="file" className='form-control w-100' />
 
 
 
@@ -155,7 +303,13 @@ const PengirimanBarang = () => {
 
                                                     <div className='col-md-8 mb-4' style={{marginLeft:'-50px'}}>
 
-                                                    <input type="text" className='form-control w-100' />
+                                                    <input onChange={(e) =>
+  setForm({
+      ...form,
+      trackingnumber: e.target.value,
+  })
+  }
+  value={form.trackingnumber} type="text" className='form-control w-100' />
 
 
 
@@ -164,7 +318,7 @@ const PengirimanBarang = () => {
 
                                                     <center>
                                                 
-                                                <button  type="button" className="submit_informasibarang" style={{color:'white'}}><a href="/admin/pengirimankeindonesia">Lanjut</a></button>
+                                                <a ><button  type="submit" className="submit_informasibarang" style={{color:'white'}}>Lanjut</button></a>
                                                
                                                 </center>
 
@@ -188,6 +342,8 @@ const PengirimanBarang = () => {
                              
 
                                 </div>
+
+                                </form>
 
 
 

@@ -44,6 +44,17 @@ const Dashboard = ()=>{
   };
 
 
+  const [items, setItems] = useState('');
+
+  useEffect(() => {
+    const items = localStorage.getItem('nama');
+    if (items) {
+     setItems(items);
+    }
+  }, []);
+  
+
+
   return(
 
     <>
@@ -63,7 +74,7 @@ const Dashboard = ()=>{
                                     <div className='text-white fs-3' style={{fontWeight:'bold',marginTop:'120px'}}>
 
                                         Selamat Sore
-                                        <div>Ridho</div>
+                                        <div>{items}</div>
 
                                     </div>
 

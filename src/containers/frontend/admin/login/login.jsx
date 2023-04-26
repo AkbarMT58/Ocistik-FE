@@ -11,6 +11,9 @@ import dateFormat from 'dateformat';
 import env from "react-dotenv";
 import Pagination from '../../../../components/general/Pagination';
 import axios from 'axios';
+import swal from 'sweetalert';
+
+
 
 function useScreenWidth() {
 
@@ -25,9 +28,16 @@ function useScreenWidth() {
   return windowWidth;
 }
 
-const Login = () => {
+const Login = (props) => {
   //fungsi set responsive
 const widthSize = useScreenWidth()
+const [inputemail, setDataEmail] = useState(null)
+const [inputpassword, setDataPassword] = useState(null)
+const email = useRef('');
+const password = useRef('');
+const { session, nextAction } = props;
+const [ taskRunning, setTaskRunning ] = useState(false);
+
 
 
 const mobileWidth = 700
@@ -46,6 +56,71 @@ if(widthSize <= mobileWidth){
   var display_height_form='430px';
 
 
+}
+
+//  console.log("lihat email:",email.current.value);
+//  console.log("lihat password:",password.current.value);
+
+
+
+// Methods
+const handlerLogin = async () => {
+
+  //  console.log("lihat email:",email.current.value);
+  
+  //  console.log("lihat password:",password.current.value);
+
+
+   try {
+    const URL = `${env.API_GATEWAY_LOKAL}/api/login_masuk`;
+
+
+    var formdatarequest = new FormData();
+
+    formdatarequest.append('email',email.current.value);
+    formdatarequest.append('password',password.current.value);
+
+    const response= await axios.post(
+        URL,  
+        
+        formdatarequest,
+        {
+          headers:{
+            "Content-Type": "multipart/form-data",
+        
+         },
+         
+         
+        }
+      )
+           console.log(response.data.Data)
+
+      
+       localStorage.setItem('email', response.data.Data[0].email);
+       localStorage.setItem('nama', response.data.Data[0].nama);
+
+
+
+        swal({
+            title: "Login Authentication?",
+            text: "Do You Want To Login Lomiles?",
+            icon: "warning",
+            dangerMode: true,
+          })
+          .then(willDelete => {
+            if (willDelete) {
+              swal("Success!", "Your Data Has Been Updated!", "success");
+            }
+             window.location.href="/admin/dashboard"
+          });
+
+} catch (err) {
+console.log(err);
+}
+ 
+
+
+ 
 }
 
 
@@ -82,20 +157,23 @@ if(widthSize <= mobileWidth){
 
 <center>
 
+
 <div className='mb-4 text-black'>Login Customer</div>
 </center>
 
 
+<div>
+
 
 <div className='form-group mb-4'>
   
-    <input type="text" className='form-control' placeholder='Alamat Email'></input>
+    <input ref={email} type="text"  value={inputemail}  className='form-control' placeholder='Alamat Email'></input>
    
 
 </div>
 <div className='form-group mb-4'>
 
-<input type="password" className='form-control' placeholder='Password'></input>
+<input ref={password} type="password" value={inputpassword}  className='form-control' placeholder='Password'></input>
 
 
 </div>
@@ -107,12 +185,29 @@ if(widthSize <= mobileWidth){
 </div>
 
 <center>
-<button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/dashboard">Login</a></button>
+<a ><button  type="submit" onClick={handlerLogin} className="login_masuk" style={{color:'white'}}>Login</button></a>
 </center>
 
+</div>
+
+
                 </div>
+    
                 <div class="mt-auto">
+               
+                <div className="row">
+                <div className='col-md-6'>
                 <div className='text-black' ><a href="/home">Back To home</a></div>
+                
+                </div>
+                  <div className='col-md-6'>
+                
+                </div>
+                </div>
+                <div className='row'>
+                <div className='text-black text-right text-end col-md-12 text-center' style={{fontSize:'12px'}} >Belum Punya Akun?<a href="/register">Daftar Disini</a></div>
+
+                </div>
                 </div>
             </div>
             <span class="fas fa-times"></span>
@@ -121,22 +216,17 @@ if(widthSize <= mobileWidth){
 
       
 
-    
+     
     
     </div>
 
+  
 
 
-
-
-
-
-
-    
 
 
     </div>
-    
+     
     
   )
 }

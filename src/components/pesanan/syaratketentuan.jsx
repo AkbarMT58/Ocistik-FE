@@ -1,15 +1,16 @@
 
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../../../frontend/admin/dashboard/dashboard.css'
-import Navbar_Dashboard  from '../navbar';
+import '../../containers/frontend/admin/dashboard/dashboard.css'
+import Navbar_Dashboard  from '../../containers/frontend/admin/layout/navbar';
 
 
 import { useState,useRef,useEffect } from "react";
 import dateFormat from 'dateformat';
 import env from "react-dotenv";
-import Pagination from '../../../../../components/general/Pagination';
+import Pagination from '../../components/general/Pagination';
 import axios from 'axios';
+import Sidebar from '../../containers/frontend/admin/layout/sidebar';
 
 
 //import react pro sidebar components
@@ -29,13 +30,23 @@ import { FiHome, FiLogOut, FiArrowLeftCircle, FiArrowRightCircle } from "react-i
 import { RiPencilLine } from "react-icons/ri";
 import { BiCog } from "react-icons/bi";
 import "react-pro-sidebar/dist/css/styles.css";
-import Sidebar from '../../layout/sidebar';
 
 
+import { RecoilRoot } from "recoil";
+import { useRecoilState } from "recoil";
+import {
+  PesananFormInputsState,
+  pesananFormStepState,
+  } from "../../atoms/pesananForm";
+
+import { useRecoilValue } from "recoil";
 
 
 
 const SyaratKetentuan = () => {
+
+  const [form, setForm] = useRecoilState(PesananFormInputsState);
+  const [formStep, setFormStep] = useRecoilState(pesananFormStepState);
   
     //create initial menuCollapse state using useState hook
     const [menuCollapse, setMenuCollapse] = useState(false)
@@ -45,6 +56,13 @@ const SyaratKetentuan = () => {
     //condition checking to change state from true to false and vice versa
     menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
   };
+
+  
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    setFormStep("pengirimanbarang");
+  };
+
 
   return (
     <>
@@ -68,7 +86,11 @@ const SyaratKetentuan = () => {
 
             </div>
 
+
+
             <div class="container" style={{marginTop:'50px'}}>
+
+            <form onSubmit={handleSubmit}>
                                 <div class="body_ketentuan d-md-flex align-items-center justify-content-between">
                                     <div class="box-ketentuan mt-md-0 mt-5">
                                     
@@ -93,8 +115,8 @@ const SyaratKetentuan = () => {
                                               </p>
 
                                               <center>
-                                              <button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/informasibarang">Setuju</a></button>
-                                              <button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/buatpesanan">Tidak Setuju</a></button>
+                                              <a><button  type="submit" className="login_masuk" style={{color:'white'}}>Setuju</button></a>
+                                              <a><button  type="button" className="login_masuk" style={{color:'white'}}>Tidak Setuju</button></a>
                                               </center>
 
                                             </div>
@@ -110,6 +132,8 @@ const SyaratKetentuan = () => {
                              
 
                                 </div>
+
+                                </form>
 
 
 

@@ -54,6 +54,70 @@
    
 }
 
+.icon_user {
+    padding-left: 40px;
+    background: url("../../../../assets/image/icons/Vector(1).png") no-repeat left;
+    background-size: 20px;
+    margin-left:10px;
+  
+  }
+  
+
+.icon_email {
+    padding-left: 40px;
+    background: url("../../../../assets/image/icons/email.png") no-repeat left;
+    background-size: 20px;
+    margin-left:10px;
+  
+  }
+  
+.icon_password {
+    padding-left: 40px;
+    background: url("../../../../assets/image/icons/password.png") no-repeat left;
+    background-size: 20px;
+    margin-left:10px;
+  
+  }
+  
+.icon_confirmpassword {
+    padding-left: 40px;
+    background: url("../../../../assets/image/icons/password.png") no-repeat left;
+    background-size: 20px;
+    margin-left:10px;
+  
+  }
+  .icon_call {
+    padding-left: 40px;
+    background: url("../../../../assets/image/icons/phone.png") no-repeat left;
+    background-size: 20px;
+    margin-left:10px;
+  
+  }
+  
+  
+
+
+.body-register {
+  
+    width: 720px;
+    height: 540px;
+    margin: 0px auto;
+    border: 1px solid #dddd;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: white;
+    color:white;
+   
+}
+
+.box-register {
+    width: 100%;
+   
+    ;
+}
+
+
 .box-1 img {
     width: 100%;
     height: 100%;
@@ -144,4 +208,57 @@
         width: 100%;
         height: 440px;
     }
+
+    .body-register {
+  
+        width: 300px;
+        height: 440px;
+        margin: 0px auto;
+        border: 1px solid #dddd;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        background-color: #008BD9A6;
+        color:white;
+       
+    }
+    
+    .box-register {
+        width: 100%;
+       
+        ;
+    }
+}
+
+
+.inputfield {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+  .input {
+    height: 3em;
+    width: 3em;
+    border: 2px solid #dad9df;
+    outline: none;
+    text-align: center;
+    font-size: 1.5em;
+    border-radius: 0.3em;
+    background-color: #ffffff;
+    outline: none;
+    /*Hide number field arrows*/
+    -moz-appearance: textfield;
+  }
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input:disabled {
+  color: #89888b;
+}
+.input:focus {
+  border: 3px solid #ffb800;
 }

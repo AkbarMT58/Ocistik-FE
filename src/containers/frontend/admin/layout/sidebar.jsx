@@ -2,7 +2,7 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../../../src/containers/frontend/admin/dashboard/dashboard.css'
-import Navbar_Dashboard  from '../dashboard/navbar';
+
 
 
 import { useState,useRef,useEffect } from "react";
@@ -67,11 +67,11 @@ return(
       <img src='/image/icons/beranda.png' style={{width:'40px', height:'40px'}} />
     <a className='text-white m-2' href="/admin/dashboard">  Beranda</a>
     </MenuItem>
-    <MenuItem >  <img src='/image/icons/pesan.png' style={{width:'40px', height:'40px'}} /><a className='text-black m-2' href="/admin/pesanan">Pesanan Saya</a></MenuItem>
-    <MenuItem ><img src='/image/icons/logistic.png' style={{width:'40px', height:'40px'}} /><a className='text-black m-2' href="/admin/buatpesanan">Buat Pesanan</a></MenuItem>
-    <MenuItem ><img src='/image/icons/pembayaran.png' style={{width:'40px', height:'40px'}} /><a className='text-black m-2' href="/admin/pembayaran">Pembayaran</a></MenuItem>
-    <MenuItem ><img src='/image/icons/uang.png' style={{width:'40px', height:'40px'}} /> <a className='text-black m-2' href="/admin/buatpesanan">Saldo</a></MenuItem>
-    
+    <MenuItem >  <img src='/image/icons/pesan.png' style={{width:'40px', height:'40px'}} /><a className='text-black m-2' href="/admin/pesanan/">Pesanan Saya</a></MenuItem>
+    <MenuItem ><img src='/image/icons/logistic.png' style={{width:'40px', height:'40px'}} /><a className='text-black m-2' href="/admin/formpesanan">Buat Pesanan</a></MenuItem>
+    {/* <MenuItem ><img src='/image/icons/pembayaran.png' style={{width:'40px', height:'40px'}} /><a className='text-black m-2' href="/admin/pembayaran">Pembayaran</a></MenuItem> */}
+    {/* <MenuItem ><img src='/image/icons/uang.png' style={{width:'40px', height:'40px'}} /> <a className='text-black m-2' href="/admin/buatpesanan">Saldo</a></MenuItem>
+     */}
   <Menu iconShape="square">
    
     {/* <MenuItem ><img src='/image/icons/pengaturan.png' style={{width:'40px', height:'40px'}} /><a href="/login"></a>Logout</MenuItem>  */}

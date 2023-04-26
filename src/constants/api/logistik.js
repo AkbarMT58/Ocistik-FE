@@ -166,6 +166,48 @@ export async function getData_Master_Categories() {
 
   }
 
+  export async function getData_Master_Jenisbarang_Informasi() {
+    const url = `http://localhost:8080/oms/cms/category-oci-logistics`;
+
+    const response = await axios.get(url, {
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        'Access-Control-Allow-Header':"Cache-Control, Content-Type,Xid"
+      },
+  });
+  const axiosResponse = response.data;
+ 
+  return axiosResponse;
+
+  }
+
+
+  export async function getData_PesananSaya() {
+    const url = "http://localhost:9000/api/getDataPesanan";
+
+    const response = await axios.get(url, {
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        // 'Access-Control-Allow-Origin':'*',
+        // 'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        // 'Access-Control-Allow-Header':"Cache-Control, Content-Type,Xid"
+      },
+  });
+  const axiosResponse = response.data;
+ 
+  return axiosResponse;
+
+  }
+
+
+
+  
+
+
 
 
 

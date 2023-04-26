@@ -1,8 +1,8 @@
 
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../../../frontend/admin/dashboard/dashboard.css'
-import Navbar_Dashboard  from '../navbar';
+import '../../containers/frontend/admin/dashboard/dashboard.css'
+import Navbar_Dashboard  from '../../containers/frontend/admin/layout/navbar';
 import { useState,useRef,useEffect } from "react";
 //import react pro sidebar components
 import {
@@ -16,12 +16,123 @@ import {
 } from "react-pro-sidebar";
 
 import "react-pro-sidebar/dist/css/styles.css";
-import Sidebar from '../../layout/sidebar';
+import Sidebar from '../../containers/frontend/admin/layout/sidebar';
+import { RecoilRoot } from "recoil";
+import { useRecoilState } from "recoil";
+import {
+  PesananFormInputsState,
+  pesananFormStepState,
+  } from "../../atoms/pesananForm";
 
+import { useRecoilValue } from "recoil";
+import axios from 'axios';
+import swal from 'sweetalert';
 
 
 const EkspedisiLokalIndonesia = () => {
 const [tipeekspedisi, setEkpedisi] = React.useState("jne");
+const select_ekspedisilokal = useRef('');
+const [form, setForm] = useRecoilState(PesananFormInputsState);
+const [formStep, setFormStep] = useRecoilState(pesananFormStepState);
+
+const [users, setItems] = useState('');
+
+useEffect(() => {
+  const users = localStorage.getItem('email');
+  if (users) {
+   setItems(users);
+  }
+}, []);
+
+
+
+let handleSubmit = async (e) => {
+  e.preventDefault();
+
+
+  try {
+
+   const datainput = JSON.stringify({
+     nama:form.namalengkap,
+     email:users,
+     telepon:form.nohp,
+     kota:"-",
+     alamat:form.alamatlengkap,
+     kode_pos:parseInt(form.kodepos),
+     kategori_barang:form.kategori_id,
+     volume:parseFloat(form.volume),
+     berat:parseFloat(form.totalberat),
+     packing_list:form.packinglistfile,
+     is_airplane:(form.tipepengiriman),
+     kurir:tipeekspedisi,
+     id_provinsi:parseInt(form.provinsi),
+     id_kota:parseInt(form.kota),
+     id_kecamatan:parseInt(form.kecamatan),
+     tracking_no:form.trackingnumber,
+ 
+  });
+   const URL = `http://localhost:8787/oms/oci-logistics/buat-pesanan`;
+
+
+   const response= await axios.post(
+       URL,  
+       datainput,
+       {
+         headers:{
+           'Content-Type': 'application/json',
+    
+           'Xemail':users,
+        },
+       }
+     )
+         //  console.log(response.data.message)
+
+         if(response.data.status=='403'){
+
+           swal({
+             title: "Failed Create Pesanan Baru?",
+             text: "There is something Trouble With Your Data.Please Contact Administrator Or Check Your Input Data With Correct",
+             icon: "warning",
+             dangerMode: true,
+           })
+           .then(willDelete => {
+             if (willDelete) {
+               swal("Failed!", "Create Pesanan Baru Failed!", "error");
+             }
+             
+           });
+
+
+         }else{
+
+           
+       swal({
+         title: "Create Pesanan Succesfully",
+         text: "Are You Sure Your Input Data Is Already Correct,Please Check Again Before Saving?",
+         icon: "warning",
+         dangerMode: true,
+       })
+       .then(willDelete => {
+         if (willDelete) {
+           swal("Success!", "Create Pesanan Succesfully Added!", "success");
+         }
+         setFormStep("rangkumanpesanan");
+       });
+
+      
+
+
+         }
+
+     
+   
+
+} catch (err) {
+console.log(err);
+}
+  // setFormStep("rangkumanpesanan");
+};
+
 
     //create initial menuCollapse state using useState hook
     const [menuCollapse, setMenuCollapse] = useState(false)
@@ -31,6 +142,11 @@ const [tipeekspedisi, setEkpedisi] = React.useState("jne");
     //condition checking to change state from true to false and vice versa
     menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
   };
+
+
+     console.log("lihat ekspedisi:",tipeekspedisi)
+
+
 
   return (
     <>
@@ -55,6 +171,13 @@ const [tipeekspedisi, setEkpedisi] = React.useState("jne");
             </div>
 
             <div class="container" style={{marginTop:'10px'}}>
+
+        
+           
+                     
+                   
+            <form onSubmit={handleSubmit}>
+        
                                 <div class="body_kirimindo d-md-flex align-items-center justify-content-between">
                                     <div class="box-kirimindo mt-md-0 mt-5">
                                     
@@ -131,7 +254,7 @@ const [tipeekspedisi, setEkpedisi] = React.useState("jne");
 
                                              <center >
                                                 
-                                                <button  type="button" className="lanjut_tombol" style={{color:'white',marginTop:'-250px'}}><a href="/admin/rangkumanpesanan">Lanjut</a></button>
+                                                <a><button  type="submit" className="lanjut_tombol" style={{color:'white',marginTop:'-250px'}}>Lanjut</button></a>
                                                
                                             </center>
 
@@ -151,6 +274,7 @@ const [tipeekspedisi, setEkpedisi] = React.useState("jne");
                              
 
                                 </div>
+                                </form>
 
 
 

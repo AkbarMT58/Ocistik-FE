@@ -1,14 +1,15 @@
 
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../../../frontend/admin/dashboard/dashboard.css'
-import Navbar_Dashboard  from '../navbar';
+import '../../containers/frontend/admin/dashboard/dashboard.css'
+import Navbar_Dashboard  from '../../containers/frontend/admin/layout/navbar';
 import { useState,useRef,useEffect } from "react";
 import dateFormat from 'dateformat';
 import env from "react-dotenv";
-import Pagination from '../../../../../components/general/Pagination';
+import Pagination from '../../components/general/Pagination';
 import axios from 'axios';
 import swal from 'sweetalert';
+import Sidebar from '../../containers/frontend/admin/layout/sidebar';
 
 
 //import react pro sidebar components
@@ -24,11 +25,26 @@ import {
 
 
 import "react-pro-sidebar/dist/css/styles.css";
-import Sidebar from '../../layout/sidebar';
+
+import { RecoilRoot } from "recoil";
+import { useRecoilState } from "recoil";
+import {
+  PesananFormInputsState,
+  pesananFormStepState,
+  } from "../../atoms/pesananForm";
+import { useRecoilValue } from "recoil";
 
 
 
 const RangkumanPesanan = () => {
+
+const [form, setForm] = useRecoilState(PesananFormInputsState);
+const [formStep, setFormStep] = useRecoilState(pesananFormStepState);
+
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    setFormStep("formotpverifikasi");
+  };
   
     //create initial menuCollapse state using useState hook
     const [menuCollapse, setMenuCollapse] = useState(false)
@@ -51,7 +67,7 @@ const RangkumanPesanan = () => {
       if (willDelete) {
         swal("Success!", "Pesananmu Berhasil Dibuat", "success");
       }
-      window.location.href="/admin/buatpesanan"
+      window.location.href="/admin/pesanan"
     });
 
 
@@ -81,6 +97,10 @@ const RangkumanPesanan = () => {
             </div>
 
             <div class="container" style={{marginTop:'10px'}}>
+
+
+
+             
                                 <div class="body_rangkuman d-md-flex align-items-center justify-content-between">
                                     <div class="box-rangkuman mt-md-0 mt-5">
                                     

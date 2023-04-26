@@ -1,9 +1,9 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../../frontend/admin/login/login.css'
+import '../../../../frontend/admin/login/login.css'
 import { useState,useRef,useEffect } from "react";
 import { RecoilRoot } from "recoil";
-import Primaryformregistrasi from "../../../../components/register";
+import Primaryformbuatpesanan from "../../../../../components/pesanan/primaryformbuatpesanan";
 
 function useScreenWidth() {
 
@@ -15,7 +15,7 @@ function useScreenWidth() {
   return windowWidth;
 }
 
-const Register = () => {
+const Index = () => {
   //fungsi set responsive
 const widthSize = useScreenWidth()
 
@@ -42,7 +42,7 @@ if(widthSize <= mobileWidth){
   return (
 
     <RecoilRoot>
-    <Primaryformregistrasi />
+    <Primaryformbuatpesanan />
    </RecoilRoot>
 
    
@@ -50,6 +50,6 @@ if(widthSize <= mobileWidth){
   )
 }
 
-export default Register
+export default Index
 
 

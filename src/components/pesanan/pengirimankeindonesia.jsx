@@ -1,15 +1,14 @@
 
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../../../frontend/admin/dashboard/dashboard.css'
-import Navbar_Dashboard  from '../navbar';
-
-
+import '../../containers/frontend/admin/dashboard/dashboard.css'
+import Navbar_Dashboard  from '../../containers/frontend/admin/layout/navbar';
 import { useState,useRef,useEffect } from "react";
 import dateFormat from 'dateformat';
 import env from "react-dotenv";
-import Pagination from '../../../../../components/general/Pagination';
+import Pagination from '../../components/general/Pagination';
 import axios from 'axios';
+import Sidebar from '../../containers/frontend/admin/layout/sidebar';
 
 
 //import react pro sidebar components
@@ -25,11 +24,57 @@ import {
 
 //import icons from react icons
 import "react-pro-sidebar/dist/css/styles.css";
-import Sidebar from '../../layout/sidebar';
+
+import { RecoilRoot } from "recoil";
+import { useRecoilState } from "recoil";
+import {
+  PesananFormInputsState,
+  pesananFormStepState,
+  } from "../../atoms/pesananForm";
+
+import { useRecoilValue } from "recoil";
 
 
 
 const PengirimanKeIndonesia = () => {
+
+  const [form, setForm] = useRecoilState(PesananFormInputsState);
+  const [formStep, setFormStep] = useRecoilState(pesananFormStepState);
+
+  
+useEffect(() => {
+
+  
+  if (tipekirim=='laut'){
+
+    setForm({
+       ...form,
+       tipepengiriman: false,
+   })
+
+
+
+ }else{
+
+   setForm({
+     ...form,
+     tipepengiriman: true,
+ })
+
+
+
+ }
+ 
+}, []);
+
+
+  
+
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    setFormStep("ekspedisilokalindonesia");
+  };
+
   
     //create initial menuCollapse state using useState hook
     const [menuCollapse, setMenuCollapse] = useState(false)
@@ -40,8 +85,17 @@ const PengirimanKeIndonesia = () => {
     menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
   };
 
-  const [tipekirim, setTipeKirim] = React.useState("laut");
+  const [tipekirim, setTipeKirim] = React.useState('');
+  const select_tipekirimlaut = useRef('');
+  const select_tipekirimudara = useRef('');
 
+
+
+
+  
+
+    console.log("lihat tipe kirim:",tipekirim)
+  
 
   return (
     <>
@@ -66,6 +120,8 @@ const PengirimanKeIndonesia = () => {
             </div>
 
             <div class="container" style={{marginTop:'10px'}}>
+
+            <form onSubmit={handleSubmit}>
                                 <div class="body_kirimindo d-md-flex align-items-center justify-content-between">
                                     <div class="box-kirimindo mt-md-0 mt-5">
                                     
@@ -85,7 +141,12 @@ const PengirimanKeIndonesia = () => {
                                                   <label className='text-black labelkirimlaut'>Pengiriman Laut</label>
                                                  
 
-                                                  <input  style={{marginLeft:'200px'}}
+                                                  <input 
+
+                                                  ref={select_tipekirimlaut}
+
+
+                                                  style={{marginLeft:'200px'}}
                                                           type="checkbox"
                                                           checked={tipekirim === "laut"}
                                                           onChange={() => setTipeKirim("laut")}
@@ -106,7 +167,11 @@ const PengirimanKeIndonesia = () => {
                                                 <label className='text-black labelkirimudara'>Pengiriman Udara</label>
                                                
 
-                                                 <input style={{marginLeft:'180px'}}
+                                                 <input 
+
+                                                  ref={select_tipekirimudara}
+                                                 
+                                                 style={{marginLeft:'180px'}}
                                                     type="checkbox"
                                                     checked={tipekirim === "udara"}
                                                     onChange={() => setTipeKirim("udara")}
@@ -123,7 +188,7 @@ const PengirimanKeIndonesia = () => {
 
                                              <center >
                                                 
-                                                <button  type="button" className="lanjut_tombol" style={{color:'white',marginTop:'0px'}}><a href="/admin/ekspedisilokalindonesia">Lanjut</a></button>
+                                                <a><button  type="submit" className="lanjut_tombol" style={{color:'white',marginTop:'0px'}}>Lanjut</button></a>
                                                
                                             </center>
 
@@ -143,6 +208,8 @@ const PengirimanKeIndonesia = () => {
                              
 
                                 </div>
+
+                                </form>
 
 
 

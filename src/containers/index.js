@@ -32,16 +32,18 @@ export {default as Login} from './frontend/admin/login/login';
 
 
 export {default as Dashboard} from './frontend/admin/dashboard/dashboard';
-export {default as BuatPesanan} from './frontend/admin/dashboard/pesanan/BuatPesanan';
+// export {default as BuatPesanan} from './frontend/admin/dashboard/pesanan/BuatPesanan';
 export {default as Pesanan} from './frontend/admin/dashboard/pesanan/pesanan';
-export {default as Syaratketentuan} from './frontend/admin/dashboard/pesanan/syaratketentuan';
-export {default as Informasibarang} from './frontend/admin/dashboard/pesanan/informasibarang';
-export {default as PengirimanKeIndonesia} from './frontend/admin/dashboard/pesanan/pengirimankeindonesia';
-export {default as EkspedisiLokalIndonesia} from './frontend/admin/dashboard/pesanan/ekspedisilokalindonesia';
-export {default as RangkumanPesanan} from './frontend/admin/dashboard/pesanan/rangkumanpesanan';
+// export {default as Syaratketentuan} from './frontend/admin/dashboard/pesanan/syaratketentuan';
+// export {default as Informasibarang} from './frontend/admin/dashboard/pesanan/informasibarang';
+// export {default as PengirimanKeIndonesia} from './frontend/admin/dashboard/pesanan/pengirimankeindonesia';
+// export {default as EkspedisiLokalIndonesia} from './frontend/admin/dashboard/pesanan/ekspedisilokalindonesia';
+// export {default as RangkumanPesanan} from './frontend/admin/dashboard/pesanan/rangkumanpesanan';
 export {default as Pembayaran} from './frontend/admin/pembayaran/pembayaran';
 export {default as Waitingpembayaran} from './frontend/admin/pembayaran/waitingpembayaran';
 export {default as Statuspembayaran} from './frontend/admin/pembayaran/statuspembayaran';
+export {default as Register} from './frontend/admin/login/register';
+export {default as Index} from './frontend/admin/dashboard/pesanan/index';
 
 
 

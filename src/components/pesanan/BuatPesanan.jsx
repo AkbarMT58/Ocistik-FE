@@ -1,22 +1,37 @@
 
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../dashboard/dashboard.css'
-import Navbar_Dashboard  from '../navbar';
+import '../../containers/frontend/admin/dashboard/dashboard.css'
+import Navbar_Dashboard  from '../../containers/frontend/admin/layout/navbar';
 import { useState,useRef,useEffect } from "react";
 import dateFormat from 'dateformat';
 import env from "react-dotenv";
-import Pagination from '../../../../../components/general/Pagination';
-import { getData_Provinsi } from '../../../../../constants/api/logistik';
+import Pagination from '../../components/general/Pagination';
+import { getData_Provinsi } from '../../constants/api/logistik';
 import axios from 'axios';
 import swal from 'sweetalert';
 
-
 import "react-pro-sidebar/dist/css/styles.css";
-import Sidebar from '../../layout/sidebar';
+import Sidebar from '../../containers/frontend/admin/layout/sidebar';
+
+
+import { RecoilRoot } from "recoil";
+import { useRecoilState } from "recoil";
+import {
+  PesananFormInputsState,
+  pesananFormStepState,
+  } from "../../atoms/pesananForm";
+
+import { useRecoilValue } from "recoil";
+
+
+
 
 
 const BuatPesanan = () => {
+
+  const [form, setForm] = useRecoilState(PesananFormInputsState);
+  const [formStep, setFormStep] = useRecoilState(pesananFormStepState);
   
     //create initial menuCollapse state using useState hook
     const [menuCollapse, setMenuCollapse] = useState(false)
@@ -45,27 +60,30 @@ const BuatPesanan = () => {
 const fetchOrderDataProvinsi= async ()=>{
 
 //const data_ = await getData_Provinsi();  
-const url = `https://api.rajaongkir.com/starter/province`;
+const url = `http://localhost:9000/api/getprovinsi`;
 
 try {
   let res = await fetch(url, {
     method: "GET",
-    mode: "cors",
     headers: {
-    'Accept': 'application/json',
-    'Access-Control-Allow-Origin':'*',
-    'Key':"2cde5c2e002d7033f11527ba0ae23de1"
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
 
-    },
+      },
 
- 
+
   });
   let resJson = await res.json();
   if (res.status === 200) {
   
-    console.log(resJson)
+    // console.log(resJson)
+
+
     const data_= resJson.Data
-    setDataProvinsi(data_.Data)
+
+    console.log("lihat data provinsi:",data_)
+
+    setDataProvinsi(data_)
 
     
   } else {
@@ -78,19 +96,20 @@ try {
 
 
 
-
-
-
-
 }
 
 
   const HandlerChangeProvinsiSelect= async (e) => {
     e.preventDefault();
 
-    var id_provinsi= select_provinsi.current.value;
-    const url = `http://192.168.15.20:9000/api/getkotabyprovinsiid`;
+    setForm({
+      ...form,
+      provinsi:select_provinsi.current.value,
+  })
+  
 
+    var id_provinsi= select_provinsi.current.value;
+    const url = `http://localhost:9000/api/getkotabyprovinsiid`;
 
     console.log("lihat id provinsi:",id_provinsi);
     
@@ -117,10 +136,12 @@ try {
           let resJson = await res.json();
           if (res.status === 200) {
           
-            console.log(resJson)
+            // console.log(resJson)
       
         
             const data_kota_ = resJson.Data
+
+          
             
   
               setDataKota(data_kota_);
@@ -147,8 +168,15 @@ try {
 
     e.preventDefault();
 
+    
+    setForm({
+      ...form,
+      kota:select_kota.current.value,
+  })
+  
+
     var id_kota= select_kota.current.value;
-    const url = `http://192.168.15.20:9000/api/getkecamatanbykotaid`;
+    const url = `http://localhost:9000/api/getkecamatanbykotaid`;
 
 
     console.log("lihat id kota:",id_kota);
@@ -193,30 +221,32 @@ try {
 
     
   }
-  // const HandlerChangeKecamatanSelect=()=>{
 
 
-    
-  // }
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    setFormStep("syaratketentuan");
+  };
 
 
   return (
     <>
       <div id="header" style={{ display: 'flex' }}>
-
-        <Sidebar/>
-        
-   
+             <Sidebar/>
         <div className="container">
+
+     
        
 <div className='bg_layerdashboard bg-aqua'>
 
-    <div className='bg_dashboard bq-aqua'>
+    <div className='bg_dashboard'>
 
-            <Navbar_Dashboard/>
+   <Navbar_Dashboard/>
 
                   
             <div class="container" style={{marginTop:'50px'}}>
+
+            <form onSubmit={handleSubmit}>
                                 <div className="body_pesanan d-md-flex align-items-center justify-content-between">
                                     <div className="box-1 mt-md-0 mt-5">
                                     
@@ -226,28 +256,62 @@ try {
                                             <div className='text-black' style={{marginLeft:"-150px"}}>Informasi Penerima</div>
                                             <div className='form-group m-2'>
                                            
-                                            <input type="text" className='form-control icon_1' placeholder='Nama Lengkap'/>
+                                            <input  onChange={(e) =>
+                    setForm({
+                        ...form,
+                        namalengkap: e.target.value,
+                    })
+                    }
+                    value={form.namalengkap}  type="text" className='form-control icon_1' placeholder='Nama Lengkap'/>
                                             
 
                                             </div>
                                             <div className='form-group m-2'>
                                           
-                                            <input type="text" className='form-control icon_2'  placeholder='No HP'/>
+                                            <input  
+
+
+onChange={(e) =>
+  setForm({
+      ...form,
+      nohp: e.target.value,
+  })
+  }
+  value={form.nohp}
+
+                                            
+                                            
+                                            
+                                             type="text" className='form-control icon_2'  placeholder='No HP'/>
 
                                             </div>
                                             <div className='form-group m-2'>
                                           
-                                          <input type="text" className='form-control icon_3'  placeholder='Alamat Lengkap'/>
+                                          <input 
+onChange={(e) =>
+  setForm({
+      ...form,
+      alamatlengkap: e.target.value,
+  })
+  }
+  value={form.alamatlengkap}
+
+type="text" className='form-control icon_3'  placeholder='Alamat Lengkap'/>
 
                                           </div>
                                           <div className='form-group m-2'>
                                           
-                                          <select ref={select_provinsi} onChange={HandlerChangeProvinsiSelect}   type="text" className='form-control icon_4 text-black'  placeholder='Pilih Provinsi' >
+                                          <select
+
+
+                                          
+                                          
+                                           ref={select_provinsi} onChange={HandlerChangeProvinsiSelect}   type="text" className='form-control icon_4 text-black'  placeholder='Pilih Provinsi' >
                                           <option>--Pilih Provinsi--</option>
                                           {dataProvinsi?.map((provinsi) => (
                                           
                                            
-                                            <option value={provinsi?.id} >{provinsi?.Nama_provinsi}</option>
+                                            <option value={provinsi?.province_id} >{provinsi?.province_name}</option>
 
                                           ))}
 
@@ -261,7 +325,7 @@ try {
                                             <option>--Pilih Kota--</option>
 
                                             {dataKota?.map((kota) => (
-                                            <option value={kota?.id_kota}>{kota?.kota}</option>
+                                            <option value={kota?.city_id}>{kota?.city_name}</option>
                                             ))}
 
 
@@ -270,11 +334,19 @@ try {
                                           </div>
                                           <div className='form-group m-2'>
                                           
-                                          <select   type="text" className='form-control icon_4'  placeholder='Pilih Kecamatan'>
+                                          <select  onChange={(e) =>
+  setForm({
+      ...form,
+      kecamatan: e.target.value,
+  })
+  }
+  value={form.kecamatan}
+
+   type="text" className='form-control icon_4'  placeholder='Pilih Kecamatan'>
                                             <option>--Pilih Kecamatan--</option>
                                             {dataKecamatan?.map((kecamatan) => (
 
-                                            <option value={kecamatan?.id_kota}>{kecamatan?.kota}</option>
+                                            <option value={kecamatan?.subdistrict_id}>{kecamatan?.subdistrict_name}</option>
 
                                             ))}
 
@@ -284,7 +356,13 @@ try {
                                           </div>
                                           <div className='form-group m-2'>
                                           
-                                          <input type="text" className='form-control icon_7'  placeholder='Kode Pos'/>
+                                          <input onChange={(e) =>
+  setForm({
+      ...form,
+      kodepos: e.target.value,
+  })
+  }
+  value={form.kodepos} type="text" className='form-control icon_7'  placeholder='Kode Pos'/>
 
                                           </div>
 
@@ -323,7 +401,7 @@ try {
                                         </div>
 
                         <center>
-                        <button  type="button" className="login_masuk" style={{color:'white'}}><a href="/admin/syaratketentuan">Lanjut</a></button>
+                       <a><button  type="submit" className="login_masuk" style={{color:'white'}}>Lanjut</button></a>
                         </center>
 
                                       
@@ -336,6 +414,7 @@ try {
                              
 
                                 </div>
+                                </form>
 
 
 
