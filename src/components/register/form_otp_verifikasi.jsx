@@ -60,7 +60,7 @@ function Form_OTP_Verifikasi() {
   
   
    });
-    const URL = `http://localhost:8082/ocistik/customer/register`;
+    const URL = `http://192.168.15.20:8082/ocistik/customer/register`;
 
 
     const response= await axios.post(
@@ -77,7 +77,7 @@ function Form_OTP_Verifikasi() {
       )
            //console.log(response)
 
-           if(response.data.status=='200'){
+           if(response.data.status=='409'){
 
         swal({
           title: "OTP Authentication?",

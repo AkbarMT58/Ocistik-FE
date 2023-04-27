@@ -34,14 +34,31 @@ const [tipeekspedisi, setEkpedisi] = React.useState("jne");
 const select_ekspedisilokal = useRef('');
 const [form, setForm] = useRecoilState(PesananFormInputsState);
 const [formStep, setFormStep] = useRecoilState(pesananFormStepState);
-
 const [users, setItems] = useState('');
+
+const url_rajaongkir = `https://api.rajaongkir.com/basic/cost`;
+const apikeyrajaongkir=`8b35c2946a4276088e5d4d422b716f90`
+
+var namaekspedisijne='jne' ;
+var namaekspedisipos='pos' ;
+var namaekspedisitiki='tiki' ;
+var namaekspedisipcp='pcp' ;
+var namaekspedisiesl='esl' ;
+var namaekspedisirpx='rpx' ;
 
 useEffect(() => {
   const users = localStorage.getItem('email');
   if (users) {
    setItems(users);
   }
+
+  getekspedisilokalrajaongkir_jne(namaekspedisijne);
+  // getekspedisilokalrajaongkir_pos(namaekspedisipos);
+  // getekspedisilokalrajaongkir_tiki(namaekspedisitiki);
+  // getekspedisilokalrajaongkir_pcp(namaekspedisipcp);
+  // getekspedisilokalrajaongkir_esl(namaekspedisiesl);
+  // getekspedisilokalrajaongkir_rpx(namaekspedisirpx);
+
 }, []);
 
 
@@ -70,10 +87,9 @@ let handleSubmit = async (e) => {
      id_kecamatan:parseInt(form.kecamatan),
      tracking_no:form.trackingnumber,
  
-  });
-   const URL = `http://localhost:8787/oms/oci-logistics/buat-pesanan`;
+     });
 
-
+   const URL = `http://192.168.15.20:8787/oms/oci-logistics/buat-pesanan`;
    const response= await axios.post(
        URL,  
        datainput,
@@ -87,7 +103,7 @@ let handleSubmit = async (e) => {
      )
          //  console.log(response.data.message)
 
-         if(response.data.status=='403'){
+         if(response.data.code.status=='400'){
 
            swal({
              title: "Failed Create Pesanan Baru?",
@@ -104,22 +120,6 @@ let handleSubmit = async (e) => {
 
 
          }else{
-
-           
-       swal({
-         title: "Create Pesanan Succesfully",
-         text: "Are You Sure Your Input Data Is Already Correct,Please Check Again Before Saving?",
-         icon: "warning",
-         dangerMode: true,
-       })
-       .then(willDelete => {
-         if (willDelete) {
-           swal("Success!", "Create Pesanan Succesfully Added!", "success");
-         }
-         setFormStep("rangkumanpesanan");
-       });
-
-      
 
 
          }
@@ -145,6 +145,159 @@ console.log(err);
 
 
      console.log("lihat ekspedisi:",tipeekspedisi)
+     //daerah get data raja ongkir all
+
+     //JNE
+     const getekspedisilokalrajaongkir_jne=async(namaekspedisijne)=>{
+
+      try{
+
+        var datainput=JSON.stringify({
+          origin:155,
+          destination:form.kota,
+          weight:form.totalberat,
+          courier:namaekspedisijne
+
+        });
+
+        const response= await axios.post(
+          url_rajaongkir,  
+          datainput,
+          {
+            headers:{
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'key':apikeyrajaongkir,
+           },
+          }
+        )
+            console.log(response.rajaongkir.results)
+   
+       
+          if(response.data.rajaongkir.status.code=='400'){
+   
+            swal({
+              title: "Failed  Get Ekspedisi JNE?",
+              text: "There is something Trouble With Your Data Or Connection",
+              icon: "warning",
+              dangerMode: true,
+            })
+            .then(willDelete => {
+              if (willDelete) {
+                swal("Failed!", "Can Not Calling Ekspedisi!", "error");
+              }
+              
+            });
+ 
+ 
+          } 
+   
+      }catch (err) {
+        console.log(err);
+      }
+
+     };
+
+
+     //TIKI
+    //  const getekspedisilokalrajaongkir_tiki=async(namaekspedisitiki)=>{
+
+    //   try{
+
+    //     var datainput=JSON.stringify({
+    //       origin:501,
+    //       destination:114,
+    //       weight:1000,
+    //       courier:namaekspedisitiki
+
+    //     });
+    //     const response= await axios.post(
+    //       url_rajaongkir,  
+    //       datainput,
+    //       {
+    //         headers:{
+    //           'Content-Type': 'application/x-www-form-urlencoded',
+    //           'key':apikeyrajaongkir,
+    //        },
+    //       }
+    //     )
+    //         //  console.log(response.data.message)
+    //         if(response.data.rajaongkir.status.code=='400'){
+    //           swal({
+    //             title: "Failed  Get Ekspedisi TIKI?",
+    //             text: "There is something Trouble With Your Data Or Connection",
+    //             icon: "warning",
+    //             dangerMode: true,
+    //           })
+    //           .then(willDelete => {
+    //             if (willDelete) {
+    //               swal("Failed!", "Can Not Calling Ekspedisi!", "error");
+    //             }
+                
+    //           });
+   
+   
+    //         } 
+   
+    //   }catch (err) {
+    //     console.log(err);
+    //   }
+
+    //  };
+
+     //POS
+     
+    //  const getekspedisilokalrajaongkir_pos=async(namaekspedisipos)=>{
+
+    //   try{
+
+    //     var datainput=JSON.stringify({
+    //       origin:501,
+    //       destination:114,
+    //       weight:1000,
+    //       courier:namaekspedisitiki
+
+    //     });
+    //     const response= await axios.post(
+    //       url_rajaongkir,  
+    //       datainput,
+    //       {
+    //         headers:{
+    //           'Content-Type': 'application/x-www-form-urlencoded',
+    //           'key':apikeyrajaongkir,
+    //        },
+    //       }
+    //     )
+    //         //  console.log(response.data.message)
+   
+    //         if(response.data.rajaongkir.status.code=='400'){
+   
+    //           swal({
+    //             title: "Failed  Get Ekspedisi POS?",
+    //             text: "There is something Trouble With Your Data Or Connection",
+    //             icon: "warning",
+    //             dangerMode: true,
+    //           })
+    //           .then(willDelete => {
+    //             if (willDelete) {
+    //               swal("Failed!", "Can Not Calling Ekspedisi!", "error");
+    //             }
+                
+    //           });
+   
+   
+    //         } 
+   
+    //   }catch (err) {
+    //     console.log(err);
+    //   }
+
+    //  };
+
+
+
+
+
+     //batas raja ongkir 
 
 
 
@@ -159,7 +312,6 @@ console.log(err);
 <div className='bg_layerdashboard bg-aqua'>
 
     <div className='bg_dashboard'>
-
             <Navbar_Dashboard/>
 
             <center>

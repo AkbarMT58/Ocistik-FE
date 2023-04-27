@@ -41,7 +41,7 @@ function Form_Pendaftaran() {
   
   
    });
-    const URL = `http://localhost:8082/ocistik/customer/send-otp`;
+    const URL = `http://192.168.15.20:8082/ocistik/customer/send-otp`;
 
 
     const response= await axios.post(

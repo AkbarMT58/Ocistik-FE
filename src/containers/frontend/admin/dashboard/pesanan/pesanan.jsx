@@ -14,6 +14,9 @@ import {Timeline, TimelineEvent} from 'react-event-timeline'
 import 'material-icons/iconfont/material-icons.css';
 import { getData_PesananSaya } from '../../../../../constants/api/logistik';
 import { getData_DetailPesanan } from '../../../../../constants/api/logistik';
+import { getData_DetailBarang } from '../../../../../constants/api/logistik';
+import { getData_LiveTracking } from '../../../../../constants/api/logistik';
+
 
 
 const PesananSaya = () => {
@@ -24,6 +27,8 @@ const PesananSaya = () => {
   const [updated, setUpdated] = useState('');
   const [datapesanansaya, setDataPesananSaya] = useState(null)
   const [datadetailpesanan, setDataDetailPesanan] = useState(null)
+  const [datadetailbarang, setDataDetailBarang] = useState(null)
+  const [datadetaillivetracking, setDataDetailLiveTracking] = useState(null)
   
     //create initial menuCollapse state using useState hook
     const [menuCollapse, setMenuCollapse] = useState(false)
@@ -42,6 +47,10 @@ const PesananSaya = () => {
     
     console.log("lihat data click no pesanan :",  nomorpesanan)
 
+    
+    getDataDetailBarang(nomorpesanan,emails);
+
+
 
   }
 
@@ -49,7 +58,6 @@ const PesananSaya = () => {
 
     setUpdated(inputRef_DetailProduk.current.value);
 
-    getDataDetailPesanan(nomorpesanan);
 
     
     console.log("lihat data click no pesanan :",  nomorpesanan)
@@ -57,6 +65,9 @@ const PesananSaya = () => {
     tabledetailbarang="none";
     tabledetailproduk="block";
     tablelivetracking="none";
+
+    
+    getDataDetailPesanan(nomorpesanan);
 
     
   }
@@ -73,6 +84,9 @@ const PesananSaya = () => {
     tabledetailbarang="none";
     tabledetailproduk="none";
     tablelivetracking="block";
+
+    
+    getDataLiveTracking(nomorpesanan,emails);
 
 
     
@@ -126,24 +140,50 @@ if(updated==''){
 }
 
 
+const [emails, setItems] = useState('');
 
+
+ const items = localStorage.getItem('email');
   // fungsi get data pesanan saya
   useEffect(() => {
-    if(!datapesanansaya) {
-      getDataPesananSaya()
-
-    }
    
+    if (items) {
+     setItems(items);
+     getDataPesananSaya(items);
 
-  }, [Pagination])
-
-
-  const getDataPesananSaya = async () => {
-    const res = await getData_PesananSaya();
-    if (res.status === 200) {
-      setDataPesananSaya(res.Data)
+    
     }
+
+
+  }, [])
+
+
+  const getDataPesananSaya = async (emails) => {
+
+    var formemail = new FormData();
+    formemail.append("email", emails);
+
+   
+    const URL = "http://192.168.15.20:9000/api/getDataPesananByUser";
+
+    const response= await axios.post(
+      URL,  
+      
+      formemail,
+      {
+        headers:{
+          "Content-Type": "multipart/form-data",
+      
+       },
+       
+       
+      }
+    )
+         //console.log(response.data.Data)
+
+         setDataPesananSaya(response.data.Data)
   }
+
 
   
   const getDataDetailPesanan = async (id_so) => {
@@ -154,7 +194,29 @@ if(updated==''){
     }
   }
 
-  console.log("detail pesanan:",datadetailpesanan)
+    
+  const getDataDetailBarang = async (id_so,emails) => {
+
+    const res = await getData_DetailBarang(id_so,emails);
+   
+    setDataDetailBarang(res.data)
+    
+  }
+
+  const getDataLiveTracking = async (id_so,emails) => {
+
+    const res = await getData_LiveTracking(id_so,emails);
+   
+    setDataDetailLiveTracking(res.data.tracking_status)
+    
+  }
+
+  console.log("detail pesanan:",datapesanansaya)
+
+  console.log("detail barang:",datadetailbarang)
+
+  console.log("detail live tracking:",datadetaillivetracking)
+
 
 
   return (
@@ -451,16 +513,20 @@ if(updated==''){
     </tr>
   </thead>
   <tbody>
+
+  {datadetailbarang?.map((detailbarang,index) => (  
   
     <tr>
-      <td>Sendal</td>
+      <td>{detailbarang.kategoribarang}</td>
       <td><img src="/image/image4.png" className='gambarproduk'/></td>
-      <td> 75647356565456</td>
-      <td>30-11-2023 11:16:23 WIB</td>
-      <td>Belum Bayar</td>
+      <td>{detailbarang.kuantiti}</td>
+      <td>{detailbarang.dimensi}</td>
+      <td>{detailbarang.volume}</td>
     
 
     </tr>
+
+  ))}
    
 
   </tbody>
@@ -484,7 +550,7 @@ daerah detail produk */}
 </label>  </div>
             <div classNmae="text-black"  style={{fontWeight:'bold',marginBottom:'20px'}}>Ekspedisi Lokal <label style={{marginLeft:'120px',fontWeight:'normal'}}>: {details.ekspedisi_lokal}</label></div>
             <div classNmae="text-black"  style={{fontWeight:'bold',marginBottom:'100px'}}>Alamat Pengiriman <label style={{marginLeft:'81px',fontWeight:'normal'}}>: {details.namajalan}</label> </div>
-            <div classNmae="text-black"  style={{fontWeight:'bold',marginBottom:'20px'}}>Total Harga <label style={{marginLeft:'145px',fontWeight:'normal'}}>:{details.estimasi_biaya_kirim}</label> </div>
+            <div classNmae="text-black"  style={{fontWeight:'bold',marginBottom:'20px'}}>Total Harga <label style={{marginLeft:'145px',fontWeight:'normal'}}>:Rp.{details.estimasi_biaya_kirim.toLocaleString('ID-id')},-</label> </div>
           </div>
           <div className='col-md-8'>
           </div>
@@ -512,61 +578,26 @@ Live Tracking */}
 
   </div>
 
+       
+
   <div className='col-md-4'>
+  {datadetaillivetracking?.map((rowstracking,index) => (  
   <Timeline>
-            <TimelineEvent title={<label style={{color:'blue'}}>Menunggu Pick Up</label>}
-                           createdAt={<label style={{color:'blue'}}>Seller - Selasa, 17 Jan 2023</label>}
-                           icon={<i className="material-icons-outlined" style={{color:'blue'}}>radio_button_checked</i>}
-            >
+           
+            <TimelineEvent title={rowstracking.status}
+                           createdAt={rowstracking.tanggal}
+                           icon={<i className="material-icons-outlined">radio_button_checked</i>}>
               
             </TimelineEvent>
-            <TimelineEvent title="Pemesanan sedang diproses oleh penjual."
-                           createdAt="Seller - Selasa, 17 Jan 2023"
-                           icon={<i className="material-icons-outlined">radio_button_checked</i>}
-            >
-              
-            </TimelineEvent>
-            <TimelineEvent title="Pembayaran sudah diverivikasi.
-                  Pembayaran telah diterima oleh Ocistok dan pesanan sudah diteruskan ke penjual."
-                           createdAt="Lomiles - Selasa, 17 Jan 2023"
-                           icon={<i className="material-icons-outlined">radio_button_checked</i>}
-            >
-              
-            </TimelineEvent>
-            <TimelineEvent title="Pembayaran sudah diverivikasi.
-                  Pembayaran telah diterima oleh Ocistok dan pesanan sudah diteruskan ke penjual."
-                           createdAt="Lomiles - Selasa, 17 Jan 2023"
-                           icon={<i className="material-icons-outlined">radio_button_checked</i>}
-            >
-              
-            </TimelineEvent>
-            <TimelineEvent title="Pembayaran sudah diverivikasi.
-                  Pembayaran telah diterima oleh Ocistok dan pesanan sudah diteruskan ke penjual."
-                           createdAt="Lomiles - Selasa, 17 Jan 2023"
-                           icon={<i className="material-icons-outlined">radio_button_checked</i>}
-            >
-              
-            </TimelineEvent>
-            <TimelineEvent title="Pembayaran sudah diverivikasi.
-                  Pembayaran telah diterima oleh Ocistok dan pesanan sudah diteruskan ke penjual."
-                           createdAt="Lomiles - Selasa, 17 Jan 2023"
-                           icon={<i className="material-icons-outlined">radio_button_checked</i>}
-            >
-              
-            </TimelineEvent>
-            <TimelineEvent title="Pembayaran sudah diverivikasi.
-                  Pembayaran telah diterima oleh Ocistok dan pesanan sudah diteruskan ke penjual."
-                           createdAt="Lomiles - Selasa, 17 Jan 2023"
-                           icon={<i className="material-icons-outlined">radio_button_checked</i>}
-            >
-              
-            </TimelineEvent>
+     
           
-    </Timeline>,
-    
+    </Timeline>
+    ))}
   </div>
+
+  
   <div className='col-md-4'>
-  <Timeline>
+  {/* <Timeline>
             <TimelineEvent title="John Doe sent a SMS"
                            createdAt="2016-09-12 10:06 PM"
                            icon={<i className="material-icons-outlined">radio_button_checked</i>}
@@ -582,7 +613,7 @@ Live Tracking */}
                     am losing patience. Can you expedite the process and pls do share the details asap. Consider this a
                     gentle reminder if you are on track already!
             </TimelineEvent>
-    </Timeline>,
+    </Timeline>, */}
 
   </div>
 
