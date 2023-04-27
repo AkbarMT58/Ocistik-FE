@@ -36,7 +36,7 @@ const [form, setForm] = useRecoilState(PesananFormInputsState);
 const [formStep, setFormStep] = useRecoilState(pesananFormStepState);
 const [users, setItems] = useState('');
 
-const url_rajaongkir = `https://api.rajaongkir.com/basic/cost`;
+const url_rajaongkir = `http://192.168.15.20:9000/api/getrajaongkir`;
 const apikeyrajaongkir=`8b35c2946a4276088e5d4d422b716f90`
 
 var namaekspedisijne='jne' ;
@@ -152,44 +152,50 @@ console.log(err);
 
       try{
 
-        var datainput=JSON.stringify({
-          origin:155,
-          destination:form.kota,
-          weight:form.totalberat,
-          courier:namaekspedisijne
+        // var datainput=JSON.stringify({
+        //   origin:155,
+        //   destination:form.kota,
+        //   weight:form.totalberat,
+        //   courier:namaekspedisijne
 
-        });
+        // });
+
+        var formrequest = new FormData();
+        formrequest.append("origincity","151");
+        formrequest.append("destination",form.kota);
+        formrequest.append("weight",form.totalberat);
+        formrequest.append("namaekspedisi",namaekspedisijne);
 
         const response= await axios.post(
           url_rajaongkir,  
-          datainput,
+          formrequest,
           {
             headers:{
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'key':apikeyrajaongkir,
+              'Content-Type': 'multipart/form-data',
+           
            },
           }
         )
-            console.log(response.rajaongkir.results)
+            console.log("data response ongkir",response.data.rajaongkir.results[0])
    
        
-          if(response.data.rajaongkir.status.code=='400'){
+          // if(response.data.rajaongkir.status.code=='400'){
    
-            swal({
-              title: "Failed  Get Ekspedisi JNE?",
-              text: "There is something Trouble With Your Data Or Connection",
-              icon: "warning",
-              dangerMode: true,
-            })
-            .then(willDelete => {
-              if (willDelete) {
-                swal("Failed!", "Can Not Calling Ekspedisi!", "error");
-              }
+          //   swal({
+          //     title: "Failed  Get Ekspedisi JNE?",
+          //     text: "There is something Trouble With Your Data Or Connection",
+          //     icon: "warning",
+          //     dangerMode: true,
+          //   })
+          //   .then(willDelete => {
+          //     if (willDelete) {
+          //       swal("Failed!", "Can Not Calling Ekspedisi!", "error");
+          //     }
               
-            });
+          //   });
  
  
-          } 
+          // } 
    
       }catch (err) {
         console.log(err);
