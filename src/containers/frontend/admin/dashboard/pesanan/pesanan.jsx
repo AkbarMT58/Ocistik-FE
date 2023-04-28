@@ -554,7 +554,7 @@ daerah detail produk */}
 </label>  </div>
             <div classNmae="text-black"  style={{fontWeight:'bold',marginBottom:'20px'}}>Ekspedisi Lokal <label style={{marginLeft:'120px',fontWeight:'normal'}}>: {details.ekspedisi_lokal}</label></div>
             <div classNmae="text-black"  style={{fontWeight:'bold',marginBottom:'100px'}}>Alamat Pengiriman <label style={{marginLeft:'81px',fontWeight:'normal'}}>: {details.namajalan}</label> </div>
-            <div classNmae="text-black"  style={{fontWeight:'bold',marginBottom:'20px'}}>Total Harga <label style={{marginLeft:'145px',fontWeight:'normal'}}>:Rp.{details.estimasi_biaya_kirim.toLocaleString('ID-id')},-</label> </div>
+            <div classNmae="text-black"  style={{fontWeight:'bold',marginBottom:'20px'}}>Total Harga <label style={{marginLeft:'145px',fontWeight:'normal'}}>:Rp.{(details.estimasi_biaya_kirim+details.harga_ekspedisi_lokal).toLocaleString('ID-id')},-</label> </div>
           </div>
           <div className='col-md-8'>
           </div>
