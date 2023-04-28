@@ -206,6 +206,10 @@ const [emails, setItems] = useState('');
   const getDataLiveTracking = async (id_so,emails) => {
 
     const res = await getData_LiveTracking(id_so,emails);
+
+    
+
+    
    
     setDataDetailLiveTracking(res.data.tracking_status)
     

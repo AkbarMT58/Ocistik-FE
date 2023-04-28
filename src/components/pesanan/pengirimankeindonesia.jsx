@@ -49,7 +49,7 @@ useEffect(() => {
 
     setForm({
        ...form,
-       tipepengiriman: false,
+       tipepengiriman: true,
    })
 
 
@@ -58,7 +58,7 @@ useEffect(() => {
 
    setForm({
      ...form,
-     tipepengiriman: true,
+     tipepengiriman: false,
  })
 
 
