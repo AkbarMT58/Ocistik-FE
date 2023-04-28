@@ -40,7 +40,7 @@ const [users, setItems] = useState('');
 
 
 
-const url_rajaongkir = `http://localhost:9000/api/getrajaongkir`;
+const url_rajaongkir = `http://192.168.15.20:9000/api/getrajaongkir`;
 const apikeyrajaongkir=`8b35c2946a4276088e5d4d422b716f90`
 const pilihjne = useRef('');
 const [dataJNE, setDataJNE] = useState(null)
@@ -98,7 +98,7 @@ let handleSubmit = async (e) => {
  
      });
 
-   const URL = `http://localhost:8787/oms/oci-logistics/buat-pesanan-versi2`;
+   const URL = `http://192.168.15.20:8787/oms/oci-logistics/buat-pesanan-versi2`;
    const response= await axios.post(
        URL,  
        datainput,
