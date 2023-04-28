@@ -206,7 +206,7 @@ export async function getData_Master_Categories() {
 
   
   export async function getData_DetailPesanan(id_so) {
-    const url = "http://192.168.15.20:9000/api/getdetailpesanan/"+id_so;
+    const url = "http://localhost:9000/api/getdetailpesanan/"+id_so;
 
     const response = await axios.get(url, {
       headers:{
@@ -225,7 +225,7 @@ export async function getData_Master_Categories() {
 
 
   export async function getData_DetailBarang(id_so,email) {
-    const url = "http://192.168.15.20:8787/oms/oci-logistics/getdetailprodukbyid/"+id_so;
+    const url = "http://localhost:8787/oms/oci-logistics/getdetailprodukbyid/"+id_so;
 
     const response = await axios.get(url, {
       headers:{
@@ -244,7 +244,7 @@ export async function getData_Master_Categories() {
 
   
   export async function getData_LiveTracking(id_so,email) {
-    const url = "http://192.168.15.20:8787/oms/oci-logistics/riwayat-pesanan-detail/"+id_so;
+    const url = "http://localhost:8787/oms/oci-logistics/riwayat-pesanan-detail/"+id_so;
 
     const response = await axios.get(url, {
       headers:{

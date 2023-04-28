@@ -94,7 +94,8 @@ const uploadToClient =async (event) => {
 
   
   try {
-    const URL = "http://192.168.15.20:9000/api/uploadexcel";
+   
+    const URL = "http://localhost:9000/api/uploadexcel";
 
 
     var formdatarequest = new FormData();

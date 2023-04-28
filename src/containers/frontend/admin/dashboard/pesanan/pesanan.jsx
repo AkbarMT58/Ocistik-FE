@@ -164,7 +164,7 @@ const [emails, setItems] = useState('');
     formemail.append("email", emails);
 
    
-    const URL = "http://192.168.15.20:9000/api/getDataPesananByUser";
+    const URL = "http://localhost:9000/api/getDataPesananByUser";
 
     const response= await axios.post(
       URL,  

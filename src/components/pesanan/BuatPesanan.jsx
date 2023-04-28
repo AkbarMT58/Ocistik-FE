@@ -59,8 +59,8 @@ const BuatPesanan = () => {
 
 const fetchOrderDataProvinsi= async ()=>{
 
-//const data_ = await getData_Provinsi();  
-const url = `http://192.168.15.20:9000/api/getprovinsi`;
+const url =`http://localhost:9000/api/getprovinsi`;
+
 
 try {
   let res = await fetch(url, {
@@ -109,7 +109,8 @@ try {
   
 
     var id_provinsi= select_provinsi.current.value;
-    const url = `http://192.168.15.20:9000/api/getkotabyprovinsiid`;
+
+    const url =`http://localhost:9000/api/getkotabyprovinsiid`;
 
     console.log("lihat id provinsi:",id_provinsi);
     
@@ -176,7 +177,8 @@ try {
   
 
     var id_kota= select_kota.current.value;
-    const url = `http://192.168.15.20:9000/api/getkecamatanbykotaid`;
+    const url =`http://localhost:9000/api/getkecamatanbykotaid`;
+   
 
 
     console.log("lihat id kota:",id_kota);

@@ -27,17 +27,24 @@ import {
 import { useRecoilValue } from "recoil";
 import axios from 'axios';
 import swal from 'sweetalert';
+import env from "react-dotenv";
 
 
 const EkspedisiLokalIndonesia = () => {
-const [tipeekspedisi, setEkpedisi] = React.useState("jne");
+const [tipeekspedisi, setEkpedisi] = React.useState("");
+const [tipeservice, setService] = React.useState("");
 const select_ekspedisilokal = useRef('');
 const [form, setForm] = useRecoilState(PesananFormInputsState);
 const [formStep, setFormStep] = useRecoilState(pesananFormStepState);
 const [users, setItems] = useState('');
 
-const url_rajaongkir = `http://192.168.15.20:9000/api/getrajaongkir`;
+
+
+const url_rajaongkir = `http://localhost:9000/api/getrajaongkir`;
 const apikeyrajaongkir=`8b35c2946a4276088e5d4d422b716f90`
+const pilihjne = useRef('');
+const [dataJNE, setDataJNE] = useState(null)
+const [dataJNECost, setDataJNECost] = useState(null)
 
 var namaekspedisijne='jne' ;
 var namaekspedisipos='pos' ;
@@ -50,6 +57,7 @@ useEffect(() => {
   const users = localStorage.getItem('email');
   if (users) {
    setItems(users);
+   
   }
 
   getekspedisilokalrajaongkir_jne(namaekspedisijne);
@@ -82,6 +90,7 @@ let handleSubmit = async (e) => {
      packing_list:form.packinglistfile,
      is_airplane:(form.tipepengiriman),
      kurir:tipeekspedisi,
+     harga_ekspedisi_lokal:parseInt(tipeservice),
      id_provinsi:parseInt(form.provinsi),
      id_kota:parseInt(form.kota),
      id_kecamatan:parseInt(form.kecamatan),
@@ -89,7 +98,7 @@ let handleSubmit = async (e) => {
  
      });
 
-   const URL = `http://192.168.15.20:8787/oms/oci-logistics/buat-pesanan`;
+   const URL = `http://localhost:8787/oms/oci-logistics/buat-pesanan-versi2`;
    const response= await axios.post(
        URL,  
        datainput,
@@ -103,23 +112,38 @@ let handleSubmit = async (e) => {
      )
          //  console.log(response.data.message)
 
-         if(response.data.code.status=='400'){
+         if(response.data.status=='200'){
 
            swal({
-             title: "Failed Create Pesanan Baru?",
-             text: "There is something Trouble With Your Data.Please Contact Administrator Or Check Your Input Data With Correct",
+             title: "Apakah Data Anda Sudah Benar,Klik Tombol OK Jika Benar?",
+             text: "Data Berhasil Tersimpan",
              icon: "warning",
              dangerMode: true,
            })
            .then(willDelete => {
              if (willDelete) {
-               swal("Failed!", "Create Pesanan Baru Failed!", "error");
+               swal("Berhasil!", "Create Pesanan Baru Sukses!", "success");
              }
+             setFormStep("rangkumanpesanan");
              
            });
 
 
          }else{
+
+          swal({
+            title: "Failed Create Pesanan Baru?",
+            text: "There is something Trouble With Your Data.Please Contact Administrator Or Check Your Input Data With Correct",
+            icon: "warning",
+            dangerMode: true,
+          })
+          .then(willDelete => {
+            if (willDelete) {
+              swal("Failed!", "Create Pesanan Baru Failed!", "error");
+            }
+            
+          });
+
 
 
          }
@@ -152,13 +176,7 @@ console.log(err);
 
       try{
 
-        // var datainput=JSON.stringify({
-        //   origin:155,
-        //   destination:form.kota,
-        //   weight:form.totalberat,
-        //   courier:namaekspedisijne
-
-        // });
+      
 
         var formrequest = new FormData();
         formrequest.append("origincity","151");
@@ -176,25 +194,12 @@ console.log(err);
            },
           }
         )
-            console.log("data response ongkir",response.data.rajaongkir.results[0])
-   
-       
-          // if(response.data.rajaongkir.status.code=='400'){
-   
-          //   swal({
-          //     title: "Failed  Get Ekspedisi JNE?",
-          //     text: "There is something Trouble With Your Data Or Connection",
-          //     icon: "warning",
-          //     dangerMode: true,
-          //   })
-          //   .then(willDelete => {
-          //     if (willDelete) {
-          //       swal("Failed!", "Can Not Calling Ekspedisi!", "error");
-          //     }
-              
-          //   });
- 
- 
+            console.log("data response ongkir",response.data.rajaongkir.results)
+            setDataJNE(response.data.rajaongkir.results);
+            setDataJNECost(response.data.rajaongkir.results[0].costs);
+            
+
+
           // } 
    
       }catch (err) {
@@ -204,106 +209,39 @@ console.log(err);
      };
 
 
-     //TIKI
-    //  const getekspedisilokalrajaongkir_tiki=async(namaekspedisitiki)=>{
-
-    //   try{
-
-    //     var datainput=JSON.stringify({
-    //       origin:501,
-    //       destination:114,
-    //       weight:1000,
-    //       courier:namaekspedisitiki
-
-    //     });
-    //     const response= await axios.post(
-    //       url_rajaongkir,  
-    //       datainput,
-    //       {
-    //         headers:{
-    //           'Content-Type': 'application/x-www-form-urlencoded',
-    //           'key':apikeyrajaongkir,
-    //        },
-    //       }
-    //     )
-    //         //  console.log(response.data.message)
-    //         if(response.data.rajaongkir.status.code=='400'){
-    //           swal({
-    //             title: "Failed  Get Ekspedisi TIKI?",
-    //             text: "There is something Trouble With Your Data Or Connection",
-    //             icon: "warning",
-    //             dangerMode: true,
-    //           })
-    //           .then(willDelete => {
-    //             if (willDelete) {
-    //               swal("Failed!", "Can Not Calling Ekspedisi!", "error");
-    //             }
-                
-    //           });
-   
-   
-    //         } 
-   
-    //   }catch (err) {
-    //     console.log(err);
-    //   }
-
-    //  };
-
-     //POS
-     
-    //  const getekspedisilokalrajaongkir_pos=async(namaekspedisipos)=>{
-
-    //   try{
-
-    //     var datainput=JSON.stringify({
-    //       origin:501,
-    //       destination:114,
-    //       weight:1000,
-    //       courier:namaekspedisitiki
-
-    //     });
-    //     const response= await axios.post(
-    //       url_rajaongkir,  
-    //       datainput,
-    //       {
-    //         headers:{
-    //           'Content-Type': 'application/x-www-form-urlencoded',
-    //           'key':apikeyrajaongkir,
-    //        },
-    //       }
-    //     )
-    //         //  console.log(response.data.message)
-   
-    //         if(response.data.rajaongkir.status.code=='400'){
-   
-    //           swal({
-    //             title: "Failed  Get Ekspedisi POS?",
-    //             text: "There is something Trouble With Your Data Or Connection",
-    //             icon: "warning",
-    //             dangerMode: true,
-    //           })
-    //           .then(willDelete => {
-    //             if (willDelete) {
-    //               swal("Failed!", "Can Not Calling Ekspedisi!", "error");
-    //             }
-                
-    //           });
-   
-   
-    //         } 
-   
-    //   }catch (err) {
-    //     console.log(err);
-    //   }
-
-    //  };
-
 
 
 
 
      //batas raja ongkir 
+
+     const handlerPilihEkpedisi=()=>{
+
+      var pilihekspedisichoice=pilihjne.current.value;
+
+      console.log(pilihekspedisichoice)
+      console.log("harga ekspedisi:",tipeservice)
+
+      setEkpedisi(pilihekspedisichoice);
+      setForm({
+        ...form,
+        namaekspedisi: pilihekspedisichoice,
+      })
+
+     setForm({
+          ...form,
+          hargaekpedisi: tipeservice,
+
+      
+
+    })
+
+
+
+
+     }
+
+    console.log("data JNE COST:", dataJNECost)
 
 
 
@@ -347,24 +285,24 @@ console.log(err);
                                             <div className='text-black fs-6' >
                                              <div className='row' style={{marginTop:'20px'}} >
 
-                                                <div className='col-md-12'>
+                                                <div className='col-md-12' >
 
-                                                 <div className='boxkirimindonesia mb-4'>
-
+                                                 <div className='boxkirimindonesia mb-4' hidden >
+                                                  
                                                   <img src="/image/icons/jne.png"  className='setlaut'/>
                                                   <label className='text-black labelkirimlaut'>JNE</label>
                                                 
 
-                                                  <input style={{marginLeft:'200px'}}
+                                                  {/* <input style={{marginLeft:'200px'}}
                                                     type="checkbox"
                                                     checked={tipeekspedisi === "jne"}
                                                     onChange={() => setEkpedisi("jne")}
-                                                  />
+                                                  />  */}
                                                  
                                               
 
                                                  </div>
-                                                <div className='col-md-12'>
+                                                {/* <div className='col-md-12'>
 
                                                     <div className='boxkirimindonesia mb-4'>
 
@@ -381,8 +319,8 @@ console.log(err);
 
                                         
 
-                                                </div>
-                                                <div className='col-md-12'>
+                                                </div> */}
+                                                {/* <div className='col-md-12'>
 
                                                 <div className='boxkirimindonesia mb-4'>
 
@@ -400,7 +338,108 @@ console.log(err);
 
 
 
+                                                </div> */}
+
+                                                <div className='col-md-12' >
+                                                  
+
+                                                          
+                                                   {dataJNE?.map((rowsjne) => (   
+
+                                                <div className='boxkirimindonesia mb-4' style={{height:'200px'}} onClick={handlerPilihEkpedisi}>
+
+                                                <input ref={pilihjne} type="text" value="jne"  hidden/>
+
+                                                <img src="/image/icons/jne.png"  className='setlaut'/>
+                                                <label className='text-black labelkirimlaut'>{rowsjne.name}</label>
+
+                                                <div>
+
+                                                <table class="table" >
+  <thead className="alert alert-success">
+    <tr>
+      <th scope="col" >No</th>
+      <th scope="col" >Service</th>
+      <th scope="col"  >Harga</th>
+      <th scope="col" className='text-center' >Pilih</th>
+    
+    </tr>
+  </thead> 
+  
+  
+  <tbody>
+
+    
+             
+  {dataJNECost?.map((rowscost,index) => (  
+    <tr>
+      <td>{index+1}</td>
+      
+      <td>{rowscost.service}</td>
+      <td >{rowscost.cost[0].value.toLocaleString('ID-id')}</td>
+      <td   className='text-center' >
+
+         <input
+                type="checkbox"
+                checked={tipeservice === rowscost.cost[0].value}
+                onChange={() => setService(rowscost.cost[0].value )}
+               />
+
+
+      </td>
+      
+
+    </tr>
+
+    
+
+    ))} 
+
+
+
+  </tbody>  
+
+
+  
+
+</table>
+
+</div>
+
+
+
+                                                                                                       
+                                                {/* {dataJNECost?.map((rowscost) => (  
+
+                                                
+
+                                                  <div className='text-black'>{rowscost.service}<label style={{marginLeft:'30px'}}>{rowscost.cost[0].value}</label></div>
+                                                 
+
+                                               
+                                                  
+                                                 
+
+
+                                                ))} */}
+                                          
+                                                {/* <input style={{marginLeft:'200px'}}
+                                                    type="checkbox"
+                                                    checked={tipeekspedisi === "jne"}
+                                                    onChange={() => setEkpedisi("jne")}
+                                                  /> */}
+
+
+
                                                 </div>
+                                                   ))}  
+
+
+
+                                                </div>
+
+
+                                                
 
                                                 </div>
 
@@ -424,8 +463,8 @@ console.log(err);
                                        
 
                                     </div>
-                               
-                                
+
+                                   
 
                                     
                              

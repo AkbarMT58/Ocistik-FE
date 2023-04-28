@@ -121,13 +121,13 @@ const [formStep, setFormStep] = useRecoilState(pesananFormStepState);
                                                   <div className='col-md-8'>
                                                     <label className='text-black' style={{fontSize:'12px',fontWeight:'bold',marginLeft:'-120px'}}>Nama Penerima</label>
                                                     <br></br>
-                                                    <label className='text-black' style={{fontSize:'10px',marginLeft:'-140px'}}>Ita Yuliana Pane
+                                                    <label className='text-black' style={{fontSize:'10px',marginLeft:'-100px'}}>{form.namalengkap}
                                                     </label>
                                                     <br></br>
 
-                                                    <label className='text-black' style={{fontSize:'10px',marginLeft:'-20px'}}>+6281290002631</label>
-                                                     <label className='text-black' style={{fontSize:'10px',marginLeft:'8px'}}> JL. H. Maula Ujung No.6 </label>
-                                                     <label className='text-black' style={{fontSize:'10px',marginLeft:'0px'}}>RT.008 RW.012 Palmerah, Jakarta Barat 11480</label>
+                                                    <label className='text-black' style={{fontSize:'10px',marginLeft:'-20px'}}></label>
+                                                     <label className='text-black' style={{fontSize:'10px',marginLeft:'-130px'}}>{form.alamatlengkap}  </label>
+                                                     <label className='text-black' style={{fontSize:'10px',marginLeft:'0px'}}></label>
 
                                                   </div>
                                                   <div className='col-md-4' style={{marginTop:'20px'}}>
@@ -144,7 +144,7 @@ const [formStep, setFormStep] = useRecoilState(pesananFormStepState);
                                                 <div className='col-md-8'>
                                                   <label className='text-black' style={{fontSize:'12px',fontWeight:'bold',marginLeft:'-150px'}}>Pengiriman</label>
                                                   <br></br>
-                                                  <label className='text-black' style={{fontSize:'10px',marginLeft:'-140px'}}>Pengiriman Laut
+                                                  <label className='text-black' style={{fontSize:'10px',marginLeft:'-150px'}}> {(form.tipepengiriman ===0 ? ("Udara") :  "Laut")}
                                                   </label>
                                                  
                                                 </div>
@@ -162,7 +162,7 @@ const [formStep, setFormStep] = useRecoilState(pesananFormStepState);
                                                 <div className='col-md-8'>
                                                   <label className='text-black' style={{fontSize:'12px',fontWeight:'bold',marginLeft:'-130px'}}>Ekspedisi Lokal</label>
                                                   <br></br>
-                                                  <label className='text-black' style={{fontSize:'10px',marginLeft:'-200px'}}>JNE
+                                                  <label className='text-black' style={{fontSize:'10px',marginLeft:'-200px'}}>{form.hargaekpedisi}
                                                   </label>
                                                  
                                                 </div>
@@ -181,7 +181,7 @@ const [formStep, setFormStep] = useRecoilState(pesananFormStepState);
                                                   <div className='col-md-8'>
                                                     <label className='text-black' style={{fontSize:'12px',fontWeight:'bold',marginLeft:'-90px'}}>Estimasi Ongkos Kirim</label>
                                                     <br></br>
-                                                    <label className='text-black' style={{fontSize:'10px',marginLeft:'-150px'}}>Rp. 320.490,-
+                                                    <label className='text-black' style={{fontSize:'10px',marginLeft:'-150px'}}>Rp.3.500.000,-
                                                     </label>
                                                   
                                                   </div>
