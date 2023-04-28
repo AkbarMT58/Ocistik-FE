@@ -74,6 +74,8 @@ const [formStep, setFormStep] = useRecoilState(pesananFormStepState);
 
   }
 
+  console.log("harga ekspedisi:",form.hargaekpedisi)
+
   return (
     <>
       <div id="header" style={{ display: 'flex' }}>
@@ -162,7 +164,7 @@ const [formStep, setFormStep] = useRecoilState(pesananFormStepState);
                                                 <div className='col-md-8'>
                                                   <label className='text-black' style={{fontSize:'12px',fontWeight:'bold',marginLeft:'-130px'}}>Ekspedisi Lokal</label>
                                                   <br></br>
-                                                  <label className='text-black' style={{fontSize:'10px',marginLeft:'-200px'}}>{form.hargaekpedisi}
+                                                  <label className='text-black' style={{fontSize:'10px',marginLeft:'-140px'}}>Rp.{form.hargaekpedisi.toLocaleString('ID-id')},-
                                                   </label>
                                                  
                                                 </div>

@@ -128,6 +128,13 @@ let handleSubmit = async (e) => {
              
            });
 
+                
+          setForm({
+            ...form,
+            hargaekpedisi: tipeservice, 
+
+      })
+
 
          }else{
 
@@ -219,29 +226,25 @@ console.log(err);
 
       var pilihekspedisichoice=pilihjne.current.value;
 
-      console.log(pilihekspedisichoice)
-      console.log("harga ekspedisi:",tipeservice)
+      //console.log(pilihekspedisichoice)
+    
 
       setEkpedisi(pilihekspedisichoice);
+
       setForm({
         ...form,
         namaekspedisi: pilihekspedisichoice,
       })
 
-     setForm({
-          ...form,
-          hargaekpedisi: tipeservice,
-
-      
-
-    })
+   
 
 
 
 
      }
 
-    console.log("data JNE COST:", dataJNECost)
+   // console.log("data JNE COST:", dataJNECost)
+
 
 
 
